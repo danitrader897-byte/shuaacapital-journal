@@ -78,7 +78,7 @@ dialog h2{margin-top:0}
 .pw{text-align:center;margin:14px 0 0;font-size:12px;color:var(--mute);letter-spacing:.02em}
 .pw a{color:var(--ink);font-weight:600;text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:1px}
 .pw a:hover,.pw a:focus-visible{color:var(--acc);border-bottom-color:var(--acc)}
-.sigbox{display:block;width:100%;margin:6px 0 0;text-align:center}
+.sigbox{display:block;width:100%;margin:6px 0 84px;text-align:center}
 .sigbox .by{font-size:12px;color:var(--mute);letter-spacing:.02em}
 .sigbox .sig{margin:2px 0 0;transform:translateY(-4px)}
 .sigbox .pwr{text-align:right;margin:18px 2px 0;font-size:11px;white-space:nowrap}
@@ -741,7 +741,7 @@ function calcUpd(){const o=document.getElementById('calc-out');if(!o)return;cons
   o.innerHTML=lot<0.01?`<div class="note warn"><b>Lot kurang dari 0,01.</b> Risiko ${u(r$)} terlalu kecil untuk stop loss ${sl} pip. Perkecil SL atau naikkan risiko.</div>`:`<div class="tls" style="grid-template-columns:1fr 1fr;margin:0"><div class="tl"><span>Lot</span><b class="win">${lot.toFixed(2)}</b></div><div class="tl"><span>Risiko sebenarnya</span><b>${u(real)}</b></div></div><div class="note" style="margin-top:8px">Risiko target ${u(r$)} (${rk}% dari ${u(bal)}). Lot dibulatkan ke bawah ke 0,01.</div>`}
 document.addEventListener('input',e=>{const k=e.target.dataset&&e.target.dataset.calc;if(!k)return;CALC[k]=e.target.value;calcUpd()});
 /* ===== BERITA (kalender ekonomi + headline) ===== */
-const NF={imp:'h',cur:'',rng:'d'};
+const NF={imp:'h',cur:'',rng:[0,6].includes(new Date().getDay())?'w':'d'};
 const NEWS={data:null,t:0,loading:false,err:''};
 const CURS=['USD','EUR','GBP','JPY','AUD','NZD','CAD','CHF','CNY'];
 function normNews(d){const IM={high:'H',medium:'M',low:'L'};
@@ -769,7 +769,7 @@ function renderNews(){nwNext();const box=document.getElementById('nw');if(!box)r
   if(!NF.cur)NF.cur=rel.size?'rel':'all';if(NF.cur==='rel'&&!rel.size)NF.cur='all';
   const chip=(k,v,l)=>`<button class="ch2${NF[k]===v?' on':''}" data-nf="${k}:${v}">${l}</button>`;
   const status=`<div class="note" style="margin:0 0 10px">${D&&!NEWS.err&&!NEWS.loading&&Date.now()-NEWS.t<12e4?'<span class="win">●</span> Live · ':''}${NEWS.loading?'Memperbarui…':D?'Diperbarui '+esc(nwAgo(NEWS.t)):''} · waktu ${nwGmt()} · <button class="lnk" id="nw-ref">Muat ulang</button></div>${NEWS.err?`<div class="note warn" style="margin:0 0 10px">${esc(NEWS.err)}</div>`:''}`;
-  let cal='',hl='';
+  let cal='',hl='<div class="note">'+(NEWS.loading?'Memuat headline…':'Headline belum tersedia.')+'</div>';
   if(!D){cal=NEWS.loading?'<div class="note">Memuat berita…</div>':'<div class="note">Belum ada data berita. <a class="b" href="https://www.forexfactory.com/calendar" target="_blank" rel="noopener">Buka Forex Factory ↗</a></div>'}
   else{
     let ev=D.calendar.filter(e=>e.imp==='H'||(NF.imp==='m'&&e.imp==='M'));
@@ -784,19 +784,30 @@ function renderNews(){nwNext();const box=document.getElementById('nw');if(!box)r
   box.innerHTML=`<h2>Kalender berita</h2><div class="card k-warn">${status}<div class="chips2">${chip('rng','d','Hari ini')}${chip('rng','w','Minggu ini')}</div><div class="chips2">${chip('imp','h','High')}${chip('imp','m','High + Medium')}${rel.size?chip('cur','rel','Pair-ku ('+[...rel].join(' ')+')'):''}${chip('cur','all','Semua mata uang')}</div>${cal}</div><h2>Headline</h2><div class="card">${hl}</div><div class="note" style="margin-top:12px">Sumber: kalender Forex Factory dan headline FXStreet. Jadwal dan angka bisa berubah, cek sumber resmi sebelum mengambil keputusan. Bukan saran trading.</div>`}
 const NCAL='https://nfs.faireconomy.media/ff_calendar_thisweek.json',NRSS='https://www.fxstreet.com/rss/news';
 const NPX=[u=>'https://api.allorigins.win/raw?url='+encodeURIComponent(u),u=>'https://corsproxy.io/?url='+encodeURIComponent(u)];
-async function viaProxy(u,asText){for(const px of NPX){try{const r=await fetch(px(u),{cache:'no-store'});if(r.ok)return asText?await r.text():await r.json()}catch(e){}}return null}
+const tf=(u,ms,o)=>{const c=new AbortController(),t=setTimeout(()=>c.abort(),ms);return fetch(u,Object.assign({},o,{signal:c.signal})).finally(()=>clearTimeout(t))};
+async function viaProxy(u,asText){try{return await Promise.any(NPX.map(async px=>{const r=await tf(px(u),9000,{cache:'no-store'});if(!r.ok)throw 0;const v=asText?await r.text():await r.json();if(asText?!v:!Array.isArray(v))throw 0;return v}))}catch(e){return null}}
 function parseRss(x){try{const d=new DOMParser().parseFromString(x,'text/xml');return[...d.querySelectorAll('item')].slice(0,15).map(i=>({title:(i.querySelector('title')||{}).textContent||'',link:((i.querySelector('link')||{}).textContent||'').trim(),ts:Date.parse((i.querySelector('pubDate')||{}).textContent||'')||0,src:'FXStreet'})).filter(h=>h.title&&/^https?:\/\//i.test(h.link))}catch(e){return[]}}
 async function loadNews(force){
-  if(NEWS.loading)return;if(!force&&NEWS.data&&Date.now()-NEWS.t<55e3)return;
+  if(NEWS.loading)return;
+  if(!force&&NEWS.data&&Date.now()-NEWS.t<(NEWS.via==='api'?55e3:3e5))return;
   NEWS.loading=true;NEWS.err='';renderNews();
-  let raw=null;
-  try{const r=await fetch('/.netlify/functions/news',{cache:'no-store'});if(r.ok){const j=await r.json();if(j&&Array.isArray(j.calendar))raw=j}}catch(e){}
-  if(!raw){try{const r=await fetch('https://nfs.faireconomy.media/ff_calendar_thisweek.json');if(r.ok){const c=await r.json();if(Array.isArray(c))raw={calendar:c,headlines:[]}}}catch(e){}}
-  if(!raw){const c=await viaProxy(NCAL,false);if(Array.isArray(c))raw={calendar:c,headlines:[]}}
-  if(raw&&!(raw.headlines&&raw.headlines.length)){const x=await viaProxy(NRSS,true);if(x)raw.headlines=parseRss(x)}
-  if(raw){try{NEWS.data=normNews(raw);NEWS.t=Date.now();try{localStorage.setItem('shuaa_news',JSON.stringify({t:NEWS.t,data:raw}))}catch(e){}}catch(e){NEWS.err='Format data berita tidak dikenali.'}}
+  let raw=null,via='';
+  if(!NEWS.noApi){
+    for(const ep of ['/api/news','/.netlify/functions/news']){if(raw)break;try{const r=await tf(ep,8000,{cache:'no-store'});if(r.ok){const j=await r.json();if(j&&Array.isArray(j.calendar)){raw=j;via='api'}}}catch(e){}}
+    if(!raw)NEWS.noApi=true;
+  }
+  if(!raw){
+    const direct=tf(NCAL,6000).then(async r=>{if(!r.ok)throw 0;const c=await r.json();if(!Array.isArray(c))throw 0;return c});
+    const prox=viaProxy(NCAL,false).then(c=>{if(!Array.isArray(c))throw 0;return c});
+    const c=await Promise.any([direct,prox]).catch(()=>null);
+    if(c)raw={calendar:c,headlines:[]};
+  }
+  const keep=r=>{try{localStorage.setItem('shuaa_news',JSON.stringify({t:NEWS.t,data:r}))}catch(e){}};
+  if(raw){try{NEWS.data=normNews(raw);NEWS.t=Date.now();NEWS.via=via;keep(raw)}catch(e){NEWS.err='Format data berita tidak dikenali.'}}
   else NEWS.err=NEWS.data?'Gagal memperbarui, menampilkan data terakhir yang tersimpan.':'Berita belum bisa dimuat. Periksa koneksi lalu tekan Muat ulang, atau buka Forex Factory langsung.';
-  NEWS.loading=false;renderNews()}
+  NEWS.loading=false;renderNews();
+  if(raw&&NEWS.data&&!NEWS.data.headlines.length){const x=await viaProxy(NRSS,true);if(x){const h=parseRss(x);if(h.length){raw.headlines=h;try{NEWS.data=normNews(raw);keep(raw)}catch(e){}renderNews()}}}
+}
 document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('[data-nf]');if(b){const [k,v]=b.dataset.nf.split(':');NF[k]=v;renderNews();return}if(e.target.id==='nw-ref')loadNews(true)});
 function startNews(){loadNews();setInterval(()=>{if(!document.hidden){loadNews();nwNext();if(document.body.dataset.tab==='news')renderNews()}},30000);document.addEventListener('visibilitychange',()=>{if(!document.hidden)loadNews()})}
 
