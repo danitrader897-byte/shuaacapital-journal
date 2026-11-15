@@ -67,7 +67,7 @@ dialog h2{margin-top:0}
 .quote{text-align:center;font-size:12px;color:var(--mute);margin-top:40px;letter-spacing:.06em}
 button.live{color:var(--acc);border:1px solid var(--acc);background:transparent;padding:6px 12px;border-radius:999px;font-size:12px;letter-spacing:.04em}
 @media(min-width:820px){.wrap{max-width:1120px}.dash{display:grid;grid-template-columns:1fr 1fr;gap:0 20px;align-items:start}.dash .full{grid-column:1/-1}.ents{display:grid;grid-template-columns:1fr 1fr;gap:0 14px}.ents .day{grid-column:1/-1}.tools{grid-template-columns:2fr 1fr 1fr 1fr}.tools input{grid-column:auto}.ring{width:132px;height:132px}}
-body.c .wrap{padding:14px 10px 100px}body.c .head{margin-bottom:10px}
+body.c .wrap{padding:14px 10px 120px}body.c .head{margin-bottom:10px}
 body.c .dash{display:grid;grid-template-columns:1fr 1fr;gap:0 10px;align-items:start}body.c .dash .full{grid-column:1/-1}
 body.c h2{margin:20px 2px 8px;font-size:16px}body.c .card{padding:12px;border-radius:10px}
 body.c .ring{width:92px;height:92px}body.c .ring b{font-size:20px}body.c .ring small{font-size:10px}
@@ -183,7 +183,7 @@ body[data-tab=ringkasan] [data-sec=n],body[data-tab=analisis] [data-sec=n],body[
 body[data-tab=news] #app>.chips2:first-child,body[data-tab=news] #app>.per{display:none}
 .ip{flex:none;font-size:11px;font-weight:700;padding:2px 8px;border-radius:4px}.ip.H{background:rgba(255,93,115,.14);color:var(--loss)}.ip.M{background:rgba(245,183,59,.14);color:var(--warn)}
 .hl2 a{color:var(--ink);text-decoration:none;font-weight:500}.hl2 a:hover{color:var(--acc)}
-.fab,body.c .fab{bottom:calc(104px + env(safe-area-inset-bottom,0px))}
+.fab,body.c .fab{bottom:calc(28px + env(safe-area-inset-bottom,0px))}
 body.c .ch span,body.c .s .d,body.c .ring small,body.c .mn .d,.rk>div,.rk .note,.tl span,.hl span{font-size:12px}
 body.c .chips div,body.c .chips i,.tags span{font-size:12px}
 dialog .acts{position:sticky;bottom:0;background:var(--card);padding:12px 0;margin-bottom:-8px;border-top:1px solid var(--line)}
@@ -207,7 +207,6 @@ dialog .acts{position:sticky;bottom:0;background:var(--card);padding:12px 0;marg
 .ents .t .shots .th span{font-size:9px;padding:1px 4px;left:4px;top:4px}
 .ents .t .foot{gap:5px;justify-content:flex-end}
 .ents .t .foot button{padding:3px 10px;font-size:11px;border-radius:7px}
-
 /* Form: lebih rapat dan rapi */
 dialog{padding:14px 14px 0;width:min(520px,96vw)}
 dialog h2{font-size:17px;margin:0 0 10px}
@@ -221,6 +220,123 @@ dialog .acts button{padding:7px 16px;font-size:13px}
 #adlg .f .w:has(input[type=number]){grid-column:auto}
 #adlg .f .w:has(input[type=text]),#adlg .f .w:has(textarea),#adlg .f .w:has(select){grid-column:1/-1}
 @media(max-width:380px){#adlg .f{grid-template-columns:1fr 1fr}}
+/* Analisis: baris RR ringkas */
+.s.rr3{display:grid;grid-template-columns:38px 1fr 42px 62px;align-items:baseline;gap:0 6px;padding:7px 0}
+.s.rr3 .k{font-size:14px}.s.rr3 .n{font-size:11.5px;color:var(--mute);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.s.rr3 b:nth-of-type(2),.s.rr3 b:nth-of-type(3){text-align:right;font-size:13px}
+.s.rr3 .m{grid-column:1/-1;height:3px;margin-top:5px}
+.s.rr3.lo{opacity:.62}
+
+/* Analisis: grafik navy */
+:root{--nv:#2a4fb8}
+.tl2g{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
+.tl2{background:var(--card2);border:1px solid var(--line);border-radius:8px;padding:8px 10px;min-width:0}
+.tl2 span{display:block;font-size:11.5px;color:var(--mute)}
+.tl2 b{display:block;font-family:'Bricolage Grotesque',Figtree,system-ui,sans-serif;font-size:18px;line-height:1.25;color:var(--ink);white-space:nowrap}
+.tl2 b.ac{color:var(--acc)}
+.tl2 em{font-style:normal;font-size:11px;color:var(--mute)}
+.vc{position:relative;display:flex;align-items:flex-end;gap:10px;height:142px;border-bottom:1px solid var(--line)}
+.vc .g50{position:absolute;left:0;right:0;border-top:1px dashed var(--line)}
+.vcol{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%}
+.vcol b{font-size:13px;font-weight:600;margin-bottom:3px;color:var(--ink)}
+.vcol u{display:block;width:100%;max-width:44px;background:var(--nv);border-radius:4px 4px 0 0;text-decoration:none}
+.vcol u.neg{background:var(--loss)}
+.vcol.lo u{opacity:.4}.vcol.lo b{color:var(--mute)}
+.vc.tt{gap:5px;height:134px}.vc.tt .vcol b{font-size:11px}.vc.tt .vcol u{max-width:26px}
+.vlb{display:flex;gap:10px;margin-top:6px}
+.vlb>div{flex:1;min-width:0;text-align:center}
+.vlb span{display:block;font-size:13px;font-weight:600}
+.vlb small{display:block;font-size:12px;font-weight:700}
+.vlb em{display:block;font-style:normal;font-size:10.5px;color:var(--mute);line-height:1.3}
+.vlb.tt{gap:5px}.vlb.tt span{font-size:11px;font-weight:500;color:var(--mute)}
+.s.rr3{grid-template-columns:38px 1fr 42px 62px}
+details.dt .s:first-of-type{padding-top:8px}
+
+/* Kompak */
+:is(body,body.c) .wrap{padding:10px 12px 110px}
+body,body.c{font-size:13px;line-height:1.4}
+:is(body,body.c) .head{margin-bottom:6px}
+:is(body,body.c) .logo{height:24px}
+:is(body,body.c) .sub{font-size:11px;margin-top:0}
+:is(body,body.c) .live,:is(body,body.c) button.live{padding:3px 10px;font-size:11px}
+:is(body,body.c) .head>div:last-child{gap:4px!important}
+:is(body,body.c) .phbar{margin:0 0 6px;gap:6px}
+:is(body,body.c) .phbar select{padding:5px 12px;font-size:12.5px}
+:is(body,body.c) .phbar button{padding:4px 10px}
+:is(body,body.c) .tabs{padding:3px;margin:0 0 8px;border-radius:10px}
+:is(body,body.c) .tabs button{padding:6px 2px;font-size:12px;border-radius:7px}
+:is(body,body.c) .chips2{margin:0 0 8px;gap:6px}
+:is(body,body.c) .ch2{padding:4px 11px;font-size:11.5px}
+:is(body,body.c) h2{font-size:14px;margin:14px 2px 6px}
+:is(body,body.c) .card{padding:9px 11px;border-radius:9px}
+:is(body,body.c) .s{padding:6px 0}
+:is(body,body.c) .s .r{font-size:12.5px}
+:is(body,body.c) .s .d{font-size:10.5px}
+:is(body,body.c) .note{font-size:11px;line-height:1.4}
+:is(body,body.c) .lbl2{font-size:11px}
+:is(body,body.c) .ch{margin-bottom:5px}
+:is(body,body.c) .ch b{font-size:16px}
+:is(body,body.c) .ch span{font-size:11px}
+:is(body,body.c) .hd{padding:11px 12px}
+:is(body,body.c) .hd .big,:is(body,body.c) .big{font-size:28px}
+:is(body,body.c) .ah{margin-bottom:6px}
+:is(body,body.c) .pill{font-size:10.5px;padding:2px 9px}
+:is(body,body.c) .hd .spk{height:42px;width:calc(100% + 24px);margin:4px -12px 6px}
+:is(body,body.c) .tg{margin:2px 0 9px}
+:is(body,body.c) .tg .r{font-size:11.5px;margin-bottom:4px}
+:is(body,body.c) .hd .m.big2{height:6px}
+:is(body,body.c) .tls{gap:6px;margin-bottom:9px}
+:is(body,body.c) .tl{padding:6px 2px;border-radius:8px}
+:is(body,body.c) .tl span{font-size:10.5px}
+:is(body,body.c) .tl b{font-size:14px}
+:is(body,body.c) .rk{gap:8px 10px}
+:is(body,body.c) .rk>div{font-size:11px}
+:is(body,body.c) .rk b{font-size:14px}
+:is(body,body.c) .mns{gap:8px}
+:is(body,body.c) .mn b{font-size:11.5px}
+:is(body,body.c) .tl2g{gap:6px;margin-bottom:8px}
+:is(body,body.c) .tl2{padding:6px 9px;border-radius:7px}
+:is(body,body.c) .tl2 span{font-size:10.5px}
+:is(body,body.c) .tl2 b{font-size:15px}
+:is(body,body.c) .tl2 em{font-size:10px}
+:is(body,body.c) .vc{height:112px}
+:is(body,body.c) .vc.tt{height:100px;gap:4px}
+:is(body,body.c) .vcol b{font-size:12px;margin-bottom:2px}
+:is(body,body.c) .vc.tt .vcol b{font-size:10.5px}
+:is(body,body.c) .vlb{margin-top:4px}
+:is(body,body.c) .vlb span{font-size:12px}
+:is(body,body.c) .vlb small{font-size:11px}
+:is(body,body.c) .vlb em{font-size:10px}
+:is(body,body.c) .vlb.tt span{font-size:10.5px}
+:is(body,body.c) .s.rr3{padding:5px 0;grid-template-columns:34px 1fr 38px 56px}
+:is(body,body.c) .s.rr3 .k{font-size:12.5px}
+:is(body,body.c) .s.rr3 .n{font-size:10.5px}
+:is(body,body.c) .s.rr3 b:nth-of-type(2),:is(body,body.c) .s.rr3 b:nth-of-type(3){font-size:12px}
+:is(body,body.c) .cal{gap:3px}
+:is(body,body.c) .cal b,:is(body,body.c) .cal i{min-height:36px}
+:is(body,body.c) .cal b{font-size:11px}
+:is(body,body.c) .cal b small{font-size:9px}
+:is(body,body.c) .cal u{font-size:10px}
+:is(body,body.c) .hm{gap:3px}
+:is(body,body.c) .hm b,:is(body,body.c) .hm i{min-height:34px}
+:is(body,body.c) .hm b{font-size:11px}
+:is(body,body.c) .hm b small{font-size:9px}
+:is(body,body.c) .calh{margin:14px 2px 6px}
+:is(body,body.c) .calh button{width:30px;padding:3px 0;font-size:15px}
+:is(body,body.c) .hl{padding:7px 10px}
+:is(body,body.c) .hl b{font-size:14px}
+:is(body,body.c) .hl span{font-size:10.5px}
+:is(body,body.c) .hl small{font-size:11px}
+:is(body,body.c) .cap{margin:4px 0}
+:is(body,body.c) .cap .d{font-size:11px}
+:is(body,body.c) input,:is(body,body.c) select,:is(body,body.c) textarea{font-size:13.5px;padding:6px 10px}
+:is(body,body.c) .f{gap:8px}
+:is(body,body.c) .f label{font-size:10.5px;margin-bottom:2px}
+:is(body,body.c) .per{margin-bottom:8px}
+:is(body,body.c) .fab,:is(body,body.c) body.c .fab{width:48px;height:48px;font-size:26px;border-radius:14px}
+:is(body,body.c) .card .s{font-size:12.5px}
+:is(body,body.c) .cal b,:is(body,body.c) .cal i{min-height:32px}
+:is(body,body.c) .hm b,:is(body,body.c) .hm i{min-height:30px}
 </style>
 </head>
 <body>
@@ -351,10 +467,16 @@ function renderV(full){
   let c=0;const eq=[0];ord.forEach(r=>{c+=R(r);eq.push(c)});
   const dn={};ord.forEach(r=>dn[r.date]=(dn[r.date]||0)+R(r));const dv=Object.keys(dn).sort().map(k=>dn[k]);
   const f1=v=>(v>=0?'+':'')+v.toFixed(1)+'R';
-  const sess=['Asia','London','New York'].map(s=>{const x=rows.filter(r=>r.session===s),w=x.filter(r=>r.result==='WIN').length,l=x.filter(r=>r.result==='LOSS').length,p=w+l?w/(w+l)*100:0;return `<div class="s"><div class="r"><span>${s}</span><span><b class="${p>=50?'win':'loss'}">${Math.round(p)}%</b> <small class="${zNet(x)>=0?'win':'loss'}">${f1(zNet(x))}</small></span></div><div class="d">${x.length} trade · ${w}W · ${l}L · ${x.length-w-l} BE</div><div class="m"><i style="width:${p}%"></i></div></div>`}).join('');
+  const sessD=['Asia','London','New York'].map(s=>{const x=rows.filter(r=>r.session===s),w=x.filter(r=>r.result==='WIN').length,l=x.filter(r=>r.result==='LOSS').length;return {s,x,w,l,p:w+l?w/(w+l)*100:0,n:zNet(x)}});
+  const sess=`<div class="vc"><div class="g50" style="bottom:42px"></div>${sessD.map(d=>`<div class="vcol"><b class="${d.p>=50?'':'loss'}">${Math.round(d.p)}%</b><u class="${d.p<50?'neg':''}" style="height:${Math.max(3,d.p*.85).toFixed(0)}px"></u></div>`).join('')}</div><div class="vlb">${sessD.map(d=>`<div><span>${d.s}</span><small class="${d.n>=0?'win':'loss'}">${f1(d.n)}</small><em>${d.x.length} trade · ${d.w}W ${d.l}L${d.x.length-d.w-d.l?' '+(d.x.length-d.w-d.l)+'BE':''}</em></div>`).join('')}</div>`;
   const wk={};rows.forEach(r=>{if(!r.date)return;const d=new Date(r.date+'T00:00:00');d.setDate(d.getDate()-(d.getDay()+6)%7);const k=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');(wk[k]=wk[k]||[]).push(r)});
   const sh=d=>d.toLocaleDateString('id-ID',{day:'numeric',month:'short'});
-  const wkHtml=Object.keys(wk).sort().reverse().map(k=>{const x=wk[k],w=x.filter(r=>r.result==='WIN').length,l=x.filter(r=>r.result==='LOSS').length,p=w+l?w/(w+l)*100:0,a=new Date(k+'T00:00:00'),e=new Date(a);e.setDate(a.getDate()+6);return `<div class="s"><div class="r"><span>${sh(a)} – ${sh(e)}</span><span><b class="${p>=50?'win':'loss'}">${w+l?Math.round(p)+'%':'-'}</b> <small class="${zNet(x)>=0?'win':'loss'}">${f1(zNet(x))}</small></span></div><div class="d">${x.length} trade · ${w}W · ${l}L · ${x.length-w-l} BE</div><div class="m"><i style="width:${p}%"></i></div></div>`}).join('');
+  const wkA=Object.keys(wk).sort().map(k=>{const x=wk[k],w=x.filter(r=>r.result==='WIN').length,l=x.filter(r=>r.result==='LOSS').length,a=new Date(k+'T00:00:00'),e=new Date(a);e.setDate(a.getDate()+6);return {x,w,l,p:w+l?w/(w+l)*100:null,a,e,n:zNet(x)}});
+  const wkRow=d=>`<div class="s"><div class="r"><span>${sh(d.a)} – ${sh(d.e)}</span><span><b class="${d.p===null?'':d.p>=50?'win':'loss'}">${d.p===null?'-':Math.round(d.p)+'%'}</b> <small class="${d.n>=0?'win':'loss'}">${f1(d.n)}</small></span></div><div class="d">${d.x.length} trade · ${d.w}W · ${d.l}L · ${d.x.length-d.w-d.l} BE</div></div>`;
+  const wkSvg=(()=>{const c=wkA.slice(-8).filter(d=>d.p!==null);if(!c.length)return '';const X0=26,X1=314,y=p=>92-p*.66,xs=i=>c.length===1?170:X0+(X1-X0)*i/(c.length-1);const pts=c.map((d,i)=>xs(i).toFixed(1)+','+y(d.p).toFixed(1));const ln=c.length>1?`<polygon points="${xs(0).toFixed(1)},92 ${pts.join(' ')} ${xs(c.length-1).toFixed(1)},92" fill="var(--nv)" fill-opacity=".2"/><polyline points="${pts.join(' ')}" fill="none" stroke="var(--nv)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>`:'';return `<svg viewBox="0 0 340 112" role="img" aria-label="Grafik win rate per minggu"><line class="gl" x1="8" x2="332" y1="${y(50)}" y2="${y(50)}"/><text class="ax" x="332" y="${y(50)-4}" text-anchor="end">50%</text>${ln}${c.map((d,i)=>`<circle cx="${xs(i).toFixed(1)}" cy="${y(d.p).toFixed(1)}" r="4.5" fill="${d.p>=50?'var(--nv)':'var(--loss)'}" stroke="var(--card)" stroke-width="2"/><text x="${xs(i).toFixed(1)}" y="${(y(d.p)-9).toFixed(1)}" text-anchor="middle" font-size="11" font-weight="600" fill="${d.p>=50?'var(--ink)':'var(--loss)'}">${Math.round(d.p)}</text><text class="ax" x="${xs(i).toFixed(1)}" y="108" text-anchor="middle">${sh(d.a)}</text>`).join('')}</svg>`})();
+  const wkV=wkA.filter(d=>d.p!==null),wkB=wkV.length?wkV.reduce((a,b)=>b.p>=a.p?b:a):null,wkW=wkV.length?wkV.reduce((a,b)=>b.p<=a.p?b:a):null;
+  const wkT=wkV.length>1?`<div class="tl2g"><div class="tl2"><span>Minggu terbaik</span><b class="ac">${Math.round(wkB.p)}%</b><em>${sh(wkB.a)} – ${sh(wkB.e)}</em></div><div class="tl2"><span>Minggu terendah</span><b class="${wkW.p>=50?'':'loss'}">${Math.round(wkW.p)}%</b><em>${sh(wkW.a)} – ${sh(wkW.e)}</em></div></div>`:'';
+  const wkL=wkA.slice().reverse(),wkHtml=wkA.length?wkT+wkSvg+`<div style="margin-top:10px">${wkL.slice(0,3).map(wkRow).join('')}</div>`+(wkL.length>3?`<details class="dt"><summary>Minggu sebelumnya (${wkL.length-3})</summary>${wkL.slice(3).map(wkRow).join('')}</details>`:''):'';
   let pk=0,dd=0;eq.forEach(v=>{pk=Math.max(pk,v);dd=Math.max(dd,pk-v)});
   let sw=0,sl=0,cw=0,cl=0;ord.forEach(r=>{if(r.result==='WIN'){cw++;cl=0}else if(r.result==='LOSS'){cl++;cw=0}sw=Math.max(sw,cw);sl=Math.max(sl,cl)});
   const gw=ord.reduce((a,r)=>a+Math.max(0,R(r)),0),gl=ord.reduce((a,r)=>a+Math.max(0,-R(r)),0);
@@ -465,7 +587,12 @@ function renderV(full){
   const dnv=Object.values(dn),cTot=dnv.reduce((a,b)=>a+b,0),cBest=dnv.length?Math.max(...dnv):0,cPct=cTot>0?cBest/cTot*100:0;
   const consHtml=cTot>0&&dnv.length>1?`<div class="ch"><b class="${cPct<=40?'win':'warn'}">${cPct.toFixed(0)}%</b><span>hari terbaik dari total profit</span></div><div class="s" style="padding:0;border:0"><div class="m"><i style="width:${Math.min(100,cPct).toFixed(0)}%;background:${cPct<=40?'var(--win)':'var(--warn)'}"></i></div></div><div class="note" style="margin-top:8px">Hari terbaik ${f1(cBest)} dari total ${f1(cTot)}. Sebagian challenge membatasi porsi ini (sering sekitar 30–40%), cek aturan firma kamu.</div>`:'<div class="note">Muncul setelah total profit positif dan ada minimal 2 hari trading.</div>';
   const rrG={};rows.forEach(r=>{if(r.rr)(rrG[r.rr]=rrG[r.rr]||[]).push(r)});
-  const rrHtml=Object.keys(rrG).sort((a,b)=>parseFloat(a.split(':')[1])-parseFloat(b.split(':')[1])).map(k=>{const x=rrG[k],w=x.filter(r=>r.result==='WIN').length,l=x.filter(r=>r.result==='LOSS').length,p=w+l?w/(w+l)*100:0,nt=zNet(x);return `<div class="s"><div class="r"><span>${esc(k)}</span><span><b class="${p>=50?'win':'loss'}">${w+l?Math.round(p)+'%':'-'}</b> <small class="${nt>=0?'win':'loss'}">${f1(nt)}</small></span></div><div class="d">${x.length} trade · ${w}W · ${l}L · expectancy ${f1(nt/x.length)}${x.length<5?' · sampel kecil':''}</div><div class="m"><i style="width:${p}%"></i></div></div>`}).join('')||'<div class="note">Belum ada data RR target.</div>';
+  const rrK=Object.keys(rrG).sort((a,b)=>parseFloat(a.split(':')[1])-parseFloat(b.split(':')[1])),rrD=rrK.map(k=>{const x=rrG[k],w=x.filter(r=>r.result==='WIN').length,l=x.filter(r=>r.result==='LOSS').length;return {k,x,w,l,p:w+l?w/(w+l)*100:null,nt:zNet(x)}});
+  const rrOk=rrD.filter(d=>d.x.length>=5&&d.p!==null),rrBest=rrOk.length?rrOk.reduce((a,b)=>b.nt/b.x.length>a.nt/a.x.length?b:a):null,rrTop=rrD.length?rrD.reduce((a,b)=>b.x.length>a.x.length?b:a):null;
+  const rrT=rrBest&&rrTop?`<div class="tl2g"><div class="tl2"><span>Expectancy terbaik</span><b class="ac">${esc(rrBest.k)} · ${f1(rrBest.nt/rrBest.x.length)}</b><em>${rrBest.x.length} trade</em></div><div class="tl2"><span>Paling sering</span><b>${esc(rrTop.k)} · ${rrTop.p===null?'-':Math.round(rrTop.p)+'%'}</b><em>${rrTop.x.length} trade · ${f1(rrTop.nt)}</em></div></div>`:'';
+  const rrChart=rrD.length?`<div class="vc tt"><div class="g50" style="bottom:37px"></div>${rrD.map(d=>`<div class="vcol${d.x.length<5?' lo':''}"><b class="${d.p!==null&&d.p<50?'loss':''}">${d.p===null?'-':Math.round(d.p)}</b><u class="${d.p!==null&&d.p<50?'neg':''}" style="height:${Math.max(3,(d.p||0)*.75).toFixed(0)}px"></u></div>`).join('')}</div><div class="vlb tt">${rrD.map(d=>`<div><span>${esc(d.k)}</span></div>`).join('')}</div>`:'';
+  const rrRows=rrD.map(d=>{const n=d.x.length;return `<div class="s rr3${n<5?' lo':''}"><b class="k">${esc(d.k)}</b><span class="n">${n} trade · ${d.w}W ${d.l}L · exp ${f1(d.nt/n)}</span><b class="${d.p!==null&&d.p>=50?'win':'loss'}">${d.p===null?'-':Math.round(d.p)+'%'}</b><b class="${d.nt>=0?'win':'loss'}">${f1(d.nt)}</b></div>`}).join('');
+  const rrHtml=rrD.length?rrT+rrChart+`<div style="margin-top:12px">${rrRows}</div>`:'<div class="note">Belum ada data RR target.</div>';
   /*WK*/const wkOf=d=>{const t=new Date(d+'T00:00:00');t.setDate(t.getDate()-(t.getDay()+6)%7);return t.getFullYear()+'-'+String(t.getMonth()+1).padStart(2,'0')+'-'+String(t.getDate()).padStart(2,'0')};
   const wAdd=(k,n)=>{const t=new Date(k+'T00:00:00');t.setDate(t.getDate()+n);return t};
   const wIso=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
@@ -516,7 +643,7 @@ function renderV(full){
   </div><div data-sec="a"><h2>Win rate per minggu</h2><div class="card">${wkHtml||'-'}</div>
   </div><div data-sec="a"><h2>Statistik risiko</h2><div class="card k-warn">${riskHtml}</div>
   </div><div data-sec="a"><h2>Win rate per setup</h2><div class="card">${setupHtml}</div>
-  </div><div class="full" data-sec="a"><h2>Performa per RR target</h2><div class="card">${rrHtml}<div class="note" style="margin-top:8px">Win rate dihitung dari WIN dan LOSS, BE tidak dihitung. R memakai nilai aktual jika diisi, selain itu estimasi dari RR target.</div></div>
+  </div><div class="full" data-sec="a"><h2>Performa per RR target</h2><div class="card">${rrHtml}<div class="note" style="margin-top:8px">Kolom dan baris redup = sampel kecil (kurang dari 5 trade). Win rate dihitung dari WIN dan LOSS, BE tidak dihitung. R memakai nilai aktual jika diisi, selain itu estimasi dari RR target.</div></div>
   </div></div><div data-sec="j">
   <div class="tools" style="grid-template-columns:1fr"><input id="q" type="search" placeholder="Cari pair, POI, catatan…" value="${esc(F.q)}"></div><details class="flt"${['pair','session','result','dir','poi','emo','so',...ACC.facts.map(f=>f[0])].some(k=>F[k])?' open':''}><summary>Filter</summary><div class="tools">${opt('pair','Pair')}${opt('session','Session')}${opt('result','Result')}${opt('dir','Arah')}${opt('poi','POI')}${opt('emo','Emosi')}${ACC.facts.map(([k,l])=>`<select data-f="${k}"><option value="">${l}</option><option${F[k]==='YES'?' selected':''}>YES</option><option${F[k]==='NO'?' selected':''}>NO</option></select>`).join('')}<select data-f="so"><option value="">Urut: terbaru</option><option value="tl"${F.so==='tl'?' selected':''}>Terlama</option><option value="rb"${F.so==='rb'?' selected':''}>R terbesar</option><option value="rk"${F.so==='rk'?' selected':''}>R terkecil</option></select></div></details>
   <div class="note" style="margin:6px 2px 10px"><b>${vis.length}</b> trade · WR <b>${zSv.w+zSv.l?Math.round(zSv.w/(zSv.w+zSv.l)*100)+'%':'-'}</b> · net <b class="${zSv.n>=0?'win':'loss'}">${f1(zSv.n)}</b>${F.so==='rb'||F.so==='rk'?' · diurut per total R harian':''}</div><div class="ents">${list}</div>
