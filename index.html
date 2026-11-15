@@ -401,7 +401,7 @@ body,body.c{font-size:13px;line-height:1.4}
 :root[data-theme=light] .logo{filter:brightness(.38) contrast(1.15)}
 :root[data-theme=light] dialog::backdrop{background:rgba(16,26,51,.45)}
 :root[data-theme=light] .toast{box-shadow:0 6px 20px var(--shadow)}
-.mnu #thm{display:block}
+.mnu #thm{display:block}.mnu hr{border:0;border-top:1px solid var(--line);margin:4px 6px}
 /* ===== Konsistensi ===== */
 .fab,body.c .fab{width:50px;height:50px;font-size:26px;border-radius:14px;opacity:.94}
 :is(body,body.c) .ents .t .tags span{font-size:11px}
@@ -424,7 +424,7 @@ input,select,textarea,a.b,button{border-radius:8px}
 </head>
 <body>
 <div class="wrap">
-  <div class="head"><div class="hl"><h1><img class="logo" src="logo.png" alt="Shuaa"></h1><div class="sub" id="sub">Trading journal dan challenge tracker</div></div><div class="hr"><select id="ph-sel" aria-label="Phase"></select><button type="button" class="mnb" id="mnb" aria-label="Menu" aria-haspopup="true" aria-expanded="false">⋯</button></div><div class="mnu" id="mnu" hidden><button type="button" id="vw"></button><button type="button" id="x-style">Ganti strategy</button><button type="button" id="ph-mng">Kelola phase</button><button type="button" id="mn-acc">Atur akun</button><button type="button" id="thm"></button></div></div>
+  <div class="head"><div class="hl"><h1><img class="logo" src="logo.png" alt="Shuaa"></h1><div class="sub" id="sub">Trading journal dan challenge tracker</div></div><div class="hr"><select id="ph-sel" aria-label="Phase"></select><button type="button" class="mnb" id="mnb" aria-label="Menu" aria-haspopup="true" aria-expanded="false">⋯</button></div><div class="mnu" id="mnu" hidden><button type="button" id="vw"></button><button type="button" id="x-style">Ganti strategy</button><button type="button" id="ph-mng">Kelola phase</button><button type="button" id="mn-acc">Atur akun</button><button type="button" id="thm"></button><hr><button type="button" data-a="x-json">Cadangkan data</button><button type="button" data-a="x-imp">Pulihkan cadangan</button><hr><button type="button" data-a="x-pdf">Unduh PDF</button><button type="button" data-a="x-tpl">Unduh templat CSV</button><button type="button" data-a="x-impcsv">Impor dari CSV</button></div></div>
   <div class="note" id="ph-note" style="margin:-4px 0 12px" hidden>Tampilan Semua phase dipakai untuk melihat pola. Balance dan progres target memakai aturan phase yang aktif, jadi lihat hasil per phase di phase masing-masing.</div>
   <nav class="tabs" id="tabs" role="tablist" aria-label="Bagian jurnal"><button data-tab="ringkasan">Ringkasan</button><button data-tab="analisis">Analisis</button><button data-tab="jurnal">Jurnal</button><button data-tab="news">News</button></nav>
   <div id="app"><div class="msg">Memuat jurnal…</div></div>
@@ -464,6 +464,7 @@ input,select,textarea,a.b,button{border-radius:8px}
 <div><label>Maks. loss total (%)</label><input name="ml" type="number" step="any" min="0.1" required></div><div class="w"><label>Jam reset hari trading (0-23, jam perangkat)</label><input name="rh" type="number" step="1" min="0" max="23" required></div><div class="w"><label>Model drawdown</label><select name="dm"><option value="t">Trailing (dari puncak equity)</option><option value="s">Statis (dari balance awal)</option></select></div></div>
 <div class="acts"><button type="button" id="acx">Batal</button><button class="p" id="asv">Simpan</button></div></form></dialog>
 <input type="file" id="imp" accept="application/json,.json" hidden>
+<input type="file" id="impc" accept=".csv,text/csv,text/plain" hidden>
 <dialog id="cdlg"><div id="cmsg" style="margin-bottom:6px"></div><div class="acts"><button type="button" id="cno">Batal</button><button type="button" id="calt" hidden></button><button type="button" class="p" id="cyes">Ya, lanjutkan</button></div></dialog>
 <dialog id="rndlg"><h2>Ubah nama phase</h2><input id="rnin" maxlength="40" autocomplete="off" aria-label="Nama phase"><div class="acts"><button type="button" id="rnx">Batal</button><button type="button" class="p" id="rnok">Simpan</button></div></dialog>
 <dialog id="phdlg"><form id="phfrm" onsubmit="return false"><h2>Kelola phase</h2>
@@ -736,7 +737,7 @@ function renderV(full){
   </div></div><div data-sec="j">
   <div class="tools" style="grid-template-columns:1fr"><input id="q" type="search" placeholder="Cari pair, POI, catatan…" value="${esc(F.q)}"></div><details class="flt"${['pair','session','result','dir','poi','emo','so',...ACC.facts.map(f=>f[0])].some(k=>F[k])?' open':''}><summary>Filter</summary><div class="tools">${opt('pair','Pair')}${opt('session','Session')}${opt('result','Result')}${opt('dir','Arah')}${opt('poi','POI')}${opt('emo','Emosi')}${ACC.facts.map(([k,l])=>`<select data-f="${k}"><option value="">${l}</option><option${F[k]==='YES'?' selected':''}>YES</option><option${F[k]==='NO'?' selected':''}>NO</option></select>`).join('')}<select data-f="so"><option value="">Urut: terbaru</option><option value="tl"${F.so==='tl'?' selected':''}>Terlama</option><option value="rb"${F.so==='rb'?' selected':''}>R terbesar</option><option value="rk"${F.so==='rk'?' selected':''}>R terkecil</option></select></div></details>
   <div class="note" style="margin:6px 2px 10px"><b>${vis.length}</b> trade · WR <b>${zSv.w+zSv.l?Math.round(zSv.w/(zSv.w+zSv.l)*100)+'%':'-'}</b> · net <b class="${zSv.n>=0?'win':'loss'}">${f1(zSv.n)}</b>${F.so==='rb'||F.so==='rk'?' · diurut per total R harian':''}</div><div class="ents">${list}</div>
-  <h2>Data</h2><div class="card"><div class="acts2" style="display:flex;gap:8px;flex-wrap:wrap"><button id="x-csv">Ekspor CSV</button><button id="x-json">Unduh cadangan</button>${typeof navigator.share==='function'?'<button id="x-share">Bagikan cadangan</button>':''}<button id="x-imp">Pulihkan cadangan</button></div><div class="note" style="margin-top:12px">Jurnal tersimpan di browser perangkat ini. Unduh cadangan secara berkala, dan pakai Pulihkan untuk memindahkannya ke perangkat lain.</div></div>
+  <h2>Data</h2><div class="card"><div class="acts2" style="display:flex;gap:8px;flex-wrap:wrap"><button id="x-csv">Ekspor CSV</button><button id="x-pdf">Unduh PDF</button><button id="x-json">Unduh cadangan</button>${typeof navigator.share==='function'?'<button id="x-share">Bagikan cadangan</button>':''}<button id="x-imp">Pulihkan cadangan</button><button id="x-tpl">Unduh templat CSV</button><button id="x-impcsv">Impor dari CSV</button></div><div class="note" style="margin-top:12px">Jurnal tersimpan di browser perangkat ini. Unduh cadangan secara berkala, dan pakai Pulihkan untuk memindahkannya ke perangkat lain. Templat CSV bisa diisi di Google Sheets atau Excel, lalu diimpor kembali.</div></div>
   </div><div data-sec="n"><div id="nw"></div></div><div class="quote">Trade with intention, execute with precision.</div><div class="disc"><b>Penting:</b> alat pencatatan pribadi, bukan saran trading atau keuangan. Hasil lampau tidak menjamin hasil ke depan. Balance dan target adalah simulasi dari R × risiko, bukan data akun broker. Jurnal hanya tersimpan di browser ini, dan menghapus data browser akan menghapus jurnal, jadi unduh cadangan secara berkala.</div><div class="sigbox"><div class="by">Dibuat oleh</div><div class="sig"><span>Shuaa</span><i></i></div><div class="pw pwr">Powered by <a href="https://kenan.id" target="_blank" rel="noopener">kenan.id</a></div></div>`;
   $('#add').hidden=false;renderNews();calcUpd();
   const q2=$('#q');q2.oninput=()=>{F.q=q2.value;clearTimeout(window.__qt);window.__qt=setTimeout(()=>{if(!q2.isConnected)return;const p=q2.selectionStart;render();const n=$('#q');n.focus();n.setSelectionRange(p,p)},200)};
@@ -780,8 +781,10 @@ $('#cx').onclick=()=>$('#dlg').close();
 $('#sv').onclick=()=>{
   const f=$('#frm');if(!f.reportValidity())return;
   const d={};[...f.elements].forEach(e=>{if(e.name)d[e.name]=e.value});
+  const wasNew=!edit;
   if(edit)rows=rows.map(r=>r.id===edit?{...r,...d}:r);else rows.push({id:'n'+Date.now(),ph:phCurId(),...d});
   $('#dlg').close();render();save();
+  if(wasNew)setTimeout(bkCheck,500);
 };
 
 const CALC={};
@@ -934,13 +937,16 @@ const csvEsc=v=>{let t=String(v??'');if(/^[=+\-@\t\r]/.test(t)&&!/^-?\d+(\.\d+)?
 function dl(name,text,type){const u=URL.createObjectURL(new Blob([text],{type}));const a=document.createElement('a');a.href=u;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),1000)}
 const stamp=today;
 document.addEventListener('click',e=>{const pb=e.target.closest&&e.target.closest('[data-preset]');if(pb){pickStyle=false;setPreset(pb.dataset.preset);persistAcc();render();if(pb.dataset.preset==='Kustom'){const b=document.getElementById('acc-edit');if(b)b.click()}return}
-  const id=e.target.id;
+  const id=e.target.id||(e.target.dataset&&e.target.dataset.a)||'';
   if(id==='x-style'){pickStyle=true;render();scrollTo(0,0)}
   if(id==='x-pcx'){pickStyle=false;render()}
   if(id==='x-csv'){const H=['Date','Pair','Session','Arah','Entry TF','POI',...ACC.facts.map(f=>f[1]),'CRT','RR Target','Result','R aktual','Chart Before','Chart After','Notes','Jam','Lot','Emosi','Pelajaran','Phase'],K=['date','pair','session','dir','tf','poi',...ACC.facts.map(f=>f[0]),'crt','rr','result','ar','before','after','notes','tm','lot','emo','lesson','ph'];dl('shuaa-journal-'+stamp()+'.csv','\ufeff'+[H.map(csvEsc).join(',')].concat(rows.map(r=>K.map(k=>csvEsc(k==='ph'?phName(r.ph):r[k])).join(','))).join('\n'),'text/csv')}
   if(id==='x-json'||id==='x-json2'){dl('shuaa-journal-backup-'+stamp()+'.json',JSON.stringify({rows,acc:ACC,phases:PH},null,1),'application/json');noteBackup();render()}
   if(id==='x-share'){const fl=new File([JSON.stringify({rows,acc:ACC,phases:PH},null,1)],'shuaa-journal-backup-'+stamp()+'.json',{type:'application/json'});if(navigator.canShare&&navigator.canShare({files:[fl]}))navigator.share({files:[fl],title:'Cadangan Shuaa Journal'}).then(()=>{noteBackup();render()}).catch(()=>{});else say('Perangkat ini belum mendukung berbagi file. Pakai Unduh cadangan.')}
   if(id==='x-imp')$('#imp').click();
+  if(id==='x-tpl')tplDl();
+  if(id==='x-pdf')pdfDl();
+  if(id==='x-impcsv'){if(!ACC.preset){say('Pilih strategy dulu lewat Ganti strategy, supaya kolom faktor cocok.');return}$('#impc').click()}
 });
 $('#imp').onchange=async e=>{const f=e.target.files[0];e.target.value='';if(!f)return;try{const d=JSON.parse(await f.text());if(!Array.isArray(d.rows))throw new Error('Format cadangan tidak dikenali');const nr=clean(d.rows);if(!nr.length&&d.rows.length)throw new Error('Tidak ada trade valid');
   const rp=()=>{try{if(d.acc)Object.assign(ACC,cleanAcc(d.acc));if(!ACC.preset)setPreset('CRT',true);persistAcc();rows=nr;restorePh(d.phases);fixPh();applyPh();pickStyle=false;save();noteBackup();render();say('Cadangan dipulihkan: '+nr.length+' trade')}catch(x){say('Gagal memulihkan: '+x.message)}};
@@ -948,6 +954,101 @@ $('#imp').onchange=async e=>{const f=e.target.files[0];e.target.value='';if(!f)r
   if(!rows.length)ask('Pulihkan '+nr.length+' trade dari file ini?',rp);
   else ask('File berisi '+nr.length+' trade, jurnal sekarang '+rows.length+'. Gabungkan (trade yang sudah ada dilewati) atau ganti seluruhnya?',mg,{yes:'Gabungkan',alt:'Ganti semua',altFn:rp})
 }catch(x){say('Gagal memulihkan: '+x.message)}};
+
+/* ===== Templat & impor CSV ===== */
+function csvCols(){return{H:['Date','Pair','Session','Arah','Entry TF','POI',...ACC.facts.map(f=>f[1]),'CRT','RR Target','Result','R aktual','Chart Before','Chart After','Notes','Jam','Lot','Emosi','Pelajaran'],K:['date','pair','session','dir','tf','poi',...ACC.facts.map(f=>f[0]),'crt','rr','result','ar','before','after','notes','tm','lot','emo','lesson']}}
+function tplDl(){const c=csvCols(),t=today();
+  const ex=(res,ar,dir,emo,les)=>c.K.map(k=>({date:t,pair:'EURUSD',session:'London',dir:dir,tf:'M15',poi:'OB',crt:'H1',rr:'1:2',result:res,ar:ar,before:'',after:'',notes:'CONTOH - hapus baris ini',tm:'09:30',lot:'0.10',emo:emo,lesson:les}[k]??(ACC.facts.some(f=>f[0]===k)?'YES':''))),
+  L=[c.H.map(csvEsc).join(','),ex('WIN','2','Buy','Sesuai plan','Sabar menunggu konfirmasi').map(csvEsc).join(','),ex('LOSS','-1','Sell','FOMO','Entry sebelum konfirmasi').map(csvEsc).join(',')];
+  dl('shuaa-templat-jurnal.csv','\ufeff'+L.join('\n'),'text/csv');
+  say('Templat diunduh. Date: YYYY-MM-DD. Session: Asia/London/New York. Arah: Buy/Sell. Result: WIN/LOSS/BE. Faktor: YES/NO. Baris CONTOH dilewati saat impor.')}
+function parseCSV(t){t=t.replace(/^\ufeff/,'');const f1=t.split(/\r?\n/)[0]||'',n=c=>f1.split(c).length,sep=n(';')>n(',')?';':(n('\t')>n(',')?'\t':',');const out=[];let row=[],f='',q=false;for(let i=0;i<t.length;i++){const c=t[i];if(q){if(c==='"'){if(t[i+1]==='"'){f+='"';i++}else q=false}else f+=c}else if(c==='"')q=true;else if(c===sep){row.push(f);f=''}else if(c==='\n'||c==='\r'){if(c==='\r'&&t[i+1]==='\n')i++;row.push(f);f='';if(row.some(x=>x.trim()!==''))out.push(row);row=[]}else f+=c}row.push(f);if(row.some(x=>x.trim()!==''))out.push(row);return out}
+function csvRows(text){const g=parseCSV(text);if(g.length<2)throw new Error('File kosong atau tidak ada baris data');
+  const map={date:'date',tanggal:'date',pair:'pair',session:'session',sesi:'session',arah:'dir',direction:'dir','entry tf':'tf',tf:'tf',poi:'poi',crt:'crt','rr target':'rr',rr:'rr',result:'result',hasil:'result','r aktual':'ar',r:'ar','chart before':'before','chart after':'after',notes:'notes',catatan:'notes',jam:'tm','jam entry':'tm',lot:'lot',emosi:'emo',pelajaran:'lesson',kesalahan:'lesson'};
+  ACC.facts.forEach(([k,l])=>{map[String(l).toLowerCase()]=k});
+  const idx=g[0].map(h=>map[h.trim().toLowerCase()]||null);if(!idx.includes('date'))throw new Error('Kolom Date tidak ditemukan. Pakai templat dari menu.');
+  const fk=new Set(ACC.facts.map(f=>f[0])),EM=['Sesuai plan','FOMO','Revenge','Ragu','Overtrade','Rules dilanggar'];
+  const nd=v=>{v=v.trim();let m=v.match(/^(\d{4})[-\/.](\d{1,2})[-\/.](\d{1,2})/);if(m)return m[1]+'-'+m[2].padStart(2,'0')+'-'+m[3].padStart(2,'0');m=v.match(/^(\d{1,2})[-\/.](\d{1,2})[-\/.](\d{4})/);return m?m[3]+'-'+m[2].padStart(2,'0')+'-'+m[1].padStart(2,'0'):''};
+  const ok=[];let skip=0,sample=0;
+  g.slice(1).forEach((c,i)=>{const o={};idx.forEach((k,j)=>{if(!k)return;let v=(c[j]??'').trim();if(/^'[=+\-@]/.test(v))v=v.slice(1);o[k]=v});
+    if(/^contoh/i.test(o.notes||'')){sample++;return}
+    o.date=nd(o.date||'');const R=String(o.result||'').toUpperCase();
+    o.result={WIN:'WIN',W:'WIN',TP:'WIN',MENANG:'WIN',LOSS:'LOSS',L:'LOSS',SL:'LOSS',KALAH:'LOSS',BE:'BE',BREAKEVEN:'BE'}[R]||'';
+    if(!o.date||!o.result){skip++;return}
+    const D=String(o.dir||'').toLowerCase();o.dir=D==='buy'||D==='long'?'Buy':(D==='sell'||D==='short'?'Sell':'');
+    const S=String(o.session||'').toLowerCase();o.session=S.startsWith('asia')?'Asia':S.startsWith('lon')?'London':(S==='ny'||S.startsWith('new'))?'New York':(o.session||'');
+    if(o.ar)o.ar=String(o.ar).replace(',','.');
+    const E=EM.find(e=>e.toLowerCase()===String(o.emo||'').toLowerCase());o.emo=E||'';
+    Object.keys(o).forEach(k=>{if(fk.has(k)||/^(mss|ob|sweep|idm|cisd|fvg|imb|pd|kz|c_[a-z0-9_]+)$/.test(k)){const v=String(o[k]).toUpperCase();o[k]=['YES','Y','YA','1','TRUE'].includes(v)?'YES':(['NO','N','TIDAK','0','FALSE'].includes(v)?'NO':'')}});
+    o.id='c'+Date.now().toString(36)+i;o.ph=phCurId();ok.push(o)});
+  return{rows:clean(ok),skip,sample}}
+$('#impc').onchange=async e=>{const f=e.target.files[0];e.target.value='';if(!f)return;
+  try{const r=csvRows(await f.text()),sig=x=>[x.date,x.pair,x.tm,x.dir,x.result,x.ar,x.lot].join('|'),have=new Set(rows.map(sig)),add=r.rows.filter(x=>!have.has(sig(x))),dup=r.rows.length-add.length;
+    if(!add.length){say('Tidak ada trade baru untuk diimpor.'+(dup?' '+dup+' sudah ada.':'')+(r.skip?' '+r.skip+' baris dilewati (Date/Result tidak valid).':''));return}
+    ask('Impor '+add.length+' trade dari CSV ke phase aktif?'+(dup?' '+dup+' trade yang sama dilewati.':'')+(r.skip?' '+r.skip+' baris tidak valid dilewati.':''),()=>{try{rows=[...rows,...add];save();render();say(add.length+' trade diimpor')}catch(x){say('Gagal impor: '+x.message)}})
+  }catch(x){say('Gagal impor CSV: '+x.message)}};
+
+/* ===== Unduh PDF (laporan jurnal) ===== */
+function pdfDl(){
+  const rs=viewRows().filter(r=>{const d=r.date||'';return !(F.from&&d<F.from)&&!(F.to&&d>F.to)&&!(F.m&&d.slice(0,7)!==F.m)}).sort((a,b)=>a.date<b.date?-1:a.date>b.date?1:0);
+  if(!rs.length){say('Belum ada trade pada phase dan periode yang dipilih.');return}
+  const mlb=m=>new Date(m+'-01T00:00:00').toLocaleDateString('id-ID',{month:'long',year:'numeric'});
+  const perLabel=F.m?mlb(F.m):((F.from||F.to)?('Periode '+(F.from||'awal')+' s/d '+(F.to||'sekarang')):'Semua waktu');
+  const Rv=r=>{const a=parseFloat(r.ar);if(r.ar!==undefined&&r.ar!==''&&!isNaN(a))return a;if(r.result==='LOSS')return -1;if(r.result!=='WIN')return 0;const q=(r.rr||'').split(':');return q.length==2&&+q[0]?(+q[1])/(+q[0]):0};
+  const tot=rs.reduce((a,r)=>a+Rv(r),0),W=rs.filter(r=>r.result==='WIN').length,L=rs.filter(r=>r.result==='LOSS').length,B=rs.length-W-L;
+  const gw=rs.reduce((a,r)=>a+Math.max(0,Rv(r)),0),gl=rs.reduce((a,r)=>a+Math.max(0,-Rv(r)),0);
+  const pnl=tot*ACC.risk/100*ACC.bal,usd=v=>(v<0?'-':'+')+'$'+Math.abs(v).toLocaleString('en-US',{maximumFractionDigits:0});
+  const fr=v=>(v>=0?'+':'')+v.toFixed(1)+'R';
+  const phLabel=(!PH.view||PH.view==='all')?'Semua phase':phName(PH.view);
+  const eq=[ACC.bal];rs.forEach(r=>eq.push(eq[eq.length-1]+Rv(r)*ACC.risk/100*ACC.bal));
+  const CW=700,CH=170,pl=48,pr=8,pt=12,pb=20,lo=Math.min(...eq),hi=Math.max(...eq),sp=(hi-lo)||1;
+  const cx=i=>pl+(CW-pl-pr)*(eq.length<2?0:i/(eq.length-1)),cy=v=>pt+(CH-pt-pb)*(1-(v-lo)/sp),mny=v=>'$'+Math.round(v).toLocaleString('en-US');
+  const pts=eq.map((v,i)=>cx(i).toFixed(1)+','+cy(v).toFixed(1)).join(' ');
+  const up=eq[eq.length-1]>=ACC.bal,col=up?'#0a7a55':'#c01735';
+  const chart=`<div class="c"><div class="ct">Equity curve (balance simulasi)</div><svg viewBox="0 0 ${CW} ${CH}" width="100%"><line x1="${pl}" x2="${CW-pr}" y1="${cy(ACC.bal).toFixed(1)}" y2="${cy(ACC.bal).toFixed(1)}" stroke="#999" stroke-dasharray="4 3" stroke-width="1"/><polygon points="${cx(0).toFixed(1)},${(CH-pb)} ${pts} ${cx(eq.length-1).toFixed(1)},${(CH-pb)}" fill="${col}" fill-opacity=".12"/><polyline points="${pts}" fill="none" stroke="${col}" stroke-width="2" stroke-linejoin="round"/><text x="${pl-4}" y="${(cy(hi)+3).toFixed(1)}" text-anchor="end" font-size="9" fill="#555">${mny(hi)}</text><text x="${pl-4}" y="${(cy(lo)+3).toFixed(1)}" text-anchor="end" font-size="9" fill="#555">${mny(lo)}</text><text x="${pl}" y="${CH-5}" font-size="9" fill="#555">${esc(rs[0].date)}</text><text x="${CW-pr}" y="${CH-5}" text-anchor="end" font-size="9" fill="#555">${esc(rs[rs.length-1].date)}</text></svg><div class="cn">Garis putus-putus = balance awal ${mny(ACC.bal)}. Berdasarkan ${rs.length} trade pada periode ini.</div></div>`;
+  const tile=(l,v)=>`<div class="t"><span>${esc(l)}</span><b>${esc(v)}</b></div>`;
+  const tr=rs.map(r=>`<tr><td>${esc(r.date)}</td><td>${esc(r.pair||'')}</td><td>${esc(r.session||'')}</td><td>${esc(r.dir||'')}</td><td>${esc([r.tf,r.poi].filter(Boolean).join(' · '))}</td><td>${esc(r.rr||'')}</td><td class="${r.result==='WIN'?'w':r.result==='LOSS'?'l':''}">${esc(r.result)}</td><td>${esc(fr(Rv(r)))}</td><td>${esc(r.emo||'')}</td><td>${esc(r.notes||r.lesson||'')}</td></tr>`).join('');
+  const html=`<!doctype html><html><head><meta charset="utf-8"><title>shuaa-journal-${stamp()}</title><style>
+@page{size:A4;margin:12mm}*{box-sizing:border-box}body{font-family:Arial,Helvetica,sans-serif;color:#111;font-size:11px;margin:0}
+h1{font-size:20px;margin:0 0 2px}.sub{color:#555;margin-bottom:12px}.g{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px}
+.t{border:1px solid #ccc;border-radius:6px;padding:8px}.t span{display:block;color:#666;font-size:10px}.t b{font-size:15px}
+table{width:100%;border-collapse:collapse}th,td{border-bottom:1px solid #ddd;padding:4px 5px;text-align:left;vertical-align:top;word-break:break-word}
+th{background:#f1f3f7;font-size:10px}tr{page-break-inside:avoid}.w{color:#0a7a55;font-weight:700}.l{color:#c01735;font-weight:700}
+.c{border:1px solid #ccc;border-radius:6px;padding:8px;margin-bottom:14px}.ct{font-weight:700;margin-bottom:4px}.cn{color:#777;font-size:9px;margin-top:2px}.f{margin-top:12px;color:#777;font-size:9px}</style></head><body>
+<h1>Shuaa Journal</h1><div class="sub">${esc(ACC.name||'Trading journal')} · ${esc(phLabel)} · ${esc(perLabel)} · dibuat ${esc(today())}</div>
+<div class="g">${tile('Hasil simulasi',usd(pnl)+' ('+(pnl/ACC.bal*100>=0?'+':'')+(pnl/ACC.bal*100).toFixed(1)+'%)')}${tile('Total R',fr(tot))}${tile('Win rate',Math.round(W/rs.length*100)+'%')}${tile('Profit factor',gl?(gw/gl).toFixed(2):'-')}${tile('Trade',String(rs.length))}${tile('WIN / LOSS / BE',W+' / '+L+' / '+B)}${tile('Rata-rata R',fr(tot/rs.length))}${tile('Risiko per 1R',ACC.risk+'% ($'+(ACC.risk/100*ACC.bal).toLocaleString('en-US',{maximumFractionDigits:0})+')')}</div>
+${chart}
+<table><thead><tr><th>Tanggal</th><th>Pair</th><th>Session</th><th>Arah</th><th>Setup</th><th>RR</th><th>Hasil</th><th>R</th><th>Emosi</th><th>Catatan</th></tr></thead><tbody>${tr}</tbody></table>
+<div class="f">Hasil simulasi dihitung dari R × risiko per 1R. Bukan data akun broker dan bukan saran trading atau keuangan.</div></body></html>`;
+  const old=document.getElementById('pdf-fr');if(old)old.remove();
+  const f=document.createElement('iframe');f.id='pdf-fr';f.setAttribute('aria-hidden','true');f.style.cssText='position:fixed;right:0;bottom:0;width:0;height:0;border:0';
+  f.onload=()=>{try{f.contentWindow.focus();f.contentWindow.print()}catch(e){say('Gagal membuka dialog cetak: '+e.message)}setTimeout(()=>f.remove(),60000)};
+  document.body.appendChild(f);f.srcdoc=html;
+  say('Di dialog cetak, pilih "Simpan sebagai PDF".')}
+
+/* ===== Peringatan backup: tiap Minggu atau tiap 50 trade ===== */
+function bkCheck(){
+  try{
+    if(document.querySelector('dialog[open]'))return;
+    const n=rows.length;if(!n)return;
+    let bn=0,bt='',la=0,wk='';
+    try{const b=JSON.parse(localStorage.getItem('shuaa_backup')||'null');if(b&&isFinite(b.n)){bn=+b.n;bt=String(b.t||'')}}catch(e){}
+    try{la=+(localStorage.getItem('shuaa_bk_ask')||0)||0;wk=localStorage.getItem('shuaa_bk_wk')||''}catch(e){}
+    const by50=n>=50&&n-Math.max(bn,la)>=50;
+    const d=new Date();d.setDate(d.getDate()-d.getDay());
+    const sun=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+    const lastEv=[bt,wk].sort().pop()||'';
+    const byWk=n>bn&&lastEv<sun;
+    if(!by50&&!byWk)return;
+    try{localStorage.setItem('shuaa_bk_ask',String(n));localStorage.setItem('shuaa_bk_wk',today())}catch(e){}
+    const nw=n-bn;
+    ask((by50?'Sudah '+nw+' trade sejak cadangan terakhir':'Waktunya cadangan mingguan ('+nw+' trade baru sejak cadangan terakhir)')+(bn?'':', dan kamu belum pernah mengunduh cadangan')+'. Unduh cadangan sekarang supaya datamu aman?',()=>{
+      dl('shuaa-journal-backup-'+stamp()+'.json',JSON.stringify({rows,acc:ACC,phases:PH},null,1),'application/json');noteBackup();render();say('Cadangan diunduh ('+rows.length+' trade)')
+    },{yes:'Unduh cadangan'})
+  }catch(e){}
+}
+addEventListener('load',()=>setTimeout(bkCheck,2000));
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)setTimeout(bkCheck,800)});
 </script>
 </body>
 </html>
