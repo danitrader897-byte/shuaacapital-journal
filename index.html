@@ -15,7 +15,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Shuaa">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700&family=Figtree:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700&family=Figtree:wght@400;500;600&family=Dancing+Script:wght@700&display=swap">
 <style>
 :root{--bg:#070b16;--card:#0e1526;--card2:#141d33;--ink:#eaf0ff;--mute:#8a96b3;--line:#1d2842;--win:#22d3a0;--loss:#ff5d73;--be:#8a96b3;--warn:#f5b73b;--acc:#4f7cff;--on-acc:#fff;--grid:rgba(110,140,255,.05);--shadow:rgba(0,0,0,.55);--grad:linear-gradient(135deg,#2f5bd8,#0b7fa8);color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 *{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
@@ -64,6 +64,25 @@ dialog h2{margin-top:0}
 .f{display:grid;grid-template-columns:1fr 1fr;gap:12px}.f label{display:block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);margin-bottom:4px}
 .f .w{grid-column:1/-1}.acts{display:flex;gap:10px;justify-content:flex-end;margin-top:18px}
 .msg{padding:40px 10px;text-align:center;color:var(--mute)}
+.guide{margin-top:18px;text-align:left}
+.guide h3{font-family:'Bricolage Grotesque',Figtree,system-ui,sans-serif;font-size:15px;margin:0 0 8px;color:var(--ink)}
+.guide .gc{background:var(--card2);border:1px solid var(--line);border-radius:10px;padding:14px;margin-bottom:12px}
+.guide ol{margin:6px 0 0;padding-left:20px;color:var(--mute);font-size:13px;line-height:1.6}
+.guide li{margin-bottom:4px}.guide li b,.guide p b{color:var(--ink);font-weight:600}
+.guide p{margin:0 0 6px;color:var(--mute);font-size:13px;line-height:1.6}
+.guide .tip2{border-left:3px solid var(--warn);padding:2px 0 2px 10px;margin-top:10px;font-size:12px;color:var(--warn)}
+.sig{text-align:center;margin:22px 0 4px}
+.sig span{display:inline-block;font-family:'Dancing Script','Segoe Script','Brush Script MT',cursive;font-size:42px;font-weight:700;line-height:1;color:var(--ink);transform:rotate(-4deg)}
+.sig i{display:block;width:96px;height:2px;margin:6px auto 0;border-radius:2px;background:var(--grad);transform:rotate(-2deg)}
+.sig small{display:block;margin-top:8px;font-size:11px;color:var(--mute)}
+.pw{text-align:center;margin:14px 0 0;font-size:12px;color:var(--mute);letter-spacing:.02em}
+.pw a{color:var(--ink);font-weight:600;text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:1px}
+.pw a:hover,.pw a:focus-visible{color:var(--acc);border-bottom-color:var(--acc)}
+.sigbox{display:block;width:100%;margin:6px 0 0;text-align:center}
+.sigbox .by{font-size:12px;color:var(--mute);letter-spacing:.02em}
+.sigbox .sig{margin:2px 0 0;transform:translateY(-4px)}
+.sigbox .pwr{text-align:right;margin:18px 2px 0;font-size:11px;white-space:nowrap}
+body[data-tab=news] #app>.card.empty{display:none}
 .quote{text-align:center;font-size:12px;color:var(--mute);margin-top:40px;letter-spacing:.06em}
 button.live{color:var(--acc);border:1px solid var(--acc);background:transparent;padding:6px 12px;border-radius:999px;font-size:12px;letter-spacing:.04em}
 @media(min-width:820px){.wrap{max-width:1120px}.dash{display:grid;grid-template-columns:1fr 1fr;gap:0 20px;align-items:start}.dash .full{grid-column:1/-1}.ents{display:grid;grid-template-columns:1fr 1fr;gap:0 14px}.ents .day{grid-column:1/-1}.tools{grid-template-columns:2fr 1fr 1fr 1fr}.tools input{grid-column:auto}.ring{width:132px;height:132px}}
@@ -358,7 +377,7 @@ body,body.c{font-size:13px;line-height:1.4}
   <div class="head"><div><h1><img class="logo" src="logo.png" alt="Shuaa"></h1><div class="sub" id="sub">Trading journal dan challenge tracker</div><div class="sub" id="hd2" style="color:var(--ink);font-weight:600;margin-top:4px"></div></div><div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px"><button class="live" id="vw"></button><button class="live" id="x-style">Ganti strategy</button></div></div>
     <div class="phbar"><select id="ph-sel" aria-label="Phase"></select><button type="button" class="live" id="ph-mng">Kelola phase</button></div>
   <div class="note" id="ph-note" style="margin:-4px 0 12px" hidden>Tampilan Semua phase dipakai untuk melihat pola. Balance dan progres target memakai aturan phase yang aktif, jadi lihat hasil per phase di phase masing-masing.</div>
-  <nav class="tabs" id="tabs" role="tablist" aria-label="Bagian jurnal"><button data-tab="ringkasan">Ringkasan</button><button data-tab="analisis">Analisis</button><button data-tab="jurnal">Jurnal</button></nav>
+  <nav class="tabs" id="tabs" role="tablist" aria-label="Bagian jurnal"><button data-tab="ringkasan">Ringkasan</button><button data-tab="analisis">Analisis</button><button data-tab="jurnal">Jurnal</button><button data-tab="news">News</button></nav>
   <div id="app"><div class="msg">Memuat jurnal…</div></div>
 </div>
 <button class="p fab" id="add" hidden aria-label="Trade baru">+</button>
@@ -469,8 +488,8 @@ function renderV(full){
   const app=$('#app');
   $('#sub').textContent=ACC.name||'Trading journal dan challenge tracker';
   {const h=new Date().getHours();$('#hd2').textContent=(h<11?'Selamat pagi':h<15?'Selamat siang':h<18?'Selamat sore':'Selamat malam')+' · '+fmt(today())}
-  if(pickStyle||(!ACC.preset&&!full.length)){app.innerHTML=`<div class="card empty"><h2>Pilih strategy-mu</h2><div class="note">Form, model entry, dan analisis akan menyesuaikan.${full.length?' Semua trade-mu tetap aman, hanya faktor konfluensi dan model entry yang berganti.':' Bisa diubah kapan saja lewat tombol Ganti strategy.'}</div><div class="note warn" style="margin-top:10px">Jurnal hanya tersimpan di browser ini. Unduh cadangan secara berkala agar datamu aman.</div><div class="pick">${Object.entries(PRESETS).map(([n,p])=>`<button class="pk" data-preset="${n}"><b>${n==='Kustom'?'Custom':n}</b><span>${p.facts.length?p.facts.map(f=>esc(f[1])).join(' · '):'Tulis faktor konfluensimu sendiri (price action, indikator, dll.)'}</span></button>`).join('')}</div><div class="acts2"><button id="x-imp">Pulihkan cadangan</button>${full.length?'<button id="x-pcx">Batal</button>':''}</div></div>`;$('#add').hidden=true;return}
-  if(!full.length){app.innerHTML=`<div class="card empty"><h2>Belum ada trade</h2><div class="note">Catat trade pertama untuk melihat balance simulasi, equity curve, kalender, dan analisis setup.</div><ol class="steps"><li>Atur balance, risiko per 1R, dan aturan challenge.</li><li>Catat trade: pair, session, setup, dan hasil.</li><li>Isi R aktual agar statistik akurat.</li></ol><div class="acts2"><button class="p" id="e-add">Catat trade pertama</button><button id="acc-edit">Atur akun</button><button id="x-imp">Pulihkan cadangan</button></div></div>`;$('#add').hidden=false;$('#e-add').onclick=()=>openEntry();return}
+  if(pickStyle||(!ACC.preset&&!full.length)){app.innerHTML=`<div class="card empty"><h2>Pilih strategy-mu</h2><div class="note">Form, model entry, dan analisis akan menyesuaikan.${full.length?' Semua trade-mu tetap aman, hanya faktor konfluensi dan model entry yang berganti.':' Bisa diubah kapan saja lewat tombol Ganti strategy.'}</div><div class="note warn" style="margin-top:10px">Jurnal hanya tersimpan di browser ini. Unduh cadangan secara berkala agar datamu aman.</div><div class="pick">${Object.entries(PRESETS).map(([n,p])=>`<button class="pk" data-preset="${n}"><b>${n==='Kustom'?'Custom':n}</b><span>${p.facts.length?p.facts.map(f=>esc(f[1])).join(' · '):'Tulis faktor konfluensimu sendiri (price action, indikator, dll.)'}</span></button>`).join('')}</div><div class="acts2"><button id="x-imp">Pulihkan cadangan</button>${full.length?'<button id="x-pcx">Batal</button>':''}</div><div class="guide"><div class="gc"><h3>Cara pakai Pulihkan cadangan</h3><ol><li>Tekan <b>Pulihkan cadangan</b>, lalu pilih file <b>.json</b> hasil tombol <b>Unduh cadangan</b> (namanya <b>shuaa-journal-backup-…json</b>).</li><li>Jurnal masih kosong: aplikasi langsung bertanya, tekan ya untuk memulihkan semua trade.</li><li>Jurnal sudah ada isinya: pilih <b>Gabungkan</b> (trade yang sudah ada dilewati) atau <b>Ganti semua</b> (jurnal sekarang ditimpa file cadangan).</li><li>Ganti HP atau browser? Unduh cadangan di perangkat lama, kirim filenya ke perangkat baru, lalu pulihkan di sini.</li></ol><div class="tip2">Data hanya tersimpan di browser ini. Menghapus data browser akan menghapus jurnal, jadi unduh cadangan secara berkala.</div></div><div class="gc"><h3>Tentang Shuaa Journal</h3><p>Jurnal trading pribadi dan <b>challenge tracker</b>. Kamu mencatat setiap trade, lalu aplikasi menghitung balance simulasi, equity curve, kalender profit, win rate, dan analisis setup dari <b>R × risiko</b> yang kamu isi.</p><p>Bukan data akun broker dan bukan saran trading atau keuangan. Fungsinya membantumu disiplin dan melihat pola dari keputusanmu sendiri.</p></div><div class="gc"><h3>Cara menggunakan</h3><ol><li><b>Pilih strategy</b> (CRT, ICT, SMC, atau Custom). Form dan analisis menyesuaikan, dan bisa diganti kapan saja.</li><li><b>Atur akun</b>: balance awal, risiko per 1R, dan aturan challenge.</li><li><b>Catat trade</b> dengan tombol <b>+</b>: pair, session, setup, arah, dan hasil. Isi <b>R aktual</b> supaya statistik akurat.</li><li><b>Ringkasan</b> menampilkan balance, target, dan progres challenge.</li><li><b>Analisis</b> menunjukkan setup, session, dan pair yang paling berhasil atau paling merugikan.</li><li><b>Jurnal</b> berisi daftar trade, bisa dicari dan difilter, lengkap dengan catatan dan screenshot.</li><li><b>News</b> menampilkan kalender berita dan headline supaya kamu tahu jadwal rilis yang berdampak.</li></ol></div><div class="sigbox"><div class="by">Dibuat oleh</div><div class="sig"><span>Shuaa</span><i></i></div><div class="pw pwr">Powered by <a href="https://kenan.id" target="_blank" rel="noopener">kenan.id</a></div></div></div></div><div data-sec="n"><div id="nw"></div></div>`;$('#add').hidden=true;renderNews();return}
+  if(!full.length){app.innerHTML=`<div class="card empty"><h2>Belum ada trade</h2><div class="note">Catat trade pertama untuk melihat balance simulasi, equity curve, kalender, dan analisis setup.</div><ol class="steps"><li>Atur balance, risiko per 1R, dan aturan challenge.</li><li>Catat trade: pair, session, setup, dan hasil.</li><li>Isi R aktual agar statistik akurat.</li></ol><div class="acts2"><button class="p" id="e-add">Catat trade pertama</button><button id="acc-edit">Atur akun</button><button id="x-imp">Pulihkan cadangan</button></div></div><div data-sec="n"><div id="nw"></div></div>`;$('#add').hidden=false;$('#e-add').onclick=()=>openEntry();renderNews();return}
   const months=[...new Set(full.map(r=>(r.date||'').slice(0,7)).filter(Boolean))].sort();
   const ml=m=>new Date(m+'-01T00:00:00').toLocaleDateString('id-ID',{month:'long',year:'numeric'});
   const rows=full.filter(r=>{const d=r.date||'';return !(F.from&&d<F.from)&&!(F.to&&d>F.to)&&!(F.m&&d.slice(0,7)!==F.m)});
@@ -669,7 +688,7 @@ function renderV(full){
   <div class="tools" style="grid-template-columns:1fr"><input id="q" type="search" placeholder="Cari pair, POI, catatan…" value="${esc(F.q)}"></div><details class="flt"${['pair','session','result','dir','poi','emo','so',...ACC.facts.map(f=>f[0])].some(k=>F[k])?' open':''}><summary>Filter</summary><div class="tools">${opt('pair','Pair')}${opt('session','Session')}${opt('result','Result')}${opt('dir','Arah')}${opt('poi','POI')}${opt('emo','Emosi')}${ACC.facts.map(([k,l])=>`<select data-f="${k}"><option value="">${l}</option><option${F[k]==='YES'?' selected':''}>YES</option><option${F[k]==='NO'?' selected':''}>NO</option></select>`).join('')}<select data-f="so"><option value="">Urut: terbaru</option><option value="tl"${F.so==='tl'?' selected':''}>Terlama</option><option value="rb"${F.so==='rb'?' selected':''}>R terbesar</option><option value="rk"${F.so==='rk'?' selected':''}>R terkecil</option></select></div></details>
   <div class="note" style="margin:6px 2px 10px"><b>${vis.length}</b> trade · WR <b>${zSv.w+zSv.l?Math.round(zSv.w/(zSv.w+zSv.l)*100)+'%':'-'}</b> · net <b class="${zSv.n>=0?'win':'loss'}">${f1(zSv.n)}</b>${F.so==='rb'||F.so==='rk'?' · diurut per total R harian':''}</div><div class="ents">${list}</div>
   <h2>Data</h2><div class="card"><div class="acts2" style="display:flex;gap:8px;flex-wrap:wrap"><button id="x-csv">Ekspor CSV</button><button id="x-json">Unduh cadangan</button>${typeof navigator.share==='function'?'<button id="x-share">Bagikan cadangan</button>':''}<button id="x-imp">Pulihkan cadangan</button></div><div class="note" style="margin-top:12px">Jurnal tersimpan di browser perangkat ini. Unduh cadangan secara berkala, dan pakai Pulihkan untuk memindahkannya ke perangkat lain.</div></div>
-  </div><div data-sec="n"><div id="nw"></div></div><div class="quote">Trade with intention, execute with precision.</div><div class="disc"><b>Penting:</b> alat pencatatan pribadi, bukan saran trading atau keuangan. Hasil lampau tidak menjamin hasil ke depan. Balance dan target adalah simulasi dari R × risiko, bukan data akun broker. Jurnal hanya tersimpan di browser ini, dan menghapus data browser akan menghapus jurnal, jadi unduh cadangan secara berkala.</div>`;
+  </div><div data-sec="n"><div id="nw"></div></div><div class="quote">Trade with intention, execute with precision.</div><div class="disc"><b>Penting:</b> alat pencatatan pribadi, bukan saran trading atau keuangan. Hasil lampau tidak menjamin hasil ke depan. Balance dan target adalah simulasi dari R × risiko, bukan data akun broker. Jurnal hanya tersimpan di browser ini, dan menghapus data browser akan menghapus jurnal, jadi unduh cadangan secara berkala.</div><div class="sigbox"><div class="by">Dibuat oleh</div><div class="sig"><span>Shuaa</span><i></i></div><div class="pw pwr">Powered by <a href="https://kenan.id" target="_blank" rel="noopener">kenan.id</a></div></div>`;
   $('#add').hidden=false;renderNews();calcUpd();
   const q2=$('#q');q2.oninput=()=>{F.q=q2.value;clearTimeout(window.__qt);window.__qt=setTimeout(()=>{if(!q2.isConnected)return;const p=q2.selectionStart;render();const n=$('#q');n.focus();n.setSelectionRange(p,p)},200)};
   app.querySelectorAll('[data-f]').forEach(s=>s.onchange=()=>{F[s.dataset.f]=s.value;render()});
@@ -699,7 +718,7 @@ let lastY=0;addEventListener('scroll',()=>{const y=scrollY;$('#add').classList.t
 let desk=true;try{desk=localStorage.getItem('vw')!=='m'}catch(e){}
 const applyV=()=>{document.body.classList.toggle('c',desk);const b=document.getElementById('vw');if(b)b.textContent=desk?'Tampilan: Ringkas':'Tampilan: Lega'};
 document.addEventListener('click',e=>{if(e.target.id==='vw'){desk=!desk;try{localStorage.setItem('vw',desk?'d':'m')}catch(x){}applyV()}});applyV();
-const TABS=['ringkasan','analisis','jurnal'];
+const TABS=['ringkasan','analisis','jurnal','news'];
 const setTab=t=>{document.body.dataset.tab=t;document.querySelectorAll('#tabs button').forEach(b=>{const on=b.dataset.tab===t;b.classList.toggle('on',on);b.setAttribute('role','tab');b.setAttribute('aria-selected',on?'true':'false')});try{history.replaceState(null,'','#'+t)}catch(e){}window.scrollTo(0,0)};
 document.querySelectorAll('#tabs button').forEach(b=>b.onclick=()=>setTab(b.dataset.tab));
 setTab(TABS.includes(location.hash.slice(1))?location.hash.slice(1):'ringkasan');
@@ -763,17 +782,23 @@ function renderNews(){nwNext();const box=document.getElementById('nw');if(!box)r
     hl=D.headlines.length?D.headlines.map(h=>`<div class="s hl2"><a href="${esc(h.link)}" target="_blank" rel="noopener">${esc(h.title)}</a><div class="d">${esc(h.src)}${h.ts?' · '+esc(nwAgo(h.ts)):''}</div></div>`).join(''):'<div class="note">Headline belum tersedia.</div>';
   }
   box.innerHTML=`<h2>Kalender berita</h2><div class="card k-warn">${status}<div class="chips2">${chip('rng','d','Hari ini')}${chip('rng','w','Minggu ini')}</div><div class="chips2">${chip('imp','h','High')}${chip('imp','m','High + Medium')}${rel.size?chip('cur','rel','Pair-ku ('+[...rel].join(' ')+')'):''}${chip('cur','all','Semua mata uang')}</div>${cal}</div><h2>Headline</h2><div class="card">${hl}</div><div class="note" style="margin-top:12px">Sumber: kalender Forex Factory dan headline FXStreet. Jadwal dan angka bisa berubah, cek sumber resmi sebelum mengambil keputusan. Bukan saran trading.</div>`}
+const NCAL='https://nfs.faireconomy.media/ff_calendar_thisweek.json',NRSS='https://www.fxstreet.com/rss/news';
+const NPX=[u=>'https://api.allorigins.win/raw?url='+encodeURIComponent(u),u=>'https://corsproxy.io/?url='+encodeURIComponent(u)];
+async function viaProxy(u,asText){for(const px of NPX){try{const r=await fetch(px(u),{cache:'no-store'});if(r.ok)return asText?await r.text():await r.json()}catch(e){}}return null}
+function parseRss(x){try{const d=new DOMParser().parseFromString(x,'text/xml');return[...d.querySelectorAll('item')].slice(0,15).map(i=>({title:(i.querySelector('title')||{}).textContent||'',link:((i.querySelector('link')||{}).textContent||'').trim(),ts:Date.parse((i.querySelector('pubDate')||{}).textContent||'')||0,src:'FXStreet'})).filter(h=>h.title&&/^https?:\/\//i.test(h.link))}catch(e){return[]}}
 async function loadNews(force){
   if(NEWS.loading)return;if(!force&&NEWS.data&&Date.now()-NEWS.t<55e3)return;
   NEWS.loading=true;NEWS.err='';renderNews();
   let raw=null;
   try{const r=await fetch('/.netlify/functions/news',{cache:'no-store'});if(r.ok){const j=await r.json();if(j&&Array.isArray(j.calendar))raw=j}}catch(e){}
   if(!raw){try{const r=await fetch('https://nfs.faireconomy.media/ff_calendar_thisweek.json');if(r.ok){const c=await r.json();if(Array.isArray(c))raw={calendar:c,headlines:[]}}}catch(e){}}
+  if(!raw){const c=await viaProxy(NCAL,false);if(Array.isArray(c))raw={calendar:c,headlines:[]}}
+  if(raw&&!(raw.headlines&&raw.headlines.length)){const x=await viaProxy(NRSS,true);if(x)raw.headlines=parseRss(x)}
   if(raw){try{NEWS.data=normNews(raw);NEWS.t=Date.now();try{localStorage.setItem('shuaa_news',JSON.stringify({t:NEWS.t,data:raw}))}catch(e){}}catch(e){NEWS.err='Format data berita tidak dikenali.'}}
-  else NEWS.err=NEWS.data?'Gagal memperbarui, menampilkan data terakhir yang tersimpan.':'Berita belum bisa dimuat. Pastikan folder netlify/functions ikut ter-deploy dan buka lewat alamat Netlify.';
+  else NEWS.err=NEWS.data?'Gagal memperbarui, menampilkan data terakhir yang tersimpan.':'Berita belum bisa dimuat. Periksa koneksi lalu tekan Muat ulang, atau buka Forex Factory langsung.';
   NEWS.loading=false;renderNews()}
 document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('[data-nf]');if(b){const [k,v]=b.dataset.nf.split(':');NF[k]=v;renderNews();return}if(e.target.id==='nw-ref')loadNews(true)});
-function startNews(){return;loadNews();setInterval(()=>{if(!document.hidden){loadNews();nwNext();if(document.body.dataset.tab==='news')renderNews()}},30000);document.addEventListener('visibilitychange',()=>{if(!document.hidden)loadNews()})}
+function startNews(){loadNews();setInterval(()=>{if(!document.hidden){loadNews();nwNext();if(document.body.dataset.tab==='news')renderNews()}},30000);document.addEventListener('visibilitychange',()=>{if(!document.hidden)loadNews()})}
 
 /* ===== PHASE PROP FIRM ===== */
 const RK=['bal','risk','tgt','md','dl','ml','rh','dm'];
