@@ -11,13 +11,14 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#070b16">
+<script>(function(){try{var t=localStorage.getItem("shuaa_theme")||"auto";var l=t==="light"||(t==="auto"&&matchMedia("(prefers-color-scheme: light)").matches);document.documentElement.setAttribute("data-theme",l?"light":"dark");var m=document.querySelector("meta[name=theme-color]");if(m)m.content=l?"#f3f6fc":"#070b16"}catch(e){}})()</script>
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Shuaa">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700&family=Figtree:wght@400;500;600&family=Dancing+Script:wght@700&display=swap">
 <style>
-:root{--bg:#070b16;--card:#0e1526;--card2:#141d33;--ink:#eaf0ff;--mute:#8a96b3;--line:#1d2842;--win:#22d3a0;--loss:#ff5d73;--be:#8a96b3;--warn:#f5b73b;--acc:#4f7cff;--on-acc:#fff;--grid:rgba(110,140,255,.05);--shadow:rgba(0,0,0,.55);--grad:linear-gradient(135deg,#2f5bd8,#0b7fa8);color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+:root{--bg:#070b16;--card:#0e1526;--card2:#141d33;--ink:#eaf0ff;--mute:#8a96b3;--line:#1d2842;--win:#22d3a0;--loss:#ff5d73;--be:#8a96b3;--warn:#f5b73b;--acc:#4f7cff;--on-acc:#fff;--grid:rgba(110,140,255,.05);--shadow:rgba(0,0,0,.55);--grad:linear-gradient(135deg,#2f5bd8,#0b7fa8);color-scheme:dark;--win-rgb:34,211,160;--loss-rgb:255,93,115;--warn-rgb:245,183,59;--acc-rgb:79,124,255;--be-rgb:138,150,179;--acc2:#7da0ff;--winbar:#1fc79a;--card-end:#0b1222;--tabsbg:rgba(14,21,38,.85);--glow:rgba(79,124,255,.16);--hdbg:linear-gradient(160deg,#16244f,#0e1628 70%);--hdb:#26396f;--hdglow:rgba(79,124,255,.28);--ov1:rgba(255,255,255,.05);--ov2:rgba(255,255,255,.09);--ov3:rgba(255,255,255,.12);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 *{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
 body{margin:0;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums}
 .wrap{max-width:620px;margin:0 auto;padding:22px 16px 110px}
@@ -36,7 +37,7 @@ h2{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--mute
 svg{display:block;width:100%;height:auto}
 .s{padding:12px 0;border-bottom:1px solid var(--line)}.s:first-child{padding-top:0}.s:last-child{border:0;padding-bottom:0}
 .s .r{display:flex;justify-content:space-between;font-weight:600}.s .d{font-size:12px;color:var(--mute)}
-.s .m{height:6px;border-radius:6px;background:rgba(240,69,90,.35);margin-top:8px;overflow:hidden}.s .m i{display:block;height:100%;background:var(--cb)}
+.s .m{height:6px;border-radius:6px;background:rgba(var(--loss-rgb),.35);margin-top:8px;overflow:hidden}.s .m i{display:block;height:100%;background:var(--cb)}
 .rr{display:flex;flex-wrap:wrap;gap:8px}.rr span{background:var(--card2);border:1px solid var(--line);border-radius:8px;padding:4px 10px;font-size:13px}
 .tools{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.tools input{grid-column:1/-1}
 input,select,textarea{font:inherit;font-size:16px;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:12px;padding:11px 13px;width:100%;min-width:0}
@@ -47,7 +48,7 @@ input,select,textarea{font:inherit;font-size:16px;color:var(--ink);background:va
 .top{display:flex;justify-content:space-between;align-items:center}
 .pair{font-size:18px;font-weight:700}.ses{margin-left:8px;font-size:12px;color:var(--mute)}
 .res{font-size:12px;font-weight:700;letter-spacing:.08em;padding:4px 12px;border-radius:8px}
-.res.WIN{background:rgba(34,211,160,.14);color:var(--win)}.res.LOSS{background:rgba(255,93,115,.14);color:var(--loss)}.res.BE{background:rgba(135,145,163,.16);color:var(--be)}
+.res.WIN{background:rgba(var(--win-rgb),.14);color:var(--win)}.res.LOSS{background:rgba(var(--loss-rgb),.14);color:var(--loss)}.res.BE{background:rgba(var(--be-rgb),.16);color:var(--be)}
 .chips{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0}
 .chips div{background:var(--card2);border-radius:10px;padding:7px 10px;font-size:14px;font-weight:600}
 .chips i{display:block;font-style:normal;font-size:10px;letter-spacing:.14em;color:var(--mute);font-weight:500}
@@ -131,7 +132,7 @@ body.c .dash{grid-template-columns:1fr}
 .per{margin-bottom:14px}
 .fab,body.c .fab{left:auto;right:16px;transform:none;width:56px;height:56px;padding:0;font-size:30px;line-height:1;border-radius:16px}
 .dir{margin-left:8px;font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px}
-.dir.Buy{background:rgba(18,166,114,.15);color:var(--win)}.dir.Sell{background:rgba(229,72,77,.15);color:var(--loss)}
+.dir.Buy{background:rgba(var(--win-rgb),.14);color:var(--win)}.dir.Sell{background:rgba(var(--loss-rgb),.14);color:var(--loss)}
 .dt,.flt{margin-top:8px}.dt summary,.flt summary{cursor:pointer;font-size:13px;color:var(--mute);list-style:none;padding:4px 0}
 .dt summary::-webkit-details-marker,.flt summary::-webkit-details-marker{display:none}
 .dt summary::before,.flt summary::before{content:'▸ '}.dt[open] summary::before,.flt[open] summary::before{content:'▾ '}
@@ -139,9 +140,9 @@ body.c .dash{grid-template-columns:1fr}
 .cal{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
 .cal u{text-decoration:none;font-size:11px;color:var(--mute);text-align:center}
 .cal b,.cal i{aspect-ratio:1}.cal b{display:flex;align-items:center;justify-content:center;border-radius:6px;font-size:12px;font-weight:500;background:var(--card2)}
-body{background-image:radial-gradient(900px 420px at 80% -10%,rgba(79,124,255,.18),transparent 60%),linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:auto,28px 28px,28px 28px}
-.card{background:linear-gradient(180deg,var(--card),#0b1222)}
-.tabs{background:rgba(14,21,38,.85)}
+body{background-image:radial-gradient(900px 420px at 80% -10%,rgba(var(--acc-rgb),.18),transparent 60%),linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:auto,28px 28px,28px 28px}
+.card{background:linear-gradient(180deg,var(--card),var(--card-end))}
+.tabs{background:var(--tabsbg)}
 .tabs button.on,body.c .tabs button.on{background:var(--grad);color:#fff;box-shadow:none}
 button.p,.fab,body.c .fab{background:var(--grad);border-color:transparent;color:#fff}
 .ch2.on,body.c .ch2.on{background:var(--grad);color:#fff;border-color:transparent}
@@ -150,9 +151,9 @@ button.p,.fab,body.c .fab{background:var(--grad);border-color:transparent;color:
 .big{display:block;font-family:'Bricolage Grotesque',Figtree,sans-serif;font-size:36px;letter-spacing:-.02em;line-height:1.1;margin:2px 0}
 .lbl2{font-size:12px;color:var(--mute)}
 .pill{font-size:12px;font-weight:700;padding:5px 12px;border-radius:999px;border:1px solid}
-.pill.win{color:var(--win);background:rgba(34,211,160,.12);border-color:rgba(34,211,160,.35)}
-.pill.loss{color:var(--loss);background:rgba(255,93,115,.12);border-color:rgba(255,93,115,.4)}
-.pill.be{color:var(--acc);background:rgba(79,124,255,.12);border-color:rgba(79,124,255,.4)}
+.pill.win{color:var(--win);background:rgba(var(--win-rgb),.12);border-color:rgba(var(--win-rgb),.35)}
+.pill.loss{color:var(--loss);background:rgba(var(--loss-rgb),.12);border-color:rgba(var(--loss-rgb),.4)}
+.pill.be{color:var(--acc);background:rgba(var(--acc-rgb),.12);border-color:rgba(var(--acc-rgb),.4)}
 .lnk,body.c .lnk{border:0;background:none;color:var(--acc);padding:0;font-size:12px;text-decoration:underline}
 .cal b,.cal i{aspect-ratio:auto;min-height:50px}
 .cal b{flex-direction:column;gap:2px;line-height:1.1}
@@ -161,21 +162,21 @@ button.p,.fab,body.c .fab{background:var(--grad);border-color:transparent;color:
 .ax{fill:var(--mute);font-size:10px}.gl{stroke:var(--line);stroke-width:1;stroke-dasharray:3 4}
 .cur{stroke:var(--acc);stroke-width:1;opacity:0}.dot{fill:var(--acc);opacity:0}.cw.on .cur,.cw.on .dot{opacity:1}
 .tip{position:absolute;top:0;transform:translateX(-50%);background:var(--card2);border:1px solid var(--line);border-radius:6px;padding:3px 8px;font-size:12px;white-space:nowrap;opacity:0;pointer-events:none}.cw.on .tip{opacity:1}
-.hd{overflow:hidden;padding:18px 16px;background:radial-gradient(500px 220px at 100% 0,rgba(79,124,255,.35),transparent 60%),linear-gradient(160deg,#162a66,#0c1426 70%);border-color:#2a4690}
+.hd{overflow:hidden;padding:18px 16px;background:radial-gradient(500px 220px at 100% 0,var(--hdglow),transparent 60%),var(--hdbg);border-color:var(--hdb)}
 .hd .big{font-size:44px}
 .hd .spk{width:calc(100% + 32px);max-width:none;height:64px;margin:10px -16px 8px}
 .tg{margin:6px 0 16px}.tg .r{display:flex;justify-content:space-between;font-size:13px;color:var(--mute);margin-bottom:7px}.tg .r b{color:var(--ink)}
-.hd .m{height:5px;border-radius:3px;overflow:hidden;background:rgba(255,255,255,.12)}.hd .m i{display:block;height:100%;background:var(--cb)}
+.hd .m{height:5px;border-radius:3px;overflow:hidden;background:var(--ov3)}.hd .m i{display:block;height:100%;background:var(--cb)}
 .hd .m.l i{background:var(--loss)}.hd .m.big2{height:10px;border-radius:6px}.hd .m.big2 i{background:var(--grad)}
 .tls{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:16px}
-.tl{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:10px;padding:9px 4px;text-align:center}
+.tl{background:var(--ov1);border:1px solid var(--ov2);border-radius:10px;padding:9px 4px;text-align:center}
 .tl span{display:block;font-size:11px;color:var(--mute)}.tl b{font-family:'Bricolage Grotesque',Figtree,sans-serif;font-size:17px}
 .mns{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.mn .d{font-size:11px;color:var(--mute)}.mn b{display:block;font-size:12px;margin:2px 0 5px}
 
 .cal{grid-template-columns:repeat(8,1fr)}.cal .wt{background:transparent;border:1px dashed var(--line);font-size:10px;font-weight:700}
 .calh{display:flex;justify-content:space-between;align-items:center;margin:26px 2px 10px}.calh h2{margin:0}.calh button{width:36px;padding:6px 0;font-size:18px;line-height:1}
 .hm{display:grid;grid-template-columns:44px repeat(3,1fr);gap:4px}.hm u{text-decoration:none;font-size:11px;color:var(--mute);display:flex;align-items:center;justify-content:center}
-.hm b,.hm i{min-height:44px;border-radius:6px}.hm b{display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:12px;line-height:1.15}.hm b small{font-size:9px;font-weight:500;opacity:.85}.hm i{background:var(--card2);opacity:.5}
+.hm b,.hm i{min-height:44px;border-radius:6px}.hm b{display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:12px;line-height:1.15}.hm b small{font-size:10px;font-weight:500;opacity:1}.hm i{background:var(--card2);opacity:.5}
 .tags{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 8px}.tags span{font-size:11px;font-weight:600;padding:3px 8px;border-radius:6px;background:var(--card2);color:var(--mute)}
 .shots{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0}.shots:empty{display:none}
 .shots a.th{display:block;position:relative;border-radius:8px;overflow:hidden;border:1px solid var(--line);padding:0;background:var(--card2)}
@@ -195,12 +196,12 @@ button.p,.fab,body.c .fab{background:var(--grad);border-color:transparent;color:
 .hd .m.w i{background:var(--warn)}.hd .m.g i{background:var(--cb)}
 .k-warn{border-top:2px solid var(--warn)}.k-win{border-top:2px solid var(--win)}.k-acc{border-top:2px solid var(--acc)}
 .pick{display:grid;gap:8px;margin:16px 0;text-align:left}.pk{display:block;width:100%;text-align:left;padding:12px 14px}.pk b{display:block;font-size:16px}.pk span{font-size:12px;color:var(--mute)}
-.disc{max-width:520px;margin:22px auto 0;text-align:center;font-size:11px;line-height:1.6;color:var(--mute);opacity:.85}.disc b{color:var(--ink);font-weight:600}
+.disc{max-width:520px;margin:22px auto 0;text-align:center;font-size:11px;line-height:1.6;color:var(--mute)}.disc b{color:var(--ink);font-weight:600}
 body[data-tab=ringkasan] [data-sec=n],body[data-tab=analisis] [data-sec=n],body[data-tab=jurnal] [data-sec=n],body[data-tab=news] [data-sec=r],body[data-tab=news] [data-sec=a],body[data-tab=news] [data-sec=j]{display:none}
 .tabs button,body.c .tabs button{font-size:13px;padding:9px 2px}
 .ev .r{gap:10px;align-items:flex-start}.ev .cu{display:inline-block;font-size:11px;font-weight:700;padding:1px 6px;border-radius:4px;background:var(--card2);color:var(--mute);margin:0 8px}.ev.past{opacity:.5}
 body[data-tab=news] #app>.chips2:first-child,body[data-tab=news] #app>.per{display:none}
-.ip{flex:none;font-size:11px;font-weight:700;padding:2px 8px;border-radius:4px}.ip.H{background:rgba(255,93,115,.14);color:var(--loss)}.ip.M{background:rgba(245,183,59,.14);color:var(--warn)}
+.ip{flex:none;font-size:11px;font-weight:700;padding:2px 8px;border-radius:4px}.ip.H{background:rgba(var(--loss-rgb),.14);color:var(--loss)}.ip.M{background:rgba(var(--warn-rgb),.14);color:var(--warn)}
 .hl2 a{color:var(--ink);text-decoration:none;font-weight:500}.hl2 a:hover{color:var(--acc)}
 .fab,body.c .fab{bottom:calc(28px + env(safe-area-inset-bottom,0px))}
 body.c .ch span,body.c .s .d,body.c .ring small,body.c .mn .d,.rk>div,.rk .note,.tl span,.hl span{font-size:12px}
@@ -244,10 +245,10 @@ dialog .acts button{padding:7px 16px;font-size:13px}
 .s.rr3 .k{font-size:14px}.s.rr3 .n{font-size:11.5px;color:var(--mute);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .s.rr3 b:nth-of-type(2),.s.rr3 b:nth-of-type(3){text-align:right;font-size:13px}
 .s.rr3 .m{grid-column:1/-1;height:3px;margin-top:5px}
-.s.rr3.lo{opacity:.62}
+.s.rr3.lo{opacity:.78}
 
 /* Analisis: grafik navy */
-:root{--nv:#2a4fb8;--cb:#5878c8}
+:root{--nv:var(--winbar);--cb:var(--winbar)}
 .tl2g{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
 .tl2{background:var(--card2);border:1px solid var(--line);border-radius:8px;padding:8px 10px;min-width:0}
 .tl2 span{display:block;font-size:11.5px;color:var(--mute)}
@@ -260,7 +261,7 @@ dialog .acts button{padding:7px 16px;font-size:13px}
 .vcol b{font-size:13px;font-weight:600;margin-bottom:3px;color:var(--ink)}
 .vcol u{display:block;width:100%;max-width:44px;background:var(--nv);border-radius:4px 4px 0 0;text-decoration:none}
 .vcol u.neg{background:var(--loss)}
-.vcol.lo u{opacity:.4}.vcol.lo b{color:var(--mute)}
+.vcol.lo u{opacity:.6}.vcol.lo b{color:var(--mute)}
 .vc.tt{gap:5px;height:134px}.vc.tt .vcol b{font-size:11px}.vc.tt .vcol u{max-width:26px}
 .vlb{display:flex;gap:10px;margin-top:6px}
 .vlb>div{flex:1;min-width:0;text-align:center}
@@ -362,20 +363,20 @@ body,body.c{font-size:13px;line-height:1.4}
 .pt{display:flex;align-items:center;gap:8px;background:var(--card2);border:1px solid var(--line);border-radius:8px;padding:6px 9px;min-width:0}
 .pt svg{flex:none;width:34px;height:34px}
 .pt>div{min-width:0}.pt b{display:block;font-size:12.5px}.pt span{display:block;font-size:12px;font-weight:700}.pt em{font-style:normal;font-size:10px;color:var(--mute)}
-.pt.lo{opacity:.6}
+.pt.lo{opacity:.92}
 .vc.sb{gap:6px}.vc.sb .vcol b{font-size:11px}.vc.sb .vcol u{max-width:30px}
 .vlb.sb{gap:6px}.vlb.sb span{font-size:10.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.vlb.sb small{font-size:10.5px}.vlb.sb em{font-size:9.5px}
-.wbox{margin-top:12px;border:1px solid rgba(245,183,59,.35);border-left:3px solid var(--warn);background:rgba(245,183,59,.07);border-radius:8px;padding:8px 10px}
+.wbox{margin-top:12px;border:1px solid rgba(var(--warn-rgb),.35);border-left:3px solid var(--warn);background:rgba(var(--warn-rgb),.07);border-radius:8px;padding:8px 10px}
 .wh{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:700;color:var(--warn);margin-bottom:2px}
 .wh svg{flex:none;width:14px;height:14px}
-.wi{color:var(--warn);font-size:12.5px;line-height:1.4;padding:6px 0;border-top:1px solid rgba(245,183,59,.18)}
+.wi{color:var(--warn);font-size:12.5px;line-height:1.4;padding:6px 0;border-top:1px solid rgba(var(--warn-rgb),.18)}
 .wh+.wi{border-top:0}
 .head{position:relative;z-index:30;gap:8px}
 .head .hl{min-width:0}
 .head .hr{display:flex;align-items:center;gap:8px;flex:none}
 .head .hr select{width:auto;max-width:150px;padding:5px 12px;font-size:12.5px;border-radius:999px}
 .mnb{width:34px;height:34px;padding:0;border-radius:50%;border:1px solid var(--acc);background:transparent;color:var(--acc);font-size:20px;line-height:1;display:flex;align-items:center;justify-content:center}
-.mnu{position:absolute;right:0;top:100%;margin-top:6px;min-width:200px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:4px;box-shadow:0 8px 24px rgba(0,0,0,.45)}
+.mnu{position:absolute;right:0;top:100%;margin-top:6px;min-width:200px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:4px;box-shadow:0 8px 24px var(--shadow)}
 .mnu[hidden]{display:none}
 .mnu button{display:block;width:100%;text-align:left;border:0;background:transparent;color:var(--ink);padding:11px 12px;font-size:14px;border-radius:8px}
 .mnu button:hover,.mnu button:focus-visible{background:var(--card2)}
@@ -393,11 +394,37 @@ body,body.c{font-size:13px;line-height:1.4}
 .ents .t .ac button{width:30px;height:26px;padding:0;margin:0;font-size:13px;line-height:1;border-radius:6px}
 .ents .t .note{margin:1px 0 0}
 .ents .t .shots{margin:4px 0 0}
+
+/* ===== Tema terang ===== */
+:root[data-theme=light]{color-scheme:light;--bg:#f3f6fc;--card:#ffffff;--card2:#eef2fa;--ink:#101a33;--mute:#56637f;--line:#d9e0ee;--win:#066a50;--loss:#b01a35;--be:#505c78;--warn:#8f560a;--acc:#2a52c8;--acc2:#2a52c8;--grid:rgba(40,70,160,.06);--shadow:rgba(20,35,80,.18);--win-rgb:11,138,102;--loss-rgb:214,48,74;--warn-rgb:183,121,31;--acc-rgb:47,91,216;--be-rgb:107,120,147;--winbar:#17a37a;--card-end:#f7f9fe;--tabsbg:rgba(255,255,255,.9);--glow:rgba(47,91,216,.10);--hdbg:linear-gradient(160deg,#e3ebff,#f6f8ff 70%);--hdb:#c3d1f4;--hdglow:rgba(47,91,216,.16);--ov1:rgba(16,26,51,.04);--ov2:rgba(16,26,51,.08);--ov3:rgba(16,26,51,.10)}
+:root[data-theme=light] .pill.win{color:#055a43!important}:root[data-theme=light] .pill.loss{color:#9e1530!important}
+:root[data-theme=light] .logo{filter:brightness(.38) contrast(1.15)}
+:root[data-theme=light] dialog::backdrop{background:rgba(16,26,51,.45)}
+:root[data-theme=light] .toast{box-shadow:0 6px 20px var(--shadow)}
+.mnu #thm{display:block}
+/* ===== Konsistensi ===== */
+.fab,body.c .fab{width:50px;height:50px;font-size:26px;border-radius:14px;opacity:.94}
+:is(body,body.c) .ents .t .tags span{font-size:11px}
+:is(body,body.c) .ents .t .mi,:is(body,body.c) .ents .t .ses{font-size:12px}
+:is(body,body.c) .ents .t .res{font-size:11px}
+:is(body,body.c) .note{font-size:12px}
+:is(body,body.c) .s .d,:is(body,body.c) .ch span,:is(body,body.c) .tl span,:is(body,body.c) .tl2 span,:is(body,body.c) .mn .d,:is(body,body.c) .rk>div,:is(body,body.c) .hl span,:is(body,body.c) .lbl2{font-size:11.5px}
+:is(body,body.c) .tl2 em,:is(body,body.c) .vlb em,:is(body,body.c) .pt em{font-size:11px}
+:is(body,body.c) .vlb.tt span,:is(body,body.c) .vc.tt .vcol b{font-size:11px}
+:is(body,body.c) .tabs button{font-size:13px}
+/* radius seragam: kartu 12, tile 8, kontrol 8, badge 5 */
+:is(body,body.c) .card,:is(body,body.c) .ents .t,.hd,dialog{border-radius:12px}
+:is(body,body.c) .tl,:is(body,body.c) .tl2,:is(body,body.c) .hl,.guide .gc,.phi,.pt,.cal b,.hm b,.chips div{border-radius:8px}
+input,select,textarea,a.b,button{border-radius:8px}
+.live,button.live,.mnb,.ch2,.pill,.phbar select{border-radius:999px}
+.ents .t .ac button,.calh button{border-radius:8px}
+:is(body,body.c) .ents .t .res,.dir,.ip,.tags span,.ents .t .tags span{border-radius:5px}
+.fab,body.c .fab{border-radius:14px}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <div class="head"><div class="hl"><h1><img class="logo" src="logo.png" alt="Shuaa"></h1><div class="sub" id="sub">Trading journal dan challenge tracker</div></div><div class="hr"><select id="ph-sel" aria-label="Phase"></select><button type="button" class="mnb" id="mnb" aria-label="Menu" aria-haspopup="true" aria-expanded="false">⋯</button></div><div class="mnu" id="mnu" hidden><button type="button" id="vw"></button><button type="button" id="x-style">Ganti strategy</button><button type="button" id="ph-mng">Kelola phase</button><button type="button" id="mn-acc">Atur akun</button></div></div>
+  <div class="head"><div class="hl"><h1><img class="logo" src="logo.png" alt="Shuaa"></h1><div class="sub" id="sub">Trading journal dan challenge tracker</div></div><div class="hr"><select id="ph-sel" aria-label="Phase"></select><button type="button" class="mnb" id="mnb" aria-label="Menu" aria-haspopup="true" aria-expanded="false">⋯</button></div><div class="mnu" id="mnu" hidden><button type="button" id="vw"></button><button type="button" id="x-style">Ganti strategy</button><button type="button" id="ph-mng">Kelola phase</button><button type="button" id="mn-acc">Atur akun</button><button type="button" id="thm"></button></div></div>
   <div class="note" id="ph-note" style="margin:-4px 0 12px" hidden>Tampilan Semua phase dipakai untuk melihat pola. Balance dan progres target memakai aturan phase yang aktif, jadi lihat hasil per phase di phase masing-masing.</div>
   <nav class="tabs" id="tabs" role="tablist" aria-label="Bagian jurnal"><button data-tab="ringkasan">Ringkasan</button><button data-tab="analisis">Analisis</button><button data-tab="jurnal">Jurnal</button><button data-tab="news">News</button></nav>
   <div id="app"><div class="msg">Memuat jurnal…</div></div>
@@ -438,6 +465,7 @@ body,body.c{font-size:13px;line-height:1.4}
 <div class="acts"><button type="button" id="acx">Batal</button><button class="p" id="asv">Simpan</button></div></form></dialog>
 <input type="file" id="imp" accept="application/json,.json" hidden>
 <dialog id="cdlg"><div id="cmsg" style="margin-bottom:6px"></div><div class="acts"><button type="button" id="cno">Batal</button><button type="button" id="calt" hidden></button><button type="button" class="p" id="cyes">Ya, lanjutkan</button></div></dialog>
+<dialog id="rndlg"><h2>Ubah nama phase</h2><input id="rnin" maxlength="40" autocomplete="off" aria-label="Nama phase"><div class="acts"><button type="button" id="rnx">Batal</button><button type="button" class="p" id="rnok">Simpan</button></div></dialog>
 <dialog id="phdlg"><form id="phfrm" onsubmit="return false"><h2>Kelola phase</h2>
   <div class="note" style="margin-bottom:10px">Setiap phase punya trade dan aturan sendiri. Trade phase lama tetap tersimpan dan bisa dibuka kapan saja.</div>
   <div class="phl" id="ph-list"></div>
@@ -501,7 +529,7 @@ function clean(a){if(!Array.isArray(a))return [];const ok=[];a.forEach((r,i)=>{i
   ok.push(o)});return ok}
 function say(t){const o=document.getElementById('toast');if(o)o.remove();const d=document.createElement('div');d.id='toast';d.className='toast';d.innerHTML='<span></span>';d.firstChild.textContent=t;document.body.appendChild(d);setTimeout(()=>d.remove(),6000)}
 function ask(msg,fn,o){o=o||{};const d=$('#cdlg'),a=$('#calt');$('#cmsg').textContent=msg;$('#cyes').textContent=o.yes||'Ya, lanjutkan';$('#cyes').onclick=()=>{d.close();fn()};$('#cno').onclick=()=>d.close();a.hidden=!o.alt;if(o.alt){a.textContent=o.alt;a.onclick=()=>{d.close();o.altFn()}}d.showModal()}
-function save(){try{localStorage.setItem(KEY,JSON.stringify({rows}))}catch(e){say('Gagal menyimpan di browser ini: '+e.message)}}
+function save(){try{localStorage.setItem(KEY,JSON.stringify({rows}))}catch(e){say('Gagal menyimpan di browser ini: '+e.message)}mirror()}
 
 function render(){phUI();renderV(viewRows())}
 const setRows=v=>{rows=v};const getRows=()=>rows;
@@ -564,7 +592,7 @@ function renderV(full){
   const cmn=F.cal||F.m||(ord.length?ord[ord.length-1].date.slice(0,7):cm),[cy,cmo]=cmn.split('-').map(Number),nd=new Date(cy,cmo,0).getDate(),off=(new Date(cy,cmo-1,1).getDay()+6)%7;
   const mny=v=>{const x=v*ACC.risk/100*ACC.bal,a=Math.abs(x);return (x<0?'-':'+')+'$'+(a>=1000?(a/1000).toFixed(1)+'k':a.toFixed(0))};
   const dnC={};full.forEach(r=>{dnC[r.date]=(dnC[r.date]||0)+R(r)});let wsum=0,wcnt=0;let cells=['Sen','Sel','Rab','Kam','Jum','Sab','Min','Total'].map(x=>`<u>${x}</u>`).join('')+'<i></i>'.repeat(off);
-  for(let d=1;d<=nd;d++){const k=cmn+'-'+String(d).padStart(2,'0'),v=dnC[k];cells+=`<b${v===undefined?'':` style="background:${v>=0?'rgba(34,211,160,':'rgba(255,93,115,'}${Math.min(.7,.28+Math.abs(v)/6*.5).toFixed(2)})"`} title="${k}: ${v===undefined?'-':mny(v)}"><span>${d}</span>${v===undefined?'':`<small>${mny(v)}</small>`}</b>`;if(v!==undefined){wsum+=v;wcnt++}if((off+d)%7===0||d===nd){if(d===nd&&(off+d)%7)cells+='<i></i>'.repeat(7-(off+d)%7);cells+=`<b class="wt"${wcnt?` style="color:${wsum>=0?'var(--win)':'var(--loss)'}"`:''}>${wcnt?mny(wsum):''}</b>`;wsum=0;wcnt=0}}
+  for(let d=1;d<=nd;d++){const k=cmn+'-'+String(d).padStart(2,'0'),v=dnC[k];cells+=`<b${v===undefined?'':` style="background:${v>=0?'rgba(var(--win-rgb),':'rgba(var(--loss-rgb),'}${Math.min(.46,.22+Math.abs(v)/6*.5).toFixed(2)})"`} title="${k}: ${v===undefined?'-':mny(v)}"><span>${d}</span>${v===undefined?'':`<small>${mny(v)}</small>`}</b>`;if(v!==undefined){wsum+=v;wcnt++}if((off+d)%7===0||d===nd){if(d===nd&&(off+d)%7)cells+='<i></i>'.repeat(7-(off+d)%7);cells+=`<b class="wt"${wcnt?` style="color:${wsum>=0?'var(--win)':'var(--loss)'}"`:''}>${wcnt?mny(wsum):''}</b>`;wsum=0;wcnt=0}}
   const nF=ACC.facts.length,cg={};rows.forEach(r=>{const k=F.cb==='b'?(nF?ACC.facts.filter(([f])=>r[f]==='YES').length+' dari '+nF+' konfluensi':'-'):(r.poi||'-')+' + TF '+(r.tf||'-')+(ACC.useCrt?' + CRT '+(r.crt||'-'):'');(cg[k]=cg[k]||[]).push(r)});
   const combo=Object.keys(cg).map(k=>{const x=cg[k];return{k,n:x.length,avg:x.reduce((a,r)=>a+R(r),0)/x.length,w:x.filter(r=>r.result==='WIN').length,l:x.filter(r=>r.result==='LOSS').length}}).filter(g=>g.n>=MINN).sort((a,b)=>b.avg-a.avg).slice(0,5);
   const comboHtml=combo.length?combo.map(g=>`<div class="s"><div class="r"><span>${esc(g.k)}</span><span class="${g.avg>=0?'win':'loss'}">${f1(g.avg)}</span></div><div class="d">${g.n} trade, ${g.w}W, ${g.l}L. Angka kanan: rata-rata R per trade</div></div>`).join(''):'<div class="note">Belum ada kombinasi dengan minimal 15 trade. Di bawah itu hasilnya belum bisa dipercaya.</div>';
@@ -577,7 +605,7 @@ function renderV(full){
   const gwA=ordA.reduce((a,r)=>a+Math.max(0,R(r)),0),glA=ordA.reduce((a,r)=>a+Math.max(0,-R(r)),0);
   const usd=v=>(v<0?'-':'')+'$'+Math.abs(v).toLocaleString('en-US',{maximumFractionDigits:0}),pn=cA*ACC.risk/100*ACC.bal,pp=pn/ACC.bal*100,wd=Object.keys(dnA).length,worstP=Math.min(0,...Object.values(dnA))*ACC.risk,ddP=ddX*ACC.risk;
   const bad=worstP<=-ACC.dl||ddP>=ACC.ml,okT=pp>=ACC.tgt&&wd>=ACC.md,stt=bad?['Batas terlanggar','loss']:okT?['Target tercapai','win']:['Berjalan','be'];
-  const sp=(()=>{const v=eqA.map(x=>ACC.bal+x*ACC.risk/100*ACC.bal),lo=Math.min(...v),hi=Math.max(...v),n=v.length-1||1,p=v.map((y,i)=>(i/n*300).toFixed(1)+','+(54-(y-lo)/((hi-lo)||1)*48).toFixed(1)).join(' ');return `<svg class="spk" viewBox="0 0 300 60" preserveAspectRatio="none"><defs><linearGradient id="sg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4f7cff" stop-opacity=".45"/><stop offset="1" stop-color="#4f7cff" stop-opacity="0"/></linearGradient></defs><polygon points="0,60 ${p} 300,60" fill="url(#sg)"/><polyline points="${p}" fill="none" stroke="#7da0ff" stroke-width="2" vector-effect="non-scaling-stroke"/></svg>`})();
+  const sp=(()=>{const v=eqA.map(x=>ACC.bal+x*ACC.risk/100*ACC.bal),lo=Math.min(...v),hi=Math.max(...v),n=v.length-1||1,p=v.map((y,i)=>(i/n*300).toFixed(1)+','+(54-(y-lo)/((hi-lo)||1)*48).toFixed(1)).join(' ');return `<svg class="spk" viewBox="0 0 300 60" preserveAspectRatio="none"><defs><linearGradient id="sg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--acc)" stop-opacity=".45"/><stop offset="1" stop-color="var(--acc)" stop-opacity="0"/></linearGradient></defs><polygon points="0,60 ${p} 300,60" fill="url(#sg)"/><polyline points="${p}" fill="none" stroke="var(--acc2)" stroke-width="2" vector-effect="non-scaling-stroke"/></svg>`})();
   const tg=Math.max(0,Math.min(100,pp/ACC.tgt*100)),pf=glA?(gwA/glA).toFixed(2):'-';
   const tdr=full.filter(r=>r.date===tradeDay()),tdn=tdr.reduce((a,r)=>a+R(r),0),tdLeft=Math.max(0,ACC.dl-Math.max(0,-tdn)*ACC.risk),tdW=tdr.filter(r=>r.result==='WIN').length,tdL=tdr.filter(r=>r.result==='LOSS').length;
   const zU=1-tdLeft/ACC.dl,zLvc=zU>=.8?'loss':zU>=.5?'warn':'win',zCol={win:'var(--win)',warn:'var(--warn)',loss:'var(--loss)'}[zLvc],zLv=p=>p>=80?'l':p>=50?'w':'g';
@@ -598,7 +626,7 @@ function renderV(full){
   const zBest=fn=>{const g={};rows.forEach(r=>{const k=fn(r);if(!k)return;(g[k]=g[k]||[]).push(r)});return Object.keys(g).map(k=>({k,n:g[k].length,r:g[k].reduce((a,r)=>a+R(r),0)})).sort((a,b)=>b.r-a.r)[0]};
   const zHl=[['Pair terbaik',zBest(r=>r.pair)],['Session terbaik',zBest(r=>r.session)],['POI terbaik',zBest(r=>r.poi)],['Entry TF terbaik',zBest(r=>r.tf)]].map(([l,a])=>`<div class="hl"><span>${l}</span><b>${a?esc(a.k):'-'}</b><small class="${a&&a.r>=0?'win':'loss'}">${a?f1(a.r)+' · '+a.n+' trade':''}</small></div>`).join('');
   const zC=2*Math.PI*46;let zo=0;
-  const zDon=`<div class="don"><div class="ring"><svg viewBox="0 0 112 112"><circle cx="56" cy="56" r="46" fill="none" stroke="#1d2842" stroke-width="12"/>${T?[[W,'#5878c8'],[L,'#ff5d73'],[B,'#8a96b3']].map(([v,k])=>{const len=v/T*zC,o=zo;zo+=len;return v?`<circle cx="56" cy="56" r="46" fill="none" stroke="${k}" stroke-width="12" stroke-dasharray="${len.toFixed(1)} ${zC.toFixed(1)}" stroke-dashoffset="${(-o).toFixed(1)}" transform="rotate(-90 56 56)"/>`:''}).join(''):''}</svg><b>${T}<small>Trade</small></b></div><div class="lg"><div><i style="background:#5878c8"></i>WIN <b>${W}</b></div><div><i style="background:#ff5d73"></i>LOSS <b>${L}</b></div><div><i style="background:#8a96b3"></i>BE <b>${B}</b></div></div></div>`;
+  const zDon=`<div class="don"><div class="ring"><svg viewBox="0 0 112 112"><circle cx="56" cy="56" r="46" fill="none" stroke="var(--line)" stroke-width="12"/>${T?[[W,'var(--winbar)'],[L,'var(--loss)'],[B,'var(--be)']].map(([v,k])=>{const len=v/T*zC,o=zo;zo+=len;return v?`<circle cx="56" cy="56" r="46" fill="none" stroke="${k}" stroke-width="12" stroke-dasharray="${len.toFixed(1)} ${zC.toFixed(1)}" stroke-dashoffset="${(-o).toFixed(1)}" transform="rotate(-90 56 56)"/>`:''}).join(''):''}</svg><b>${T}<small>Trade</small></b></div><div class="lg"><div><i style="background:var(--winbar)"></i>WIN <b>${W}</b></div><div><i style="background:var(--loss)"></i>LOSS <b>${L}</b></div><div><i style="background:var(--be)"></i>BE <b>${B}</b></div></div></div>`;
   const zAv=a=>a.length?a.reduce((x,r)=>x+R(r),0)/a.length:0,zWn=ord.filter(r=>r.result==='WIN'),zLs=ord.filter(r=>r.result==='LOSS');
   const zt=(l,v,c)=>`<div class="tl"><span>${l}</span><b class="${c||''}">${v}</b></div>`;
   const zQ=`<div class="tls" style="margin:0 0 10px;grid-template-columns:1fr 1fr">${zt('Expectancy',ord.length?f1(zAv(ord)):'-',zAv(ord)>=0?'win':'loss')}${zt('Rata-rata WIN',zWn.length?f1(zAv(zWn)):'-','win')}${zt('Rata-rata LOSS',zLs.length?f1(zAv(zLs)):'-','loss')}${zt('R terbaik',ord.length?f1(Math.max(...ord.map(R))):'-','win')}</div>`;
@@ -613,18 +641,17 @@ function renderV(full){
   if(zBf)zI.push(`Konfluensi paling berpengaruh: <b>${zBf.l}</b> (rata-rata R ${zBf.d>=0?'lebih tinggi':'lebih rendah'} ${Math.abs(zBf.d).toFixed(2)}R saat YES).`);
   const zIns=zI.length?zI.map(t=>`<div class="s" style="font-weight:400">${t}</div>`).join(''):'<div class="note">Data belum cukup. Kesimpulan muncul setelah tiap kelompok punya minimal 15 trade, supaya tidak menyesatkan.</div>';
   const zBS=['Buy','Sell'].map(d=>{const x=rows.filter(r=>r.dir===d),w=x.filter(r=>r.result==='WIN').length,l=x.filter(r=>r.result==='LOSS').length,p=w+l?w/(w+l)*100:0;return `<div class="s"><div class="r"><span>${d}</span><span><b class="${p>=50?'win':'loss'}">${w+l?Math.round(p)+'%':'-'}</b> <small class="${zNet(x)>=0?'win':'loss'}">${f1(zNet(x))}</small></span></div><div class="d">${x.length} trade · ${w}W · ${l}L</div><div class="m"><i style="width:${p}%"></i></div></div>`}).join('');
-  const zTg=(()=>{let n=0,hit=0,sum=0;rows.forEach(r=>{if(r.result!=='WIN'||r.ar===undefined||r.ar==='')return;const q=(r.rr||'').split(':'),t=q.length==2&&+q[0]?+q[1]/+q[0]:0;if(!t)return;n++;const a=parseFloat(r.ar);sum+=a/t;if(a>=t*.98)hit++});return n?`<div class="ch"><b>${Math.round(hit/n*100)}%</b><span>WIN mencapai target penuh (${hit} dari ${n})</span></div><div class="note">Rata-rata capaian terhadap target: <b>${Math.round(sum/n*100)}%</b>. Dihitung hanya dari WIN yang punya R aktual.</div>`:'<div class="note">Isi R aktual di trade WIN untuk melihat capaian terhadap target.</div>'})();
-  const zLn=(v,col)=>{if(v.length<3)return '<div class="note">Data belum cukup.</div>';const lo=Math.min(0,...v),hi=Math.max(0,...v),y=x=>6+(hi-x)/((hi-lo)||1)*58,pts=v.map((x,i)=>(i/(v.length-1)*300).toFixed(1)+','+y(x).toFixed(1)).join(' ');return `<svg viewBox="0 0 300 70" preserveAspectRatio="none" style="height:70px"><line x1="0" x2="300" y1="${y(0).toFixed(1)}" y2="${y(0).toFixed(1)}" stroke="#8a96b3" stroke-dasharray="3 4" vector-effect="non-scaling-stroke"/><polyline points="${pts}" fill="none" stroke="${col}" stroke-width="2" vector-effect="non-scaling-stroke"/></svg><div class="note" style="display:flex;justify-content:space-between"><span>${f1(lo)}</span><span>${f1(hi)}</span></div>`};
+  const zLn=(v,col)=>{if(v.length<3)return '<div class="note">Data belum cukup.</div>';const lo=Math.min(0,...v),hi=Math.max(0,...v),y=x=>6+(hi-x)/((hi-lo)||1)*58,pts=v.map((x,i)=>(i/(v.length-1)*300).toFixed(1)+','+y(x).toFixed(1)).join(' ');return `<svg viewBox="0 0 300 70" preserveAspectRatio="none" style="height:70px"><line x1="0" x2="300" y1="${y(0).toFixed(1)}" y2="${y(0).toFixed(1)}" stroke="var(--be)" stroke-dasharray="3 4" vector-effect="non-scaling-stroke"/><polyline points="${pts}" fill="none" stroke="${col}" stroke-width="2" vector-effect="non-scaling-stroke"/></svg><div class="note" style="display:flex;justify-content:space-between"><span>${f1(lo)}</span><span>${f1(hi)}</span></div>`};
   const zRs=ord.map(R),zRoll=zRs.map((_,i)=>{const w=zRs.slice(Math.max(0,i-9),i+1);return w.reduce((a,b)=>a+b,0)/w.length});let zp=0;const zDdv=eq.map(v=>{zp=Math.max(zp,v);return v-zp});
   const zBn=['≤ -1R','-1 – 0R','BE (0R)','0 – 1R','1 – 2R','2 – 4R','> 4R'],zBc=zBn.map(()=>0);zRs.forEach(v=>{zBc[v<=-.99?0:v<-.01?1:Math.abs(v)<=.01?2:v<=1?3:v<=2?4:v<=4?5:6]++});const zBm=Math.max(1,...zBc);
-  const zHist=zBn.map((l,i)=>`<div class="s" style="padding:6px 0"><div class="r"><span>${l}</span><span>${zBc[i]}</span></div><div class="m"><i style="width:${zBc[i]/zBm*100}%;background:${i<2?'var(--loss)':i==2?'var(--be)':'#5878c8'}"></i></div></div>`).join('');
+  const zHist=zBn.map((l,i)=>`<div class="s" style="padding:6px 0"><div class="r"><span>${l}</span><span>${zBc[i]}</span></div><div class="m"><i style="width:${zBc[i]/zBm*100}%;background:${i<2?'var(--loss)':i==2?'var(--be)':'var(--winbar)'}"></i></div></div>`).join('');
   const zRsk=`<div class="tls" style="margin:0 0 10px;grid-template-columns:repeat(3,1fr)">${zt('Risiko / trade',ACC.risk+'%')}${zt('Loss harian',ACC.dl+'%')}${zt('Loss total',ACC.ml+'%')}</div><div class="note">1R = <b>${usd(ACC.bal*ACC.risk/100)}</b> · batas loss harian setara <b>${Math.floor(ACC.dl/ACC.risk)}</b> trade kalah beruntun · target <b>${ACC.tgt}%</b> (${usd(ACC.bal*ACC.tgt/100)}) dengan minimal ${ACC.md} hari trading.</div>${ACC.rules?`<div class="note" style="margin-top:8px"><b>Aturan:</b> ${esc(ACC.rules).replace(/\n/g,'<br>')}</div>`:''}`;
   const zMdl=(ACC.model||'').split('\n').filter(x=>x.trim()).map((x,i)=>`<div class="s" style="padding:7px 0;display:flex;align-items:center"><span class="stp">${i+1}</span>${esc(x.replace(/^\s*\d+[.)]\s*/,''))}</div>`).join('')||'<div class="note">Belum ada model entry. Isi lewat Atur akun.</div>';
   const zFl=ACC.facts.length?rows.filter(r=>ACC.facts.every(([k])=>r[k]==='YES')):[],zOt=rows.filter(r=>!zFl.includes(r));
   const zCmp=rows.length&&ACC.facts.length?`<div class="note" style="margin-top:8px">Trade dengan konfluensi lengkap (${ACC.facts.map(f=>f[1]).join(', ')} = YES): <b>${zFl.length}</b> dari ${rows.length}. WR <b class="win">${zWr(zFl).p}</b> dibanding sisanya <b class="be">${zWr(zOt).p}</b>.</div>`:'';
   const dow=['Min','Sen','Sel','Rab','Kam','Jum','Sab'],hmS=['Asia','London','New York'],hm={};
   rows.forEach(r=>{if(!r.date)return;const k=new Date(r.date+'T00:00:00').getDay()+'|'+r.session;(hm[k]=hm[k]||[]).push(r)});
-  const hmHtml='<div class="hm"><u></u>'+hmS.map(x=>`<u>${x}</u>`).join('')+[1,2,3,4,5,6,0].filter(d=>(d>0&&d<6)||hmS.some(x=>hm[d+'|'+x])).map(d=>`<u>${dow[d]}</u>`+hmS.map(x=>{const y=hm[d+'|'+x]||[];if(!y.length)return '<i></i>';const n=y.reduce((a,r)=>a+R(r),0);return `<b style="background:${n>=0?'rgba(34,211,160,':'rgba(255,93,115,'}${Math.min(.75,.25+Math.abs(n)/6*.5).toFixed(2)})">${f1(n)}<small>${y.length} trade</small></b>`}).join('')).join('')+'</div>';
+  const hmHtml='<div class="hm"><u></u>'+hmS.map(x=>`<u>${x}</u>`).join('')+[1,2,3,4,5,6,0].filter(d=>(d>0&&d<6)||hmS.some(x=>hm[d+'|'+x])).map(d=>`<u>${dow[d]}</u>`+hmS.map(x=>{const y=hm[d+'|'+x]||[];if(!y.length)return '<i></i>';const n=y.reduce((a,r)=>a+R(r),0);return `<b style="background:${n>=0?'rgba(var(--win-rgb),':'rgba(var(--loss-rgb),'}${Math.min(.5,.22+Math.abs(n)/6*.5).toFixed(2)})">${f1(n)}<small>${y.length} trade</small></b>`}).join('')).join('')+'</div>';
   const pg={};rows.forEach(r=>{const k=r.pair||'-';(pg[k]=pg[k]||[]).push(r)});
   const pgL=Object.keys(pg).map(k=>{const x=pg[k],w=x.filter(r=>r.result==='WIN').length,l=x.filter(r=>r.result==='LOSS').length;return{k,n:x.length,w,l,r:x.reduce((a,r)=>a+R(r),0),p:w+l?w/(w+l)*100:0}}).sort((a,b)=>b.r-a.r).map(g=>{const c=g.p>=50?'var(--nv)':'var(--loss)';return `<div class="pt${g.n<5?' lo':''}"><svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="16" fill="none" stroke="var(--line)" stroke-width="4"/><circle cx="20" cy="20" r="16" fill="none" stroke="${c}" stroke-width="4" stroke-linecap="round" stroke-dasharray="${(g.p*1.005).toFixed(1)} 100.5" transform="rotate(-90 20 20)"/><text x="20" y="24" text-anchor="middle" font-size="11" font-weight="600" fill="var(--ink)">${g.w+g.l?Math.round(g.p):'-'}</text></svg><div><b>${esc(g.k)}</b><span class="${g.r>=0?'win':'loss'}">${f1(g.r)}</span><em>${g.n} trade${g.n<5?' · kecil':''}</em></div></div>`}).join('');
   const pairHtml=pgL?`<div class="pgrid">${pgL}</div><div class="note" style="margin-top:6px">Ring = win rate (%), angka berwarna = total R. Pudar = sampel kecil.</div>`:'-';
@@ -642,7 +669,7 @@ function renderV(full){
   const hrG={};rows.forEach(r=>{const m=/^(\d{1,2}):/.exec(r.tm||'');if(m){const k=String(+m[1]).padStart(2,'0');(hrG[k]=hrG[k]||[]).push(r)}});
   const hrHtml=Object.keys(hrG).sort().map(k=>grow(k+':00 – '+k+':59',hrG[k])).join('')||'<div class="note">Isi Jam entry di trade untuk melihat performa per jam.</div>';
   const dnv=Object.values(dn),cTot=dnv.reduce((a,b)=>a+b,0),cBest=dnv.length?Math.max(...dnv):0,cPct=cTot>0?cBest/cTot*100:0;
-  const consHtml=cTot>0&&dnv.length>1?`<div class="ch"><b class="${cPct<=40?'win':'warn'}">${cPct.toFixed(0)}%</b><span>hari terbaik dari total profit</span></div><div class="s" style="padding:0;border:0"><div class="m"><i style="width:${Math.min(100,cPct).toFixed(0)}%;background:${cPct<=40?'#5878c8':'var(--warn)'}"></i></div></div><div class="note" style="margin-top:8px">Hari terbaik ${f1(cBest)} dari total ${f1(cTot)}. Sebagian challenge membatasi porsi ini (sering sekitar 30–40%), cek aturan firma kamu.</div>`:'<div class="note">Muncul setelah total profit positif dan ada minimal 2 hari trading.</div>';
+  const consHtml=cTot>0&&dnv.length>1?`<div class="ch"><b class="${cPct<=40?'win':'warn'}">${cPct.toFixed(0)}%</b><span>hari terbaik dari total profit</span></div><div class="s" style="padding:0;border:0"><div class="m"><i style="width:${Math.min(100,cPct).toFixed(0)}%;background:${cPct<=40?'var(--acc)':'var(--warn)'}"></i></div></div><div class="note" style="margin-top:8px">Hari terbaik ${f1(cBest)} dari total ${f1(cTot)}. Sebagian challenge membatasi porsi ini (sering sekitar 30–40%), cek aturan firma kamu.</div>`:'<div class="note">Muncul setelah total profit positif dan ada minimal 2 hari trading.</div>';
   const rrG={};rows.forEach(r=>{if(r.rr)(rrG[r.rr]=rrG[r.rr]||[]).push(r)});
   const rrK=Object.keys(rrG).sort((a,b)=>parseFloat(a.split(':')[1])-parseFloat(b.split(':')[1])),rrD=rrK.map(k=>{const x=rrG[k],w=x.filter(r=>r.result==='WIN').length,l=x.filter(r=>r.result==='LOSS').length;return {k,x,w,l,p:w+l?w/(w+l)*100:null,nt:zNet(x)}});
   const rrOk=rrD.filter(d=>d.x.length>=5&&d.p!==null),rrBest=rrOk.length?rrOk.reduce((a,b)=>b.nt/b.x.length>a.nt/a.x.length?b:a):null,rrTop=rrD.length?rrD.reduce((a,b)=>b.x.length>a.x.length?b:a):null;
@@ -686,7 +713,7 @@ function renderV(full){
   const axX=(a,b)=>a?`<text x="${X0}" y="${H-6}" class="ax">${a}</text><text x="${X1}" y="${H-6}" text-anchor="end" class="ax">${b}</text>`:'';
   const mk=(k,inner)=>`<div class="cw" data-k="${k}"><svg viewBox="0 0 340 ${H}">${inner}<line class="cur" y1="${Y0}" y2="${Y1}" x1="0" x2="0"/><circle class="dot" r="4" cx="0" cy="0"/></svg><div class="tip"></div></div>`;
   const ev=eq.map(v=>ACC.bal+v*ACC.risk/100*ACC.bal),elo=Math.min(...ev),ehi=Math.max(...ev),en=ev.length-1||1,ey=v=>Y1-(v-elo)/((ehi-elo)||1)*(Y1-Y0),ex=i=>X0+i/en*(X1-X0);
-  const epts=ev.map((v,i)=>ex(i).toFixed(1)+','+ey(v).toFixed(1)).join(' '),ec=c>=0?'#5878c8':'#ff5d73';
+  const epts=ev.map((v,i)=>ex(i).toFixed(1)+','+ey(v).toFixed(1)).join(' '),ec=c>=0?'var(--winbar)':'var(--loss)';
   CH.eq={xs:ev.map((v,i)=>ex(i)),ys:ev.map(ey),tx:ev.map((v,i)=>i?`${sd(ord[i-1].date)}, ${ord[i-1].pair}: ${usd(v)}`:`Awal: ${usd(v)}`)};
   const eqChart=mk('eq',`<defs><linearGradient id="eg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${ec}" stop-opacity=".35"/><stop offset="1" stop-color="${ec}" stop-opacity="0"/></linearGradient></defs>${axY([ehi,(ehi+elo)/2,elo],ey)}<polygon points="${X0},${Y1} ${epts} ${X1},${Y1}" fill="url(#eg)"/><polyline points="${epts}" fill="none" stroke="${ec}" stroke-width="2.5" stroke-linejoin="round"/>${axX(ord.length?sd(ord[0].date):'',ord.length?sd(ord[ord.length-1].date):'')}`);
   const dk=Object.keys(dn).sort(),dvv=dk.map(k=>dn[k]*ACC.risk/100*ACC.bal),dlo=Math.min(0,...dvv),dhi=Math.max(0,...dvv),dy=v=>Y1-(v-dlo)/((dhi-dlo)||1)*(Y1-Y0),dst=(X1-X0)/Math.max(dk.length,1),dx=i=>X0+dst*(i+.5),bwd=Math.min(18,dst*.7);
@@ -695,13 +722,13 @@ function renderV(full){
   const dwV=dwS.map((s,i)=>dwC[i]?s/dwC[i]:0),dwHi=Math.max(0,...dwV),dwLo=Math.min(0,...dwV);let dwBest=-1;dwV.forEach((v,i)=>{if(dwC[i]&&(dwBest<0||v>dwV[dwBest]))dwBest=i});
   const dwY=v=>Y1-(v-dwLo)/(((dwHi*1.12)-dwLo)||1)*(Y1-Y0),dwSt=(X1-X0)/7,dwX=i=>X0+dwSt*(i+.5),dwB=Math.min(26,dwSt*.66),dwSg=v=>(v<0?'-':'+')+usdK(Math.abs(v));
   CH.dow={xs:dwN.map((n,i)=>dwX(i)),ys:dwV.map(dwY),tx:dwN.map((n,i)=>dwC[i]?`${n}: ${dwV[i]>=0?'+':''}${usd(dwV[i])} rata-rata (${dwC[i]} hari)`:`${n}: belum ada data`)};
-  const dChart=mk('dow',axY([dwHi,0,dwLo],dwY)+dwV.map((v,i)=>{const cx=dwX(i).toFixed(1),lb=`<text class="ax" x="${cx}" y="${H-6}" text-anchor="middle">${dwA[i]}</text>`;if(!dwC[i])return `<text x="${cx}" y="${(dwY(0)-5).toFixed(1)}" text-anchor="middle" font-size="10" fill="var(--mute)">-</text>${lb}`;const y0=dwY(0),y1=dwY(v),top=Math.min(y0,y1),h=Math.max(2,Math.abs(y1-y0)),col=v<0?'#3f5390':(i===dwBest?'#7f9be3':'#5878c8');return `<rect x="${(dwX(i)-dwB/2).toFixed(1)}" y="${top.toFixed(1)}" width="${dwB.toFixed(1)}" height="${h.toFixed(1)}" rx="4" fill="${col}"/><text x="${cx}" y="${(v>=0?top-5:top+h+11).toFixed(1)}" text-anchor="middle" font-size="10" font-weight="600" fill="var(--ink)">${dwSg(v)}</text>${lb}`}).join(''))+`<div class="note" style="margin-top:8px">Rata-rata hasil tiap hari dalam seminggu. Bar terang = hari terbaik. Tap bar untuk detail.</div>`;
+  const dChart=mk('dow',axY([dwHi,0,dwLo],dwY)+dwV.map((v,i)=>{const cx=dwX(i).toFixed(1),lb=`<text class="ax" x="${cx}" y="${H-6}" text-anchor="middle">${dwA[i]}</text>`;if(!dwC[i])return `<text x="${cx}" y="${(dwY(0)-5).toFixed(1)}" text-anchor="middle" font-size="10" fill="var(--mute)">-</text>${lb}`;const y0=dwY(0),y1=dwY(v),top=Math.min(y0,y1),h=Math.max(2,Math.abs(y1-y0)),col=v<0?'var(--loss)':(i===dwBest?'var(--win)':'var(--winbar)');return `<rect x="${(dwX(i)-dwB/2).toFixed(1)}" y="${top.toFixed(1)}" width="${dwB.toFixed(1)}" height="${h.toFixed(1)}" rx="4" fill="${col}"/><text x="${cx}" y="${(v>=0?top-5:top+h+11).toFixed(1)}" text-anchor="middle" font-size="10" font-weight="600" fill="var(--ink)">${dwSg(v)}</text>${lb}`}).join(''))+`<div class="note" style="margin-top:8px">Rata-rata hasil tiap hari dalam seminggu. Bar terang = hari terbaik. Tap bar untuk detail.</div>`;
   app.innerHTML=`
   <div class="chips2">${[['','Semua'],[cm,'Bulan ini'],[pm,'Bulan lalu']].map(([v,l])=>`<button class="ch2${!cust&&(F.m||'')===v?' on':''}" data-p="${v}">${l}</button>`).join('')}<button class="ch2${cust?' on':''}" data-p="custom">Custom</button></div>${cust?`<div class="tools per"><div><div class="lbl">Periode</div><select data-f="m"><option value="">Semua waktu</option>${months.map(m=>`<option value="${m}"${F.m===m?' selected':''}>${ml(m)}</option>`).join('')}</select></div><div><div class="lbl">Dari</div><input type="date" data-f="from" value="${F.from||''}"></div><div><div class="lbl">Sampai</div><input type="date" data-f="to" value="${F.to||''}"></div></div>`:''}
   <div class="dash"><div class="full" data-sec="r">${accHtml}
-  </div><div class="full" data-sec="r"><h2>Hari ini</h2><div class="card k-warn">${todayHtml}</div></div><div class="full" data-sec="r"><h2>Manajemen risiko</h2><div class="card k-warn">${zRsk}</div></div><div class="full" data-sec="r"><h2>Kalkulator lot</h2><div class="card k-acc"><div class="f"><div><label>Balance ($)</label><input data-calc="bal" type="number" step="any" inputmode="decimal" value="${calcV('bal')}"></div><div><label>Risiko (%)</label><input data-calc="risk" type="number" step="any" inputmode="decimal" value="${calcV('risk')}"></div><div><label>Stop loss (pip)</label><input data-calc="sl" type="number" step="any" inputmode="decimal" value="${calcV('sl')}"></div><div><label>Nilai per pip, 1 lot ($)</label><input data-calc="pv" type="number" step="any" inputmode="decimal" value="${calcV('pv')}"></div></div><div id="calc-out" style="margin-top:12px"></div><div class="note" style="margin-top:8px">Nilai per pip: EURUSD, GBPUSD, AUDUSD dan XAUUSD (1 pip = 0,1) sekitar 10. Pair JPY dan silang berubah mengikuti kurs, cek spesifikasi kontrak di broker-mu.</div></div></div><div class="full" data-sec="r"><h2>Model entry</h2><div class="card k-acc">${zMdl}${zCmp}<div class="note" style="margin-top:8px"><button id="acc-edit2" class="lnk">Ubah model</button></div></div></div><div class="full" data-sec="r"><h2>10 trade terakhir</h2><div class="card k-win">${zForm}</div></div><div data-sec="r"><h2>Hasil trade</h2><div class="card k-win">${zDon}</div></div><div data-sec="r"><h2>Performa</h2><div class="card k-win">${zQ}<div class="note">Expectancy = rata-rata R per trade.</div></div></div><div class="full" data-sec="r"><h2>Yang terbaik</h2><div class="hls">${zHl}</div></div><div data-sec="r"><h2>Trade terakhir</h2><div class="card k-acc">${zLast}</div></div><div data-sec="r"><h2>Dampak konfluensi</h2><div class="card k-win">${zConf||'<div class="note">Belum ada faktor konfluensi. Tambahkan lewat Atur akun.</div>'}<div class="note" style="margin-top:8px">Win rate saat konfluensi ada vs tidak. Angka dalam kurung = jumlah trade.</div></div></div><div class="full" data-sec="r"><h2>Hari trading terakhir, ${lastD?sd(lastD):'-'}</h2><div class="card">${lastHtml}</div></div><div data-sec="r"><h2>Equity curve</h2><div class="card k-win"><div class="ch"><b class="${c>=0?'win':'loss'}">${pn>=0?'+':''}${usd(pn)}</b><span>${f1(c)} dari ${T} trade (BE ${B})</span></div>${eqChart}</div>
+  </div><div class="full" data-sec="r"><h2>Hari ini</h2><div class="card k-acc">${todayHtml}</div></div><div class="full" data-sec="r"><h2>Manajemen risiko</h2><div class="card k-warn">${zRsk}</div></div><div class="full" data-sec="r"><h2>Kalkulator lot</h2><div class="card k-acc"><div class="f"><div><label>Balance ($)</label><input data-calc="bal" type="number" step="any" inputmode="decimal" value="${calcV('bal')}"></div><div><label>Risiko (%)</label><input data-calc="risk" type="number" step="any" inputmode="decimal" value="${calcV('risk')}"></div><div><label>Stop loss (pip)</label><input data-calc="sl" type="number" step="any" inputmode="decimal" value="${calcV('sl')}"></div><div><label>Nilai per pip, 1 lot ($)</label><input data-calc="pv" type="number" step="any" inputmode="decimal" value="${calcV('pv')}"></div></div><div id="calc-out" style="margin-top:12px"></div><div class="note" style="margin-top:8px">Nilai per pip: EURUSD, GBPUSD, AUDUSD dan XAUUSD (1 pip = 0,1) sekitar 10. Pair JPY dan silang berubah mengikuti kurs, cek spesifikasi kontrak di broker-mu.</div></div></div><div class="full" data-sec="r"><h2>Model entry</h2><div class="card k-acc">${zMdl}${zCmp}<div class="note" style="margin-top:8px"><button id="acc-edit2" class="lnk">Ubah model</button></div></div></div><div class="full" data-sec="r"><h2>10 trade terakhir</h2><div class="card k-win">${zForm}</div></div><div data-sec="r"><h2>Hasil trade</h2><div class="card k-win">${zDon}</div></div><div data-sec="r"><h2>Performa</h2><div class="card k-win">${zQ}<div class="note">Expectancy = rata-rata R per trade.</div></div></div><div class="full" data-sec="r"><h2>Yang terbaik</h2><div class="hls">${zHl}</div></div><div data-sec="r"><h2>Trade terakhir</h2><div class="card k-acc">${zLast}</div></div><div data-sec="r"><h2>Dampak konfluensi</h2><div class="card k-win">${zConf||'<div class="note">Belum ada faktor konfluensi. Tambahkan lewat Atur akun.</div>'}<div class="note" style="margin-top:8px">Win rate saat konfluensi ada vs tidak. Angka dalam kurung = jumlah trade.</div></div></div><div class="full" data-sec="r"><h2>Hari trading terakhir, ${lastD?sd(lastD):'-'}</h2><div class="card">${lastHtml}</div></div><div data-sec="r"><h2>Equity curve</h2><div class="card k-win"><div class="ch"><b class="${c>=0?'win':'loss'}">${pn>=0?'+':''}${usd(pn)}</b><span>${f1(c)} dari ${T} trade (BE ${B})</span></div>${eqChart}</div>
   </div><div data-sec="r"><h2>Rata-rata per hari dalam seminggu ($)</h2><div class="card k-win">${dChart}</div>
-  </div><div class="full" data-sec="r"><h2>Panduan</h2><div class="guide" style="margin-top:0">${GUIDE_CARDS}</div></div><div class="full" data-sec="a"><h2>Review mingguan</h2><div class="card k-warn">${wkReview}</div></div><div class="full" data-sec="a"><h2>Kesimpulan</h2><div class="card k-acc">${zIns}</div></div><div class="full" data-sec="a"><div class="calh"><button data-cal="-1" aria-label="Bulan sebelumnya">‹</button><h2>Kalender, ${ml(cmn)}</h2><button data-cal="1" aria-label="Bulan berikutnya">›</button></div><div class="card"><div class="cal">${cells}</div><div class="note" style="margin-top:10px">Angka di tiap tanggal adalah total profit atau loss hari itu, dihitung dari R × risiko per 1R.</div></div></div><div class="full" data-sec="a"><h2>Heatmap hari × session</h2><div class="card">${hmHtml}<div class="note" style="margin-top:10px">Total R per kombinasi hari dan session. Hijau untung, merah rugi.</div></div></div><div class="full" data-sec="a"><h2>Disiplin dan emosi</h2><div class="card k-warn">${emoHtml}</div></div><div data-sec="a"><h2>Konsistensi profit</h2><div class="card k-acc">${consHtml}</div></div><div class="full" data-sec="a"><h2>Performa per pair</h2><div class="card">${pairHtml}</div></div><div data-sec="a"><h2>Buy vs Sell</h2><div class="card k-win">${zBS}</div></div><div class="full" data-sec="a"><h2>Kombinasi setup terbaik</h2><div class="card"><select data-f="cb" style="margin-bottom:12px"><option value="a"${F.cb!=='b'?' selected':''}>POI + Entry TF</option><option value="b"${F.cb==='b'?' selected':''}>Jumlah konfluensi terpenuhi</option></select>${comboHtml}</div></div><div data-sec="a"><h2>Session</h2><div class="card">${sess}</div>
+  </div><div class="full" data-sec="r"><h2>Panduan</h2><div class="guide" style="margin-top:0">${GUIDE_CARDS}</div></div><div class="full" data-sec="a"><h2>Review mingguan</h2><div class="card k-acc">${wkReview}</div></div><div class="full" data-sec="a"><h2>Kesimpulan</h2><div class="card k-acc">${zIns}</div></div><div class="full" data-sec="a"><div class="calh"><button data-cal="-1" aria-label="Bulan sebelumnya">‹</button><h2>Kalender, ${ml(cmn)}</h2><button data-cal="1" aria-label="Bulan berikutnya">›</button></div><div class="card"><div class="cal">${cells}</div><div class="note" style="margin-top:10px">Angka di tiap tanggal adalah total profit atau loss hari itu, dihitung dari R × risiko per 1R.</div></div></div><div class="full" data-sec="a"><h2>Heatmap hari × session</h2><div class="card">${hmHtml}<div class="note" style="margin-top:10px">Total R per kombinasi hari dan session. Hijau untung, merah rugi.</div></div></div><div class="full" data-sec="a"><h2>Disiplin dan emosi</h2><div class="card k-warn">${emoHtml}</div></div><div data-sec="a"><h2>Konsistensi profit</h2><div class="card k-acc">${consHtml}</div></div><div class="full" data-sec="a"><h2>Performa per pair</h2><div class="card">${pairHtml}</div></div><div data-sec="a"><h2>Buy vs Sell</h2><div class="card k-win">${zBS}</div></div><div class="full" data-sec="a"><h2>Kombinasi setup terbaik</h2><div class="card"><select data-f="cb" style="margin-bottom:12px"><option value="a"${F.cb!=='b'?' selected':''}>POI + Entry TF</option><option value="b"${F.cb==='b'?' selected':''}>Jumlah konfluensi terpenuhi</option></select>${comboHtml}</div></div><div data-sec="a"><h2>Session</h2><div class="card">${sess}</div>
   </div><div data-sec="a"><h2>Win rate per minggu</h2><div class="card">${wkHtml||'-'}</div>
   </div><div data-sec="a"><h2>Statistik risiko</h2><div class="card k-warn">${riskHtml}</div>
   </div><div data-sec="a"><h2>Win rate per setup</h2><div class="card">${setupHtml}</div>
@@ -805,7 +832,7 @@ function renderNews(){nwNext();const box=document.getElementById('nw');if(!box)r
       ||`<div class="note">Tidak ada berita yang cocok dengan filter${NF.rng==='d'?' hari ini':''}. Coba ubah filter di atas.</div>`;
     hl=D.headlines.length?D.headlines.map(h=>`<div class="s hl2"><a href="${esc(h.link)}" target="_blank" rel="noopener">${esc(h.title)}</a><div class="d">${esc(h.src)}${h.ts?' · '+esc(nwAgo(h.ts)):''}</div></div>`).join(''):'<div class="note">Headline belum tersedia.</div>';
   }
-  box.innerHTML=`<h2>Kalender berita</h2><div class="card k-warn">${status}<div class="chips2">${chip('rng','d','Hari ini')}${chip('rng','w','Minggu ini')}</div><div class="chips2">${chip('imp','h','High')}${chip('imp','m','High + Medium')}${rel.size?chip('cur','rel','Pair-ku ('+[...rel].join(' ')+')'):''}${chip('cur','all','Semua mata uang')}</div>${cal}</div><h2>Headline</h2><div class="card">${hl}</div><div class="note" style="margin-top:12px">Sumber: kalender Forex Factory dan headline FXStreet. Jadwal dan angka bisa berubah, cek sumber resmi sebelum mengambil keputusan. Bukan saran trading.</div>`}
+  box.innerHTML=`<h2>Kalender berita</h2><div class="card k-acc">${status}<div class="chips2">${chip('rng','d','Hari ini')}${chip('rng','w','Minggu ini')}</div><div class="chips2">${chip('imp','h','High')}${chip('imp','m','High + Medium')}${rel.size?chip('cur','rel','Pair-ku ('+[...rel].join(' ')+')'):''}${chip('cur','all','Semua mata uang')}</div>${cal}</div><h2>Headline</h2><div class="card">${hl}</div><div class="note" style="margin-top:12px">Sumber: kalender Forex Factory dan headline FXStreet. Jadwal dan angka bisa berubah, cek sumber resmi sebelum mengambil keputusan. Bukan saran trading.</div>`}
 const NCAL='https://nfs.faireconomy.media/ff_calendar_thisweek.json',NRSS='https://www.fxstreet.com/rss/news';
 const NPX=[u=>'https://api.allorigins.win/raw?url='+encodeURIComponent(u),u=>'https://corsproxy.io/?url='+encodeURIComponent(u)];
 const tf=(u,ms,o)=>{const c=new AbortController(),t=setTimeout(()=>c.abort(),ms);return fetch(u,Object.assign({},o,{signal:c.signal})).finally(()=>clearTimeout(t))};
@@ -846,7 +873,7 @@ const viewRows=()=>(!PH.view||PH.view==='all')?rows:rows.filter(r=>r.ph===PH.vie
 const E=(f,k)=>f.elements.namedItem(k);
 const isD=s=>/^\d{4}-\d{2}-\d{2}$/.test(s||'');
 function newPh(){return{list:[{id:'p1',name:'Phase 1',type:'eval',status:'aktif',start:'',end:'',acc:pickR(ACC)}],active:'p1',view:'p1'}}
-function savePh(){try{localStorage.setItem('shuaa_phases',JSON.stringify(PH))}catch(e){}}
+function savePh(){try{localStorage.setItem('shuaa_phases',JSON.stringify(PH))}catch(e){}mirror()}
 function cleanPh(d){const out={list:[],active:'',view:''};if(!d||typeof d!=='object'||!Array.isArray(d.list))return out;const seen=new Set();
   d.list.forEach(p=>{if(!p||typeof p!=='object')return;const id=String(p.id||'');if(!/^[\w-]{1,24}$/.test(id)||seen.has(id))return;seen.add(id);
     out.list.push({id,name:clip(p.name,40)||'Phase',type:p.type==='funded'?'funded':'eval',status:['aktif','lulus','gagal'].includes(p.status)?p.status:'aktif',start:isD(p.start)?p.start:'',end:isD(p.end)?p.end:'',acc:pickR(cleanAcc(p.acc||{}))})});
@@ -878,14 +905,30 @@ document.addEventListener('click',e=>{const t=e.target;if(!t||!t.closest)return;
     const acc=pickR({...ACC,bal:+g('bal'),risk:+g('risk'),tgt:+g('tgt'),md:+g('md'),dl:+g('dl'),ml:+g('ml')});
     PH.list.push({id,name:nm,type:g('type')==='funded'?'funded':'eval',status:'aktif',start:today(),end:'',acc});PH.active=id;PH.view=id;applyPh();$('#phdlg').close();render();scrollTo(0,0);say('Phase "'+nm+'" dimulai. Trade phase sebelumnya tetap tersimpan.');return}
   const op=t.dataset&&t.dataset.phopen;if(op&&phById(op)){PH.view=op;applyPh();$('#phdlg').close();render();scrollTo(0,0);return}
-  const rn=t.dataset&&t.dataset.phren;if(rn){const p=phById(rn);if(p){const v=prompt('Nama phase',p.name);if(v&&v.trim()){p.name=clip(v.trim(),40);savePh();phList();phUI()}}}});
+  const rn=t.dataset&&t.dataset.phren;if(rn){const p=phById(rn);if(p){window.rnId=p.id;$('#rnin').value=p.name;$('#rndlg').showModal();setTimeout(()=>{const i=$('#rnin');i.focus();i.select()},60)}}});
 
-try{const raw=localStorage.getItem(KEY);rows=raw?clean(JSON.parse(raw).rows):clean(SEED);if(!raw)save()}catch(e){rows=clean(SEED)}
+
+/* ===== Tema, salinan otomatis, ubah nama phase ===== */
+var THL={auto:'Ikuti HP',dark:'Gelap',light:'Terang'};
+function thmGet(){try{return localStorage.getItem('shuaa_theme')||'auto'}catch(e){return 'auto'}}
+function thmApply(){const t=thmGet(),l=t==='light'||(t==='auto'&&matchMedia('(prefers-color-scheme: light)').matches);document.documentElement.setAttribute('data-theme',l?'light':'dark');const m=document.querySelector('meta[name=theme-color]');if(m)m.content=l?'#f3f6fc':'#070b16';const b=document.getElementById('thm');if(b)b.textContent='Tema: '+THL[t]}
+document.addEventListener('click',e=>{if(e.target&&e.target.id==='thm'){const o=['auto','dark','light'],n=o[(o.indexOf(thmGet())+1)%3];try{localStorage.setItem('shuaa_theme',n)}catch(x){}thmApply();say('Tema: '+THL[n])}});
+try{matchMedia('(prefers-color-scheme: light)').addEventListener('change',()=>{if(thmGet()==='auto')thmApply()})}catch(e){}
+function idbOpen(){return new Promise((ok,no)=>{try{const q=indexedDB.open('shuaa_mirror',1);q.onupgradeneeded=()=>q.result.createObjectStore('s');q.onsuccess=()=>ok(q.result);q.onerror=()=>no(q.error)}catch(e){no(e)}})}
+var idbT;function mirror(){if(mirrorLock)return;clearTimeout(idbT);idbT=setTimeout(async()=>{try{const db=await idbOpen();db.transaction('s','readwrite').objectStore('s').put({t:Date.now(),d:{rows,acc:ACC,phases:PH}},'last')}catch(e){}},600)}
+async function mirrorGet(){try{const db=await idbOpen();return await new Promise(ok=>{const r=db.transaction('s').objectStore('s').get('last');r.onsuccess=()=>ok(r.result||null);r.onerror=()=>ok(null)})}catch(e){return null}}
+async function autoRestore(){if(!mirrorLock)return;try{const m=await mirrorGet();const nr=m&&m.d&&Array.isArray(m.d.rows)?clean(m.d.rows):[];mirrorLock=false;if(!nr.length||rows.length)return;
+  ask('Jurnal terlihat kosong, tapi ada salinan otomatis berisi '+nr.length+' trade di browser ini. Pulihkan?',()=>{try{if(m.d.acc)Object.assign(ACC,cleanAcc(m.d.acc));if(!ACC.preset)setPreset('CRT',true);persistAcc();rows=nr;restorePh(m.d.phases);fixPh();applyPh();pickStyle=false;save();render();say('Salinan otomatis dipulihkan: '+nr.length+' trade')}catch(x){say('Gagal memulihkan: '+x.message)}},{yes:'Pulihkan'})}catch(e){mirrorLock=false}}
+function rnSave(){const p=phById(window.rnId),v=$('#rnin').value.trim();if(p&&v){p.name=clip(v,40);savePh();phList();phUI()}$('#rndlg').close()}
+document.addEventListener('click',e=>{const id=e.target&&e.target.id;if(id==='rnx')$('#rndlg').close();if(id==='rnok')rnSave()});
+document.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target&&e.target.id==='rnin'){e.preventDefault();rnSave()}});
+var mirrorLock=false;
+try{const raw=localStorage.getItem(KEY);rows=raw?clean(JSON.parse(raw).rows):clean(SEED);if(!raw){mirrorLock=true;save()}}catch(e){rows=clean(SEED)}
 loadPh();
 try{if(navigator.storage&&navigator.storage.persist)navigator.storage.persist()}catch(e){}
 if(!ACC.preset&&rows.length){setPreset('CRT',true);persistAcc()}
-render();
-if('serviceWorker' in navigator&&/^https?:/.test(location.protocol))addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));
+render();thmApply();autoRestore();
+if('serviceWorker' in navigator&&/^https?:/.test(location.protocol))addEventListener('load',()=>navigator.serviceWorker.register('sw.js').then(reg=>{const nv=w=>ask('Ada versi baru Shuaa Journal. Muat ulang sekarang?',()=>{try{w.postMessage({type:'SKIP_WAITING'})}catch(e){}setTimeout(()=>location.reload(),400)},{yes:'Muat ulang'});if(reg.waiting&&navigator.serviceWorker.controller)nv(reg.waiting);reg.addEventListener('updatefound',()=>{const w=reg.installing;if(!w)return;w.addEventListener('statechange',()=>{if(w.state==='installed'&&navigator.serviceWorker.controller)nv(w)})})}).catch(()=>{}));
 startNews();
 const csvEsc=v=>{let t=String(v??'');if(/^[=+\-@\t\r]/.test(t)&&!/^-?\d+(\.\d+)?$/.test(t))t="'"+t;return '"'+t.replace(/"/g,'""')+'"'};
 function dl(name,text,type){const u=URL.createObjectURL(new Blob([text],{type}));const a=document.createElement('a');a.href=u;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),1000)}
