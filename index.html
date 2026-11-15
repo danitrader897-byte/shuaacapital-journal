@@ -1074,11 +1074,14 @@ th{background:#f1f3f7;font-size:10px}tr{page-break-inside:avoid}.w{color:#0a7a55
 ${chart}
 <table><thead><tr><th>Tanggal</th><th>Pair</th><th>Session</th><th>Arah</th><th>Setup</th><th>RR</th><th>Hasil</th><th>R</th><th>Emosi</th><th>Catatan</th></tr></thead><tbody>${tr}</tbody></table>
 <div class="f">Hasil simulasi dihitung dari R × risiko per 1R. Bukan data akun broker dan bukan saran trading atau keuangan.</div></body></html>`;
-  const old=document.getElementById('pdf-fr');if(old)old.remove();
-  const f=document.createElement('iframe');f.id='pdf-fr';f.setAttribute('aria-hidden','true');f.style.cssText='position:fixed;right:0;bottom:0;width:0;height:0;border:0';
-  f.onload=()=>{try{f.contentWindow.focus();f.contentWindow.print()}catch(e){say('Gagal membuka dialog cetak: '+e.message)}setTimeout(()=>f.remove(),60000)};
-  document.body.appendChild(f);f.srcdoc=html;
-  say('Di dialog cetak, pilih "Simpan sebagai PDF".')}
+  const html2=html
+    .replace('</style>','.np{position:fixed;right:12px;bottom:12px}@media print{.np{display:none}}</style>')
+    .replace('</body>','<div class="np"><button onclick="window.print()" style="padding:12px 18px;font-size:16px">Cetak / Simpan PDF</button></div></body>');
+  const url=URL.createObjectURL(new Blob([html2],{type:'text/html'}));
+  const w=window.open(url,'_blank');
+  if(w){say('Di halaman laporan, ketuk Cetak, lalu pilih "Simpan sebagai PDF".')}
+  else{dl('shuaa-journal-'+stamp()+'.html',html2,'text/html');say('Pop-up diblokir. Laporan diunduh sebagai file HTML, buka lalu cetak ke PDF.')}
+  setTimeout(()=>URL.revokeObjectURL(url),120000)}
 
 /* ===== Peringatan backup: tiap Minggu atau tiap 50 trade ===== */
 function bkCheck(){
