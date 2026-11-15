@@ -1,8 +1,17 @@
 const CAL = "https://nfs.faireconomy.media/ff_calendar_thisweek.json";
-const RSS = "https://www.fxstreet.com/rss/news";
-const UA = { "User-Agent": "Mozilla/5.0 (compatible; ShuaaJournal/1.0)" };
+const FEEDS = [
+  { src: "FXStreet", url: "https://www.fxstreet.com/rss/news" },
+  { src: "ForexLive", url: "https://www.forexlive.com/feed/news" },
+  { src: "Investing", url: "https://www.investing.com/rss/news_1.rss" },
+  { src: "CNBC", url: "https://www.cnbc.com/id/10000664/device/rss/rss.html" },
+];
+const UA = {
+  "User-Agent":
+    "Mozilla/5.0 (Linux; Android 13) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120 Mobile Safari/537.36",
+  Accept: "application/rss+xml, application/xml, text/xml, */*",
+};
 
-let memo = { cal: null, calT: 0, hl: null, hlT: 0 };
+let memo = { cal: null, calT: 0, hl: null, hlT: 0, dbg: {} };
 
 async function getJson(url, ms = 8000) {
   const r = await fetch(url, { headers: UA, signal: AbortSignal.timeout(ms) });
@@ -26,7 +35,7 @@ const clean = (s) =>
     .replace(/&#0?39;/g, "'")
     .trim();
 
-function parseRss(xml) {
+function parseRss(xml, src) {
   const items = xml.match(/<item[\s\S]*?<\/item>/g) || [];
   return items
     .slice(0, 15)
@@ -39,10 +48,37 @@ function parseRss(xml) {
         title: pick("title"),
         link: pick("link"),
         ts: Date.parse(pick("pubDate")) || 0,
-        src: "FXStreet",
+        src,
       };
     })
     .filter((h) => h.title && /^https?:\/\//i.test(h.link));
+}
+
+async function loadHeadlines() {
+  const results = await Promise.allSettled(
+    FEEDS.map(async (f) => {
+      const items = parseRss(await getText(f.url), f.src);
+      if (!items.length) throw new Error("kosong");
+      return items;
+    })
+  );
+  const all = [];
+  const dbg = {};
+  results.forEach((r, i) => {
+    const name = FEEDS[i].src;
+    if (r.status === "fulfilled") {
+      dbg[name] = "ok (" + r.value.length + ")";
+      all.push(...r.value);
+    } else {
+      dbg[name] = "gagal: " + (r.reason && r.reason.message);
+    }
+  });
+  const seen = new Set();
+  const list = all
+    .filter((h) => (seen.has(h.title) ? false : seen.add(h.title)))
+    .sort((a, b) => b.ts - a.ts)
+    .slice(0, 15);
+  return { list, dbg };
 }
 
 module.exports = async (req, res) => {
@@ -57,14 +93,14 @@ module.exports = async (req, res) => {
 
   if (!memo.hl || now - memo.hlT > 60e3) {
     try {
-      const h = parseRss(await getText(RSS));
-      if (h.length) { memo.hl = h; memo.hlT = now; }
+      const { list, dbg } = await loadHeadlines();
+      memo.dbg = dbg;
+      if (list.length) { memo.hl = list; memo.hlT = now; }
     } catch (e) {}
   }
 
   res.setHeader("Cache-Control", "s-maxage=60, stale-while-revalidate=300");
-  res.status(200).json({
-    calendar: memo.cal || [],
-    headlines: memo.hl || [],
-  });
+  const out = { calendar: memo.cal || [], headlines: memo.hl || [] };
+  if (req.query && req.query.debug) out.debug = memo.dbg;
+  res.status(200).json(out);
 };
