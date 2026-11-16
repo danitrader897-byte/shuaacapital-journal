@@ -515,6 +515,7 @@ body[data-tab=plan] #app,body[data-tab=plan] #add{display:none!important}
 #pm .pmd{padding:0 10px 10px;font-size:12px}
 #pm .pmd .ln{margin-top:7px}#pm .pmd .ln i{display:block;font-style:normal;font-size:11px;color:var(--mute)}
 #pm .pmd .ln span{white-space:pre-wrap;overflow-wrap:anywhere}
+#pm .bar{display:flex;align-items:center;gap:8px;margin-top:5px;font-size:12px}#pm .bar>span{width:88px;flex:none;color:var(--mute);font-size:11.5px}#pm .bar>div{flex:1;height:8px;border-radius:6px;background:var(--card2);overflow:hidden}#pm .bar>div>i{display:block;height:100%;border-radius:6px}#pm .bar>b{width:58px;flex:none;text-align:right;font-weight:600}
 #pm .pmd button.dl{margin-top:10px;padding:3px 10px;font-size:11.5px;border:1px solid var(--line);background:transparent;color:var(--loss)}
 </style>
 </head>
@@ -966,7 +967,7 @@ async function loadNews(force){
   const keep=r=>{try{localStorage.setItem('shuaa_news',JSON.stringify({t:NEWS.t,data:r}))}catch(e){}};
   if(raw){try{NEWS.data=normNews(raw);NEWS.t=Date.now();NEWS.via=via;keep(raw)}catch(e){NEWS.err='Format data berita tidak dikenali.'}}
   else NEWS.err=NEWS.data?'Gagal memperbarui, menampilkan data terakhir yang tersimpan.':'Berita belum bisa dimuat. Periksa koneksi lalu tekan Muat ulang, atau buka Forex Factory langsung.';
-  NEWS.loading=false;renderNews();
+  NEWS.loading=false;renderNews();if(window.pmNewsRefresh)pmNewsRefresh();
   if(raw&&NEWS.data&&!NEWS.data.headlines.length){const x=await viaProxy(NRSS,true);if(x){const h=parseRss(x);if(h.length){raw.headlines=h;try{NEWS.data=normNews(raw);keep(raw)}catch(e){}renderNews()}}}
 }
 document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('[data-nf]');if(b){const [k,v]=b.dataset.nf.split(':');NF[k]=v;renderNews();return}if(e.target.id==='nw-ref')loadNews(true)});
@@ -1224,10 +1225,11 @@ function pmRV(r){var a=parseFloat(r.ar);if(r.ar!==undefined&&r.ar!==''&&!isNaN(a
 function pmStat(d){var x=rows.filter(function(r){return r.date===d});return{n:x.length,w:x.filter(function(r){return r.result==='WIN'}).length,l:x.filter(function(r){return r.result==='LOSS'}).length,r:x.reduce(function(a,r){return a+pmRV(r)},0)}}
 function pmFr(v){return(v>0?'+':'')+v.toFixed(1)+'R'}
 function pmFd(d){return new Date(d+'T00:00:00').toLocaleDateString('id-ID',{weekday:'short',day:'numeric',month:'short'})}
-function pmNews(){try{var D=NEWS.data;if(!D)return '<div class="note">Data berita belum dimuat. Buka tab News sekali, lalu kembali ke sini.</div>';
+function pmNews(){try{var D=NEWS.data;if(!D)return NEWS.err?'<div class="note">'+esc(NEWS.err)+'</div><div style="margin-top:6px"><button type="button" data-nwr="1">Muat ulang</button></div>':'<div class="note">Memuat berita…</div>';
   var rel=relCur(),td=today(),ev=D.calendar.filter(function(e){return e.imp==='H'&&nwDay(e.ts)===td&&(!rel.size||rel.has(e.cur)||e.cur==='ALL')});
   if(!ev.length)return '<div class="note">Tidak ada berita high impact hari ini'+(rel.size?' untuk pair-mu':'')+'.</div>';
   return ev.map(function(e){return '<div class="pmw"><b>'+esc(nwT(e.ts))+'</b><span class="cu">'+esc(e.cur)+'</span>'+esc(e.title)+'</div>'}).join('')}catch(x){return '<div class="note">Berita belum bisa ditampilkan.</div>'}}
+function pmNewsRefresh(){try{var e=document.getElementById('pm-news');if(e)e.innerHTML=pmNews()}catch(x){}}
 function pmRender(){try{
   var box=document.getElementById('pm');if(!box)return;
   var P=pmGet(),day=tradeDay(),S=P[day]?JSON.parse(JSON.stringify(P[day])):pmBlank();
@@ -1252,14 +1254,21 @@ function pmRender(){try{
   var g={y:{d:0,n:0,w:0,l:0,r:0},o:{d:0,n:0,w:0,l:0,r:0}};
   Object.keys(Pall).forEach(function(k){var v=Pall[k];if(!v.ev)return;var q=v.ev==='ya'?g.y:g.o,t=pmStat(k);q.d++;q.n+=t.n;q.w+=t.w;q.l+=t.l;q.r+=t.r});
   var gl=function(l,q){if(!q.d)return '';var wr=q.w+q.l?Math.round(q.w/(q.w+q.l)*100)+'%':'-';return '<div class="ln"><i>'+l+'</i><span>'+q.d+' hari · '+q.n+' trade · win rate '+wr+' · '+(q.n?pmFr(q.r/q.n):'-')+' per trade</span></div>'};
-  var dampak='<h2>Dampak mengikuti plan</h2><div class="card pmd" style="padding:10px 12px!important">'+((g.y.d||g.o.d)?gl('Diikuti',g.y)+gl('Sebagian atau tidak diikuti',g.o):'<div class="note">Isi bagian Setelah sesi supaya hasil di hari saat plan diikuti dan tidak diikuti bisa dibandingkan.</div>')+'</div>';
+  var wr=function(q){return q.w+q.l?q.w/(q.w+q.l)*100:0};
+  var br=function(l,w,c,t){return '<div class="bar"><span>'+l+'</span><div><i style="width:'+Math.max(2,Math.min(100,w))+'%;background:'+c+'"></i></div><b>'+t+'</b></div>'};
+  var cmp='',few='';
+  if(g.y.n&&g.o.n){var ry=g.y.r/g.y.n,ro=g.o.r/g.o.n,mx=Math.max(.01,Math.abs(ry),Math.abs(ro));
+    cmp='<div class="ln" style="margin-top:12px"><i>Perbandingan win rate</i></div>'+br('Diikuti',wr(g.y),'var(--acc)',Math.round(wr(g.y))+'%')+br('Tidak/sebagian',wr(g.o),'var(--warn)',Math.round(wr(g.o))+'%')
+      +'<div class="ln" style="margin-top:10px"><i>Perbandingan rata-rata R per trade</i></div>'+br('Diikuti',Math.abs(ry)/mx*100,'var(--acc)',pmFr(ry))+br('Tidak/sebagian',Math.abs(ro)/mx*100,'var(--warn)',pmFr(ro))}
+  if((g.y.d&&g.y.d<10)||(g.o.d&&g.o.d<10))few='<div class="note warn" style="margin-top:10px">Data masih sedikit ('+g.y.d+' hari diikuti, '+g.o.d+' hari tidak/sebagian). Anggap ini gambaran awal, bukan patokan. Lebih bisa dipercaya setelah sekitar 10 hari per kelompok.</div>';
+  var dampak='<h2>Dampak mengikuti plan</h2><div class="card pmd" style="padding:10px 12px!important">'+((g.y.d||g.o.d)?gl('Diikuti',g.y)+gl('Sebagian atau tidak diikuti',g.o)+cmp+few:'<div class="note">Isi bagian Setelah sesi supaya hasil di hari saat plan diikuti dan tidak diikuti bisa dibandingkan.</div>')+'</div>';
   box.innerHTML='<h2>Planner<span class="pmdt">'+esc(pmFd(day))+'</span></h2>'
   +'<details class="card pms k-acc" open><summary>Sebelum sesi</summary><div class="pmb2">'
     +'<label class="pml">Bias per timeframe</label>'+PM_TF.map(function(a){return row(a[1],'tf.'+a[0],PM_B,'bias')}).join('')
     +'<label class="pml" for="pm-pr">Pair fokus</label><input id="pm-pr" data-k="pr" maxlength="80" placeholder="mis. EURUSD, XAUUSD" value="'+esc(S.pr)+'">'
     +'<label class="pml" for="pm-lv">Level penting</label><textarea id="pm-lv" data-k="lv" rows="2" maxlength="1000" placeholder="mis. High dan low kemarin, high dan low sesi Asia, zona POI">'+esc(S.lv)+'</textarea>'
     +'<label class="pml" for="pm-n">Skenario (if-then)</label><textarea id="pm-n" data-k="n" rows="3" maxlength="1000" placeholder="mis. Kalau harga sweep low Asia lalu balik naik, cari buy. Kalau close di bawahnya, skip.">'+esc(S.n)+'</textarea>'
-    +'<label class="pml">Berita high impact hari ini</label>'+pmNews()
+    +'<label class="pml">Berita high impact hari ini</label><div id="pm-news">'+pmNews()+'</div>'
     +'<label class="ck"><input type="checkbox" data-bool="nw"'+(S.nw?' checked':'')+'><span>Sudah cek berita hari ini</span></label>'
     +'<label class="pml">Kondisi diri</label><div class="pmtg"><button type="button" class="'+(S.td?'on':'')+'" data-bool="td">Tidur cukup</button><button type="button" class="'+(S.fk?'on':'')+'" data-bool="fk">Fokus</button></div>'+row('Emosi','em',PM_E)
   +'</div></details>'
@@ -1269,18 +1278,19 @@ function pmRender(){try{
     +'<div class="note" style="margin-top:10px">Batas loss harian <b>'+esc(ACC.dl)+'%</b> dan batas loss total <b>'+esc(ACC.ml)+'%</b> mengikuti Atur akun.</div>'
     +'<label class="pml">Sesi yang dipakai</label><div class="sg">'+PM_S.map(function(x){return '<button type="button" data-tg="ss" data-v="'+x+'" class="'+(S.ss.indexOf(x)>=0?'on':'')+'">'+x+'</button>'}).join('')+'</div>'
     +(ACC.rules?'<div class="note" style="margin-top:12px">Aturan pribadimu: '+esc(ACC.rules)+'</div>':'')
-    +'<label class="pml">Checklist entry</label><div class="note" style="margin-bottom:4px">Centang poin yang terpenuhi saat entry. Skor disiplin dihitung dari sini.</div>'+(steps.length?steps.map(function(t,i){return ck('m'+i,t)}).join(''):'<div class="note">Belum ada model entry. Isi lewat Atur akun.</div>')
-    +(facts.length?'<div class="note" style="margin:12px 0 0">Faktor konfluensi</div>'+facts.map(function(f){return ck('f:'+f[0],f[1])}).join(''):'')
   +'</div></details>'
   +'<details class="card pms k-win"><summary>Setelah sesi</summary><div class="pmb2">'
     +'<div class="note" id="pm-sum"></div>'
+    +'<label class="pml">Checklist entry</label><div class="note" style="margin-bottom:4px">Centang poin yang kamu penuhi di setiap trade hari ini. Kalau hanya sebagian trade yang memenuhi, jangan dicentang.</div>'+(steps.length?steps.map(function(t,i){return ck('m'+i,t)}).join(''):'<div class="note">Belum ada model entry. Isi lewat Atur akun.</div>')
+    +(facts.length?'<div class="note" style="margin:12px 0 0">Faktor konfluensi</div>'+facts.map(function(f){return ck('f:'+f[0],f[1])}).join(''):'')
+    +'<label class="pml">Skor disiplin hari ini</label><div id="pm-sk"></div>'
     +'<label class="pml">Apakah plan diikuti?</label>'+seg('ev',PM_V)
     +'<label class="pml" for="pm-evn">Alasan atau catatan</label><textarea id="pm-evn" data-k="evn" rows="2" maxlength="500" placeholder="Mengapa plan diikuti atau tidak">'+esc(S.evn)+'</textarea>'
-    +'<label class="pml">Skor disiplin (otomatis dari checklist entry)</label><div id="pm-sk"></div>'
     +'<label class="pml" for="pm-ls">Pelajaran hari ini</label><input id="pm-ls" data-k="ls" maxlength="300" placeholder="Tulis satu kalimat" value="'+esc(S.ls)+'">'
   +'</div></details>'
   +'<div class="note pmst" id="pm-st">Tersimpan otomatis di perangkat ini.</div>'
   +dampak+'<h2>Riwayat</h2>'+histHtml;
+  if(!NEWS.data&&!NEWS.loading&&!NEWS.err)loadNews();
   var st=function(t){var e=document.getElementById('pm-st');if(e)e.textContent=t};
   var sumUpd=function(){var t=pmStat(day),lim=(S.l===''||S.l==null)?null:+S.l,m=t.n?t.n+' trade tercatat hari ini · '+t.w+'W · '+t.l+'L · '+pmFr(t.r):'Belum ada trade yang tercatat hari ini',w=false;
     if(lim!==null&&t.n>lim){m+=' · melebihi batas '+lim+' trade';w=true}else if(lim!==null&&t.n>0&&t.n===lim){m+=' · batas '+lim+' trade tercapai';w=true}
@@ -1292,7 +1302,7 @@ function pmRender(){try{
     if(!tot){S.sk='';S.ms=[];html='<div class="note">Belum ada checklist entry. Isi model entry lewat Atur akun.</div>'}
     else if(!n||!pmHasInput(S)){S.sk='';S.ms=[];html='<div class="note">'+(n?'Isi plan hari ini dulu, lalu centang checklist entry.':'Skor dihitung setelah ada trade tercatat hari ini.')+'</div>'}
     else{var sk=Math.max(1,Math.round(got.length/tot*5));S.sk=sk;S.ms=miss.slice(0,12);
-      html='<div class="'+(sk>=4?'win':sk===3?'warn':'loss')+'" style="font-size:15px;font-weight:700">'+sk+'/5 <span class="note" style="font-weight:400">· '+got.length+' dari '+tot+' poin checklist terpenuhi</span></div>'+(miss.length?'<div class="note" style="margin:6px 0 2px">Yang belum terpenuhi:</div>'+miss.map(function(m){return '<div class="pmm">• '+esc(m)+'</div>'}).join(''):'<div class="note" style="margin-top:6px">Semua poin checklist terpenuhi.</div>')}
+      html='<div class="'+(sk>=4?'win':sk===3?'warn':'loss')+'" style="font-size:15px;font-weight:700">'+sk+'/5 <span class="note" style="font-weight:400">· '+got.length+' dari '+tot+' poin checklist terpenuhi'+(n>1?' · satu skor untuk '+n+' trade hari ini':'')+'</span></div>'+(miss.length?'<div class="note" style="margin:6px 0 2px">Yang belum terpenuhi:</div>'+miss.map(function(m){return '<div class="pmm">• '+esc(m)+'</div>'}).join(''):'<div class="note" style="margin-top:6px">Semua poin checklist terpenuhi.</div>')}
     if(el)el.innerHTML=html};
   var tm,pend=false;
   var doSave=function(){pend=false;var P2=pmGet(),c=pmClean(Object.fromEntries([[day,S]]))[day];if(c)P2[day]=c;else delete P2[day];pmPut(P2);st('Tersimpan otomatis ✓')};
@@ -1302,6 +1312,7 @@ function pmRender(){try{
   box.oninput=function(e){var t=e.target;if(t.dataset&&t.dataset.k){S[t.dataset.k]=t.value;if(t.dataset.k==='l')sumUpd();sv()}};
   box.onchange=function(e){var t=e.target;if(!t.dataset)return;if(t.dataset.bool&&t.type==='checkbox'){S[t.dataset.bool]=t.checked;sv()}else if(t.dataset.ck){var i=S.ck.indexOf(t.dataset.ck);if(t.checked&&i<0)S.ck.push(t.dataset.ck);if(!t.checked&&i>=0)S.ck.splice(i,1);sv()}};
   box.onclick=function(e){var b=e.target.closest?e.target.closest('button'):null;if(!b)return;
+    if(b.dataset.nwr){loadNews(true);pmNewsRefresh();return}
     var g=b.closest('[data-seg]');
     if(g){var p=g.dataset.seg,v=b.dataset.v,nv=String(get(p))===v?'':v;set(p,nv);g.querySelectorAll('button').forEach(function(x){x.classList.toggle('on',x.dataset.v===nv)});sv();return}
     if(b.dataset.tg){var a=S[b.dataset.tg],v2=b.dataset.v,i=a.indexOf(v2);if(i<0)a.push(v2);else a.splice(i,1);b.classList.toggle('on',i<0);sv();return}
