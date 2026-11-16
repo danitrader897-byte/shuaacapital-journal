@@ -12,6 +12,7 @@
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#070b16">
 <script>(function(){try{var t=localStorage.getItem("shuaa_theme")||"dark";var l=t==="light"||(t==="auto"&&matchMedia("(prefers-color-scheme: light)").matches);document.documentElement.setAttribute("data-theme",l?"light":"dark");var m=document.querySelector("meta[name=theme-color]");if(m)m.content=l?"#f3f6fc":"#070b16"}catch(e){}})()</script>
+<script>(function(){try{if(localStorage.getItem("shuaa_unlock")!=="6c54a558324a704c40384745813009c090d9344ea310f386a57b90c04dcab963")document.documentElement.classList.add("locked")}catch(e){document.documentElement.classList.add("locked")}})()</script>
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Shuaa">
@@ -518,8 +519,36 @@ body[data-tab=plan] #app,body[data-tab=plan] #add{display:none!important}
 #pm .bar{display:flex;align-items:center;gap:8px;margin-top:5px;font-size:12px}#pm .bar>span{width:88px;flex:none;color:var(--mute);font-size:11.5px}#pm .bar>div{flex:1;height:8px;border-radius:6px;background:var(--card2);overflow:hidden}#pm .bar>div>i{display:block;height:100%;border-radius:6px}#pm .bar>b{width:58px;flex:none;text-align:right;font-weight:600}
 #pm .pmd button.dl{margin-top:10px;padding:3px 10px;font-size:11.5px;border:1px solid var(--line);background:transparent;color:var(--loss)}
 </style>
+<style>
+html.locked body>*:not(#lock){display:none!important}
+#lock{display:none}
+html.locked #lock{display:flex;position:fixed;inset:0;z-index:99999;background:var(--bg,#070b16);color:var(--ink,#eaf0ff);align-items:center;justify-content:center;padding:24px;font-family:Figtree,system-ui,sans-serif}
+#lock .lb{width:100%;max-width:340px;text-align:center}
+#lock h1{font-size:22px;letter-spacing:.14em;margin:0 0 6px}
+#lock p{margin:0 0 18px;color:var(--mute,#8a96b3);font-size:13px}
+#lock input{width:100%;font-size:16px;text-align:center;letter-spacing:.08em;padding:13px;border-radius:12px;border:1px solid var(--line,#1d2842);background:var(--card,#0e1526);color:inherit}
+#lock button{width:100%;margin-top:12px;padding:13px;border-radius:12px;border:0;background:var(--acc,#4f7cff);color:#fff;font:inherit;font-weight:700;cursor:pointer}
+#lock button:disabled{opacity:.5}
+#lock .er{min-height:18px;margin-top:10px;font-size:13px;color:var(--loss,#ff5d73)}
+</style>
 </head>
 <body>
+<div id="lock"><div class="lb"><h1>SHUAA</h1><p>Masukkan kode akses untuk membuka jurnal.</p>
+<input id="lk-in" type="password" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="Kode akses">
+<button id="lk-go" type="button">Buka</button><div class="er" id="lk-er"></div></div></div>
+<script>(function(){
+var H="6c54a558324a704c40384745813009c090d9344ea310f386a57b90c04dcab963",SALT="shuaa-journal-v1|",f=0,inp=document.getElementById("lk-in"),go=document.getElementById("lk-go"),er=document.getElementById("lk-er");
+function hex(b){return Array.prototype.map.call(new Uint8Array(b),function(x){return("0"+x.toString(16)).slice(-2)}).join("")}
+async function check(){
+ if(!(window.crypto&&crypto.subtle)){er.textContent="Browser ini tidak mendukung. Buka lewat https.";return}
+ var v=inp.value.trim();if(!v)return;go.disabled=true;
+ var h=hex(await crypto.subtle.digest("SHA-256",new TextEncoder().encode(SALT+v)));
+ if(h===H){try{localStorage.setItem("shuaa_unlock",H)}catch(e){}document.documentElement.classList.remove("locked");inp.value=""}
+ else{f++;er.textContent="Kode salah."+(f>=3?" Tunggu sebentar.":"");inp.value="";var w=f>=3?Math.min(30,f*3)*1000:600;setTimeout(function(){go.disabled=false;er.textContent=""},w);return}
+ go.disabled=false}
+go.addEventListener("click",check);inp.addEventListener("keydown",function(e){if(e.key==="Enter")check()});
+})()</script>
+
 <div class="wrap">
   <div class="head"><div class="hl"><h1><svg class="lg" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="8" role="img" aria-label="Shuaa"><rect x="4" y="4" width="92" height="92"/><path d="M4 37H61L92 8M61 37V96M4 62H38V96"/></svg></h1></div><div class="jc"><div class="jn empty" id="jn" role="button" tabindex="0">+ Nama jurnal</div></div><div class="hr"><button type="button" class="mnb" id="mnb" aria-label="Menu" aria-haspopup="true" aria-expanded="false">⋯</button></div><div class="mnu" id="mnu" hidden><button type="button" id="vw"></button><button type="button" id="x-style">Ganti strategy</button><button type="button" id="ph-mng">Kelola phase</button><button type="button" id="mn-acc">Atur akun</button><button type="button" id="thm"></button><hr><button type="button" data-a="x-json">Cadangkan data</button><button type="button" data-a="x-imp">Pulihkan cadangan</button><hr><button type="button" data-a="x-pdf">Unduh PDF</button><button type="button" data-a="x-tpl">Unduh templat CSV</button><button type="button" data-a="x-impmt">Impor dari MT4/MT5</button><button type="button" data-a="x-impcsv">Impor dari CSV</button><hr><button type="button" id="mn-faq">FAQ dan panduan</button></div></div>
   <div class="phrow"><select id="ph-sel" aria-label="Phase"></select><div class="sub" id="sub">Trading journal dan challenge tracker</div></div>
