@@ -464,10 +464,11 @@ input,select,textarea,a.b,button{border-radius:8px}
 .ents .t .cap{position:absolute;left:0;right:0;bottom:0;margin:0}
 .ents .t .cap .m{height:2px;border-radius:0}
 .head{display:grid;grid-template-columns:var(--sw) minmax(0,1fr) var(--sw);align-items:center;gap:6px;--sw:104px}
-.head .hl,:is(body,body.c) .head .hl{background:var(--card)!important;border:1px solid var(--line)!important;border-left:3px solid var(--acc)!important;border-radius:9px!important;box-shadow:none!important;padding:5px 8px!important;min-width:0;justify-self:start;max-width:100%;display:flex;align-items:center}
+.head .hl,:is(body,body.c) .head .hl{background:transparent!important;border:1px solid var(--line)!important;border-left:3px solid var(--acc)!important;border-radius:9px!important;box-shadow:none!important;padding:5px 8px!important;min-width:0;justify-self:start;max-width:100%;display:flex;align-items:center}
 .head .hl .logo{height:15px;width:auto;max-width:100%;object-fit:contain;opacity:.85}
 .head .hl h1{display:flex;margin:0}
 .head .hr{justify-self:end}
+#add.fab,body.c #add.fab{background:none!important;border:0!important;box-shadow:none!important;color:var(--acc)!important;width:46px;height:46px;font-size:36px;font-weight:400;opacity:.8;text-shadow:0 0 8px var(--bg),0 0 3px var(--bg)}
 .head .jc{min-width:0;text-align:center;display:flex;justify-content:center}
 .head .jc .jn{max-width:100%;font-size:14px;font-weight:700;line-height:1.2;color:var(--ink);cursor:pointer;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;word-break:break-word}
 .head .jc .jn.empty{font-size:11.5px;font-weight:500;color:var(--mute);opacity:.85}
@@ -510,7 +511,7 @@ input,select,textarea,a.b,button{border-radius:8px}
   </div>
   <div class="acts"><button type="button" id="cx">Batal</button><button class="p" id="sv">Simpan</button></div>
 </form></dialog>
-<dialog id="adlg"><form id="afrm" onsubmit="return false"><h2>Aturan akun</h2><div class="f"><div class="w"><label>Nama jurnal</label><input name="jname" type="text" maxlength="40" placeholder="mis. Saputrayana Journal"></div><div class="w"><label>Nama challenge</label><input name="name" type="text" placeholder="mis. Challenge 10K"></div><div class="w"><label>Model entry (satu langkah per baris)</label><textarea name="model" rows="5"></textarea></div><div class="w"><label>Faktor konfluensi (YES/NO), satu per baris, maks. 8</label><textarea name="factsTxt" rows="4" placeholder="mis. Retest zona&#10;Searah tren HTF"></textarea></div><div class="w"><label>Aturan pribadi (opsional)</label><textarea name="rules" rows="2" placeholder="mis. Maks 2 trade per hari, stop setelah 2 loss"></textarea></div>
+<dialog id="adlg"><form id="afrm" onsubmit="return false"><h2>Aturan akun</h2><div class="f"><div class="w"><label>Nama jurnal</label><input name="jname" type="text" maxlength="40" placeholder="mis. Jurnal Trading Saya"></div><div class="w"><label>Nama challenge</label><input name="name" type="text" placeholder="mis. Challenge 10K"></div><div class="w"><label>Model entry (satu langkah per baris)</label><textarea name="model" rows="5"></textarea></div><div class="w"><label>Faktor konfluensi (YES/NO), satu per baris, maks. 8</label><textarea name="factsTxt" rows="4" placeholder="mis. Retest zona&#10;Searah tren HTF"></textarea></div><div class="w"><label>Aturan pribadi (opsional)</label><textarea name="rules" rows="2" placeholder="mis. Maks 2 trade per hari, stop setelah 2 loss"></textarea></div>
 <div><label>Balance awal ($)</label><input name="bal" type="number" step="any" min="1" required></div>
 <div><label>Risiko per 1R (%)</label><input name="risk" type="number" step="any" min="0.01" required></div>
 <div><label>Target profit (%)</label><input name="tgt" type="number" step="any" min="0.1" required></div>
