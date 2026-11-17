@@ -623,7 +623,7 @@ const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&g
 const KEY='shuaa_journal_v1';
 const SEED=[];
 const PRESETS={
- CRT:{facts:[['mss','MSS'],['ob','OB'],['sweep','Liquidity Sweep'],['idm','BOS']],crt:1,pois:['OB H1','FVG M15','SUPPLY','DEMAND'],model:'Tentukan bias HTF dan CRT\nTunggu sweep likuiditas\nKonfirmasi MSS dan BOS\nEntry di OB atau POI\nSL di luar struktur, TP sesuai RR target'},
+ CRT:{facts:[['mss','MSS'],['ob','OB'],['sweep','Liquidity Sweep'],['idm','BOS'],['cisd','CISD']],crt:1,pois:['OB H1','FVG M15','SUPPLY','DEMAND'],model:'Tentukan bias HTF dan CRT\nTunggu sweep likuiditas\nKonfirmasi MSS dan BOS\nEntry di OB atau POI\nSL di luar struktur, TP sesuai RR target'},
  ICT:{facts:[['sweep','Liquidity Sweep'],['mss','MSS'],['cisd','CISD'],['fvg','FVG'],['ob','Order Block'],['pd','Premium/Discount'],['kz','Killzone']],pois:['FVG','Order Block','Breaker','OTE'],model:'Tentukan bias HTF dan draw on liquidity\nTunggu sweep likuiditas di killzone\nKonfirmasi MSS atau CISD dengan displacement\nEntry di FVG atau OB (zona OTE)\nSL di luar swing, TP ke likuiditas berikutnya'},
  SMC:{facts:[['idm','BOS/CHoCH'],['sweep','Sweep'],['ob','Order Block'],['imb','Imbalance'],['pd','Premium/Discount']],pois:['Order Block','Supply','Demand','Imbalance'],model:'Tandai struktur HTF dan zona supply/demand\nTunggu sweep atau inducement\nKonfirmasi CHoCH atau BOS di LTF\nEntry di order block atau imbalance\nSL di luar zona, TP ke struktur berikutnya'},
  Kustom:{facts:[],pois:[],model:''}};
@@ -639,7 +639,7 @@ function parseFacts(t){const known=[...ACC.facts,...Object.values(PRESETS).flatM
 function cleanAcc(a){const o={};if(!a||typeof a!=='object')return o;['name','jname','model','rules'].forEach(k=>{if(typeof a[k]==='string')o[k]=a[k].slice(0,k==='jname'?40:2000)});
   ['bal','risk','tgt','md','dl','ml'].forEach(k=>{const v=+a[k];if(isFinite(v)&&v>(k==='md'?-1:0))o[k]=v});
   if(a.rh!==undefined&&a.rh!==''){const h=+a.rh;if(Number.isInteger(h)&&h>=0&&h<=23)o.rh=h}if(a.dm==='s'||a.dm==='t')o.dm=a.dm;if(PRESETS[a.preset])o.preset=a.preset;o.useCrt=!!a.useCrt;
-  if(Array.isArray(a.facts))o.facts=a.facts.filter(f=>Array.isArray(f)&&/^[\w-]{1,32}$/.test(f[0])&&typeof f[1]==='string').slice(0,8).map(f=>[f[0],f[1].slice(0,40)]);
+  if(Array.isArray(a.facts))o.facts=a.facts.filter(f=>Array.isArray(f)&&/^[\w-]{1,32}$/.test(f[0])&&typeof f[1]==='string').slice(0,8).map(f=>[f[0],f[1].slice(0,40)]);if(o.preset==='CRT'&&o.facts.map(f=>f[0]).join()==='mss,ob,sweep,idm')o.facts.push(['cisd','CISD']);
   if(Array.isArray(a.pois))o.pois=a.pois.filter(x=>typeof x==='string').slice(0,12).map(x=>x.slice(0,40));return o}
 let pickStyle=false;let CH={};let rows=[],edit=null,F={q:'',pair:'',session:'',result:''};
 const pct=(a,b)=>b?Math.round(a/b*100)+'%':'0%';
