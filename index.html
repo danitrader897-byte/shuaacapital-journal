@@ -1071,7 +1071,7 @@ render();thmApply();autoRestore();
 if('serviceWorker' in navigator&&/^https?:/.test(location.protocol))addEventListener('load',()=>navigator.serviceWorker.register('sw.js').then(reg=>{const nv=w=>ask('Ada versi baru Shuaa Journal. Muat ulang sekarang?',()=>{try{w.postMessage({type:'SKIP_WAITING'})}catch(e){}setTimeout(()=>location.reload(),400)},{yes:'Muat ulang'});if(reg.waiting&&navigator.serviceWorker.controller)nv(reg.waiting);reg.addEventListener('updatefound',()=>{const w=reg.installing;if(!w)return;w.addEventListener('statechange',()=>{if(w.state==='installed'&&navigator.serviceWorker.controller)nv(w)})})}).catch(()=>{}));
 startNews();
 const csvEsc=v=>{let t=String(v??'');if(/^[=+\-@\t\r]/.test(t)&&!/^-?\d+(\.\d+)?$/.test(t))t="'"+t;return '"'+t.replace(/"/g,'""')+'"'};
-function dl(name,text,type){const u=URL.createObjectURL(new Blob([text],{type}));const a=document.createElement('a');a.href=u;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),1000)}
+function dl(name,text,type){const u=URL.createObjectURL(new Blob([text],{type}));const a=document.createElement('a');a.href=u;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),30000)}
 const stamp=today;
 document.addEventListener('click',e=>{const pb=e.target.closest&&e.target.closest('[data-preset]');if(pb){pickStyle=false;setPreset(pb.dataset.preset);persistAcc();render();if(pb.dataset.preset==='Kustom'){const b=document.getElementById('acc-edit');if(b)b.click()}return}
   const id=e.target.id||(e.target.dataset&&e.target.dataset.a)||'';
@@ -1170,6 +1170,61 @@ function faqGo(mt){try{$('#mtdlg').close()}catch(e){}$('#faqbody').innerHTML=FAQ
 $('#faqx').onclick=()=>$('#faqdlg').close();
 $('#mn-faq').onclick=()=>faqGo(false);
 
+/* ===== Penulis PDF mini (tanpa library, langsung jadi file .pdf) ===== */
+const HW=[278,278,355,556,556,889,667,191,333,333,389,584,278,333,278,278,556,556,556,556,556,556,556,556,556,556,278,278,584,584,584,556,1015,667,667,722,722,667,611,778,722,278,500,667,556,833,722,778,667,778,722,667,611,722,667,944,667,667,611,278,278,278,469,556,333,556,556,500,556,556,278,556,556,222,222,500,222,833,556,556,556,556,333,500,278,556,500,722,500,500,500,334,260,334,584];
+function pdfBuild(o){
+  const L1=s=>{s=String(s==null?'':s).replace(/[\u2013\u2014]/g,'-').replace(/[\u2018\u2019]/g,"'").replace(/[\u201C\u201D]/g,'"').replace(/\u2026/g,'...').replace(/[\r\n\t]+/g,' ');let r='';for(const ch of s){const c=ch.charCodeAt(0);r+=(c>=32&&c<=126)||(c>=161&&c<=255)?ch:' '}return r};
+  const cw=(s,sz,b)=>{let w=0;for(const ch of s){const c=ch.charCodeAt(0);w+=(c>=32&&c<=126?HW[c-32]:556)}return w*sz/1000*(b?1.06:1)};
+  const wrap=(s,w,sz)=>{s=L1(s).trim();if(!s)return[''];const out=[];let cur='';for(const word of s.split(/ +/)){let t=cur?cur+' '+word:word;if(cw(t,sz)<=w){cur=t;continue}if(cur){out.push(cur);cur=''}let wd=word;while(cw(wd,sz)>w&&wd.length>1){let k=wd.length-1;while(k>1&&cw(wd.slice(0,k),sz)>w)k--;out.push(wd.slice(0,k));wd=wd.slice(k)}cur=wd}if(cur)out.push(cur);return out};
+  const esc=s=>s.replace(/[\\()]/g,m=>'\\'+m);
+  const f=n=>(Math.round(n*100)/100).toString();
+  const PW=595.28,PH=841.89,M=30,UW=PW-2*M;
+  const pages=[];let cur=null,y=0;
+  const np=()=>{cur=[];pages.push(cur);y=PH-M};
+  const txt=(x,yy,s,sz,b,rgb,al)=>{s=L1(s);const w=cw(s,sz,b);if(al==='r')x-=w;else if(al==='c')x-=w/2;cur.push('BT /F'+(b?2:1)+' '+f(sz)+' Tf '+(rgb||'0 0 0')+' rg '+f(x)+' '+f(yy)+' Td ('+esc(s)+') Tj ET')};
+  const line=(x1,y1,x2,y2,rgb,w,dash)=>cur.push((dash?'['+dash+'] 0 d ':'[] 0 d ')+(rgb||'0.8 0.8 0.8')+' RG '+f(w||0.5)+' w '+f(x1)+' '+f(y1)+' m '+f(x2)+' '+f(y2)+' l S');
+  const box=(x,yy,w,h,rgb)=>cur.push('0.8 0.8 0.8 RG 0.6 w '+f(x)+' '+f(yy)+' '+f(w)+' '+f(h)+' re S');
+  np();
+  txt(M,y-14,o.title,16,1);y-=30;
+  txt(M,y,o.sub,8.5,0,'0.35 0.35 0.35');y-=14;
+  const tw=(UW-3*8)/4;
+  o.tiles.forEach((t,i)=>{const c=i%4,r=Math.floor(i/4),x=M+c*(tw+8),yy=y-r*40-34;box(x,yy,tw,34);txt(x+6,yy+22,t[0],7,0,'0.4 0.4 0.4');txt(x+6,yy+8,t[1],10.5,1)});
+  y-=2*40+4;
+  const CH=140,cl=M+52,cr=PW-M-6,ct=y-14,cb=y-CH+14;
+  box(M,y-CH,UW,CH);txt(M+6,y-11,'Equity curve (balance simulasi)',8,1);
+  const eq=o.eq,lo=Math.min(...eq),hi=Math.max(...eq),sp=(hi-lo)||1;
+  const cx=i=>cl+(cr-cl)*(eq.length<2?0:i/(eq.length-1)),cy=v=>cb+(ct-cb-8)*((v-lo)/sp);
+  const col=o.up?'0.04 0.48 0.33':'0.75 0.09 0.21',fill=o.up?'0.88 0.95 0.91':'0.97 0.89 0.90';
+  const pts=eq.map((v,i)=>f(cx(i))+' '+f(cy(v)));
+  cur.push(fill+' rg '+f(cx(0))+' '+f(cb)+' m '+pts.map(q=>q+' l').join(' ')+' '+f(cx(eq.length-1))+' '+f(cb)+' l f');
+  cur.push('[] 0 d '+col+' RG 1.4 w 1 j '+pts.map((q,i)=>q+(i?' l':' m')).join(' ')+' S');
+  line(cl,cy(o.bal),cr,cy(o.bal),'0.6 0.6 0.6',0.6,'3 2');
+  txt(cl-4,cy(hi)-3,o.mny(hi),7,0,'0.35 0.35 0.35','r');txt(cl-4,cy(lo)-3,o.mny(lo),7,0,'0.35 0.35 0.35','r');
+  txt(cl,y-CH+4,o.d0,7,0,'0.35 0.35 0.35');txt(cr,y-CH+4,o.d1,7,0,'0.35 0.35 0.35','r');
+  y-=CH+12;
+  const cols=[['Tanggal',50],['Pair',50],['Session',46],['Arah',30],['Setup',90],['RR',28],['Hasil',40],['R',34],['Emosi',55],['Catatan',UW-423]];
+  const SZ=7.5,LH=9.2;
+  const head=()=>{cur.push('0.945 0.953 0.969 rg '+f(M)+' '+f(y-13)+' '+f(UW)+' 14 re f');let x=M;cols.forEach(c=>{txt(x+3,y-9,c[0],7.5,1);x+=c[1]});y-=14};
+  head();
+  o.rows.forEach(r=>{
+    const cells=r.map((v,i)=>wrap(v,cols[i][1]-6,SZ));
+    const n=Math.max(...cells.map(c=>c.length)),h=n*LH+5;
+    if(y-h<M+16){np();head()}
+    let x=M;cells.forEach((c,i)=>{const rgb=i===6?(r[6]==='WIN'?'0.04 0.48 0.33':r[6]==='LOSS'?'0.75 0.09 0.21':'0 0 0'):'0 0 0';c.forEach((ln,k)=>txt(x+3,y-8-k*LH,ln,SZ,i===6&&r[6]!=='BE',rgb));x+=cols[i][1]});
+    line(M,y-h+1,M+UW,y-h+1,'0.87 0.87 0.87',0.4);y-=h});
+  if(y-24<M+10)np();
+  wrap(o.foot,UW,7).forEach((ln,k)=>txt(M,y-14-k*9,ln,7,0,'0.45 0.45 0.45'));
+  pages.forEach((pg,i)=>{cur=pg;txt(PW-M,M-14,'Hal '+(i+1)+'/'+pages.length,7,0,'0.45 0.45 0.45','r')});
+  const objs=[];const add=s=>{objs.push(s);return objs.length};
+  add('<< /Type /Catalog /Pages 2 0 R >>');add('');
+  const f1=add('<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>'),f2=add('<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>');
+  const kids=[];
+  pages.forEach(pg=>{const s=pg.join('\n'),c=add('<< /Length '+s.length+' >>\nstream\n'+s+'\nendstream'),pgo=add('<< /Type /Page /Parent 2 0 R /MediaBox [0 0 '+f(PW)+' '+f(PH)+'] /Resources << /Font << /F1 '+f1+' 0 R /F2 '+f2+' 0 R >> >> /Contents '+c+' 0 R >>');kids.push(pgo+' 0 R')});
+  objs[1]='<< /Type /Pages /Count '+kids.length+' /Kids ['+kids.join(' ')+'] >>';
+  let out='%PDF-1.4\n',offs=[];objs.forEach((s,i)=>{offs.push(out.length);out+=(i+1)+' 0 obj\n'+s+'\nendobj\n'});
+  const xr=out.length;out+='xref\n0 '+(objs.length+1)+'\n0000000000 65535 f \n'+offs.map(n=>String(n).padStart(10,'0')+' 00000 n \n').join('')+'trailer\n<< /Size '+(objs.length+1)+' /Root 1 0 R >>\nstartxref\n'+xr+'\n%%EOF';
+  const u=new Uint8Array(out.length);for(let i=0;i<out.length;i++)u[i]=out.charCodeAt(i)&255;return u}
+
 /* ===== Unduh PDF (laporan jurnal) ===== */
 function pdfDl(){
   const rs=viewRows().filter(r=>{if(r.result==='SETUP')return false;const d=r.date||'';return !(F.from&&d<F.from)&&!(F.to&&d>F.to)&&!(F.m&&d.slice(0,7)!==F.m)}).sort((a,b)=>a.date<b.date?-1:a.date>b.date?1:0);
@@ -1202,6 +1257,15 @@ th{background:#f1f3f7;font-size:11px}tr{page-break-inside:avoid}.w{color:#0a7a55
 ${chart}
 <table><thead><tr><th>Tanggal</th><th>Pair</th><th>Session</th><th>Arah</th><th>Setup</th><th>RR</th><th>Hasil</th><th>R</th><th>Emosi</th><th>Catatan</th></tr></thead><tbody>${tr}</tbody></table>
 <div class="f">Hasil simulasi dihitung dari R × risiko per 1R. Bukan data akun broker dan bukan saran trading atau keuangan.</div></body></html>`;
+  try{
+    const u8=pdfBuild({title:ACC.jname||'Shuaa Journal',sub:(ACC.name||'Trading journal')+' · '+phLabel+' · '+perLabel+' · dibuat '+today(),
+      tiles:[['Hasil simulasi',usd(pnl)+' ('+(pnl/ACC.bal*100>=0?'+':'')+(pnl/ACC.bal*100).toFixed(1)+'%)'],['Total R',fr(tot)],['Win rate',Math.round(W/rs.length*100)+'%'],['Profit factor',gl?(gw/gl).toFixed(2):'-'],['Trade',String(rs.length)],['WIN / LOSS / BE',W+' / '+L+' / '+B],['Rata-rata R',fr(tot/rs.length)],['Risiko per 1R',ACC.risk+'% ($'+(ACC.risk/100*ACC.bal).toLocaleString('en-US',{maximumFractionDigits:0})+')']],
+      eq,bal:ACC.bal,up,mny,d0:rs[0].date,d1:rs[rs.length-1].date,
+      rows:rs.map(r=>[r.date,r.pair||'',r.session||'',r.dir||'',[r.tf,r.poi].filter(Boolean).join(' · '),r.rr||'',r.result,fr(Rv(r)),r.emo||'',r.notes||r.lesson||'']),
+      foot:'Hasil simulasi dihitung dari R × risiko per 1R. Bukan data akun broker dan bukan saran trading atau keuangan.'});
+    dl('shuaa-journal-'+stamp()+'.pdf',u8,'application/pdf');
+    say('PDF diunduh: cek folder Download atau notifikasi unduhan.');return
+  }catch(e){console.error(e)}
   const html2=html
     .replace('</style>','.np{position:fixed;right:12px;bottom:12px}@media print{.np{display:none}}</style>')
     .replace('</body>','<div class="np"><button onclick="window.print()" style="padding:12px 18px;font-size:16px">Cetak / Simpan PDF</button></div></body>');
@@ -1209,7 +1273,7 @@ ${chart}
   const w=window.open(url,'_blank');
   if(w){say('Di halaman laporan, ketuk Cetak, lalu pilih "Simpan sebagai PDF".')}
   else{dl('shuaa-journal-'+stamp()+'.html',html2,'text/html');say('Pop-up diblokir. Laporan diunduh sebagai file HTML, buka lalu cetak ke PDF.')}
-  setTimeout(()=>URL.revokeObjectURL(url),120000)}
+  setTimeout(()=>URL.revokeObjectURL(url),1800000)}
 
 /* ===== Peringatan backup: tiap Minggu atau tiap 50 trade ===== */
 function bkCheck(){
