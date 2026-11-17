@@ -714,7 +714,7 @@ function renderV(fullAll){
   ['pair','tf','poi','crt','rr'].forEach(k=>{$('#l-'+k).innerHTML=[...new Set([...(({poi:ACC.pois||[],tf:['M1','M3','M5','M15','M30','H1'],rr:['1:2','1:3','1:4']})[k]||[]),...uniq(k)])].map(v=>`<option value="${esc(v)}">`).join('')});
   const q=F.q.toLowerCase();
   const vis=rowsAll.filter(r=>(!F.pair||r.pair===F.pair)&&(!F.session||r.session===F.session)&&(!F.result||r.result===F.result)&&(!F.dir||r.dir===F.dir)&&(!F.poi||r.poi===F.poi)&&(!F.emo||r.emo===F.emo)&&ACC.facts.every(([k])=>!F[k]||r[k]===F[k])&&(!q||Object.values(r).join(' ').toLowerCase().includes(q)));
-  const zSv={w:vis.filter(r=>r.result==='WIN').length,l:vis.filter(r=>r.result==='LOSS').length,n:zNet(vis)};const days={};vis.forEach(r=>(days[r.date]=days[r.date]||[]).push(r));
+  const zSv={w:vis.filter(r=>r.result==='WIN').length,l:vis.filter(r=>r.result==='LOSS').length,n:zNet(vis)};const days={};vis.forEach(r=>(days[r.date]=days[r.date]||[]).push(r));Object.keys(days).forEach(d=>{const asc=F.so==='tl',ix=new Map(days[d].map((r,i)=>[r,i]));days[d].sort((p,q)=>{const x=(p.tm||''),y=(q.tm||'');if(x!==y)return asc?(x<y?-1:1):(x<y?1:-1);return asc?ix.get(p)-ix.get(q):ix.get(q)-ix.get(p)})});
   const yn=v=>v==='YES'?'win':v==='NO'?'be':'';
   const lk=(v,t)=>v?(isUrl(v)?`<a class="b" href="${esc(v.trim())}" target="_blank" rel="noopener">${t} ↗</a>`:`<span class="note">${esc(v)}</span>`):'';
   const prog=r=>{const q=(r.rr||'').split(':'),t=q.length==2&&+q[0]?+q[1]/+q[0]:0;if(!t||r.ar===undefined||r.ar==='')return '';const a=parseFloat(r.ar);if(isNaN(a))return '';return `<div class="cap" title="Capaian ${f1(a)} dari ${t.toFixed(1)}R target"><div class="m"><i style="width:${Math.max(0,Math.min(100,a/t*100)).toFixed(0)}%"></i></div></div>`};
