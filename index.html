@@ -1179,8 +1179,8 @@ function pdfBuild(o){
   const esc=s=>s.replace(/[\\()]/g,m=>'\\'+m);
   const f=n=>(Math.round(n*100)/100).toString();
   const PW=595.28,PH=841.89,M=30,UW=PW-2*M;
-  const pages=[];let cur=null,y=0;
-  const np=()=>{cur=[];pages.push(cur);y=PH-M};
+  const pages=[],anns=[];let cur=null,ca=null,y=0;
+  const np=()=>{cur=[];pages.push(cur);ca=[];anns.push(ca);y=PH-M};
   const txt=(x,yy,s,sz,b,rgb,al)=>{s=L1(s);const w=cw(s,sz,b);if(al==='r')x-=w;else if(al==='c')x-=w/2;cur.push('BT /F'+(b?2:1)+' '+f(sz)+' Tf '+(rgb||'0 0 0')+' rg '+f(x)+' '+f(yy)+' Td ('+esc(s)+') Tj ET')};
   const line=(x1,y1,x2,y2,rgb,w,dash)=>cur.push((dash?'['+dash+'] 0 d ':'[] 0 d ')+(rgb||'0.8 0.8 0.8')+' RG '+f(w||0.5)+' w '+f(x1)+' '+f(y1)+' m '+f(x2)+' '+f(y2)+' l S');
   const box=(x,yy,w,h,rgb)=>cur.push('0.8 0.8 0.8 RG 0.6 w '+f(x)+' '+f(yy)+' '+f(w)+' '+f(h)+' re S');
@@ -1202,15 +1202,16 @@ function pdfBuild(o){
   txt(cl-4,cy(hi)-3,o.mny(hi),7,0,'0.35 0.35 0.35','r');txt(cl-4,cy(lo)-3,o.mny(lo),7,0,'0.35 0.35 0.35','r');
   txt(cl,y-CH+4,o.d0,7,0,'0.35 0.35 0.35');txt(cr,y-CH+4,o.d1,7,0,'0.35 0.35 0.35','r');
   y-=CH+12;
-  const cols=[['Tanggal',50],['Pair',50],['Session',46],['Arah',30],['Setup',90],['RR',28],['Hasil',40],['R',34],['Emosi',55],['Catatan',UW-423]];
+  const cols=[['Tanggal',48],['Pair',48],['Session',44],['Arah',28],['Setup',80],['RR',26],['Hasil',38],['R',32],['Emosi',48],['Analisa',52],['Catatan',UW-444]];
   const SZ=7.5,LH=9.2;
   const head=()=>{cur.push('0.945 0.953 0.969 rg '+f(M)+' '+f(y-13)+' '+f(UW)+' 14 re f');let x=M;cols.forEach(c=>{txt(x+3,y-9,c[0],7.5,1);x+=c[1]});y-=14};
   head();
   o.rows.forEach(r=>{
-    const cells=r.map((v,i)=>wrap(v,cols[i][1]-6,SZ));
+    const lks=[['Before',r[9]&&r[9][0]],['After',r[9]&&r[9][1]]].filter(q=>/^https?:\/\//i.test(String(q[1]||'').trim()));
+    const cells=r.map((v,i)=>i===9?(lks.length?lks.map(q=>q[0]):['']):wrap(v,cols[i][1]-6,SZ));
     const n=Math.max(...cells.map(c=>c.length)),h=n*LH+5;
     if(y-h<M+16){np();head()}
-    let x=M;cells.forEach((c,i)=>{const rgb=i===6?(r[6]==='WIN'?'0.04 0.48 0.33':r[6]==='LOSS'?'0.75 0.09 0.21':'0 0 0'):'0 0 0';c.forEach((ln,k)=>txt(x+3,y-8-k*LH,ln,SZ,i===6&&r[6]!=='BE',rgb));x+=cols[i][1]});
+    let x=M;cells.forEach((c,i)=>{const rgb=i===6?(r[6]==='WIN'?'0.04 0.48 0.33':r[6]==='LOSS'?'0.75 0.09 0.21':'0 0 0'):i===9?'0.05 0.3 0.8':'0 0 0';c.forEach((ln,k)=>{txt(x+3,y-8-k*LH,ln,SZ,i===6&&r[6]!=='BE',rgb);if(i===9&&lks[k]){const w=cw(ln,SZ),yy=y-8-k*LH;line(x+3,yy-1.5,x+3+w,yy-1.5,'0.05 0.3 0.8',0.5);ca.push({r:[x+3,yy-2.5,x+3+w,yy+SZ],u:encodeURI(String(lks[k][1]).trim()).replace(/[^\x21-\x7e]/g,'')})}});x+=cols[i][1]});
     line(M,y-h+1,M+UW,y-h+1,'0.87 0.87 0.87',0.4);y-=h});
   if(y-24<M+10)np();
   wrap(o.foot,UW,7).forEach((ln,k)=>txt(M,y-14-k*9,ln,7,0,'0.45 0.45 0.45'));
@@ -1219,7 +1220,7 @@ function pdfBuild(o){
   add('<< /Type /Catalog /Pages 2 0 R >>');add('');
   const f1=add('<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>'),f2=add('<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>');
   const kids=[];
-  pages.forEach(pg=>{const s=pg.join('\n'),c=add('<< /Length '+s.length+' >>\nstream\n'+s+'\nendstream'),pgo=add('<< /Type /Page /Parent 2 0 R /MediaBox [0 0 '+f(PW)+' '+f(PH)+'] /Resources << /Font << /F1 '+f1+' 0 R /F2 '+f2+' 0 R >> >> /Contents '+c+' 0 R >>');kids.push(pgo+' 0 R')});
+  pages.forEach((pg,pi)=>{const s=pg.join('\n'),c=add('<< /Length '+s.length+' >>\nstream\n'+s+'\nendstream'),ids=anns[pi].map(a=>add('<< /Type /Annot /Subtype /Link /Rect ['+a.r.map(f).join(' ')+'] /Border [0 0 0] /A << /S /URI /URI ('+esc(a.u)+') >> >>')),pgo=add('<< /Type /Page /Parent 2 0 R /MediaBox [0 0 '+f(PW)+' '+f(PH)+'] /Resources << /Font << /F1 '+f1+' 0 R /F2 '+f2+' 0 R >> >> /Contents '+c+' 0 R'+(ids.length?' /Annots ['+ids.map(n=>n+' 0 R').join(' ')+']':'')+' >>');kids.push(pgo+' 0 R')});
   objs[1]='<< /Type /Pages /Count '+kids.length+' /Kids ['+kids.join(' ')+'] >>';
   let out='%PDF-1.4\n',offs=[];objs.forEach((s,i)=>{offs.push(out.length);out+=(i+1)+' 0 obj\n'+s+'\nendobj\n'});
   const xr=out.length;out+='xref\n0 '+(objs.length+1)+'\n0000000000 65535 f \n'+offs.map(n=>String(n).padStart(10,'0')+' 00000 n \n').join('')+'trailer\n<< /Size '+(objs.length+1)+' /Root 1 0 R >>\nstartxref\n'+xr+'\n%%EOF';
@@ -1261,7 +1262,7 @@ ${chart}
     const u8=pdfBuild({title:ACC.jname||'Shuaa Journal',sub:(ACC.name||'Trading journal')+' · '+phLabel+' · '+perLabel+' · dibuat '+today(),
       tiles:[['Hasil simulasi',usd(pnl)+' ('+(pnl/ACC.bal*100>=0?'+':'')+(pnl/ACC.bal*100).toFixed(1)+'%)'],['Total R',fr(tot)],['Win rate',Math.round(W/rs.length*100)+'%'],['Profit factor',gl?(gw/gl).toFixed(2):'-'],['Trade',String(rs.length)],['WIN / LOSS / BE',W+' / '+L+' / '+B],['Rata-rata R',fr(tot/rs.length)],['Risiko per 1R',ACC.risk+'% ($'+(ACC.risk/100*ACC.bal).toLocaleString('en-US',{maximumFractionDigits:0})+')']],
       eq,bal:ACC.bal,up,mny,d0:rs[0].date,d1:rs[rs.length-1].date,
-      rows:rs.map(r=>[r.date,r.pair||'',r.session||'',r.dir||'',[r.tf,r.poi].filter(Boolean).join(' · '),r.rr||'',r.result,fr(Rv(r)),r.emo||'',r.notes||r.lesson||'']),
+      rows:rs.map(r=>[r.date,r.pair||'',r.session||'',r.dir||'',[r.tf,r.poi].filter(Boolean).join(' · '),r.rr||'',r.result,fr(Rv(r)),r.emo||'',[r.before||'',r.after||''],r.notes||r.lesson||'']),
       foot:'Hasil simulasi dihitung dari R × risiko per 1R. Bukan data akun broker dan bukan saran trading atau keuangan.'});
     dl('shuaa-journal-'+stamp()+'.pdf',u8,'application/pdf');
     say('PDF diunduh: cek folder Download atau notifikasi unduhan.');return
