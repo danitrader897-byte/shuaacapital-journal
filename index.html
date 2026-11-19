@@ -1439,7 +1439,8 @@ body .ents .t .ac button{width:22px;height:22px;font-size:12px;opacity:.7}
 .cw .lpx{fill:#fff;font-size:10px;font-weight:700}
 .cw .cur{stroke-dasharray:3 3;stroke:var(--mute)}
 .cw .tip{top:-4px;background:var(--card2);font-weight:600}
-@media(prefers-reduced-motion:no-preference){.lp,.lpt,.lpx{animation:mFade .4s ease 1.3s backwards}}
+@media(prefers-reduced-motion:no-preference){#app.mfirst .lp,#app.mfirst .lpt,#app.mfirst .lpx{animation:mFade .4s ease 1.3s backwards}}
+body .ents .t{content-visibility:auto;contain-intrinsic-size:auto 66px}
 </style>
 <script id="exchange-js">
 (function(){
@@ -1462,41 +1463,38 @@ document.querySelectorAll("#tabs button").forEach(function(b){
 .tabs button:active,.fab:active,.p:active{transform:scale(.94)}
 
 /* ---- pindah halaman: keluar cepat, masuk bertahap ---- */
-#app.mrp,#app.mrp *,#app.mrp *::before,#app.mrp *::after{animation:none!important}
-#app.mout{animation:mOut .13s ease-in both}
-@keyframes mOut{to{opacity:0;transform:translate3d(var(--ox,0px),0,0)}}
 #app>*{animation:mFade .25s ease-out both}
 @keyframes mFade{from{opacity:0}to{opacity:1}}
 @keyframes mPage{from{opacity:0;transform:translate3d(var(--dx,0px),12px,0)}to{opacity:1;transform:none}}
-.mpg,#pm>*{animation:mPage .4s var(--ease) backwards;animation-delay:calc(var(--ci,0)*55ms)}
+#app.mfirst .mpg,#pm>*{animation:mPage .4s var(--ease) backwards;animation-delay:calc(var(--ci,0)*55ms)}
 #pm>:nth-child(2){--ci:1}#pm>:nth-child(3){--ci:2}#pm>:nth-child(4){--ci:3}#pm>:nth-child(5){--ci:4}#pm>:nth-child(6){--ci:5}#pm>:nth-child(7){--ci:6}#pm>:nth-child(n+8){--ci:7}
 .tabs button.on{animation:mTabPop .3s cubic-bezier(.3,1.5,.5,1)}
 @keyframes mTabPop{0%{transform:scale(.92)}60%{transform:scale(1.05)}100%{transform:none}}
 
 /* ---- equity curve & sparkline: garis tergambar dari kiri ke kanan ---- */
-.mc-line polyline,.mc-line polygon{animation:mWipe 1.2s var(--draw) .15s backwards}
+#app.mfirst .mc-line polyline,#app.mfirst .mc-line polygon{animation:mWipe 1.2s var(--draw) .15s backwards}
 @keyframes mWipe{from{clip-path:inset(-8px 100% -8px -8px)}to{clip-path:inset(-8px -8px -8px -8px)}}
-.mc-end{transform-box:fill-box;transform-origin:center;animation:mPopIn .4s cubic-bezier(.3,1.6,.5,1) 1.3s backwards}
-.mc-ring{fill:none;stroke-width:1.5;opacity:0;transform-box:fill-box;transform-origin:center;animation:mPing 1s ease-out 1.35s backwards}
+#app.mfirst .mc-end{transform-box:fill-box;transform-origin:center;animation:mPopIn .4s cubic-bezier(.3,1.6,.5,1) 1.3s backwards}
+#app.mfirst .mc-ring{fill:none;stroke-width:1.5;opacity:0;transform-box:fill-box;transform-origin:center;animation:mPing 1s ease-out 1.35s backwards}
 @keyframes mPopIn{from{transform:scale(0)}to{transform:scale(1)}}
 @keyframes mPing{from{transform:scale(1);opacity:.55}to{transform:scale(3.2);opacity:0}}
 
 /* ---- bar chart: tumbuh dari dasar, berurutan ---- */
-.mc-bars rect{transform-box:fill-box;transform-origin:50% 100%;animation:mGrowY .65s var(--ease) var(--d,0ms) backwards}
-.mc-bars rect.neg{transform-origin:50% 0}
-.mc-lbl{animation:mFadeUp .45s var(--ease) var(--d,0ms) backwards}
+#app.mfirst .mc-bars rect{transform-box:fill-box;transform-origin:50% 100%;animation:mGrowY .65s var(--ease) var(--d,0ms) backwards}
+#app.mfirst .mc-bars rect.neg{transform-origin:50% 0}
+#app.mfirst .mc-lbl{animation:mFadeUp .45s var(--ease) var(--d,0ms) backwards}
 @keyframes mGrowY{from{transform:scaleY(0)}to{transform:scaleY(1)}}
 @keyframes mFadeUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
-.vcol u{transform-origin:50% 100%;animation:mGrowY .6s var(--ease) var(--d,0ms) backwards}
-.vcol b{animation:mFadeUp .45s var(--ease) calc(var(--d,0ms) + 220ms) backwards}
+#app.mfirst .vcol u{transform-origin:50% 100%;animation:mGrowY .6s var(--ease) var(--d,0ms) backwards}
+#app.mfirst .vcol b{animation:mFadeUp .45s var(--ease) calc(var(--d,0ms) + 220ms) backwards}
 
 /* ---- progress, donut, titik ---- */
-#app .m i{transform-origin:0 50%;animation:mFillX .75s var(--ease) .1s backwards}
+#app.mfirst .m i{transform-origin:0 50%;animation:mFillX .75s var(--ease) .1s backwards}
 @keyframes mFillX{from{transform:scaleX(0)}to{transform:scaleX(1)}}
-.ring svg,.pt svg{--a:360deg;-webkit-mask-image:conic-gradient(#000 var(--a),transparent 0);mask-image:conic-gradient(#000 var(--a),transparent 0);animation:mSweep .9s var(--draw) .1s backwards}
-.pt svg{animation-duration:.7s}
+#app.mfirst .ring svg,#app.mfirst .pt svg{--a:360deg;-webkit-mask-image:conic-gradient(#000 var(--a),transparent 0);mask-image:conic-gradient(#000 var(--a),transparent 0);animation:mSweep .9s var(--draw) .1s backwards}
+#app.mfirst .pt svg{animation-duration:.7s}
 @keyframes mSweep{from{--a:0deg}to{--a:360deg}}
-.dt2{animation:mPopIn .3s cubic-bezier(.3,1.5,.5,1) calc(var(--k,0)*35ms) backwards}
+#app.mfirst .dt2{animation:mPopIn .3s cubic-bezier(.3,1.5,.5,1) calc(var(--k,0)*35ms) backwards}
 
 /* ---- news ---- */
 #nw .s.ev{position:relative;animation:mSlide .3s var(--ease) both;animation-delay:calc(var(--mj,0)*30ms)}
@@ -1588,9 +1586,12 @@ function decorate(sc){
     if(n>=14)return;n++;if(e.classList.contains("mpg"))return;e.classList.add("mpg");e.style.setProperty("--ci",Math.min(n-1,8))})});
   q(".note .win").forEach(function(s){if(s.textContent.trim()==="●")s.classList.add("mlive")});
 }
+var played={},mt=0;
+function first(on){app.classList.add("mfirst");clearTimeout(mt);mt=setTimeout(function(){app.classList.remove("mfirst")},2200)}
 function run(){
   newTrades();
   decorate(app);
+  played={};played[document.body.dataset.tab]=1;first();
 }
 new MutationObserver(function(ms){
   var full=false,nodes=[];
@@ -1602,22 +1603,14 @@ new MutationObserver(function(ms){
 }).observe(app,{childList:true,subtree:true});
 if(app.children.length)run();
 
-/* ---- pindah tab ---- */
-var tabs=document.getElementById("tabs"),pill=null,busy=false;
+/* ---- pindah tab: instan, hanya fade singkat ---- */
+var tabs=document.getElementById("tabs"),pill=null;
 var order=["ringkasan","analisis","jurnal","news","plan"],prev=Math.max(0,order.indexOf(document.body.dataset.tab));
-function replay(){app.classList.add("mrp");void app.offsetWidth;app.classList.remove("mrp")}
-if(tabs)tabs.addEventListener("click",function(e){
-  var b=e.target.closest?e.target.closest("button"):null;
-  if(!b||!b.dataset.tab||busy||b.dataset.tab===document.body.dataset.tab)return;
-  var ni=order.indexOf(b.dataset.tab);if(ni<0)return;
-  e.stopPropagation();busy=true;
-  document.body.style.setProperty("--ox",(ni>=prev?-26:26)+"px");
-  app.classList.add("mout");
-  setTimeout(function(){app.classList.remove("mout");busy=false;if(b.onclick)b.onclick.call(b,e)},130);
-},true);
 new MutationObserver(function(){
-  var ni=order.indexOf(document.body.dataset.tab);if(ni<0)return;
-  document.body.style.setProperty("--dx",(ni>=prev?34:-34)+"px");prev=ni;replay();
+  var t=document.body.dataset.tab,ni=order.indexOf(t);if(ni<0)return;
+  document.body.style.setProperty("--dx",(ni>=prev?34:-34)+"px");prev=ni;
+  if(app.animate)app.animate([{opacity:.35},{opacity:1}],{duration:140,easing:"ease-out"});
+  if(!played[t]){played[t]=1;first()}
 }).observe(document.body,{attributes:true,attributeFilter:["data-tab"]});
 function movePill(){
   if(!tabs)return;var b=tabs.querySelector("button.on");if(!b)return;
