@@ -1378,5 +1378,113 @@ function pmRender(){try{
 document.addEventListener('visibilitychange',function(){if(document.hidden&&window.__pmFlush)window.__pmFlush()});
 if(document.body.dataset.tab==='plan')pmRender();
 </script>
+<style id="motion-css">
+@media (prefers-reduced-motion:no-preference){
+#app>*{animation:mIn .55s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(var(--mi,0)*70ms)}
+@keyframes mIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+#app .s,#app .rk>div,#app .tl{animation:mIn .45s ease both;animation-delay:calc(var(--mj,0)*45ms + 250ms)}
+.ring svg{animation:mSpin 1s cubic-bezier(.2,.8,.2,1) both}
+@keyframes mSpin{from{opacity:0;transform:rotate(-120deg) scale(.7)}to{opacity:1;transform:none}}
+.pill{position:relative}
+.pill::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:currentColor;margin-right:6px;vertical-align:1px;animation:mPulse 1.8s infinite}
+@keyframes mPulse{0%{box-shadow:0 0 0 0 currentColor;opacity:1}70%{box-shadow:0 0 0 7px transparent;opacity:.6}100%{box-shadow:0 0 0 0 transparent;opacity:1}}
+.tabs button,.fab,.p,button.lnk{transition:transform .15s,background .25s,color .25s}
+.tabs button:active,.fab:active,.p:active{transform:scale(.92)}
+.card{transition:transform .2s,box-shadow .2s}.card:active{transform:scale(.99)}
+.m i{transition:width 1.1s cubic-bezier(.2,.8,.2,1)}
+.mflash{animation:mFlash .9s ease}
+@keyframes mFlash{0%{filter:brightness(1.8)}100%{filter:none}}
+dialog[open]{animation:mDlg .3s cubic-bezier(.2,.8,.2,1)}
+@keyframes mDlg{from{opacity:0;transform:translateY(24px) scale(.97)}to{opacity:1;transform:none}}
+
+.tabs{overflow:visible}
+.tabs button{position:relative;z-index:1}
+.tabs button.on,body.c .tabs button.on{background:transparent!important;box-shadow:none}
+#tabpill{position:absolute;z-index:0;top:5px;bottom:5px;left:0;width:0;border-radius:8px;background:var(--grad);transition:transform .38s cubic-bezier(.4,0,.2,1),width .38s cubic-bezier(.4,0,.2,1);pointer-events:none}
+.s.ev:not(.past) .ip.H{animation:mHi 1.6s ease-in-out infinite}
+@keyframes mHi{0%,100%{box-shadow:0 0 0 0 rgba(var(--loss-rgb),.55)}50%{box-shadow:0 0 0 6px rgba(var(--loss-rgb),0)}}
+.t.mnew.WIN{animation:mWin 1.4s ease-out}
+.t.mnew.LOSS{animation:mLoss 1.4s ease-out}
+.t.mnew.BE{animation:mBe 1.4s ease-out}
+@keyframes mWin{0%{box-shadow:0 0 0 0 rgba(var(--win-rgb),.8);background:rgba(var(--win-rgb),.22)}100%{box-shadow:0 0 0 14px rgba(var(--win-rgb),0)}}
+@keyframes mLoss{0%{box-shadow:0 0 0 0 rgba(var(--loss-rgb),.8);background:rgba(var(--loss-rgb),.22);transform:translateX(0)}15%{transform:translateX(-6px)}30%{transform:translateX(5px)}45%{transform:translateX(-3px)}60%{transform:none}100%{box-shadow:0 0 0 14px rgba(var(--loss-rgb),0)}}
+@keyframes mBe{0%{box-shadow:0 0 0 0 rgba(var(--be-rgb),.7)}100%{box-shadow:0 0 0 12px rgba(var(--be-rgb),0)}}
+.mrv-on .t.mrv,.mrv-on .ents .day.mrv{opacity:0;transform:translateY(22px);animation:none}
+.mrv-on .t.mrv.mvis,.mrv-on .ents .day.mrv.mvis{opacity:1;transform:none;transition:opacity .5s ease,transform .5s cubic-bezier(.2,.8,.2,1)}
+#toast{animation:mToast .4s cubic-bezier(.2,.8,.2,1)}
+@keyframes mToast{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
+.fab.mpop{animation:mPop .5s cubic-bezier(.3,1.6,.5,1)}
+@keyframes mPop{from{transform:scale(0)}to{transform:none}}
+}
+</style>
+<script id="motion-js">
+(function(){
+var RM=matchMedia("(prefers-reduced-motion:reduce)").matches;if(RM)return;
+var app=document.getElementById("app");if(!app)return;
+function count(el){
+  var t=el.textContent.trim(),m=t.match(/^([^\d-]*-?)([\d,]+(?:\.\d+)?)(.*)$/);if(!m)return;
+  var to=parseFloat(m[2].replace(/,/g,"")),dec=(m[2].split(".")[1]||"").length;if(!isFinite(to)||to===0)return;
+  var t0=performance.now(),D=1100;
+  (function f(n){var p=Math.min((n-t0)/D,1),e=1-Math.pow(1-p,3),v=to*e;
+    el.textContent=m[1]+v.toLocaleString("en-US",{minimumFractionDigits:dec,maximumFractionDigits:dec})+m[3];
+    if(p<1)requestAnimationFrame(f);else el.textContent=t})(t0);
+}
+function run(){
+  newTrades();
+  var k=0;[].forEach.call(app.children,function(c){c.style.setProperty("--mi",k++)});
+  [].forEach.call(app.querySelectorAll(".s,.rk>div,.tl"),function(c,i){c.style.setProperty("--mj",i%12)});
+  [].forEach.call(app.querySelectorAll(".big,.kp b,.ch b"),count);
+  [].forEach.call(app.querySelectorAll(".m i"),function(b){
+    var w=b.style.width;if(!w)return;b.style.transition="none";b.style.width="0";void b.offsetWidth;
+    b.style.transition="";requestAnimationFrame(function(){b.style.width=w});
+  });
+  [].forEach.call(app.querySelectorAll("svg polyline"),function(l){
+    if(!l.getAttribute("stroke")&&!getComputedStyle(l).stroke)return;
+    l.setAttribute("pathLength","1");l.style.strokeDasharray="1";l.style.strokeDashoffset="1";
+    l.style.transition="none";void l.getBoundingClientRect();
+    l.style.transition="stroke-dashoffset 1.5s ease-out .15s";l.style.strokeDashoffset="0";
+  });
+  reveal();
+  [].forEach.call(app.querySelectorAll("svg polygon"),function(a){
+    a.style.opacity="0";a.style.transition="opacity 1s ease 1s";requestAnimationFrame(function(){a.style.opacity="1"});
+  });
+}
+
+var seen={};
+function newTrades(){
+  var cur={};[].forEach.call(app.querySelectorAll(".t"),function(c){
+    var k=c.textContent.replace(/\s+/g," ").trim();cur[k]=1;
+    if(seen.__init&&!seen[k]&&c.className.indexOf("t ")===0){c.classList.add("mnew")}
+  });cur.__init=1;seen=cur;
+}
+var io=null;
+if("IntersectionObserver"in window){
+  io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("mvis");io.unobserve(e.target)}})},{rootMargin:"0px 0px -8% 0px"});
+  document.documentElement.classList.add("mrv-on");
+}
+function reveal(){
+  if(!io)return;
+  [].forEach.call(app.querySelectorAll(".t,.ents .day"),function(c,i){
+    if(c.classList.contains("mnew"))return;
+    c.classList.add("mrv");io.observe(c);
+  });
+}
+var tabs=document.getElementById("tabs"),pill=null;
+function movePill(){
+  if(!tabs)return;var b=tabs.querySelector("button.on");if(!b)return;
+  if(!pill){pill=document.createElement("span");pill.id="tabpill";tabs.insertBefore(pill,tabs.firstChild)}
+  pill.style.width=b.offsetWidth+"px";pill.style.transform="translateX("+b.offsetLeft+"px)";
+}
+if(tabs){
+  new MutationObserver(movePill).observe(tabs,{attributes:true,subtree:true,attributeFilter:["class"]});
+  addEventListener("resize",movePill);setTimeout(movePill,50);setTimeout(movePill,600);
+}
+var fab=document.getElementById("add");
+if(fab)new MutationObserver(function(){if(!fab.hidden)fab.classList.add("mpop")}).observe(fab,{attributes:true,attributeFilter:["hidden"]});
+var busy=false;
+new MutationObserver(function(){if(busy)return;busy=true;requestAnimationFrame(function(){run();busy=false})}).observe(app,{childList:true});
+if(app.children.length)run();
+})();
+</script>
 </body>
 </html>
