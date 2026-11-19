@@ -427,8 +427,8 @@ input,select,textarea,a.b,button{border-radius:8px}
 .faq details>div{padding:0 14px 12px;color:var(--mute);font-size:13px;line-height:1.6}
 .faq details>div>p{margin:6px 0 0}.faq details>div .gc{margin:0 0 4px}
 .faq h3{margin:18px 0 8px}
-</style>
-<style id="jr-compact">
+
+
 /* ===== Jurnal ringkas + status Belum entry ===== */
 .t.SETUP{border-left-color:var(--warn)}
 .res.SETUP{background:rgba(var(--warn-rgb),.14);color:var(--warn)}
@@ -518,8 +518,8 @@ body[data-tab=plan] #app,body[data-tab=plan] #add{display:none!important}
 #pm .pmd .ln span{white-space:pre-wrap;overflow-wrap:anywhere}
 #pm .bar{display:flex;align-items:center;gap:8px;margin-top:5px;font-size:12px}#pm .bar>span{width:88px;flex:none;color:var(--mute);font-size:11.5px}#pm .bar>div{flex:1;height:8px;border-radius:6px;background:var(--card2);overflow:hidden}#pm .bar>div>i{display:block;height:100%;border-radius:6px}#pm .bar>b{width:58px;flex:none;text-align:right;font-weight:600}
 #pm .pmd button.dl{margin-top:10px;padding:3px 10px;font-size:11.5px;border:1px solid var(--line);background:transparent;color:var(--loss)}
-</style>
-<style>
+
+
 html.locked body>*:not(#lock){display:none!important}
 #lock{display:none}
 html.locked #lock{display:flex;position:fixed;inset:0;z-index:99999;background:var(--bg,#0f1626);color:var(--ink,#eaf0ff);align-items:center;justify-content:center;padding:24px;font-family:Figtree,system-ui,sans-serif}
@@ -742,7 +742,7 @@ function renderV(fullAll){
   const gwA=ordA.reduce((a,r)=>a+Math.max(0,R(r)),0),glA=ordA.reduce((a,r)=>a+Math.max(0,-R(r)),0);
   const usd=v=>(v<0?'-':'')+'$'+Math.abs(v).toLocaleString('en-US',{maximumFractionDigits:0}),pn=cA*ACC.risk/100*ACC.bal,pp=pn/ACC.bal*100,wd=Object.keys(dnA).length,worstP=Math.min(0,...Object.values(dnA))*ACC.risk,ddP=ddX*ACC.risk;
   const bad=worstP<=-ACC.dl||ddP>=ACC.ml,okT=pp>=ACC.tgt&&wd>=ACC.md,stt=bad?['Batas terlanggar','loss']:okT?['Target tercapai','win']:['Berjalan','be'];
-  const sp=(()=>{const v=eqA.map(x=>ACC.bal+x*ACC.risk/100*ACC.bal),lo=Math.min(...v),hi=Math.max(...v),n=v.length-1||1,p=v.map((y,i)=>(i/n*300).toFixed(1)+','+(54-(y-lo)/((hi-lo)||1)*48).toFixed(1)).join(' ');return `<svg class="spk" viewBox="0 0 300 60" preserveAspectRatio="none"><defs><linearGradient id="sg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--acc)" stop-opacity=".45"/><stop offset="1" stop-color="var(--acc)" stop-opacity="0"/></linearGradient></defs><polygon points="0,60 ${p} 300,60" fill="url(#sg)"/><polyline points="${p}" fill="none" stroke="var(--acc2)" stroke-width="2" vector-effect="non-scaling-stroke"/></svg>`})();
+  const sp=(()=>{const v=eqA.map(x=>ACC.bal+x*ACC.risk/100*ACC.bal),lo=Math.min(...v),hi=Math.max(...v),n=v.length-1||1,p=v.map((y,i)=>(i/n*300).toFixed(1)+','+(54-(y-lo)/((hi-lo)||1)*48).toFixed(1)).join(' ');return `<svg class="spk" viewBox="0 0 300 60" preserveAspectRatio="none"><defs><linearGradient id="sg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--acc)" stop-opacity=".45"/><stop offset="1" stop-color="var(--acc)" stop-opacity="0"/></linearGradient></defs><polygon points="0,60 ${p} 300,60" fill="url(#sg)"/><polyline points="${p}" fill="none" stroke="var(--acc2)" stroke-width="2" vector-effect="non-scaling-stroke"/></svg><div class="spr"><span>Terendah ${usd(lo)}</span><span>Tertinggi ${usd(hi)}</span></div>`})();
   const tg=Math.max(0,Math.min(100,pp/ACC.tgt*100)),pf=glA?(gwA/glA).toFixed(2):'-';
   const tdr=full.filter(r=>r.date===tradeDay()),tdn=tdr.reduce((a,r)=>a+R(r),0),tdLeft=Math.max(0,ACC.dl-Math.max(0,-tdn)*ACC.risk),tdW=tdr.filter(r=>r.result==='WIN').length,tdL=tdr.filter(r=>r.result==='LOSS').length;
   const zU=1-tdLeft/ACC.dl,zLvc=zU>=.8?'loss':zU>=.5?'warn':'win',zCol={win:'var(--win)',warn:'var(--warn)',loss:'var(--loss)'}[zLvc],zLv=p=>p>=80?'l':p>=50?'w':'g';
@@ -803,7 +803,7 @@ function renderV(fullAll){
   <div class="tg"><div class="r"><span>Menuju target ${ACC.tgt}% (${usd(ACC.bal*ACC.tgt/100)})</span><b>${Math.round(tg)}%</b></div><div class="m big2"><i style="width:${tg.toFixed(0)}%"></i></div></div>
   <div class="tls">${tile('Win rate',pct(WA,WA+LA),'win')}${tile('Profit factor',pf)}${tile('Trade',TA)}${tile('Rata-rata R',TA?f1(cA/TA):'-',cA>=0?'win':'loss')}</div>
   <div class="mns">${mini('Loss harian terbesar',worstP.toFixed(1)+'% / '+ACC.dl+'%',-worstP/ACC.dl*100,zLv(-worstP/ACC.dl*100))}${mini('Loss total',(ddP>=0.05?'-'+ddP.toFixed(1):'0.0')+'% / '+ACC.ml+'%',ddP/ACC.ml*100,zLv(ddP/ACC.ml*100))}${mini('Hari trading',wd+' / '+ACC.md,wd/ACC.md*100,'')}</div>
-  <div class="note" style="margin-top:14px">${TA<5?'<b>Sampel masih kecil ('+TA+' trade), win rate belum representatif.</b> ':''}1R = ${ACC.risk}% dari balance awal ${usd(ACC.bal)}. Semua trade, tanpa filter periode. Loss total: ${ACC.dm==='s'?'statis':'trailing'}.${nEstA?` ${nEstA} trade WIN masih estimasi R.`:''} <button id="acc-edit" class="lnk">Atur akun</button></div></div>`;
+  <div class="note" style="margin-top:14px">${TA<5?'<b>Sampel masih kecil ('+TA+' trade), win rate belum representatif.</b> ':''}<details class="nfo"><summary>Catatan perhitungan</summary>1R = ${ACC.risk}% dari balance awal ${usd(ACC.bal)}. Semua trade, tanpa filter periode. Loss total: ${ACC.dm==='s'?'statis':'trailing'}.${nEstA?` ${nEstA} trade WIN masih estimasi R.`:''}</details><button id="acc-edit" class="lnk">Atur akun</button></div></div>`;
   const emoG={};rows.forEach(r=>{if(r.emo)(emoG[r.emo]=emoG[r.emo]||[]).push(r)});
   const emoK=Object.keys(emoG).sort((a,b)=>emoG[b].length-emoG[a].length),emoTot=rows.filter(r=>r.emo).length,emoOkA=emoG['Sesuai plan']||[],emoBad=rows.filter(r=>r.emo&&r.emo!=='Sesuai plan');
   const grow=(k,x)=>{const w=x.filter(r=>r.result==='WIN').length,l=x.filter(r=>r.result==='LOSS').length,p=w+l?w/(w+l)*100:0;return `<div class="s"><div class="r"><span>${esc(k)}</span><span><b class="${p>=50?'win':'loss'}">${w+l?Math.round(p)+'%':'-'}</b> <small class="${zNet(x)>=0?'win':'loss'}">${f1(zNet(x))}</small></span></div><div class="d">${x.length} trade · ${w}W · ${l}L</div><div class="m"><i style="width:${p}%"></i></div></div>`};
@@ -1391,16 +1391,16 @@ if(document.body.dataset.tab==='plan')pmRender();
 .tabs button{position:relative;z-index:1}
 .tabs button.on,body.c .tabs button.on{background:transparent!important;box-shadow:none}
 #tabpill{position:absolute;z-index:0;top:5px;bottom:5px;left:0;width:0;border-radius:8px;background:var(--grad);pointer-events:none}
-</style>
-<style id="bluewhite">
+
+
 /* Palet biru-putih: biru = positif/utama, merah = hanya untuk rugi, abu = netral */
 :root{--win:#7aa2ff;--win-rgb:122,162,255;--warn:#9fb4e6;--warn-rgb:159,180,230;--acc2:#7aa2ff}
 :root[data-theme=light]{--bg:#f4f7fd;--win:#1f3fa8;--win-rgb:31,63,168;--warn:#4a5f94;--warn-rgb:74,95,148;--be:#6b7a99;--be-rgb:107,122,153}
 :root[data-theme=light] .pill.win{color:#1f3fa8!important}
 body .k-win,body .k-acc,body .k-warn{border-top:2px solid var(--acc)}
 .ip.M{background:rgba(var(--acc-rgb),.12);color:var(--acc)}
-</style>
-<style id="dark-exchange">
+
+
 /* Tema gelap gaya exchange: navy lebih terang, satu biru seragam, teks sekunder lebih jelas */
 :root[data-theme=dark]{--bg:#0a1020;--card:#111a2e;--card2:#18233b;--line:#223052;--ink:#eef3ff;--mute:#a3b0cc;
 --acc:#6690ff;--acc2:#86abff;--acc-rgb:102,144,255;--chart:#6690ff;--chart2:#4a74e8;--chart-best:#bcd0ff;--winbar:#6690ff;
@@ -1412,8 +1412,8 @@ body .k-win,body .k-acc,body .k-warn{border-top:2px solid var(--acc)}
 :root[data-theme=dark] .t .mi,:root[data-theme=dark] .ses,:root[data-theme=dark] .ax{color:var(--mute);fill:var(--mute)}
 :root[data-theme=dark] .cw .tip{background:#1c2a47;border-color:#2c3f68}
 :root[data-theme=dark] .ents .day{background:#15213a}
-</style>
-<style id="soft-colors">
+
+
 /* Warna diredam: merah lebih kalem, elemen kecil tidak menonjol, bar chart tetap */
 :root[data-theme=dark]{--loss:#d9808c;--loss-rgb:217,128,140}
 :root[data-theme=light]{--loss:#b5485a;--loss-rgb:181,72,90}
@@ -1424,6 +1424,17 @@ body .k-win,body .k-acc,body .k-warn{border-top:2px solid var(--acc)}
 :root[data-theme=dark] body #tabs{background:#131b2d}
 :root[data-theme=dark] .cw .tip{background:#22304d;border-color:#35497a}
 :root[data-theme=dark] .ents .day{background:#1b2740}
+/* Warna hasil: hijau lembut = profit/win, merah lembut = loss. Biru tetap untuk aksen dan grafik */
+:root[data-theme=dark]{--win:#4cc9a0;--win-rgb:76,201,160}
+:root[data-theme=light]{--win:#1a7f5f;--win-rgb:26,127,95}
+.dt2.WIN{background:rgba(var(--win-rgb),.8)!important}
+.nfo{margin:0 0 8px}.nfo summary{cursor:pointer;list-style:none;color:var(--acc2);font-weight:600;display:inline-flex;align-items:center;gap:6px}
+.nfo summary::-webkit-details-marker{display:none}.nfo summary::after{content:"";width:6px;height:6px;border:solid currentColor;border-width:0 2px 2px 0;transform:rotate(45deg) translateY(-2px);transition:transform .2s var(--snap)}
+.nfo[open] summary::after{transform:rotate(225deg) translateY(-2px)}
+.nfo[open] summary{margin-bottom:6px}
+.spr{display:flex;justify-content:space-between;font-size:11px;color:var(--mute);margin:-2px 0 8px;letter-spacing:.02em}
+/* toast di atas layar, tidak menabrak kartu atau tombol + */
+body .toast{top:calc(12px + env(safe-area-inset-top,0px));bottom:auto;left:16px;right:16px}
 body .k-win,body .k-acc,body .k-warn{border-top:1px solid var(--line)}
 .dots{gap:7px}
 .dt2{width:13px;height:13px}
@@ -1437,8 +1448,8 @@ body .vcol u,body .vcol.lo u{opacity:1;border-radius:4px}
 body .vcol u.neg{opacity:.85}
 body .hl{border-left:3px solid rgba(var(--acc-rgb),.45)}
 .pill.loss,.res.LOSS,.dir.Sell,.ip.H{background:rgba(var(--loss-rgb),.10)}
-</style>
-<style id="exchange-theme">
+
+
 @property --a{syntax:"<angle>";inherits:false;initial-value:360deg}
 /* ===== Gaya aplikasi exchange ===== */
 /* 1. Bottom bar */
@@ -1505,7 +1516,7 @@ document.querySelectorAll("#tabs button").forEach(function(b){
 :root{--spring:cubic-bezier(.34,1.56,.64,1);--snap:cubic-bezier(.16,1,.3,1)}
 @media (prefers-reduced-motion:no-preference){
 .tabs{-webkit-backdrop-filter:none;backdrop-filter:none}
-#tabpill{transition:transform .38s var(--spring),width .38s var(--spring)}
+#tabpill{transition:transform .2s var(--snap),width .2s var(--snap)}
 .tabs button,.fab,.p,button.lnk,button{transition:transform .18s var(--spring),color .15s,background-color .15s,border-color .15s,box-shadow .2s}
 .tabs button:active,.fab:active,.p:active,button:active{transform:scale(.93)}
 .card,.t{transition:transform .22s var(--spring),box-shadow .25s,border-color .2s}
@@ -1513,20 +1524,11 @@ document.querySelectorAll("#tabs button").forEach(function(b){
 @media(hover:hover){.card:hover,.t:hover{transform:translateY(-2px);box-shadow:0 10px 26px var(--shadow)}}
 
 /* ---- pindah halaman: langsung mulai, tanpa jeda ---- */
-#app>*{animation:mFade .18s ease-out both}
 @keyframes mFade{from{opacity:0}to{opacity:1}}
 @keyframes mPage{from{opacity:0;transform:translate3d(calc(var(--dx,0px)*.9),16px,0) scale(.97)}to{opacity:1;transform:none}}
-#app.mfirst .mpg,#pm>*{animation:mPage .42s var(--snap) backwards;animation-delay:calc(var(--ci,0)*14ms)}
-#pm>:nth-child(2){--ci:1}#pm>:nth-child(3){--ci:2}#pm>:nth-child(4){--ci:3}#pm>:nth-child(5){--ci:4}#pm>:nth-child(6){--ci:5}#pm>:nth-child(7){--ci:6}#pm>:nth-child(n+8){--ci:7}
-.tabs button.on{animation:mTabPop .38s var(--spring)}
-@keyframes mTabPop{0%{transform:scale(.88)}100%{transform:none}}
-.tabs button.on svg,.tabs button.on i{animation:mIcon .5s var(--spring)}
-@keyframes mIcon{0%{transform:translateY(5px) scale(.7) rotate(-12deg)}100%{transform:none}}
+.tabs button.on{animation:mTabPop .15s var(--snap)}
+@keyframes mTabPop{0%{transform:scale(.94)}100%{transform:none}}
 
-/* garis cahaya yang menyapu di atas layar tiap pindah halaman */
-#mbar{position:fixed;left:0;right:0;top:0;height:3px;z-index:99;pointer-events:none;opacity:0;transform-origin:0 50%;background:linear-gradient(90deg,transparent,var(--acc2),var(--acc),transparent);box-shadow:0 0 14px rgba(var(--acc-rgb),.8)}
-#mbar.go{animation:mBar .55s var(--snap)}
-@keyframes mBar{0%{opacity:1;transform:scaleX(0)}60%{opacity:1;transform:scaleX(1)}100%{opacity:0;transform:scaleX(1)}}
 
 /* ---- equity curve & sparkline: tergambar cepat, ujung berdenyut terus ---- */
 #app.mfirst .mc-line polyline,#app.mfirst .mc-line polygon{animation:mWipe .75s var(--draw) backwards}
@@ -1572,7 +1574,7 @@ document.querySelectorAll("#tabs button").forEach(function(b){
 @keyframes mLoss{0%{box-shadow:0 0 0 0 rgba(var(--loss-rgb),.8);background:rgba(var(--loss-rgb),.22);transform:translateX(0)}15%{transform:translateX(-7px)}30%{transform:translateX(6px)}45%{transform:translateX(-3px)}60%{transform:none}100%{box-shadow:0 0 0 16px rgba(var(--loss-rgb),0)}}
 @keyframes mBe{0%{box-shadow:0 0 0 0 rgba(var(--be-rgb),.7)}100%{box-shadow:0 0 0 14px rgba(var(--be-rgb),0)}}
 #toast{animation:mToast .35s var(--spring)}
-@keyframes mToast{from{opacity:0;transform:translateY(30px) scale(.92)}to{opacity:1;transform:none}}
+@keyframes mToast{from{opacity:0;transform:translateY(-22px) scale(.96)}to{opacity:1;transform:none}}
 .fab{animation:mGlow 2.8s ease-out infinite}
 .fab.mpop{animation:mPop .45s var(--spring),mGlow 2.8s ease-out .45s infinite}
 @keyframes mPop{from{transform:scale(0) rotate(-90deg)}to{transform:none}}
@@ -1673,9 +1675,7 @@ var order=["ringkasan","analisis","jurnal","news","plan"],prev=Math.max(0,order.
 new MutationObserver(function(){
   var t=document.body.dataset.tab,ni=order.indexOf(t);if(ni<0)return;
   var prev0=prev;document.body.style.setProperty("--dx",(ni>=prev?34:-34)+"px");prev=ni;
-  if(app.animate){var dx=ni>=prev0?64:-64;app.animate([{opacity:0,transform:"translate3d("+dx+"px,0,0) scale(.94)"},{opacity:1,transform:"translate3d("+(-dx*.04)+"px,0,0) scale(1.008)",offset:.7},{opacity:1,transform:"none"}],{duration:380,easing:"cubic-bezier(.16,1,.3,1)"})}
-  var mb=document.getElementById("mbar");if(!mb){mb=document.createElement("div");mb.id="mbar";mb.dataset.mx=1;document.body.appendChild(mb)}
-  mb.style.transformOrigin=ni>=prev0?"0 50%":"100% 50%";mb.classList.remove("go");void mb.offsetWidth;mb.classList.add("go");
+  if(app.animate){var dx=ni>=prev0?16:-16;app.animate([{opacity:0,transform:"translate3d("+dx+"px,0,0)"},{opacity:1,transform:"none"}],{duration:150,easing:"cubic-bezier(.2,.9,.3,1)"})}
   if(!played[t]){played[t]=1;first()}
 }).observe(document.body,{attributes:true,attributeFilter:["data-tab"]});
 function movePill(){
