@@ -854,17 +854,17 @@ function renderV(fullAll){
   const axY=(lv,y)=>[...new Set(lv.map(Math.round))].filter((v,i,ar)=>ar.slice(0,i).every(u=>Math.abs(y(u)-y(v))>12)).map(v=>`<line x1="${X0}" x2="${X1}" y1="${y(v).toFixed(1)}" y2="${y(v).toFixed(1)}" class="gl"/><text x="${X0-6}" y="${(y(v)+3).toFixed(1)}" text-anchor="end" class="ax">${usdK(v)}</text>`).join('');
   const axX=(a,b)=>a?`<text x="${X0}" y="${H-6}" class="ax">${a}</text><text x="${X1}" y="${H-6}" text-anchor="end" class="ax">${b}</text>`:'';
   const mk=(k,inner)=>`<div class="cw" data-k="${k}"><svg viewBox="0 0 340 ${H}">${inner}<line class="cur" y1="${Y0}" y2="${Y1}" x1="0" x2="0"/><circle class="dot" r="4" cx="0" cy="0"/></svg><div class="tip"></div></div>`;
-  const ev=eq.map(v=>ACC.bal+v*ACC.risk/100*ACC.bal),elo=Math.min(...ev),ehi=Math.max(...ev),en=ev.length-1||1,ey=v=>Y1-(v-elo)/((ehi-elo)||1)*(Y1-Y0),ex=i=>X0+i/en*(X1-X0);
+  const XE=280,ev=eq.map(v=>ACC.bal+v*ACC.risk/100*ACC.bal),elo=Math.min(...ev),ehi=Math.max(...ev),en=ev.length-1||1,ey=v=>Y1-(v-elo)/((ehi-elo)||1)*(Y1-Y0),ex=i=>X0+i/en*(XE-X0);
   const epts=ev.map((v,i)=>ex(i).toFixed(1)+','+ey(v).toFixed(1)).join(' '),ec=c>=0?'var(--winbar)':'var(--loss)';
   CH.eq={xs:ev.map((v,i)=>ex(i)),ys:ev.map(ey),tx:ev.map((v,i)=>i?`${sd(ord[i-1].date)}, ${ord[i-1].pair}: ${usd(v)}`:`Awal: ${usd(v)}`)};
-  const eqChart=mk('eq',`<defs><linearGradient id="eg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${ec}" stop-opacity=".35"/><stop offset="1" stop-color="${ec}" stop-opacity="0"/></linearGradient></defs>${axY([ehi,(ehi+elo)/2,elo],ey)}<polygon points="${X0},${Y1} ${epts} ${X1},${Y1}" fill="url(#eg)"/><polyline points="${epts}" fill="none" stroke="${ec}" stroke-width="2.5" stroke-linejoin="round"/>${axX(ord.length?sd(ord[0].date):'',ord.length?sd(ord[ord.length-1].date):'')}`);
+  const eqChart=mk('eq',`<defs><linearGradient id="eg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${ec}" stop-opacity=".35"/><stop offset="1" stop-color="${ec}" stop-opacity="0"/></linearGradient></defs>${axY([ehi,(ehi+elo)/2,elo],ey)}<polygon points="${X0},${Y1} ${epts} ${XE},${Y1}" fill="url(#eg)"/><polyline points="${epts}" fill="none" stroke="${ec}" stroke-width="2.5" stroke-linejoin="round"/><line class="lp" x1="${X0}" x2="${X1}" y1="${ey(ev[ev.length-1]).toFixed(1)}" y2="${ey(ev[ev.length-1]).toFixed(1)}" stroke="${ec}"/><rect class="lpt" x="${X1-50}" y="${(ey(ev[ev.length-1])-9).toFixed(1)}" width="50" height="18" rx="4" fill="${ec}"/><text class="lpx" x="${X1-25}" y="${(ey(ev[ev.length-1])+3.5).toFixed(1)}" text-anchor="middle">${usd(ev[ev.length-1])}</text>${axX(ord.length?sd(ord[0].date):'',ord.length?sd(ord[ord.length-1].date):'')}`);
   const dk=Object.keys(dn).sort(),dvv=dk.map(k=>dn[k]*ACC.risk/100*ACC.bal),dlo=Math.min(0,...dvv),dhi=Math.max(0,...dvv),dy=v=>Y1-(v-dlo)/((dhi-dlo)||1)*(Y1-Y0),dst=(X1-X0)/Math.max(dk.length,1),dx=i=>X0+dst*(i+.5),bwd=Math.min(18,dst*.7);
   const dwN=['Senin','Selasa','Rabu','Kamis','Jumat','Sabtu','Minggu'],dwA=['Sen','Sel','Rab','Kam','Jum','Sab','Min'],dwS=[0,0,0,0,0,0,0],dwC=[0,0,0,0,0,0,0];
   dk.forEach((k,i)=>{const w=(new Date(k+'T00:00:00').getDay()+6)%7;dwS[w]+=dvv[i];dwC[w]++});
   const dwV=dwS.map((s,i)=>dwC[i]?s/dwC[i]:0),dwHi=Math.max(0,...dwV),dwLo=Math.min(0,...dwV);let dwBest=-1;dwV.forEach((v,i)=>{if(dwC[i]&&(dwBest<0||v>dwV[dwBest]))dwBest=i});
   const dwY=v=>Y1-(v-dwLo)/(((dwHi*1.12)-dwLo)||1)*(Y1-Y0),dwSt=(X1-X0)/7,dwX=i=>X0+dwSt*(i+.5),dwB=Math.min(26,dwSt*.66),dwSg=v=>(v<0?'-':'+')+usdK(Math.abs(v));
   CH.dow={xs:dwN.map((n,i)=>dwX(i)),ys:dwV.map(dwY),tx:dwN.map((n,i)=>dwC[i]?`${n}: ${dwV[i]>=0?'+':''}${usd(dwV[i])} rata-rata (${dwC[i]} hari)`:`${n}: belum ada data`)};
-  const dChart=mk('dow',axY([dwHi,0,dwLo],dwY)+dwV.map((v,i)=>{const cx=dwX(i).toFixed(1),lb=`<text class="ax" x="${cx}" y="${H-6}" text-anchor="middle">${dwA[i]}</text>`;if(!dwC[i])return `<text x="${cx}" y="${(dwY(0)-5).toFixed(1)}" text-anchor="middle" font-size="10" fill="var(--mute)">-</text>${lb}`;const y0=dwY(0),y1=dwY(v),top=Math.min(y0,y1),h=Math.max(2,Math.abs(y1-y0)),col=v<0?'var(--loss)':(i===dwBest?'var(--win)':'var(--winbar)');return `<rect x="${(dwX(i)-dwB/2).toFixed(1)}" y="${top.toFixed(1)}" width="${dwB.toFixed(1)}" height="${h.toFixed(1)}" rx="4" fill="${col}"/><text x="${cx}" y="${(v>=0?top-5:top+h+11).toFixed(1)}" text-anchor="middle" font-size="10" font-weight="600" fill="var(--ink)">${dwSg(v)}</text>${lb}`}).join(''))+`<div class="note" style="margin-top:8px">Rata-rata hasil tiap hari dalam seminggu. Bar terang = hari terbaik. Tap bar untuk detail.</div>`;
+  const dChart=mk('dow',axY([dwHi,0,dwLo],dwY)+dwV.map((v,i)=>{const cx=dwX(i).toFixed(1),lb=`<text class="ax" x="${cx}" y="${H-6}" text-anchor="middle">${dwA[i]}</text>`;if(!dwC[i])return `<text x="${cx}" y="${(dwY(0)-5).toFixed(1)}" text-anchor="middle" font-size="10" fill="var(--mute)">-</text>${lb}`;const y0=dwY(0),y1=dwY(v),top=Math.min(y0,y1),h=Math.max(2,Math.abs(y1-y0)),col=v<0?'var(--loss)':(i===dwBest?'var(--win)':'var(--winbar)');return `<rect x="${(dwX(i)-dwB/2).toFixed(1)}" y="${top.toFixed(1)}" width="${dwB.toFixed(1)}" height="${h.toFixed(1)}" rx="4" fill="${col}"/><text x="${cx}" y="${(v>=0?top-5:top+h+11).toFixed(1)}" text-anchor="middle" font-size="10" font-weight="600" fill="var(--ink)">${dwSg(v)}</text>${lb}`}).join(''))+`<div class="note" style="margin-top:8px">Rata-rata hasil tiap hari dalam seminggu. Bar paling menonjol = hari terbaik. Tap bar untuk detail.</div>`;
   app.innerHTML=`
   <div class="chips2">${[['','Semua'],[cm,'Bulan ini'],[pm,'Bulan lalu']].map(([v,l])=>`<button class="ch2${!cust&&(F.m||'')===v?' on':''}" data-p="${v}">${l}</button>`).join('')}<button class="ch2${cust?' on':''}" data-p="custom">Custom</button></div>${cust?`<div class="tools per"><div><div class="lbl">Periode</div><select data-f="m"><option value="">Semua waktu</option>${months.map(m=>`<option value="${m}"${F.m===m?' selected':''}>${ml(m)}</option>`).join('')}</select></div><div><div class="lbl">Dari</div><input type="date" data-f="from" value="${F.from||''}"></div><div><div class="lbl">Sampai</div><input type="date" data-f="to" value="${F.to||''}"></div></div>`:''}
   <div class="dash"><div class="full" data-sec="r">${accHtml}
@@ -1378,111 +1378,196 @@ function pmRender(){try{
 document.addEventListener('visibilitychange',function(){if(document.hidden&&window.__pmFlush)window.__pmFlush()});
 if(document.body.dataset.tab==='plan')pmRender();
 </script>
+<style id="navy-theme">
+/* Palet navy: bar chart, equity curve, progress, tab aktif */
+:root{--chart:#5b84f5;--chart2:#3a62dc;--chart-best:#b4c8ff;--winbar:#5b84f5;--grad:linear-gradient(135deg,#1c3a96,#2c55cf);--ease:cubic-bezier(.22,.8,.2,1);--draw:cubic-bezier(.45,0,.25,1)}
+:root[data-theme=light]{--chart:#1e3a8a;--chart2:#3558c8;--chart-best:#0b1a4d;--winbar:#1e3a8a;--acc:#1f3fa8;--acc2:#1f3fa8;--acc-rgb:31,63,168;--grad:linear-gradient(135deg,#13307c,#2a52c8)}
+.cw svg polyline{stroke-linecap:round}
+.cw rect.best{fill:var(--chart-best)}
+.cw rect.neg{fill:var(--loss)}
+.vcol u{background:linear-gradient(180deg,var(--chart2),var(--chart))}
+.vcol u.neg{background:var(--loss)}
+.tabs{background:var(--card)}
+.tabs button{position:relative;z-index:1}
+.tabs button.on,body.c .tabs button.on{background:transparent!important;box-shadow:none}
+#tabpill{position:absolute;z-index:0;top:5px;bottom:5px;left:0;width:0;border-radius:8px;background:var(--grad);pointer-events:none}
+</style>
+<style id="exchange-theme">
+@property --a{syntax:"<angle>";inherits:false;initial-value:360deg}
+/* ===== Gaya aplikasi exchange ===== */
+/* 1. Bottom bar */
+body #tabs{position:fixed;left:0;right:0;bottom:0;top:auto;margin:0;border:0;border-top:1px solid var(--line);border-radius:0;padding:6px 4px calc(6px + env(safe-area-inset-bottom,0px));background:var(--card);z-index:30;gap:0;display:flex}
+body #tabs button{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:5px 0 3px;font-size:11px;font-weight:600;border-radius:8px;color:var(--mute)}
+body #tabs button svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+body #tabs button.on{color:var(--acc);background:transparent!important}
+body #tabpill{top:0;bottom:auto;height:2.5px;border-radius:0 0 3px 3px}
+body #pgbar{display:none}
+body #add.fab{bottom:calc(80px + env(safe-area-inset-bottom,0px))}
+body .toast{bottom:calc(82px + env(safe-area-inset-bottom,0px))}
+.wrap{padding-bottom:150px!important}
+@media(min-width:820px){body #tabs{left:50%;right:auto;width:560px;transform:translateX(-50%);border:1px solid var(--line);border-bottom:0;border-radius:14px 14px 0 0}}
+
+/* 2. Header saldo */
+.hd .lbl2{font-size:12px;color:var(--mute);letter-spacing:.02em}
+.hd .big{font-size:40px;font-weight:700;letter-spacing:-.02em}
+.hd .ah b.big+span{display:inline-flex;align-items:center;gap:5px;margin-top:6px;padding:3px 10px;border-radius:6px;font-size:13px;font-weight:700}
+.hd .ah b.big+span.win{background:rgba(var(--win-rgb),.15);color:var(--win)}
+.hd .ah b.big+span.loss{background:rgba(var(--loss-rgb),.15);color:var(--loss)}
+.hd .ah b.big+span.win::before{content:"▲";font-size:9px}
+.hd .ah b.big+span.loss::before{content:"▼";font-size:9px}
+
+/* 3. Daftar trade rapat */
+body .ents{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;padding:0}
+body .ents .day{margin:0!important;padding:7px 12px;background:var(--card2);border-bottom:1px solid var(--line);font-size:12px!important;color:var(--mute);font-family:Figtree,system-ui,sans-serif}
+body .ents .day>span{color:var(--ink);font-weight:600}
+body .ents .t{background:transparent;border:0;border-bottom:1px solid var(--line);border-left:3px solid var(--be);border-radius:0!important;margin:0!important;padding:7px 12px 7px 10px!important}
+body .ents .t.WIN{border-left-color:var(--win)}body .ents .t.LOSS{border-left-color:var(--loss)}
+body .ents .t:last-child{border-bottom:0}
+body .ents .t .top{gap:6px}
+body .ents .t .pair{font-size:14px;font-weight:700}
+body .ents .t .dir{margin-left:6px;padding:1px 6px;font-size:11px}
+body .ents .t .ses{margin-left:6px;font-size:11px}
+body .ents .t .rt{gap:8px}
+body .ents .t .rt b{min-width:46px;text-align:right;font-size:14px;font-variant-numeric:tabular-nums}
+body .ents .t .res{padding:1px 7px;font-size:10.5px}
+body .ents .t .mt{margin-top:1px}
+body .ents .t .mi{font-size:11px}
+body .ents .t .ac button{width:22px;height:22px;font-size:12px;opacity:.7}
+
+/* 4. Chart ala exchange */
+.cw .lp{stroke-width:1;stroke-dasharray:2 3;opacity:.75}
+.cw .lpx{fill:#fff;font-size:10px;font-weight:700}
+.cw .cur{stroke-dasharray:3 3;stroke:var(--mute)}
+.cw .tip{top:-4px;background:var(--card2);font-weight:600}
+@media(prefers-reduced-motion:no-preference){.lp,.lpt,.lpx{animation:mFade .4s ease 1.3s backwards}}
+</style>
+<script id="exchange-js">
+(function(){
+var P={ringkasan:'<path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/>',
+analisis:'<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>',
+jurnal:'<path d="M5 3h11a3 3 0 0 1 3 3v15H8a3 3 0 0 1-3-3zM5 18a3 3 0 0 1 3-3h11M9 8h6"/>',
+news:'<path d="M4 5h13v14a2 2 0 0 0 2 2H6a2 2 0 0 1-2-2zM17 9h3v10a2 2 0 0 1-2 2M8 9h5M8 13h5M8 17h5"/>',
+plan:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 10h18M8 15l2.5 2.5L16 13"/>'};
+document.querySelectorAll("#tabs button").forEach(function(b){
+  var t=b.dataset.tab;if(!P[t]||b.querySelector("svg"))return;
+  b.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true">'+P[t]+'</svg><span>'+b.textContent+'</span>';
+});
+})();
+</script>
 <style id="motion-css">
 @media (prefers-reduced-motion:no-preference){
 .tabs{-webkit-backdrop-filter:none;backdrop-filter:none}
-#app>*{animation:mIn .22s ease-out both;animation-delay:calc(var(--mi,0)*25ms)}
-@keyframes mIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-.mbar{transform-origin:50% 100%;animation:mGrow .35s cubic-bezier(.2,.9,.25,1) var(--d,0ms) both,mBreath var(--p,1.1s) ease-in-out calc(var(--d,0ms) + .35s) infinite alternate}
-.mbl{animation:mLab .35s cubic-bezier(.2,.9,.25,1) var(--d,0ms) both,mBob var(--p,1.1s) ease-in-out calc(var(--d,0ms) + .35s) infinite alternate}
-@keyframes mGrow{from{transform:scaleY(0)}to{transform:scaleY(1)}}
-@keyframes mBreath{from{transform:scaleY(1)}to{transform:scaleY(.55)}}
-@keyframes mLab{from{opacity:0;transform:translateY(var(--h,0px))}to{opacity:1;transform:none}}
-@keyframes mBob{from{transform:none}to{transform:translateY(calc(var(--h,0px)*.45))}}
-.dt2{animation:mPopIn .25s cubic-bezier(.3,1.6,.5,1) calc(var(--k,0)*35ms) both,mDot 1.2s ease-in-out calc(var(--k,0)*90ms + .5s) infinite}
-@keyframes mPopIn{from{transform:scale(0)}to{transform:scale(1)}}
-@keyframes mDot{0%,100%{transform:scale(1)}50%{transform:scale(1.25)}}
-.dt2:last-child{position:relative}
-.dt2:last-child::after{content:"";position:absolute;inset:0;border-radius:50%;background:inherit;animation:mPing 1.2s ease-out .6s infinite}
-@keyframes mPing{0%{transform:scale(1);opacity:.5}100%{transform:scale(2.1);opacity:0}}
-.ring svg{animation:mSpin .4s cubic-bezier(.2,.8,.2,1) both,mRot 6s linear .4s infinite}
-@keyframes mSpin{from{opacity:0;transform:rotate(-90deg) scale(.8)}to{opacity:1;transform:none}}
-@keyframes mRot{from{transform:rotate(0)}to{transform:rotate(360deg)}}
-@keyframes mRotR{from{transform:rotate(0)}to{transform:rotate(-360deg)}}
-@keyframes mRotC{from{transform:rotate(-90deg)}to{transform:rotate(270deg)}}
-.ring::before{content:"";position:absolute;inset:-5px;border:1.5px dashed rgba(var(--acc-rgb,79,124,255),.6);border-radius:50%;pointer-events:none;animation:mRotR 10s linear infinite}
-.pt svg circle+circle{transform-box:fill-box;transform-origin:50% 50%;animation:mRotC 2.2s linear infinite}
-.tabs{background:var(--card)}
-#app .m i{transform-origin:0 50%;animation:mFill .4s cubic-bezier(.2,.8,.2,1) both}
-@keyframes mFill{from{transform:scaleX(0)}to{transform:scaleX(1)}}
-.acct .m i{position:relative;overflow:hidden}
-.acct .m i::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.45),transparent);transform:translateX(-100%);animation:mSweep 1.5s ease-in-out .5s infinite}
-@keyframes mSweep{0%{transform:translateX(-100%)}60%,100%{transform:translateX(100%)}}
-.mdraw{animation:mFade .5s ease both}
-@keyframes mFade{from{opacity:0}to{opacity:1}}
-.mshim{position:absolute;overflow:hidden;pointer-events:none}
-.mshim::before{content:"";position:absolute;top:0;bottom:0;left:0;width:30%;background:linear-gradient(90deg,transparent,rgba(var(--acc-rgb,79,124,255),.3),transparent);transform:translateX(-100%);animation:mShim 2s ease-in-out .5s infinite}
-@keyframes mShim{0%{transform:translateX(-100%)}55%,100%{transform:translateX(340%)}}
-.pill::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:currentColor;margin-right:6px;vertical-align:1px;animation:mBlink .9s ease-in-out infinite}
-@keyframes mBlink{0%,100%{opacity:.3}50%{opacity:1}}
+#tabpill{transition:transform .32s var(--ease),width .32s var(--ease)}
 .tabs button,.fab,.p,button.lnk{transition:transform .15s,color .2s}
-.tabs button:active,.fab:active,.p:active{transform:scale(.93)}
-.tabs button.on,body.c .tabs button.on{background:transparent!important;box-shadow:none}
-.tabs button{position:relative;z-index:1}
-#tabpill{position:absolute;z-index:0;top:5px;bottom:5px;left:0;width:0;border-radius:8px;background:var(--grad);transition:transform .2s cubic-bezier(.4,0,.2,1),width .2s cubic-bezier(.4,0,.2,1);pointer-events:none}
-#nw .s.ev{position:relative;animation:mSlide .3s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(var(--mj,0)*30ms)}
-#nw .s.hl2{animation:mSlideR .3s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(var(--mj,0)*30ms)}
+.tabs button:active,.fab:active,.p:active{transform:scale(.94)}
+
+/* ---- pindah halaman: keluar cepat, masuk bertahap ---- */
+#app.mrp,#app.mrp *,#app.mrp *::before,#app.mrp *::after{animation:none!important}
+#app.mout{animation:mOut .13s ease-in both}
+@keyframes mOut{to{opacity:0;transform:translate3d(var(--ox,0px),0,0)}}
+#app>*{animation:mFade .25s ease-out both}
+@keyframes mFade{from{opacity:0}to{opacity:1}}
+@keyframes mPage{from{opacity:0;transform:translate3d(var(--dx,0px),12px,0)}to{opacity:1;transform:none}}
+.mpg,#pm>*{animation:mPage .4s var(--ease) backwards;animation-delay:calc(var(--ci,0)*55ms)}
+#pm>:nth-child(2){--ci:1}#pm>:nth-child(3){--ci:2}#pm>:nth-child(4){--ci:3}#pm>:nth-child(5){--ci:4}#pm>:nth-child(6){--ci:5}#pm>:nth-child(7){--ci:6}#pm>:nth-child(n+8){--ci:7}
+.tabs button.on{animation:mTabPop .3s cubic-bezier(.3,1.5,.5,1)}
+@keyframes mTabPop{0%{transform:scale(.92)}60%{transform:scale(1.05)}100%{transform:none}}
+
+/* ---- equity curve & sparkline: garis tergambar dari kiri ke kanan ---- */
+.mc-line polyline,.mc-line polygon{animation:mWipe 1.2s var(--draw) .15s backwards}
+@keyframes mWipe{from{clip-path:inset(-8px 100% -8px -8px)}to{clip-path:inset(-8px -8px -8px -8px)}}
+.mc-end{transform-box:fill-box;transform-origin:center;animation:mPopIn .4s cubic-bezier(.3,1.6,.5,1) 1.3s backwards}
+.mc-ring{fill:none;stroke-width:1.5;opacity:0;transform-box:fill-box;transform-origin:center;animation:mPing 1s ease-out 1.35s backwards}
+@keyframes mPopIn{from{transform:scale(0)}to{transform:scale(1)}}
+@keyframes mPing{from{transform:scale(1);opacity:.55}to{transform:scale(3.2);opacity:0}}
+
+/* ---- bar chart: tumbuh dari dasar, berurutan ---- */
+.mc-bars rect{transform-box:fill-box;transform-origin:50% 100%;animation:mGrowY .65s var(--ease) var(--d,0ms) backwards}
+.mc-bars rect.neg{transform-origin:50% 0}
+.mc-lbl{animation:mFadeUp .45s var(--ease) var(--d,0ms) backwards}
+@keyframes mGrowY{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+@keyframes mFadeUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.vcol u{transform-origin:50% 100%;animation:mGrowY .6s var(--ease) var(--d,0ms) backwards}
+.vcol b{animation:mFadeUp .45s var(--ease) calc(var(--d,0ms) + 220ms) backwards}
+
+/* ---- progress, donut, titik ---- */
+#app .m i{transform-origin:0 50%;animation:mFillX .75s var(--ease) .1s backwards}
+@keyframes mFillX{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.ring svg,.pt svg{--a:360deg;-webkit-mask-image:conic-gradient(#000 var(--a),transparent 0);mask-image:conic-gradient(#000 var(--a),transparent 0);animation:mSweep .9s var(--draw) .1s backwards}
+.pt svg{animation-duration:.7s}
+@keyframes mSweep{from{--a:0deg}to{--a:360deg}}
+.dt2{animation:mPopIn .3s cubic-bezier(.3,1.5,.5,1) calc(var(--k,0)*35ms) backwards}
+
+/* ---- news ---- */
+#nw .s.ev{position:relative;animation:mSlide .3s var(--ease) both;animation-delay:calc(var(--mj,0)*30ms)}
+#nw .s.hl2{animation:mSlideR .3s var(--ease) both;animation-delay:calc(var(--mj,0)*30ms)}
 @keyframes mSlide{from{opacity:0;transform:translateX(-22px)}to{opacity:1;transform:none}}
 @keyframes mSlideR{from{opacity:0;transform:translateX(22px)}to{opacity:1;transform:none}}
-#nw .s.ev:not(.past):has(.ip.H)::before{content:"";position:absolute;left:-2px;top:8px;bottom:8px;width:3px;border-radius:3px;background:var(--loss);animation:mBlink .9s ease-in-out infinite}
-.s.ev:not(.past) .ip.H{animation:mBlink .9s ease-in-out infinite}
-.mlive{animation:mBlink .8s ease-in-out infinite}
+.mlive{animation:mLive 1.8s ease-in-out infinite}
+@keyframes mLive{0%,100%{opacity:.45}50%{opacity:1}}
+
+/* ---- trade baru, toast, dialog, tombol + ---- */
 .t.mnew.WIN{animation:mWin 1.2s ease-out}
 .t.mnew.LOSS{animation:mLoss 1.2s ease-out}
 .t.mnew.BE{animation:mBe 1.2s ease-out}
-@keyframes mWin{0%{box-shadow:0 0 0 0 rgba(var(--win-rgb),.8);background:rgba(var(--win-rgb),.22)}100%{box-shadow:0 0 0 14px rgba(var(--win-rgb),0)}}
+@keyframes mWin{0%{box-shadow:0 0 0 0 rgba(var(--acc-rgb),.7);background:rgba(var(--acc-rgb),.18)}100%{box-shadow:0 0 0 14px rgba(var(--acc-rgb),0)}}
 @keyframes mLoss{0%{box-shadow:0 0 0 0 rgba(var(--loss-rgb),.8);background:rgba(var(--loss-rgb),.22);transform:translateX(0)}15%{transform:translateX(-6px)}30%{transform:translateX(5px)}45%{transform:translateX(-3px)}60%{transform:none}100%{box-shadow:0 0 0 14px rgba(var(--loss-rgb),0)}}
 @keyframes mBe{0%{box-shadow:0 0 0 0 rgba(var(--be-rgb),.7)}100%{box-shadow:0 0 0 12px rgba(var(--be-rgb),0)}}
-#toast{animation:mToast .3s cubic-bezier(.2,.8,.2,1)}
+#toast{animation:mToast .3s var(--ease)}
 @keyframes mToast{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
 .fab.mpop{animation:mPop .4s cubic-bezier(.3,1.6,.5,1)}
 @keyframes mPop{from{transform:scale(0)}to{transform:none}}
-dialog[open]{animation:mDlg .25s cubic-bezier(.2,.8,.2,1)}
+dialog[open]{animation:mDlg .25s var(--ease)}
 @keyframes mDlg{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
-@keyframes mPage{from{opacity:0;transform:translate3d(var(--dx,0px),14px,0)}to{opacity:1;transform:none}}
-.mpg,#pm>*{animation:mPage .32s cubic-bezier(.2,.8,.2,1) backwards;animation-delay:calc(var(--ci,0)*45ms)}
-#pm>:nth-child(2){--ci:1}#pm>:nth-child(3){--ci:2}#pm>:nth-child(4){--ci:3}#pm>:nth-child(5){--ci:4}#pm>:nth-child(6){--ci:5}#pm>:nth-child(7){--ci:6}#pm>:nth-child(n+8){--ci:7}
-#pgbar{position:absolute;left:10px;right:10px;bottom:-1px;height:2px;border-radius:2px;background:var(--grad);transform-origin:0 50%;transform:scaleX(0);opacity:0;pointer-events:none}
-#pgbar.go{animation:mPg .5s ease-out}
-@keyframes mPg{0%{transform:scaleX(0);opacity:1}65%{transform:scaleX(1);opacity:1}100%{transform:scaleX(1);opacity:0}}
-.tabs button.on{animation:mTabPop .3s cubic-bezier(.3,1.5,.5,1)}
-@keyframes mTabPop{0%{transform:scale(.9)}60%{transform:scale(1.07)}100%{transform:none}}
 }
 </style>
 <script id="motion-js">
 (function(){
 if(matchMedia("(prefers-reduced-motion:reduce)").matches)return;
 var app=document.getElementById("app");if(!app)return;
-var root=document.documentElement;
+var NS="http://www.w3.org/2000/svg",gid=0;
 function count(el){
   var tn=el.firstChild;if(!tn||tn.nodeType!==3||el.childNodes.length!==1||el.dataset.m)return;el.dataset.m=1;
   var orig=tn.nodeValue,m=orig.trim().match(/^([^\d-]*-?)([\d,]+(?:\.\d+)?)(.*)$/);if(!m)return;
   var to=parseFloat(m[2].replace(/,/g,"")),dec=(m[2].split(".")[1]||"").length;if(!isFinite(to)||to===0)return;
-  var t0=performance.now(),D=450;
+  var t0=performance.now(),D=600;
   (function f(n){var p=Math.min((n-t0)/D,1),e=1-Math.pow(1-p,3);
     tn.nodeValue=p<1?m[1]+(to*e).toLocaleString("en-US",{minimumFractionDigits:dec,maximumFractionDigits:dec})+m[3]:orig;
     if(p<1)requestAnimationFrame(f)})(t0);
 }
-function bars(q){
-  q(".vcol").forEach(function(col){
-    var u=col.querySelector("u"),b=col.querySelector("b");if(!u||u.dataset.m)return;u.dataset.m=1;
-    var i=[].indexOf.call(col.parentNode.children,col),h=u.offsetHeight||parseFloat(u.style.height)||0;
-    var d=Math.min(i,8)*15+5,p=(.9+(i%5)*.12).toFixed(2)+"s";
-    u.style.setProperty("--d",d+"ms");u.style.setProperty("--p",p);u.classList.add("mbar","mloop");
-    if(b){b.style.setProperty("--d",d+"ms");b.style.setProperty("--p",p);b.style.setProperty("--h",h+"px");b.classList.add("mbl","mloop")}
-  });
-}
-function shimmer(q){
-  q("svg.spk,.cw>svg").forEach(function(svg){
+function mk(tag,attrs){var e=document.createElementNS(NS,tag);for(var k in attrs)e.setAttribute(k,attrs[k]);e.dataset.mx=1;return e}
+function charts(q){
+  q(".cw>svg,svg.spk").forEach(function(svg){
     if(svg.dataset.m)return;svg.dataset.m=1;
-    if(!svg.querySelector("polyline,polygon"))return;
-    svg.classList.add("mdraw");
-    var p=svg.parentNode;if(!p||p.nodeType!==1)return;
-    if(getComputedStyle(p).position==="static")p.style.position="relative";
-    var r=svg.getBoundingClientRect(),pr=p.getBoundingClientRect();if(!r.width||!r.height)return;
-    var o=document.createElement("i");o.className="mshim mloop";o.dataset.mx=1;
-    o.style.cssText="left:"+(r.left-pr.left-p.clientLeft)+"px;top:"+(r.top-pr.top-p.clientTop)+"px;width:"+r.width+"px;height:"+r.height+"px";
-    p.insertBefore(o,svg.nextSibling);
+    var line=svg.querySelector("polyline");
+    if(line){
+      svg.classList.add("mc-line");
+      if(svg.parentNode.classList.contains("cw")){
+        var pts=(line.getAttribute("points")||"").trim().split(/\s+/),last=pts[pts.length-1]||"";
+        if(last.indexOf(",")>0){
+          var xy=last.split(","),col=line.getAttribute("stroke")||"currentColor",cur=svg.querySelector(".cur");
+          svg.insertBefore(mk("circle",{cx:xy[0],cy:xy[1],r:"3.5","class":"mc-ring",stroke:col}),cur);
+          svg.insertBefore(mk("circle",{cx:xy[0],cy:xy[1],r:"3.5","class":"mc-end",fill:col}),cur);
+        }
+      }
+    }
+    var rects=svg.querySelectorAll("rect[rx]");
+    if(rects.length){
+      svg.classList.add("mc-bars");
+      var id="mcb"+(++gid),defs=mk("defs",{}),g=mk("linearGradient",{id:id,x1:"0",y1:"0",x2:"0",y2:"1"});
+      g.appendChild(mk("stop",{offset:"0",style:"stop-color:var(--chart2)"}));
+      g.appendChild(mk("stop",{offset:"1",style:"stop-color:var(--chart)"}));
+      defs.appendChild(g);svg.insertBefore(defs,svg.firstChild);
+      [].forEach.call(rects,function(r,i){
+        var f=r.getAttribute("fill")||"",d=Math.min(i,10)*70;
+        if(f.indexOf("--loss")>0)r.classList.add("neg");
+        else if(f.indexOf("--win)")>0)r.classList.add("best");
+        else r.style.fill="url(#"+id+")";
+        r.style.setProperty("--d",d+"ms");
+        var t=r.nextElementSibling;
+        if(t&&t.tagName.toLowerCase()==="text"){t.classList.add("mc-lbl");t.style.setProperty("--d",(d+280)+"ms")}
+      });
+    }
   });
 }
 var seen={};
@@ -1495,17 +1580,16 @@ function newTrades(){
 function decorate(sc){
   var q=function(s){var a=[].slice.call(sc.querySelectorAll(s));if(sc.matches&&sc.matches(s))a.unshift(sc);return a};
   q(".big").forEach(count);
-  q(".dt2").forEach(function(d,i){d.style.setProperty("--k",i);d.classList.add("mloop")});
-  q(".ring,.ring svg,.acct .m i,.pt svg circle+circle").forEach(function(e){e.classList.add("mloop")});
+  q(".dt2").forEach(function(d,i){d.style.setProperty("--k",Math.min(i,20))});
+  q(".vcol").forEach(function(c,i){c.style.setProperty("--d",Math.min(i,10)*55+"ms")});
   q("#nw .s.ev,#nw .s.hl2").forEach(function(c,i){c.style.setProperty("--mj",Math.min(i,6))});
-  bars(q);shimmer(q);
+  charts(q);
   q("[data-sec]").forEach(function(sec){var n=0;[].forEach.call(sec.querySelectorAll("h2,.card,.t"),function(e){
     if(n>=14)return;n++;if(e.classList.contains("mpg"))return;e.classList.add("mpg");e.style.setProperty("--ci",Math.min(n-1,8))})});
   q(".note .win").forEach(function(s){if(s.textContent.trim()==="●")s.classList.add("mlive")});
 }
 function run(){
   newTrades();
-  var k=0;[].forEach.call(app.children,function(c){c.style.setProperty("--mi",Math.min(k++,5))});
   decorate(app);
 }
 new MutationObserver(function(ms){
@@ -1517,20 +1601,27 @@ new MutationObserver(function(ms){
   if(full)run();else nodes.forEach(decorate);
 }).observe(app,{childList:true,subtree:true});
 if(app.children.length)run();
-var tabs=document.getElementById("tabs"),pill=null;
-var order=["ringkasan","analisis","jurnal","news","plan"],prev=Math.max(0,order.indexOf(document.body.dataset.tab)),bar=null;
-function goBar(){
-  if(!tabs)return;
-  if(!bar){bar=document.createElement("i");bar.id="pgbar";bar.dataset.mx=1;tabs.appendChild(bar)}
-  bar.classList.remove("go");void bar.offsetWidth;bar.classList.add("go");
-}
+
+/* ---- pindah tab ---- */
+var tabs=document.getElementById("tabs"),pill=null,busy=false;
+var order=["ringkasan","analisis","jurnal","news","plan"],prev=Math.max(0,order.indexOf(document.body.dataset.tab));
+function replay(){app.classList.add("mrp");void app.offsetWidth;app.classList.remove("mrp")}
+if(tabs)tabs.addEventListener("click",function(e){
+  var b=e.target.closest?e.target.closest("button"):null;
+  if(!b||!b.dataset.tab||busy||b.dataset.tab===document.body.dataset.tab)return;
+  var ni=order.indexOf(b.dataset.tab);if(ni<0)return;
+  e.stopPropagation();busy=true;
+  document.body.style.setProperty("--ox",(ni>=prev?-26:26)+"px");
+  app.classList.add("mout");
+  setTimeout(function(){app.classList.remove("mout");busy=false;if(b.onclick)b.onclick.call(b,e)},130);
+},true);
 new MutationObserver(function(){
   var ni=order.indexOf(document.body.dataset.tab);if(ni<0)return;
-  document.body.style.setProperty("--dx",(ni>=prev?34:-34)+"px");prev=ni;goBar();
+  document.body.style.setProperty("--dx",(ni>=prev?34:-34)+"px");prev=ni;replay();
 }).observe(document.body,{attributes:true,attributeFilter:["data-tab"]});
 function movePill(){
   if(!tabs)return;var b=tabs.querySelector("button.on");if(!b)return;
-  if(!pill){pill=document.createElement("span");pill.id="tabpill";tabs.insertBefore(pill,tabs.firstChild)}
+  if(!pill){pill=document.createElement("span");pill.id="tabpill";pill.dataset.mx=1;tabs.insertBefore(pill,tabs.firstChild)}
   pill.style.width=b.offsetWidth+"px";pill.style.transform="translateX("+b.offsetLeft+"px)";
 }
 if(tabs){
