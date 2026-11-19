@@ -1381,47 +1381,52 @@ if(document.body.dataset.tab==='plan')pmRender();
 <style id="motion-css">
 @media (prefers-reduced-motion:no-preference){
 .tabs{-webkit-backdrop-filter:none;backdrop-filter:none}
-#app>*{animation:mIn .3s ease-out both;animation-delay:calc(var(--mi,0)*35ms)}
+#app>*{animation:mIn .22s ease-out both;animation-delay:calc(var(--mi,0)*25ms)}
 @keyframes mIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-.mbar{transform-origin:50% 100%;animation:mGrow .5s cubic-bezier(.2,.9,.25,1) var(--d,0ms) both,mBreath var(--p,2.6s) ease-in-out calc(var(--d,0ms) + .5s) infinite alternate}
-.mbl{animation:mLab .5s cubic-bezier(.2,.9,.25,1) var(--d,0ms) both,mBob var(--p,2.6s) ease-in-out calc(var(--d,0ms) + .5s) infinite alternate}
+.mbar{transform-origin:50% 100%;animation:mGrow .35s cubic-bezier(.2,.9,.25,1) var(--d,0ms) both,mBreath var(--p,1.1s) ease-in-out calc(var(--d,0ms) + .35s) infinite alternate}
+.mbl{animation:mLab .35s cubic-bezier(.2,.9,.25,1) var(--d,0ms) both,mBob var(--p,1.1s) ease-in-out calc(var(--d,0ms) + .35s) infinite alternate}
 @keyframes mGrow{from{transform:scaleY(0)}to{transform:scaleY(1)}}
-@keyframes mBreath{from{transform:scaleY(1)}to{transform:scaleY(.8)}}
+@keyframes mBreath{from{transform:scaleY(1)}to{transform:scaleY(.55)}}
 @keyframes mLab{from{opacity:0;transform:translateY(var(--h,0px))}to{opacity:1;transform:none}}
-@keyframes mBob{from{transform:none}to{transform:translateY(calc(var(--h,0px)*.2))}}
-.dt2{animation:mPopIn .35s cubic-bezier(.3,1.6,.5,1) calc(var(--k,0)*50ms) both,mDot 2.4s ease-in-out calc(var(--k,0)*140ms + 1s) infinite}
+@keyframes mBob{from{transform:none}to{transform:translateY(calc(var(--h,0px)*.45))}}
+.dt2{animation:mPopIn .25s cubic-bezier(.3,1.6,.5,1) calc(var(--k,0)*35ms) both,mDot 1.2s ease-in-out calc(var(--k,0)*90ms + .5s) infinite}
 @keyframes mPopIn{from{transform:scale(0)}to{transform:scale(1)}}
-@keyframes mDot{0%,100%{transform:scale(1)}50%{transform:scale(1.18)}}
+@keyframes mDot{0%,100%{transform:scale(1)}50%{transform:scale(1.25)}}
 .dt2:last-child{position:relative}
-.dt2:last-child::after{content:"";position:absolute;inset:0;border-radius:50%;background:inherit;animation:mPing 1.8s ease-out 1s infinite}
+.dt2:last-child::after{content:"";position:absolute;inset:0;border-radius:50%;background:inherit;animation:mPing 1.2s ease-out .6s infinite}
 @keyframes mPing{0%{transform:scale(1);opacity:.5}100%{transform:scale(2.1);opacity:0}}
-.ring svg{animation:mSpin .5s cubic-bezier(.2,.8,.2,1) both,mBreathe 3.2s ease-in-out .6s infinite alternate}
+.ring svg{animation:mSpin .4s cubic-bezier(.2,.8,.2,1) both,mRot 6s linear .4s infinite}
 @keyframes mSpin{from{opacity:0;transform:rotate(-90deg) scale(.8)}to{opacity:1;transform:none}}
-@keyframes mBreathe{from{transform:scale(1)}to{transform:scale(1.04)}}
-#app .m i{transform-origin:0 50%;animation:mFill .6s cubic-bezier(.2,.8,.2,1) both}
+@keyframes mRot{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+@keyframes mRotR{from{transform:rotate(0)}to{transform:rotate(-360deg)}}
+@keyframes mRotC{from{transform:rotate(-90deg)}to{transform:rotate(270deg)}}
+.ring::before{content:"";position:absolute;inset:-5px;border:1.5px dashed rgba(var(--acc-rgb,79,124,255),.6);border-radius:50%;pointer-events:none;animation:mRotR 10s linear infinite}
+.pt svg circle+circle{transform-box:fill-box;transform-origin:50% 50%;animation:mRotC 2.2s linear infinite}
+.tabs{background:var(--card)}
+#app .m i{transform-origin:0 50%;animation:mFill .4s cubic-bezier(.2,.8,.2,1) both}
 @keyframes mFill{from{transform:scaleX(0)}to{transform:scaleX(1)}}
 .acct .m i{position:relative;overflow:hidden}
-.acct .m i::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.45),transparent);transform:translateX(-100%);animation:mSweep 2.6s ease-in-out 1s infinite}
+.acct .m i::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.45),transparent);transform:translateX(-100%);animation:mSweep 1.5s ease-in-out .5s infinite}
 @keyframes mSweep{0%{transform:translateX(-100%)}60%,100%{transform:translateX(100%)}}
 .mdraw{animation:mFade .5s ease both}
 @keyframes mFade{from{opacity:0}to{opacity:1}}
 .mshim{position:absolute;overflow:hidden;pointer-events:none}
-.mshim::before{content:"";position:absolute;top:0;bottom:0;left:0;width:30%;background:linear-gradient(90deg,transparent,rgba(var(--acc-rgb,79,124,255),.3),transparent);transform:translateX(-100%);animation:mShim 3.6s ease-in-out 1s infinite}
+.mshim::before{content:"";position:absolute;top:0;bottom:0;left:0;width:30%;background:linear-gradient(90deg,transparent,rgba(var(--acc-rgb,79,124,255),.3),transparent);transform:translateX(-100%);animation:mShim 2s ease-in-out .5s infinite}
 @keyframes mShim{0%{transform:translateX(-100%)}55%,100%{transform:translateX(340%)}}
-.pill::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:currentColor;margin-right:6px;vertical-align:1px;animation:mBlink 1.6s ease-in-out infinite}
+.pill::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:currentColor;margin-right:6px;vertical-align:1px;animation:mBlink .9s ease-in-out infinite}
 @keyframes mBlink{0%,100%{opacity:.3}50%{opacity:1}}
 .tabs button,.fab,.p,button.lnk{transition:transform .15s,color .2s}
 .tabs button:active,.fab:active,.p:active{transform:scale(.93)}
 .tabs button.on,body.c .tabs button.on{background:transparent!important;box-shadow:none}
 .tabs button{position:relative;z-index:1}
-#tabpill{position:absolute;z-index:0;top:5px;bottom:5px;left:0;width:0;border-radius:8px;background:var(--grad);transition:transform .28s cubic-bezier(.4,0,.2,1),width .28s cubic-bezier(.4,0,.2,1);pointer-events:none}
+#tabpill{position:absolute;z-index:0;top:5px;bottom:5px;left:0;width:0;border-radius:8px;background:var(--grad);transition:transform .2s cubic-bezier(.4,0,.2,1),width .2s cubic-bezier(.4,0,.2,1);pointer-events:none}
 #nw .s.ev{position:relative;animation:mSlide .3s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(var(--mj,0)*30ms)}
 #nw .s.hl2{animation:mSlideR .3s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(var(--mj,0)*30ms)}
 @keyframes mSlide{from{opacity:0;transform:translateX(-22px)}to{opacity:1;transform:none}}
 @keyframes mSlideR{from{opacity:0;transform:translateX(22px)}to{opacity:1;transform:none}}
-#nw .s.ev:not(.past):has(.ip.H)::before{content:"";position:absolute;left:-2px;top:8px;bottom:8px;width:3px;border-radius:3px;background:var(--loss);animation:mBlink 1.4s ease-in-out infinite}
-.s.ev:not(.past) .ip.H{animation:mBlink 1.4s ease-in-out infinite}
-.mlive{animation:mBlink 1.2s ease-in-out infinite}
+#nw .s.ev:not(.past):has(.ip.H)::before{content:"";position:absolute;left:-2px;top:8px;bottom:8px;width:3px;border-radius:3px;background:var(--loss);animation:mBlink .9s ease-in-out infinite}
+.s.ev:not(.past) .ip.H{animation:mBlink .9s ease-in-out infinite}
+.mlive{animation:mBlink .8s ease-in-out infinite}
 .t.mnew.WIN{animation:mWin 1.2s ease-out}
 .t.mnew.LOSS{animation:mLoss 1.2s ease-out}
 .t.mnew.BE{animation:mBe 1.2s ease-out}
@@ -1446,7 +1451,7 @@ function count(el){
   var tn=el.firstChild;if(!tn||tn.nodeType!==3||el.childNodes.length!==1||el.dataset.m)return;el.dataset.m=1;
   var orig=tn.nodeValue,m=orig.trim().match(/^([^\d-]*-?)([\d,]+(?:\.\d+)?)(.*)$/);if(!m)return;
   var to=parseFloat(m[2].replace(/,/g,"")),dec=(m[2].split(".")[1]||"").length;if(!isFinite(to)||to===0)return;
-  var t0=performance.now(),D=600;
+  var t0=performance.now(),D=450;
   (function f(n){var p=Math.min((n-t0)/D,1),e=1-Math.pow(1-p,3);
     tn.nodeValue=p<1?m[1]+(to*e).toLocaleString("en-US",{minimumFractionDigits:dec,maximumFractionDigits:dec})+m[3]:orig;
     if(p<1)requestAnimationFrame(f)})(t0);
@@ -1455,7 +1460,7 @@ function bars(q){
   q(".vcol").forEach(function(col){
     var u=col.querySelector("u"),b=col.querySelector("b");if(!u||u.dataset.m)return;u.dataset.m=1;
     var i=[].indexOf.call(col.parentNode.children,col),h=u.offsetHeight||parseFloat(u.style.height)||0;
-    var d=Math.min(i,8)*25+10,p=(2.2+(i%5)*.25).toFixed(2)+"s";
+    var d=Math.min(i,8)*15+5,p=(.9+(i%5)*.12).toFixed(2)+"s";
     u.style.setProperty("--d",d+"ms");u.style.setProperty("--p",p);u.classList.add("mbar","mloop");
     if(b){b.style.setProperty("--d",d+"ms");b.style.setProperty("--p",p);b.style.setProperty("--h",h+"px");b.classList.add("mbl","mloop")}
   });
@@ -1484,7 +1489,7 @@ function decorate(sc){
   var q=function(s){var a=[].slice.call(sc.querySelectorAll(s));if(sc.matches&&sc.matches(s))a.unshift(sc);return a};
   q(".big").forEach(count);
   q(".dt2").forEach(function(d,i){d.style.setProperty("--k",i);d.classList.add("mloop")});
-  q(".ring svg,.acct .m i").forEach(function(e){e.classList.add("mloop")});
+  q(".ring,.ring svg,.acct .m i,.pt svg circle+circle").forEach(function(e){e.classList.add("mloop")});
   q("#nw .s.ev,#nw .s.hl2").forEach(function(c,i){c.style.setProperty("--mj",Math.min(i,6))});
   bars(q);shimmer(q);
   q(".note .win").forEach(function(s){if(s.textContent.trim()==="●")s.classList.add("mlive")});
