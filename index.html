@@ -1404,7 +1404,7 @@ body #tabpill{top:0;bottom:auto;height:2.5px;border-radius:0 0 3px 3px}
 body #pgbar{display:none}
 body #add.fab{bottom:calc(80px + env(safe-area-inset-bottom,0px))}
 body .toast{bottom:calc(82px + env(safe-area-inset-bottom,0px))}
-.wrap{padding-bottom:150px!important}
+.wrap{padding-bottom:150px!important;overflow-x:clip}
 @media(min-width:820px){body #tabs{left:50%;right:auto;width:560px;transform:translateX(-50%);border:1px solid var(--line);border-bottom:0;border-radius:14px 14px 0 0}}
 
 /* 2. Header saldo */
@@ -1608,8 +1608,8 @@ var tabs=document.getElementById("tabs"),pill=null;
 var order=["ringkasan","analisis","jurnal","news","plan"],prev=Math.max(0,order.indexOf(document.body.dataset.tab));
 new MutationObserver(function(){
   var t=document.body.dataset.tab,ni=order.indexOf(t);if(ni<0)return;
-  document.body.style.setProperty("--dx",(ni>=prev?34:-34)+"px");prev=ni;
-  if(app.animate)app.animate([{opacity:.35},{opacity:1}],{duration:140,easing:"ease-out"});
+  var prev0=prev;document.body.style.setProperty("--dx",(ni>=prev?34:-34)+"px");prev=ni;
+  if(app.animate){var dx=ni>=prev0?44:-44;app.animate([{opacity:0,transform:"translate3d("+dx+"px,0,0)"},{opacity:1,transform:"none"}],{duration:260,easing:"cubic-bezier(.22,.8,.2,1)"})}
   if(!played[t]){played[t]=1;first()}
 }).observe(document.body,{attributes:true,attributeFilter:["data-tab"]});
 function movePill(){
