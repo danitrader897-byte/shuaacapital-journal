@@ -1256,7 +1256,7 @@ function pdfDl(){
 h1{font-size:20px;margin:0 0 2px}.sub{color:#555;margin-bottom:12px}.g{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px}
 .t{border:1px solid #ccc;border-radius:6px;padding:8px}.t span{display:block;color:#666;font-size:11px}.t b{font-size:15px}
 table{width:100%;border-collapse:collapse}th,td{border-bottom:1px solid #ddd;padding:4px 5px;text-align:left;vertical-align:top;word-break:break-word}
-th{background:#f1f3f7;font-size:11px}tr{page-break-inside:avoid}.w{color:#0a7a55;font-weight:700}.l{color:#c01735;font-weight:700}
+th{background:#f1f3f7;font-size:11px}tr{page-break-inside:avoid}.w{color:#1f3fa8;font-weight:700}.l{color:#c01735;font-weight:700}
 .c{border:1px solid #ccc;border-radius:6px;padding:8px;margin-bottom:14px}.ct{font-weight:700;margin-bottom:4px}.cn{color:#777;font-size:11px;margin-top:2px}.f{margin-top:12px;color:#777;font-size:11px}</style></head><body>
 <h1>${esc(ACC.jname||'Shuaa Journal')}</h1><div class="sub">${esc(ACC.name||'Trading journal')} · ${esc(phLabel)} · ${esc(perLabel)} · dibuat ${esc(today())}</div>
 <div class="g">${tile('Hasil simulasi',usd(pnl)+' ('+(pnl/ACC.bal*100>=0?'+':'')+(pnl/ACC.bal*100).toFixed(1)+'%)')}${tile('Total R',fr(tot))}${tile('Win rate',Math.round(W/rs.length*100)+'%')}${tile('Profit factor',gl?(gw/gl).toFixed(2):'-')}${tile('Trade',String(rs.length))}${tile('WIN / LOSS / BE',W+' / '+L+' / '+B)}${tile('Rata-rata R',fr(tot/rs.length))}${tile('Risiko per 1R',ACC.risk+'% ($'+(ACC.risk/100*ACC.bal).toLocaleString('en-US',{maximumFractionDigits:0})+')')}</div>
@@ -1391,6 +1391,27 @@ if(document.body.dataset.tab==='plan')pmRender();
 .tabs button{position:relative;z-index:1}
 .tabs button.on,body.c .tabs button.on{background:transparent!important;box-shadow:none}
 #tabpill{position:absolute;z-index:0;top:5px;bottom:5px;left:0;width:0;border-radius:8px;background:var(--grad);pointer-events:none}
+</style>
+<style id="bluewhite">
+/* Palet biru-putih: biru = positif/utama, merah = hanya untuk rugi, abu = netral */
+:root{--win:#7aa2ff;--win-rgb:122,162,255;--warn:#9fb4e6;--warn-rgb:159,180,230;--acc2:#7aa2ff}
+:root[data-theme=light]{--bg:#f4f7fd;--win:#1f3fa8;--win-rgb:31,63,168;--warn:#4a5f94;--warn-rgb:74,95,148;--be:#6b7a99;--be-rgb:107,122,153}
+:root[data-theme=light] .pill.win{color:#1f3fa8!important}
+body .k-win,body .k-acc,body .k-warn{border-top:2px solid var(--acc)}
+.ip.M{background:rgba(var(--acc-rgb),.12);color:var(--acc)}
+</style>
+<style id="dark-exchange">
+/* Tema gelap gaya exchange: navy lebih terang, satu biru seragam, teks sekunder lebih jelas */
+:root[data-theme=dark]{--bg:#0a1020;--card:#111a2e;--card2:#18233b;--line:#223052;--ink:#eef3ff;--mute:#a3b0cc;
+--acc:#6690ff;--acc2:#86abff;--acc-rgb:102,144,255;--chart:#6690ff;--chart2:#4a74e8;--chart-best:#bcd0ff;--winbar:#6690ff;
+--win:#86abff;--win-rgb:134,171,255;--grid:rgba(110,140,255,.035);--shadow:rgba(0,0,0,.45);
+--hdbg:linear-gradient(160deg,#16306e,#111a2e 72%);--hdb:#25418a;--hdglow:rgba(102,144,255,.14);--glow:rgba(102,144,255,.08);
+--tabsbg:#0d1426;--card-end:#0e1729}
+:root[data-theme=dark] body #tabs{background:#0d1426}
+:root[data-theme=dark] .card{box-shadow:none}
+:root[data-theme=dark] .t .mi,:root[data-theme=dark] .ses,:root[data-theme=dark] .ax{color:var(--mute);fill:var(--mute)}
+:root[data-theme=dark] .cw .tip{background:#1c2a47;border-color:#2c3f68}
+:root[data-theme=dark] .ents .day{background:#15213a}
 </style>
 <style id="exchange-theme">
 @property --a{syntax:"<angle>";inherits:false;initial-value:360deg}
