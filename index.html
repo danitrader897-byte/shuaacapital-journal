@@ -1439,7 +1439,14 @@ if(document.body.dataset.tab==='plan')pmRender();
 @keyframes mPop{from{transform:scale(0)}to{transform:none}}
 dialog[open]{animation:mDlg .25s cubic-bezier(.2,.8,.2,1)}
 @keyframes mDlg{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
-html.msc .mloop,html.msc .mloop::before,html.msc .mloop::after{animation-play-state:paused!important}
+@keyframes mPage{from{opacity:0;transform:translate3d(var(--dx,0px),14px,0)}to{opacity:1;transform:none}}
+.mpg,#pm>*{animation:mPage .32s cubic-bezier(.2,.8,.2,1) backwards;animation-delay:calc(var(--ci,0)*45ms)}
+#pm>:nth-child(2){--ci:1}#pm>:nth-child(3){--ci:2}#pm>:nth-child(4){--ci:3}#pm>:nth-child(5){--ci:4}#pm>:nth-child(6){--ci:5}#pm>:nth-child(7){--ci:6}#pm>:nth-child(n+8){--ci:7}
+#pgbar{position:absolute;left:10px;right:10px;bottom:-1px;height:2px;border-radius:2px;background:var(--grad);transform-origin:0 50%;transform:scaleX(0);opacity:0;pointer-events:none}
+#pgbar.go{animation:mPg .5s ease-out}
+@keyframes mPg{0%{transform:scaleX(0);opacity:1}65%{transform:scaleX(1);opacity:1}100%{transform:scaleX(1);opacity:0}}
+.tabs button.on{animation:mTabPop .3s cubic-bezier(.3,1.5,.5,1)}
+@keyframes mTabPop{0%{transform:scale(.9)}60%{transform:scale(1.07)}100%{transform:none}}
 }
 </style>
 <script id="motion-js">
@@ -1492,6 +1499,8 @@ function decorate(sc){
   q(".ring,.ring svg,.acct .m i,.pt svg circle+circle").forEach(function(e){e.classList.add("mloop")});
   q("#nw .s.ev,#nw .s.hl2").forEach(function(c,i){c.style.setProperty("--mj",Math.min(i,6))});
   bars(q);shimmer(q);
+  q("[data-sec]").forEach(function(sec){var n=0;[].forEach.call(sec.querySelectorAll("h2,.card,.t"),function(e){
+    if(n>=14)return;n++;if(e.classList.contains("mpg"))return;e.classList.add("mpg");e.style.setProperty("--ci",Math.min(n-1,8))})});
   q(".note .win").forEach(function(s){if(s.textContent.trim()==="●")s.classList.add("mlive")});
 }
 function run(){
@@ -1508,12 +1517,17 @@ new MutationObserver(function(ms){
   if(full)run();else nodes.forEach(decorate);
 }).observe(app,{childList:true,subtree:true});
 if(app.children.length)run();
-var st=0,tm;
-addEventListener("scroll",function(){
-  if(!st){root.classList.add("msc");st=1}
-  clearTimeout(tm);tm=setTimeout(function(){root.classList.remove("msc");st=0},10);
-},{passive:true});
 var tabs=document.getElementById("tabs"),pill=null;
+var order=["ringkasan","analisis","jurnal","news","plan"],prev=Math.max(0,order.indexOf(document.body.dataset.tab)),bar=null;
+function goBar(){
+  if(!tabs)return;
+  if(!bar){bar=document.createElement("i");bar.id="pgbar";bar.dataset.mx=1;tabs.appendChild(bar)}
+  bar.classList.remove("go");void bar.offsetWidth;bar.classList.add("go");
+}
+new MutationObserver(function(){
+  var ni=order.indexOf(document.body.dataset.tab);if(ni<0)return;
+  document.body.style.setProperty("--dx",(ni>=prev?34:-34)+"px");prev=ni;goBar();
+}).observe(document.body,{attributes:true,attributeFilter:["data-tab"]});
 function movePill(){
   if(!tabs)return;var b=tabs.querySelector("button.on");if(!b)return;
   if(!pill){pill=document.createElement("span");pill.id="tabpill";tabs.insertBefore(pill,tabs.firstChild)}
