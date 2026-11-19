@@ -1380,10 +1380,34 @@ if(document.body.dataset.tab==='plan')pmRender();
 </script>
 <style id="motion-css">
 @media (prefers-reduced-motion:no-preference){
+.tabs{-webkit-backdrop-filter:none;backdrop-filter:none}
 #app>*{animation:mIn .3s ease-out both;animation-delay:calc(var(--mi,0)*35ms)}
 @keyframes mIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-.ring svg{animation:mSpin .6s cubic-bezier(.2,.8,.2,1) both}
+.mbar{transform-origin:50% 100%;animation:mGrow .5s cubic-bezier(.2,.9,.25,1) var(--d,0ms) both,mBreath var(--p,2.6s) ease-in-out calc(var(--d,0ms) + .5s) infinite alternate}
+.mbl{animation:mLab .5s cubic-bezier(.2,.9,.25,1) var(--d,0ms) both,mBob var(--p,2.6s) ease-in-out calc(var(--d,0ms) + .5s) infinite alternate}
+@keyframes mGrow{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+@keyframes mBreath{from{transform:scaleY(1)}to{transform:scaleY(.8)}}
+@keyframes mLab{from{opacity:0;transform:translateY(var(--h,0px))}to{opacity:1;transform:none}}
+@keyframes mBob{from{transform:none}to{transform:translateY(calc(var(--h,0px)*.2))}}
+.dt2{animation:mPopIn .35s cubic-bezier(.3,1.6,.5,1) calc(var(--k,0)*50ms) both,mDot 2.4s ease-in-out calc(var(--k,0)*140ms + 1s) infinite}
+@keyframes mPopIn{from{transform:scale(0)}to{transform:scale(1)}}
+@keyframes mDot{0%,100%{transform:scale(1)}50%{transform:scale(1.18)}}
+.dt2:last-child{position:relative}
+.dt2:last-child::after{content:"";position:absolute;inset:0;border-radius:50%;background:inherit;animation:mPing 1.8s ease-out 1s infinite}
+@keyframes mPing{0%{transform:scale(1);opacity:.5}100%{transform:scale(2.1);opacity:0}}
+.ring svg{animation:mSpin .5s cubic-bezier(.2,.8,.2,1) both,mBreathe 3.2s ease-in-out .6s infinite alternate}
 @keyframes mSpin{from{opacity:0;transform:rotate(-90deg) scale(.8)}to{opacity:1;transform:none}}
+@keyframes mBreathe{from{transform:scale(1)}to{transform:scale(1.04)}}
+#app .m i{transform-origin:0 50%;animation:mFill .6s cubic-bezier(.2,.8,.2,1) both}
+@keyframes mFill{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.acct .m i{position:relative;overflow:hidden}
+.acct .m i::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.45),transparent);transform:translateX(-100%);animation:mSweep 2.6s ease-in-out 1s infinite}
+@keyframes mSweep{0%{transform:translateX(-100%)}60%,100%{transform:translateX(100%)}}
+.mdraw{animation:mFade .5s ease both}
+@keyframes mFade{from{opacity:0}to{opacity:1}}
+.mshim{position:absolute;overflow:hidden;pointer-events:none}
+.mshim::before{content:"";position:absolute;top:0;bottom:0;left:0;width:30%;background:linear-gradient(90deg,transparent,rgba(var(--acc-rgb,79,124,255),.3),transparent);transform:translateX(-100%);animation:mShim 3.6s ease-in-out 1s infinite}
+@keyframes mShim{0%{transform:translateX(-100%)}55%,100%{transform:translateX(340%)}}
 .pill::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:currentColor;margin-right:6px;vertical-align:1px;animation:mBlink 1.6s ease-in-out infinite}
 @keyframes mBlink{0%,100%{opacity:.3}50%{opacity:1}}
 .tabs button,.fab,.p,button.lnk{transition:transform .15s,color .2s}
@@ -1391,19 +1415,6 @@ if(document.body.dataset.tab==='plan')pmRender();
 .tabs button.on,body.c .tabs button.on{background:transparent!important;box-shadow:none}
 .tabs button{position:relative;z-index:1}
 #tabpill{position:absolute;z-index:0;top:5px;bottom:5px;left:0;width:0;border-radius:8px;background:var(--grad);transition:transform .28s cubic-bezier(.4,0,.2,1),width .28s cubic-bezier(.4,0,.2,1);pointer-events:none}
-#app .m i{transform-origin:0 50%;animation:mFill .6s cubic-bezier(.2,.8,.2,1) both}
-@keyframes mFill{from{transform:scaleX(0)}to{transform:scaleX(1)}}
-.mbar{transform-origin:50% 100%;animation:mGrow .6s cubic-bezier(.2,.9,.25,1) var(--d,0ms) both}
-.mrect{transform-box:fill-box;animation:mGrow .6s cubic-bezier(.2,.9,.25,1) var(--d,0ms) both}
-@keyframes mGrow{from{transform:scaleY(0)}to{transform:scaleY(1)}}
-.mbl{animation:mLab .6s cubic-bezier(.2,.9,.25,1) var(--d,0ms) both}
-@keyframes mLab{from{opacity:0;transform:translateY(var(--h,0px))}to{opacity:1;transform:none}}
-.mdraw{animation:mWipe .8s cubic-bezier(.3,.7,.2,1) both}
-@keyframes mWipe{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}
-.mdot{animation:mFade .3s ease .7s both}
-@keyframes mFade{from{opacity:0}to{opacity:1}}
-.mping{transform-box:fill-box;transform-origin:center;opacity:0;animation:mPing 2s ease-out 1s infinite}
-@keyframes mPing{0%{transform:scale(1);opacity:.55}100%{transform:scale(3.4);opacity:0}}
 #nw .s.ev{position:relative;animation:mSlide .3s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(var(--mj,0)*30ms)}
 #nw .s.hl2{animation:mSlideR .3s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(var(--mj,0)*30ms)}
 @keyframes mSlide{from{opacity:0;transform:translateX(-22px)}to{opacity:1;transform:none}}
@@ -1423,69 +1434,43 @@ if(document.body.dataset.tab==='plan')pmRender();
 @keyframes mPop{from{transform:scale(0)}to{transform:none}}
 dialog[open]{animation:mDlg .25s cubic-bezier(.2,.8,.2,1)}
 @keyframes mDlg{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+html.msc .mloop,html.msc .mloop::before,html.msc .mloop::after{animation-play-state:paused!important}
 }
 </style>
 <script id="motion-js">
 (function(){
 if(matchMedia("(prefers-reduced-motion:reduce)").matches)return;
 var app=document.getElementById("app");if(!app)return;
-var NS="http://www.w3.org/2000/svg",gid=0;
+var root=document.documentElement;
 function count(el){
   var tn=el.firstChild;if(!tn||tn.nodeType!==3||el.childNodes.length!==1||el.dataset.m)return;el.dataset.m=1;
   var orig=tn.nodeValue,m=orig.trim().match(/^([^\d-]*-?)([\d,]+(?:\.\d+)?)(.*)$/);if(!m)return;
   var to=parseFloat(m[2].replace(/,/g,"")),dec=(m[2].split(".")[1]||"").length;if(!isFinite(to)||to===0)return;
-  var t0=performance.now(),D=650;
+  var t0=performance.now(),D=600;
   (function f(n){var p=Math.min((n-t0)/D,1),e=1-Math.pow(1-p,3);
     tn.nodeValue=p<1?m[1]+(to*e).toLocaleString("en-US",{minimumFractionDigits:dec,maximumFractionDigits:dec})+m[3]:orig;
     if(p<1)requestAnimationFrame(f)})(t0);
 }
-var ioP="IntersectionObserver"in window?new IntersectionObserver(function(es){es.forEach(function(e){
-  try{e.isIntersecting?e.target.unpauseAnimations():e.target.pauseAnimations()}catch(x){}})}):null;
 function bars(q){
   q(".vcol").forEach(function(col){
     var u=col.querySelector("u"),b=col.querySelector("b");if(!u||u.dataset.m)return;u.dataset.m=1;
-    var i=[].indexOf.call(col.parentNode.children,col),h=u.offsetHeight||parseFloat(u.style.height)||0,d=Math.min(i,8)*25+10;
-    u.style.setProperty("--d",d+"ms");u.classList.add("mbar");
-    if(b){b.style.setProperty("--d",d+"ms");b.style.setProperty("--h",h+"px");b.classList.add("mbl")}
-  });
-  var groups=new Map();
-  q(".cw rect").forEach(function(r){var s=r.ownerSVGElement;if(!s||r.dataset.m)return;if(!groups.has(s))groups.set(s,[]);groups.get(s).push(r)});
-  groups.forEach(function(rs){
-    if(rs.length>40)return;
-    var cnt={};rs.forEach(function(r){var y=+r.getAttribute("y"),hh=+r.getAttribute("height");[y,y+hh].forEach(function(e){e=Math.round(e);cnt[e]=(cnt[e]||0)+1})});
-    var zero=0,best=-1;for(var k in cnt)if(cnt[k]>best){best=cnt[k];zero=+k}
-    rs.forEach(function(r,i){
-      var y=+r.getAttribute("y"),hh=+r.getAttribute("height");r.dataset.m=1;
-      r.style.transformOrigin=Math.abs(y+hh-zero)<=Math.abs(y-zero)?"50% 100%":"50% 0%";
-      r.style.setProperty("--d",Math.min(i,12)*15+10+"ms");r.classList.add("mrect");
-    });
+    var i=[].indexOf.call(col.parentNode.children,col),h=u.offsetHeight||parseFloat(u.style.height)||0;
+    var d=Math.min(i,8)*25+10,p=(2.2+(i%5)*.25).toFixed(2)+"s";
+    u.style.setProperty("--d",d+"ms");u.style.setProperty("--p",p);u.classList.add("mbar","mloop");
+    if(b){b.style.setProperty("--d",d+"ms");b.style.setProperty("--p",p);b.style.setProperty("--h",h+"px");b.classList.add("mbl","mloop")}
   });
 }
-function lines(q){
-  var made=0;
-  q("svg").forEach(function(svg){
-    if(svg.dataset.m)return;var l=svg.querySelector("polyline");if(!l)return;
-    svg.dataset.m=1;svg.classList.add("mdraw");
-    svg.addEventListener("animationend",function h(e){if(e.target===svg){svg.classList.remove("mdraw");svg.removeEventListener("animationend",h)}});
-    if(made>=4)return;
-    var pts=(l.getAttribute("points")||"").trim().split(/\s+/);if(pts.length<4)return;made++;
-    var vb=svg.viewBox&&svg.viewBox.baseVal,W=vb&&vb.width?vb.width:300,bw=W*.22,id="mg"+(++gid);
-    var defs=document.createElementNS(NS,"defs"),g=document.createElementNS(NS,"linearGradient");
-    g.setAttribute("id",id);g.setAttribute("gradientUnits","userSpaceOnUse");g.setAttribute("y1","0");g.setAttribute("y2","0");g.setAttribute("x1",-bw);g.setAttribute("x2","0");
-    [[0,0],[.5,.95],[1,0]].forEach(function(s){var st=document.createElementNS(NS,"stop");st.setAttribute("offset",s[0]);st.setAttribute("stop-color","#fff");st.setAttribute("stop-opacity",s[1]);g.appendChild(st)});
-    [["x1",-bw,W],["x2",0,W+bw]].forEach(function(a){
-      var an=document.createElementNS(NS,"animate");an.setAttribute("attributeName",a[0]);an.setAttribute("values",a[1]+";"+a[2]+";"+a[2]);
-      an.setAttribute("keyTimes","0;.65;1");an.setAttribute("dur","4s");an.setAttribute("begin","1s");an.setAttribute("repeatCount","indefinite");g.appendChild(an)});
-    defs.appendChild(g);defs.dataset.mx=1;svg.insertBefore(defs,svg.firstChild);
-    var c=l.cloneNode(false);c.setAttribute("stroke","url(#"+id+")");c.removeAttribute("class");c.dataset.mx=1;c.style.pointerEvents="none";
-    l.parentNode.insertBefore(c,l.nextSibling);
-    if(svg.getAttribute("preserveAspectRatio")!=="none"){
-      var lp=pts[pts.length-1].split(",");
-      if(lp.length===2)["mping","mdot"].forEach(function(k){
-        var d=document.createElementNS(NS,"circle");d.setAttribute("cx",lp[0]);d.setAttribute("cy",lp[1]);d.setAttribute("r",k==="mdot"?3.4:4);
-        d.setAttribute("fill",l.getAttribute("stroke")||"currentColor");d.setAttribute("class",k);d.dataset.mx=1;d.style.pointerEvents="none";svg.appendChild(d)});
-    }
-    if(ioP)ioP.observe(svg);
+function shimmer(q){
+  q("svg.spk,.cw>svg").forEach(function(svg){
+    if(svg.dataset.m)return;svg.dataset.m=1;
+    if(!svg.querySelector("polyline,polygon"))return;
+    svg.classList.add("mdraw");
+    var p=svg.parentNode;if(!p||p.nodeType!==1)return;
+    if(getComputedStyle(p).position==="static")p.style.position="relative";
+    var r=svg.getBoundingClientRect(),pr=p.getBoundingClientRect();if(!r.width||!r.height)return;
+    var o=document.createElement("i");o.className="mshim mloop";o.dataset.mx=1;
+    o.style.cssText="left:"+(r.left-pr.left-p.clientLeft)+"px;top:"+(r.top-pr.top-p.clientTop)+"px;width:"+r.width+"px;height:"+r.height+"px";
+    p.insertBefore(o,svg.nextSibling);
   });
 }
 var seen={};
@@ -1498,8 +1483,10 @@ function newTrades(){
 function decorate(sc){
   var q=function(s){var a=[].slice.call(sc.querySelectorAll(s));if(sc.matches&&sc.matches(s))a.unshift(sc);return a};
   q(".big").forEach(count);
+  q(".dt2").forEach(function(d,i){d.style.setProperty("--k",i);d.classList.add("mloop")});
+  q(".ring svg,.acct .m i").forEach(function(e){e.classList.add("mloop")});
   q("#nw .s.ev,#nw .s.hl2").forEach(function(c,i){c.style.setProperty("--mj",Math.min(i,6))});
-  bars(q);lines(q);
+  bars(q);shimmer(q);
   q(".note .win").forEach(function(s){if(s.textContent.trim()==="●")s.classList.add("mlive")});
 }
 function run(){
@@ -1516,6 +1503,11 @@ new MutationObserver(function(ms){
   if(full)run();else nodes.forEach(decorate);
 }).observe(app,{childList:true,subtree:true});
 if(app.children.length)run();
+var st=0,tm;
+addEventListener("scroll",function(){
+  if(!st){root.classList.add("msc");st=1}
+  clearTimeout(tm);tm=setTimeout(function(){root.classList.remove("msc");st=0},10);
+},{passive:true});
 var tabs=document.getElementById("tabs"),pill=null;
 function movePill(){
   if(!tabs)return;var b=tabs.querySelector("button.on");if(!b)return;
