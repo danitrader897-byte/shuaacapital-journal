@@ -706,7 +706,7 @@ function renderV(fullAll){
   const grp={};rows.forEach(r=>{const k=r[sbk]||'-';(grp[k]=grp[k]||[]).push(r)});
   const sbRows=Object.keys(grp).map(k=>{const x=grp[k],w=x.filter(r=>r.result==='WIN').length,l=x.filter(r=>r.result==='LOSS').length;return{k,n:x.length,w,l,p:w+l?w/(w+l)*100:0,e:zNet(x)/x.length}}).sort((a,b)=>b.n-a.n);
   const sbTop=sbRows.slice(0,6),sbRest=sbRows.slice(6),sbNeg=g=>g.w+g.l>0&&g.p<50;
-  const setupHtml=`<select data-f="sb" style="margin-bottom:10px">${Object.keys(sbl).map(k=>`<option value="${k}"${k===sbk?' selected':''}>${sbl[k]}</option>`).join('')}</select>`+(sbTop.length?`<div class="vc sb"><div class="g50" style="bottom:42px"></div>${sbTop.map(g=>`<div class="vcol${g.n<5?' lo':''}"><b class="${sbNeg(g)?'loss':''}">${g.w+g.l?Math.round(g.p)+'%':'-'}</b><u class="${sbNeg(g)?'neg':''}" style="height:${Math.max(3,g.p*.85).toFixed(0)}px"></u></div>`).join('')}</div><div class="vlb sb">${sbTop.map(g=>`<div><span>${esc(g.k)}</span><small class="${g.e>=0?'win':'loss'}">${f1(g.e)}</small><em>${g.n} trade</em></div>`).join('')}</div><div class="note" style="margin-top:6px">Angka berwarna = expectancy per trade. Pudar = sampel kecil (kurang dari 5 trade).</div>`:'')+(sbRest.length?`<details class="dt"><summary>Setup lainnya (${sbRest.length})</summary>${sbRest.map(g=>`<div class="s"><div class="r"><span>${esc(g.k)}</span><span><b class="${sbNeg(g)?'loss':'win'}">${g.w+g.l?Math.round(g.p)+'%':'-'}</b> <small class="${g.e>=0?'win':'loss'}">${f1(g.e)}/trade</small></span></div><div class="d">${g.n} trade · ${g.w}W · ${g.l}L${g.n<5?' · sampel kecil':''}</div></div>`).join('')}</details>`:'');
+  const setupHtml=`<select data-f="sb" style="margin-bottom:10px">${Object.keys(sbl).map(k=>`<option value="${k}"${k===sbk?' selected':''}>${sbl[k]}</option>`).join('')}</select>`+(sbTop.length?`<div class="vc sb"><div class="g50" style="bottom:42px"></div>${sbTop.map(g=>`<div class="vcol${g.n<5?' lo':''}"><b class="${sbNeg(g)?'loss':''}">${g.w+g.l?Math.round(g.p)+'%':'-'}</b><u class="${sbNeg(g)?'neg':''}" style="height:${Math.max(3,g.p*.85).toFixed(0)}px"></u></div>`).join('')}</div><div class="vlb sb">${sbTop.map(g=>`<div><span>${esc(g.k)}</span><small class="${g.e>=0?'win':'loss'}">${f1(g.e)}</small><em>${g.n} trade</em></div>`).join('')}</div><div class="note" style="margin-top:6px">Angka berwarna = expectancy per trade. Angka abu-abu = sampel kecil (kurang dari 5 trade).</div>`:'')+(sbRest.length?`<details class="dt"><summary>Setup lainnya (${sbRest.length})</summary>${sbRest.map(g=>`<div class="s"><div class="r"><span>${esc(g.k)}</span><span><b class="${sbNeg(g)?'loss':'win'}">${g.w+g.l?Math.round(g.p)+'%':'-'}</b> <small class="${g.e>=0?'win':'loss'}">${f1(g.e)}/trade</small></span></div><div class="d">${g.n} trade · ${g.w}W · ${g.l}L${g.n<5?' · sampel kecil':''}</div></div>`).join('')}</details>`:'');
   const rrc={};rows.forEach(r=>{if(r.rr)rrc[r.rr]=(rrc[r.rr]||0)+1});
   const rrs=Object.keys(rrc).sort((a,b)=>parseFloat(a.split(':')[1])-parseFloat(b.split(':')[1])).map(k=>`<span>${esc(k)} · <b>${rrc[k]}</b></span>`).join('');
   const uniq=k=>[...new Set(rowsAll.map(r=>r[k]).filter(Boolean))].sort();
@@ -791,12 +791,12 @@ function renderV(fullAll){
   const hmHtml='<div class="hm"><u></u>'+hmS.map(x=>`<u>${x}</u>`).join('')+[1,2,3,4,5,6,0].filter(d=>(d>0&&d<6)||hmS.some(x=>hm[d+'|'+x])).map(d=>`<u>${dow[d]}</u>`+hmS.map(x=>{const y=hm[d+'|'+x]||[];if(!y.length)return '<i></i>';const n=y.reduce((a,r)=>a+R(r),0);return `<b style="background:${n>=0?'rgba(var(--win-rgb),':'rgba(var(--loss-rgb),'}${Math.min(.5,.22+Math.abs(n)/6*.5).toFixed(2)})">${f1(n)}<small>${y.length} trade</small></b>`}).join('')).join('')+'</div>';
   const pg={};rows.forEach(r=>{const k=r.pair||'-';(pg[k]=pg[k]||[]).push(r)});
   const pgL=Object.keys(pg).map(k=>{const x=pg[k],w=x.filter(r=>r.result==='WIN').length,l=x.filter(r=>r.result==='LOSS').length;return{k,n:x.length,w,l,r:x.reduce((a,r)=>a+R(r),0),p:w+l?w/(w+l)*100:0}}).sort((a,b)=>b.r-a.r).map(g=>{const c=g.p>=50?'var(--nv)':'var(--loss)';return `<div class="pt${g.n<5?' lo':''}"><svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="16" fill="none" stroke="var(--line)" stroke-width="4"/><circle cx="20" cy="20" r="16" fill="none" stroke="${c}" stroke-width="4" stroke-linecap="round" stroke-dasharray="${(g.p*1.005).toFixed(1)} 100.5" transform="rotate(-90 20 20)"/><text x="20" y="24" text-anchor="middle" font-size="11" font-weight="600" fill="var(--ink)">${g.w+g.l?Math.round(g.p):'-'}</text></svg><div><b>${esc(g.k)}</b><span class="${g.r>=0?'win':'loss'}">${f1(g.r)}</span><em>${g.n} trade${g.n<5?' · kecil':''}</em></div></div>`}).join('');
-  const pairHtml=pgL?`<div class="pgrid">${pgL}</div><div class="note" style="margin-top:6px">Ring = win rate (%), angka berwarna = total R. Pudar = sampel kecil.</div>`:'-';
+  const pairHtml=pgL?`<div class="pgrid">${pgL}</div><div class="note" style="margin-top:6px">Ring = win rate (%), angka berwarna = total R. Angka abu-abu = sampel kecil.</div>`:'-';
   const crtNorm=v=>{let t=String(v||'').trim().toUpperCase().replace(/[\s_-]+/g,'');const m=t.match(/^([MHD])(\d+)$/)||t.match(/^(\d+)([MHD])$/);if(!m)return t;return /^\d/.test(m[1])?m[2]+m[1]:m[1]+m[2]};
   const crtOrd=['M1','M3','M5','M15','M30','H1','M90','H4','H6','D1'],cg2={};rows.forEach(r=>{const k=crtNorm(r.crt);if(!k)return;(cg2[k]=cg2[k]||[]).push(r)});
   const crtL=Object.keys(cg2).sort((a,b)=>{const ia=crtOrd.indexOf(a),ib=crtOrd.indexOf(b);return (ia<0?99:ia)-(ib<0?99:ib)||a.localeCompare(b)}).map(k=>{const x=cg2[k],w=x.filter(r=>r.result==='WIN').length,l=x.filter(r=>r.result==='LOSS').length,be=x.filter(r=>r.result==='BE').length;return{k,n:x.length,w,l,be,r:x.reduce((a,r)=>a+R(r),0),p:w+l?w/(w+l)*100:0}}).map(g=>{const c=g.p>=50?'var(--nv)':'var(--loss)';return `<div class="pt${g.n<5?' lo':''}"><svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="16" fill="none" stroke="var(--line)" stroke-width="4"/><circle cx="20" cy="20" r="16" fill="none" stroke="${c}" stroke-width="4" stroke-linecap="round" stroke-dasharray="${(g.p*1.005).toFixed(1)} 100.5" transform="rotate(-90 20 20)"/><text x="20" y="24" text-anchor="middle" font-size="11" font-weight="600" fill="var(--ink)">${g.w+g.l?Math.round(g.p):'-'}</text></svg><div><b>CRT ${esc(g.k)}</b><span class="${g.r>=0?'win':'loss'}">${f1(g.r)}</span><em>${g.w}W · ${g.l}L${g.be?' · '+g.be+'BE':''} · ${g.n} trade${g.n<5?' · kecil':''}</em></div></div>`}).join('');
   const noCrt=rows.filter(r=>!crtNorm(r.crt)).length;
-  const crtHtml=crtL?`<div class="pgrid">${crtL}</div><div class="note" style="margin-top:6px">Ring = win rate (%), angka berwarna = total R. Pudar = sampel kecil (kurang dari 5 trade). BE tidak dihitung dalam win rate.${noCrt?' '+noCrt+' trade belum diisi CRT.':''}</div>`:'<div class="note">Belum ada trade dengan CRT TF. Isi kolom CRT (TF) di form trade.</div>';
+  const crtHtml=crtL?`<div class="pgrid">${crtL}</div><div class="note" style="margin-top:6px">Ring = win rate (%), angka berwarna = total R. Angka abu-abu = sampel kecil (kurang dari 5 trade). BE tidak dihitung dalam win rate.${noCrt?' '+noCrt+' trade belum diisi CRT.':''}</div>`:'<div class="note">Belum ada trade dengan CRT TF. Isi kolom CRT (TF) di form trade.</div>';
   const tile=(l,v,c)=>`<div class="tl"><span>${l}</span><b class="${c||''}">${v}</b></div>`;
   const mini=(l,v,pc,cl)=>`<div class="mn"><div class="d">${l}</div><b>${v}</b><div class="m ${cl}"><i style="width:${Math.max(0,Math.min(100,pc)).toFixed(0)}%"></i></div></div>`;
   const accHtml=`<div class="card acct hd"><div class="ah"><div><div class="lbl2">Balance</div><b class="big">${usd(ACC.bal+pn)}</b><span class="${pn>=0?'win':'loss'}">${pn>=0?'+':''}${usd(pn)} (${pp.toFixed(1)}%)</span></div><span class="pill ${stt[1]}">${stt[0]}</span></div>${sp}
@@ -1412,6 +1412,24 @@ body .k-win,body .k-acc,body .k-warn{border-top:2px solid var(--acc)}
 :root[data-theme=dark] .t .mi,:root[data-theme=dark] .ses,:root[data-theme=dark] .ax{color:var(--mute);fill:var(--mute)}
 :root[data-theme=dark] .cw .tip{background:#1c2a47;border-color:#2c3f68}
 :root[data-theme=dark] .ents .day{background:#15213a}
+</style>
+<style id="soft-colors">
+/* Warna diredam: merah lebih kalem, elemen kecil tidak menonjol, bar chart tetap */
+:root[data-theme=dark]{--loss:#d9808c;--loss-rgb:217,128,140}
+:root[data-theme=light]{--loss:#b5485a;--loss-rgb:181,72,90}
+body .k-win,body .k-acc,body .k-warn{border-top:1px solid var(--line)}
+.dots{gap:7px}
+.dt2{width:13px;height:13px}
+.dt2.WIN{background:rgba(var(--acc-rgb),.8)}
+.dt2.LOSS{background:rgba(var(--loss-rgb),.75)}
+.dt2.BE{background:rgba(var(--be-rgb),.6)}
+.ring svg circle{stroke-width:9}
+.stp{background:rgba(var(--acc-rgb),.16);color:var(--acc);font-weight:700}
+.vcol u.neg,.cw rect.neg{opacity:.85}
+body .vcol u,body .vcol.lo u{opacity:1;border-radius:4px}
+body .vcol u.neg{opacity:.85}
+body .hl{border-left:3px solid rgba(var(--acc-rgb),.45)}
+.pill.loss,.res.LOSS,.dir.Sell,.ip.H{background:rgba(var(--loss-rgb),.10)}
 </style>
 <style id="exchange-theme">
 @property --a{syntax:"<angle>";inherits:false;initial-value:360deg}
