@@ -1560,12 +1560,16 @@ svg.mrv.in :is(.lp,.lpt,.lpx){animation:mFade .3s ease .3s backwards}
 /* bar chart: tumbuh dari dasar dengan sedikit pantulan */
 svg.mrv.mc-bars rect{transform-box:fill-box;transform-origin:50% 100%}
 svg.mrv.mc-bars rect.neg{transform-origin:50% 0}
-svg.mrv.mc-bars.in rect{animation:mGrowY .5s var(--spring) var(--d,0ms) backwards}
-svg.mrv.mc-bars.in .mc-lbl{animation:mFadeUp .3s var(--snap) var(--d,0ms) backwards}
+svg.mrv.mc-bars{overflow:visible}
+svg.mrv.mc-bars.in rect{animation:mGrowY .5s var(--spring) var(--d,0ms) backwards,mPulse var(--pd,2.4s) ease-in-out calc(.55s + var(--d,0ms)) infinite}
+svg.mrv.mc-bars.in .mc-lbl{animation:mFadeUp .3s var(--snap) var(--d,0ms) backwards,mLblPulse var(--pd,2.4s) ease-in-out .55s infinite}
 .vc.mrv .vcol u{transform-origin:50% 100%}
-.vc.mrv.in .vcol u{animation:mGrowY .5s var(--spring) var(--d,0ms) backwards}
-.vc.mrv.in .vcol b{animation:mFadeUp .3s var(--snap) calc(var(--d,0ms) + 60ms) backwards}
+.vc.mrv.in .vcol u{animation:mGrowY .5s var(--spring) var(--d,0ms) backwards,mPulse var(--pd,2.4s) ease-in-out calc(.55s + var(--d,0ms)) infinite}
+svg.mrv.mc-bars:not(.vis) :is(rect,.mc-lbl),.vc.mrv:not(.vis) .vcol :is(u,b){animation-play-state:paused}
+.vc.mrv.in .vcol b{animation:mFadeUp .3s var(--snap) calc(var(--d,0ms) + 60ms) backwards,mLblPulse var(--pd,2.4s) ease-in-out calc(.55s + var(--d,0ms)) infinite}
 .vcol:active u{filter:brightness(1.25)}
+@keyframes mPulse{0%,100%{transform:scaleY(1)}35%{transform:scaleY(1.14)}70%{transform:scaleY(.9)}}
+@keyframes mLblPulse{0%,100%{transform:translateY(0)}35%{transform:translateY(calc(var(--h,0px)*var(--sg,-1)*.14))}70%{transform:translateY(calc(var(--h,0px)*var(--sg,-1)*-.1))}}
 @keyframes mGrowY{from{transform:scaleY(0)}to{transform:scaleY(1)}}
 @keyframes mFadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 
@@ -1578,10 +1582,14 @@ svg.mrv.mc-bars.in .mc-lbl{animation:mFadeUp .3s var(--snap) var(--d,0ms) backwa
 /* progress bar: terisi lalu kilau berjalan (berhenti saat di luar layar) */
 .m.mrv i{transform-origin:0 50%;position:relative;overflow:hidden}
 .m.mrv.in i{animation:mFillX .6s var(--snap) backwards}
-.m.mrv i::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.32),transparent);transform:translateX(-120%);animation:mShine 2.8s ease-in-out .7s infinite}
-.m.mrv:not(.vis) i::after{animation-play-state:paused}
+.m.mrv i::after{content:"";position:absolute;left:0;top:0;bottom:0;width:55%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.6) 50%,transparent);transform:translateX(-100%);animation:mShine 1.7s ease-in-out .6s infinite}
+.m.mrv i::before{content:"";position:absolute;right:0;top:0;bottom:0;width:10px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.95));border-radius:0 3px 3px 0;animation:mHead 1.2s ease-in-out .6s infinite;z-index:1}
+.m.mrv:not(.vis) i::after,.m.mrv:not(.vis) i::before{animation-play-state:paused}
+.hd .m.big2.mrv.in i{animation:mFillX .6s var(--snap) backwards,mGlowBar 2.4s ease-in-out .8s infinite}
+@keyframes mHead{0%,100%{opacity:.25}50%{opacity:1}}
+@keyframes mGlowBar{0%,100%{opacity:1}50%{opacity:.82}}
 @keyframes mFillX{from{transform:scaleX(0)}to{transform:scaleX(1)}}
-@keyframes mShine{0%{transform:translateX(-120%)}55%,100%{transform:translateX(120%)}}
+@keyframes mShine{0%{transform:translateX(-100%)}100%{transform:translateX(190%)}}
 
 /* titik form 10 trade terakhir */
 .dots.mrv.in .dt2{animation:mPopIn .3s var(--spring) calc(var(--k,0)*10ms) backwards}
@@ -1670,9 +1678,9 @@ function charts(q){
         if(f.indexOf("--loss")>0)r.classList.add("neg");
         else if(f.indexOf("--win)")>0)r.classList.add("best");
         else r.style.fill="url(#"+id+")";
-        r.style.setProperty("--d",d+"ms");
+        r.style.setProperty("--d",d+"ms");r.style.setProperty("--h",(parseFloat(r.getAttribute("height"))||0)+"px");r.style.setProperty("--pd",(2.1+Math.min(i,10)*.13).toFixed(2)+"s");
         var t=r.nextElementSibling;
-        if(t&&t.tagName.toLowerCase()==="text"){t.classList.add("mc-lbl");t.style.setProperty("--d",(d+90)+"ms")}
+        if(t&&t.tagName.toLowerCase()==="text"){t.classList.add("mc-lbl");t.style.setProperty("--d",(d+90)+"ms");t.style.setProperty("--h",(parseFloat(r.getAttribute("height"))||0)+"px");t.style.setProperty("--sg",r.classList.contains("neg")?1:-1);t.style.setProperty("--pd",(2.1+Math.min(i,10)*.13).toFixed(2)+"s")}
       });
     }
   });
@@ -1692,7 +1700,7 @@ function decorate(sc){
     c.style.setProperty("--len",d[0]);c.style.setProperty("--C",d[1]||"999");c.classList.add("seg")});
   q(".ring,.pt,.m,.dots,.vc").forEach(function(e){watch(e)});
   q(".dt2").forEach(function(d,i){d.style.setProperty("--k",Math.min(i,12))});
-  q(".vcol").forEach(function(c,i){c.style.setProperty("--d",Math.min(i,10)*12+"ms")});
+  q(".vcol").forEach(function(c,i){c.style.setProperty("--d",Math.min(i,10)*12+"ms");var u=c.querySelector("u");if(u)c.style.setProperty("--h",(parseFloat(u.style.height)||0)+"px");c.style.setProperty("--pd",(2.1+Math.min(i,10)*.13).toFixed(2)+"s")});
   q("#nw .s.ev,#nw .s.hl2").forEach(function(c,i){c.style.setProperty("--mj",Math.min(i,6))});
   charts(q);
   q("[data-sec]").forEach(function(sec){var n=0;[].forEach.call(sec.querySelectorAll("h2,.card,.t"),function(e){
