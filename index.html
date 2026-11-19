@@ -1496,7 +1496,6 @@ body .ents .t .ac button{width:22px;height:22px;font-size:12px;opacity:.7}
 .cw .lpx{fill:#fff;font-size:10px;font-weight:700}
 .cw .cur{stroke-dasharray:3 3;stroke:var(--mute)}
 .cw .tip{top:-4px;background:var(--card2);font-weight:600}
-@media(prefers-reduced-motion:no-preference){#app.mfirst .lp,#app.mfirst .lpt,#app.mfirst .lpx{animation:mFade .25s ease .45s backwards}}
 body .ents .t{content-visibility:auto;contain-intrinsic-size:auto 66px}
 </style>
 <script id="exchange-js">
@@ -1530,33 +1529,62 @@ document.querySelectorAll("#tabs button").forEach(function(b){
 @keyframes mTabPop{0%{transform:scale(.94)}100%{transform:none}}
 
 
-/* ---- equity curve & sparkline: tergambar cepat, ujung berdenyut terus ---- */
-#app.mfirst .mc-line polyline,#app.mfirst .mc-line polygon{animation:mWipe .75s var(--draw) backwards}
+/* ===== GRAFIK: jalan saat masuk layar (IntersectionObserver), hanya transform/opacity/dash agar halus ===== */
+/* keadaan awal (sebelum masuk layar) */
+svg.mrv.mc-line:not(.in) polyline,svg.mrv.mc-line:not(.in) polygon{clip-path:inset(-8px 100% -8px -8px)}
+svg.mrv.mc-line:not(.in) .mc-end{transform:scale(0)}
+svg.mrv:not(.in) :is(.lp,.lpt,.lpx){opacity:0}
+svg.mrv.mc-bars:not(.in) rect{transform:scaleY(0)}
+svg.mrv.mc-bars:not(.in) .mc-lbl{opacity:0}
+.vc.mrv:not(.in) .vcol u{transform:scaleY(0)}
+.vc.mrv:not(.in) .vcol b{opacity:0}
+.m.mrv:not(.in) i{transform:scaleX(0)}
+:is(.ring,.pt).mrv:not(.in) svg{opacity:0;transform:rotate(-110deg) scale(.86)}
+:is(.ring,.pt).mrv:not(.in) .seg{stroke-dasharray:0 var(--C,999)}
+.dots.mrv:not(.in) .dt2{transform:scale(0)}
+
+/* garis equity & sparkline: tergambar kiri ke kanan, ujungnya muncul lalu berdenyut terus */
+svg.mrv.mc-line.in polyline,svg.mrv.mc-line.in polygon{animation:mWipe .7s var(--draw) backwards}
 @keyframes mWipe{from{clip-path:inset(-8px 100% -8px -8px)}to{clip-path:inset(-8px -8px -8px -8px)}}
 .mc-end{transform-box:fill-box;transform-origin:center}
-#app.mfirst .mc-end{animation:mPopIn .4s var(--spring) .55s backwards}
-.mc-ring{fill:none;stroke-width:1.5;opacity:0;transform-box:fill-box;transform-origin:center;animation:mPing 2.2s ease-out .8s infinite}
+svg.mrv.in .mc-end{animation:mPopIn .35s var(--spring) .5s backwards}
+.mc-ring{fill:none;stroke-width:1.5;opacity:0;transform-box:fill-box;transform-origin:center;animation:mPing 2.2s ease-out .9s infinite}
+svg.mrv.mc-line.in polygon{animation:mWipe .7s var(--draw) backwards,mBreath 4s ease-in-out .8s infinite}
+svg.mrv:not(.in) .mc-ring{animation:none}
+svg.mrv:not(.vis) .mc-ring,svg.mrv:not(.vis) polygon{animation-play-state:paused}
+svg.mrv.in :is(.lp,.lpt,.lpx){animation:mFade .3s ease .3s backwards}
 @keyframes mPopIn{from{transform:scale(0)}to{transform:scale(1)}}
 @keyframes mPing{0%{transform:scale(1);opacity:.6}70%,100%{transform:scale(3.4);opacity:0}}
+@keyframes mBreath{0%,100%{opacity:1}50%{opacity:.72}}
 
-/* ---- bar chart: tumbuh dari dasar dengan pantulan ---- */
-#app.mfirst .mc-bars rect{transform-box:fill-box;transform-origin:50% 100%;animation:mGrowY .5s var(--spring) var(--d,0ms) backwards}
-#app.mfirst .mc-bars rect.neg{transform-origin:50% 0}
-#app.mfirst .mc-lbl{animation:mFadeUp .3s var(--snap) var(--d,0ms) backwards}
+/* bar chart: tumbuh dari dasar dengan sedikit pantulan */
+svg.mrv.mc-bars rect{transform-box:fill-box;transform-origin:50% 100%}
+svg.mrv.mc-bars rect.neg{transform-origin:50% 0}
+svg.mrv.mc-bars.in rect{animation:mGrowY .5s var(--spring) var(--d,0ms) backwards}
+svg.mrv.mc-bars.in .mc-lbl{animation:mFadeUp .3s var(--snap) var(--d,0ms) backwards}
+.vc.mrv .vcol u{transform-origin:50% 100%}
+.vc.mrv.in .vcol u{animation:mGrowY .5s var(--spring) var(--d,0ms) backwards}
+.vc.mrv.in .vcol b{animation:mFadeUp .3s var(--snap) calc(var(--d,0ms) + 60ms) backwards}
+.vcol:active u{filter:brightness(1.25)}
 @keyframes mGrowY{from{transform:scaleY(0)}to{transform:scaleY(1)}}
 @keyframes mFadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-#app.mfirst .vcol u{transform-origin:50% 100%;animation:mGrowY .5s var(--spring) var(--d,0ms) backwards}
-#app.mfirst .vcol b{animation:mFadeUp .3s var(--snap) calc(var(--d,0ms) + 60ms) backwards}
 
-/* ---- progress (dengan kilau berjalan), donut, titik ---- */
-#app.mfirst .m i{transform-origin:0 50%;animation:mFillX .6s var(--snap) backwards}
+/* win rate & donut: lingkaran berputar masuk, busur mengisi, angka menghitung naik bersamaan */
+:is(.ring,.pt).mrv.in svg{animation:mSpin .65s var(--snap) backwards}
+:is(.ring,.pt).mrv.in .seg{animation:mArc .75s var(--draw) backwards}
+@keyframes mSpin{from{opacity:0;transform:rotate(-110deg) scale(.86)}to{opacity:1;transform:none}}
+@keyframes mArc{from{stroke-dasharray:0 var(--C,999)}to{stroke-dasharray:var(--len) var(--C,999)}}
+
+/* progress bar: terisi lalu kilau berjalan (berhenti saat di luar layar) */
+.m.mrv i{transform-origin:0 50%;position:relative;overflow:hidden}
+.m.mrv.in i{animation:mFillX .6s var(--snap) backwards}
+.m.mrv i::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.32),transparent);transform:translateX(-120%);animation:mShine 2.8s ease-in-out .7s infinite}
+.m.mrv:not(.vis) i::after{animation-play-state:paused}
 @keyframes mFillX{from{transform:scaleX(0)}to{transform:scaleX(1)}}
-#app .m i{position:relative;overflow:hidden}
-#app .m i::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.32),transparent);transform:translateX(-120%);animation:mShine 2.8s ease-in-out .6s infinite}
 @keyframes mShine{0%{transform:translateX(-120%)}55%,100%{transform:translateX(120%)}}
-#app.mfirst .ring svg,#app.mfirst .pt svg{--a:360deg;-webkit-mask-image:conic-gradient(#000 var(--a),transparent 0);mask-image:conic-gradient(#000 var(--a),transparent 0);animation:mSweep .65s var(--draw) backwards}
-@keyframes mSweep{from{--a:0deg}to{--a:360deg}}
-#app.mfirst .dt2{animation:mPopIn .3s var(--spring) calc(var(--k,0)*10ms) backwards}
+
+/* titik form 10 trade terakhir */
+.dots.mrv.in .dt2{animation:mPopIn .3s var(--spring) calc(var(--k,0)*10ms) backwards}
 
 /* ---- news ---- */
 #nw .s.ev{position:relative;animation:mSlide .32s var(--snap) both;animation-delay:calc(var(--mj,0)*10ms)}
@@ -1590,19 +1618,34 @@ dialog[open]::backdrop{animation:mBd .25s ease-out}
 if(matchMedia("(prefers-reduced-motion:reduce)").matches)return;
 var app=document.getElementById("app");if(!app)return;
 var NS="http://www.w3.org/2000/svg",gid=0;
-function count(el){
-  var tn=el.firstChild;if(!tn||tn.nodeType!==3||el.childNodes.length!==1||el.dataset.m)return;el.dataset.m=1;
+/* --- pemicu masuk-layar: animasi mulai saat grafik hampir terlihat, dan dijeda saat keluar layar --- */
+var io=null;
+function visCb(es){es.forEach(function(e){var el=e.target;
+  if(e.isIntersecting){el.classList.add("vis");
+    if(!el.classList.contains("in")){el.classList.add("in");var f=el.__go;if(f){el.__go=null;f()}}}
+  else el.classList.remove("vis")})}
+if("IntersectionObserver" in window)io=new IntersectionObserver(visCb,{rootMargin:"0px 0px 22% 0px",threshold:0});
+function watch(el,go){
+  if(el.dataset.w)return;el.dataset.w=1;if(go)el.__go=go;
+  if(io){el.classList.add("mrv");io.observe(el)}
+  else{el.classList.add("mrv","in","vis");if(go){el.__go=null;go()}}
+}
+function armCount(el){
+  var tn=el.firstChild;if(!tn||tn.nodeType!==3||el.dataset.m)return;
+  if(el.childNodes.length!==1&&!(el.matches&&el.matches(".ring b")))return;
   var orig=tn.nodeValue,m=orig.trim().match(/^([^\d-]*-?)([\d,]+(?:\.\d+)?)(.*)$/);if(!m)return;
   var to=parseFloat(m[2].replace(/,/g,"")),dec=(m[2].split(".")[1]||"").length;if(!isFinite(to)||to===0)return;
-  var t0=performance.now(),D=480;
-  (function f(n){var p=Math.min((n-t0)/D,1),e=1-Math.pow(1-p,3);
-    tn.nodeValue=p<1?m[1]+(to*e).toLocaleString("en-US",{minimumFractionDigits:dec,maximumFractionDigits:dec})+m[3]:orig;
-    if(p<1)requestAnimationFrame(f)})(t0);
+  el.dataset.m=1;
+  var fmt=function(v){return m[1]+v.toLocaleString("en-US",{minimumFractionDigits:dec,maximumFractionDigits:dec})+m[3]};
+  if(io)tn.nodeValue=fmt(0);
+  watch(el,function(){var t0=performance.now(),D=650;
+    (function f(n){var p=Math.min((n-t0)/D,1),e=1-Math.pow(1-p,3);
+      tn.nodeValue=p<1?fmt(to*e):orig;if(p<1)requestAnimationFrame(f)})(t0)});
 }
 function mk(tag,attrs){var e=document.createElementNS(NS,tag);for(var k in attrs)e.setAttribute(k,attrs[k]);e.dataset.mx=1;return e}
 function charts(q){
   q(".cw>svg,svg.spk").forEach(function(svg){
-    if(svg.dataset.m)return;svg.dataset.m=1;
+    if(svg.dataset.m)return;svg.dataset.m=1;watch(svg);
     var line=svg.querySelector("polyline");
     if(line){
       svg.classList.add("mc-line");
@@ -1623,7 +1666,7 @@ function charts(q){
       g.appendChild(mk("stop",{offset:"1",style:"stop-color:var(--chart)"}));
       defs.appendChild(g);svg.insertBefore(defs,svg.firstChild);
       [].forEach.call(rects,function(r,i){
-        var f=r.getAttribute("fill")||"",d=Math.min(i,10)*22;
+        var f=r.getAttribute("fill")||"",d=Math.min(i,10)*14;
         if(f.indexOf("--loss")>0)r.classList.add("neg");
         else if(f.indexOf("--win)")>0)r.classList.add("best");
         else r.style.fill="url(#"+id+")";
@@ -1643,9 +1686,13 @@ function newTrades(){
 }
 function decorate(sc){
   var q=function(s){var a=[].slice.call(sc.querySelectorAll(s));if(sc.matches&&sc.matches(s))a.unshift(sc);return a};
-  q(".big").forEach(count);
-  q(".dt2").forEach(function(d,i){d.style.setProperty("--k",Math.min(i,20))});
-  q(".vcol").forEach(function(c,i){c.style.setProperty("--d",Math.min(i,10)*20+"ms")});
+  q(".big,.tl b,.ring b,.pt svg text,.kp b,.ch b,.mn b").forEach(armCount);
+  q(".ring circle[stroke-dasharray],.pt circle[stroke-dasharray]").forEach(function(c){
+    if(c.dataset.sg)return;c.dataset.sg=1;var d=(c.getAttribute("stroke-dasharray")||"").trim().split(/[\s,]+/);
+    c.style.setProperty("--len",d[0]);c.style.setProperty("--C",d[1]||"999");c.classList.add("seg")});
+  q(".ring,.pt,.m,.dots,.vc").forEach(function(e){watch(e)});
+  q(".dt2").forEach(function(d,i){d.style.setProperty("--k",Math.min(i,12))});
+  q(".vcol").forEach(function(c,i){c.style.setProperty("--d",Math.min(i,10)*12+"ms")});
   q("#nw .s.ev,#nw .s.hl2").forEach(function(c,i){c.style.setProperty("--mj",Math.min(i,6))});
   charts(q);
   q("[data-sec]").forEach(function(sec){var n=0;[].forEach.call(sec.querySelectorAll("h2,.card,.t"),function(e){
@@ -1654,7 +1701,10 @@ function decorate(sc){
 }
 var played={},mt=0;
 function first(on){app.classList.add("mfirst");clearTimeout(mt);mt=setTimeout(function(){app.classList.remove("mfirst")},2200)}
+function rescue(){[].forEach.call(app.querySelectorAll(".mrv:not(.in)"),function(el){
+  var r=el.getBoundingClientRect();if(r.bottom>0&&r.top<innerHeight*1.2){el.classList.add("in","vis");var f=el.__go;if(f){el.__go=null;f()}}})}
 function run(){
+  setTimeout(rescue,900);
   newTrades();
   decorate(app);
   played={};played[document.body.dataset.tab]=1;first();
