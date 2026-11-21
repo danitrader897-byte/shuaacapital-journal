@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" data-theme="dark">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -10,14 +10,14 @@
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="manifest" href="manifest.webmanifest">
-<meta name="theme-color" content="#1d1410">
-<script>(function(){try{var t=localStorage.getItem("shuaa_theme")||"dark";var l=t==="light"||(t==="auto"&&matchMedia("(prefers-color-scheme: light)").matches);document.documentElement.setAttribute("data-theme",l?"light":"dark");var m=document.querySelector("meta[name=theme-color]");if(m)m.content=l?"#dcebe0":"#141011"}catch(e){}})()</script>
+<meta name="theme-color" content="#0f1626">
+<script>window.__cp=function(x,l,r,wl){var P=['--bg','--card','--card2','--card-end','--ink','--mute','--line','--acc','--acc2','--acc-rgb','--on-acc','--chart','--chart2','--chart-best','--winbar','--grad','--hdbg','--hdb','--hdglow','--glow','--tabsbg','--grid','--shadow','--win','--win-rgb','--loss','--loss-rgb'],i;for(i=0;i<P.length;i++)r.style.removeProperty(P[i]);var m=/^#?([0-9a-f]{6})$/i.exec(x||'');if(!m)return;var n=parseInt(m[1],16),R=(n>>16&255)/255,G=(n>>8&255)/255,B=(n&255)/255,mx=Math.max(R,G,B),mn=Math.min(R,G,B),d=mx-mn,h=0,L0=(mx+mn)/2,S0=d?d/(1-Math.abs(2*L0-1)):0;if(d){h=mx===R?((G-B)/d)%6:mx===G?(B-R)/d+2:(R-G)/d+4;h=Math.round(h*60);if(h<0)h+=360}var cl=function(v,a,b){return Math.max(a,Math.min(b,v))},f=function(H,S,L){S/=100;L/=100;var a=S*Math.min(L,1-L),k=function(q){var t=(q+H/30)%12;return Math.round(255*(L-a*Math.max(-1,Math.min(t-3,9-t,1))))};return '#'+[k(0),k(8),k(4)].map(function(v){return('0'+v.toString(16)).slice(-2)}).join('')},rg=function(x){x=x.slice(1);return parseInt(x.slice(0,2),16)+','+parseInt(x.slice(2,4),16)+','+parseInt(x.slice(4,6),16)},ts=d?1:0,S=cl(S0*100,0,90),ac=f(h,S,l?cl(L0*100,30,46):cl(L0*100,58,72)),c=l?[f(h,25*ts,93),f(h,35*ts,98),f(h,25*ts,89),f(h,35*ts,12),f(h,12*ts,40),f(h,20*ts,80),ac,'#ffffff']:[f(h,30*ts,7),f(h,28*ts,11),f(h,26*ts,15),f(h,40*ts,94),f(h,12*ts,62),f(h,22*ts,22),ac,f(h,50*ts,10)],w=wl==='blue'?(l?['#1b6fe0','#d9631a']:['#6fa8ff','#ff9a4d']):(l?['#1f8a5b','#c4414f']:['#4fd6a0','#ff6b7d']),a=rg(ac),o={'--bg':c[0],'--card':c[1],'--card2':c[2],'--card-end':c[1],'--ink':c[3],'--mute':c[4],'--line':c[5],'--acc':ac,'--acc2':ac,'--acc-rgb':a,'--on-acc':c[7],'--chart':ac,'--chart2':ac,'--chart-best':w[0],'--winbar':ac,'--grad':ac,'--hdbg':'linear-gradient(160deg,'+c[2]+','+c[1]+' 72%)','--hdb':c[5],'--hdglow':'rgba('+a+',.16)','--glow':'rgba('+a+',.08)','--tabsbg':c[1],'--grid':'rgba('+a+',.04)','--shadow':l?'rgba(20,30,50,.14)':'rgba(0,0,0,.4)','--win':w[0],'--win-rgb':rg(w[0]),'--loss':w[1],'--loss-rgb':rg(w[1])};for(i in o)r.style.setProperty(i,o[i])};(function(){try{var t=localStorage.getItem("shuaa_theme")||"dark";var l=t==="light"||(t==="auto"&&matchMedia("(prefers-color-scheme: light)").matches);var d=document.documentElement;d.setAttribute("data-theme",l?"light":"dark");var p=localStorage.getItem("shuaa_pal"),w=localStorage.getItem("shuaa_wl");if(p&&p!=="navy")d.setAttribute("data-pal",p);if(w&&w!=="auto")d.setAttribute("data-wl",w);if(p==="custom")window.__cp(localStorage.getItem("shuaa_cu")||"#e0561f",l,d,w);var m=document.querySelector("meta[name=theme-color]");if(m)m.content=getComputedStyle(d).getPropertyValue("--bg").trim()||(l?"#e2e6ee":"#0f1626")}catch(e){}})()</script>
 <script>(function(){try{if(localStorage.getItem("shuaa_unlock")!=="6c54a558324a704c40384745813009c090d9344ea310f386a57b90c04dcab963")document.documentElement.classList.add("locked")}catch(e){document.documentElement.classList.add("locked")}})()</script>
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Shuaa">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700&family=Figtree:wght@400;500;600&family=Dancing+Script:wght@700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700&family=Figtree:wght@400;500;600&family=Dancing+Script:wght@700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
 <style>
 :root{--bg:#0f1626;--card:#0e1526;--card2:#141d33;--ink:#eaf0ff;--mute:#8a96b3;--line:#1d2842;--win:#22d3a0;--loss:#ff5d73;--be:#8a96b3;--warn:#f5b73b;--acc:#4f7cff;--on-acc:#fff;--grid:rgba(110,140,255,.05);--shadow:rgba(0,0,0,.55);--grad:linear-gradient(135deg,#2f5bd8,#0b7fa8);color-scheme:dark;--win-rgb:34,211,160;--loss-rgb:255,93,115;--warn-rgb:245,183,59;--acc-rgb:79,124,255;--be-rgb:138,150,179;--acc2:#7da0ff;--winbar:#1fc79a;--card-end:#0b1222;--tabsbg:rgba(14,21,38,.85);--glow:rgba(79,124,255,.16);--hdbg:linear-gradient(160deg,#16244f,#0e1628 70%);--hdb:#26396f;--hdglow:rgba(79,124,255,.28);--ov1:rgba(255,255,255,.05);--ov2:rgba(255,255,255,.09);--ov3:rgba(255,255,255,.12);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 *{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
@@ -531,7 +531,286 @@ html.locked #lock{display:flex;position:fixed;inset:0;z-index:99999;background:v
 #lock button:disabled{opacity:.5}
 #lock .er{min-height:18px;margin-top:10px;font-size:13px;color:var(--loss,#ff5d73)}
 </style>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+<style id="navy-theme">
+/* Palet navy: bar chart, equity curve, progress, tab aktif */
+:root{--chart:#5b84f5;--chart2:#3a62dc;--chart-best:#b4c8ff;--winbar:#5b84f5;--grad:linear-gradient(135deg,#1c3a96,#2c55cf);--ease:cubic-bezier(.22,.8,.2,1);--draw:cubic-bezier(.45,0,.25,1)}
+:root[data-theme=light]{--chart:#1e3a8a;--chart2:#3558c8;--chart-best:#0b1a4d;--winbar:#1e3a8a;--acc:#1f3fa8;--acc2:#1f3fa8;--acc-rgb:31,63,168;--grad:linear-gradient(135deg,#13307c,#2a52c8)}
+.cw svg polyline{stroke-linecap:round}
+.cw rect.best{fill:var(--chart-best)}
+.cw rect.neg{fill:var(--loss)}
+.vcol u{background:linear-gradient(180deg,var(--chart2),var(--chart))}
+.vcol u.neg{background:var(--loss)}
+.tabs{background:var(--card)}
+.tabs button{position:relative;z-index:1}
+.tabs button.on,body.c .tabs button.on{background:transparent!important;box-shadow:none}
+#tabpill{position:absolute;z-index:0;top:5px;bottom:5px;left:0;width:0;border-radius:8px;background:var(--grad);pointer-events:none}
+
+
+/* Palet biru-putih: biru = positif/utama, merah = hanya untuk rugi, abu = netral */
+:root{--win:#7aa2ff;--win-rgb:122,162,255;--warn:#9fb4e6;--warn-rgb:159,180,230;--acc2:#7aa2ff}
+:root[data-theme=light]{--bg:#f4f7fd;--win:#1f3fa8;--win-rgb:31,63,168;--warn:#4a5f94;--warn-rgb:74,95,148;--be:#6b7a99;--be-rgb:107,122,153}
+:root[data-theme=light] .pill.win{color:#1f3fa8!important}
+body .k-win,body .k-acc,body .k-warn{border-top:2px solid var(--acc)}
+.ip.M{background:rgba(var(--acc-rgb),.12);color:var(--acc)}
+
+
+/* Tema gelap gaya exchange: navy lebih terang, satu biru seragam, teks sekunder lebih jelas */
+:root[data-theme=dark]{--bg:#0a1020;--card:#111a2e;--card2:#18233b;--line:#223052;--ink:#eef3ff;--mute:#a3b0cc;
+--acc:#6690ff;--acc2:#86abff;--acc-rgb:102,144,255;--chart:#6690ff;--chart2:#4a74e8;--chart-best:#bcd0ff;--winbar:#6690ff;
+--win:#86abff;--win-rgb:134,171,255;--grid:rgba(110,140,255,.035);--shadow:rgba(0,0,0,.45);
+--hdbg:linear-gradient(160deg,#16306e,#111a2e 72%);--hdb:#25418a;--hdglow:rgba(102,144,255,.14);--glow:rgba(102,144,255,.08);
+--tabsbg:#0d1426;--card-end:#0e1729}
+:root[data-theme=dark] body #tabs{background:#0d1426}
+:root[data-theme=dark] .card{box-shadow:none}
+:root[data-theme=dark] .t .mi,:root[data-theme=dark] .ses,:root[data-theme=dark] .ax{color:var(--mute);fill:var(--mute)}
+:root[data-theme=dark] .cw .tip{background:#1c2a47;border-color:#2c3f68}
+:root[data-theme=dark] .ents .day{background:#15213a}
+
+
+/* Warna diredam: merah lebih kalem, elemen kecil tidak menonjol, bar chart tetap */
+:root[data-theme=dark]{--loss:#d9808c;--loss-rgb:217,128,140}
+:root[data-theme=light]{--loss:#b5485a;--loss-rgb:181,72,90}
+/* Tema terang: lembut di mata tapi tetap hidup (teks tegas, aksen biru-cyan jernih) */
+:root[data-theme=light]{--bg:#e2e6ee;--card:#edf0f6;--card2:#dde3ee;--line:#c4cbd9;--ink:#182140;--mute:#505d78;--card-end:#e5e9f1;--tabsbg:rgba(226,230,238,.92);--hdbg:linear-gradient(160deg,#cfdcf8,#e5eaf5 70%);--hdb:#adbfe6;--grid:rgba(47,85,196,.05);--shadow:rgba(30,45,90,.14);--acc:#2f55c4;--acc2:#2f55c4;--acc-rgb:47,85,196;--win:#2f55c4;--win-rgb:47,85,196;--chart:#2f55c4;--chart2:#5a7ddb;--chart-best:#1d3a99;--winbar:#2f55c4;--loss:#c04a62;--loss-rgb:192,74,98;--grad:linear-gradient(135deg,#2f55c4,#2487b0);--glow:rgba(47,85,196,.12);--hdglow:rgba(47,85,196,.16)}
+/* Tema gelap: tidak menyilaukan tapi hidup (teks cerah lembut, aksen biru-cyan bercahaya) */
+:root[data-theme=dark]{--bg:#0f1626;--card:#172033;--card2:#1e2940;--line:#2a3857;--ink:#e6ebf7;--mute:#a2aec8;--acc:#6f94f2;--acc2:#8fb0ff;--acc-rgb:111,148,242;--win:#8fb0ff;--win-rgb:143,176,255;--chart:#6f94f2;--chart2:#4f78e0;--chart-best:#c3d4ff;--winbar:#6f94f2;--loss:#e0798a;--loss-rgb:224,121,138;--grad:linear-gradient(135deg,#3a62d6,#1f8fb8);--hdbg:linear-gradient(160deg,#1d3470,#172033 72%);--hdb:#2e4a8f;--hdglow:rgba(111,148,242,.22);--glow:rgba(111,148,242,.12);--tabsbg:#131b2d;--card-end:#131c2f;--grid:rgba(120,150,230,.04);--shadow:rgba(0,0,0,.4)}
+:root[data-theme=dark] body #tabs{background:#131b2d}
+:root[data-theme=dark] .cw .tip{background:#22304d;border-color:#35497a}
+:root[data-theme=dark] .ents .day{background:#1b2740}
+/* Warna hasil: hijau lembut = profit/win, merah lembut = loss. Biru tetap untuk aksen dan grafik */
+:root[data-theme=dark]{--win:#4cc9a0;--win-rgb:76,201,160}
+:root[data-theme=light]{--win:#1a7f5f;--win-rgb:26,127,95}
+.dt2.WIN{background:rgba(var(--win-rgb),.8)!important}
+.nfo{margin:0 0 8px}.nfo summary{cursor:pointer;list-style:none;color:var(--acc2);font-weight:600;display:inline-flex;align-items:center;gap:6px}
+.nfo summary::-webkit-details-marker{display:none}.nfo summary::after{content:"";width:6px;height:6px;border:solid currentColor;border-width:0 2px 2px 0;transform:rotate(45deg) translateY(-2px);transition:transform .2s var(--snap)}
+.nfo[open] summary::after{transform:rotate(225deg) translateY(-2px)}
+.nfo[open] summary{margin-bottom:6px}
+.spr{display:flex;justify-content:space-between;font-size:11px;color:var(--mute);margin:-2px 0 8px;letter-spacing:.02em}
+/* toast di atas layar, tidak menabrak kartu atau tombol + */
+html body .toast{top:calc(12px + env(safe-area-inset-top,0px))!important;bottom:auto!important;height:auto!important;max-height:none;left:16px;right:16px}
+body .k-win,body .k-acc,body .k-warn{border-top:1px solid var(--line)}
+.dots{gap:7px}
+.dt2{width:13px;height:13px}
+.dt2.WIN{background:rgba(var(--acc-rgb),.8)}
+.dt2.LOSS{background:rgba(var(--loss-rgb),.75)}
+.dt2.BE{background:rgba(var(--be-rgb),.6)}
+.ring svg circle{stroke-width:9}
+.stp{background:rgba(var(--acc-rgb),.16);color:var(--acc);font-weight:700}
+.vcol u.neg,.cw rect.neg{opacity:.85}
+body .vcol u,body .vcol.lo u{opacity:1;border-radius:4px}
+body .vcol u.neg{opacity:.85}
+body .hl{border-left:3px solid rgba(var(--acc-rgb),.45)}
+.pill.loss,.res.LOSS,.dir.Sell,.ip.H{background:rgba(var(--loss-rgb),.10)}
+
+
+@property --a{syntax:"<angle>";inherits:false;initial-value:360deg}
+/* ===== Gaya aplikasi exchange ===== */
+/* 1. Bottom bar */
+body #tabs{position:fixed;left:0;right:0;bottom:0;top:auto;margin:0;border:0;border-top:1px solid var(--line);border-radius:0;padding:6px 4px calc(6px + env(safe-area-inset-bottom,0px));background:var(--card);z-index:30;gap:0;display:flex}
+body #tabs button{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:5px 0 3px;font-size:11px;font-weight:600;border-radius:8px;color:var(--mute)}
+body #tabs button svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+body #tabs button.on{color:var(--acc);background:transparent!important}
+body #tabpill{top:0;bottom:auto;height:2.5px;border-radius:0 0 3px 3px}
+body #pgbar{display:none}
+body #add.fab{bottom:calc(80px + env(safe-area-inset-bottom,0px))}
+body .toast{bottom:calc(82px + env(safe-area-inset-bottom,0px))}
+.wrap{padding-bottom:150px!important;overflow-x:clip}
+@media(min-width:820px){body #tabs{left:50%;right:auto;width:560px;transform:translateX(-50%);border:1px solid var(--line);border-bottom:0;border-radius:14px 14px 0 0}}
+
+/* 2. Header saldo */
+.hd .lbl2{font-size:12px;color:var(--mute);letter-spacing:.02em}
+.hd .big{font-size:40px;font-weight:700;letter-spacing:-.02em}
+.hd .ah b.big+span{display:inline-flex;align-items:center;gap:5px;margin-top:6px;padding:3px 10px;border-radius:6px;font-size:13px;font-weight:700}
+.hd .ah b.big+span.win{background:rgba(var(--win-rgb),.15);color:var(--win)}
+.hd .ah b.big+span.loss{background:rgba(var(--loss-rgb),.15);color:var(--loss)}
+.hd .ah b.big+span.win::before{content:"▲";font-size:9px}
+.hd .ah b.big+span.loss::before{content:"▼";font-size:9px}
+
+/* 3. Daftar trade rapat */
+body .ents{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;padding:0}
+body .ents .day{margin:0!important;padding:7px 12px;background:var(--card2);border-bottom:1px solid var(--line);font-size:12px!important;color:var(--mute);font-family:Figtree,system-ui,sans-serif}
+body .ents .day>span{color:var(--ink);font-weight:600}
+body .ents .t{background:transparent;border:0;border-bottom:1px solid var(--line);border-left:3px solid var(--be);border-radius:0!important;margin:0!important;padding:7px 12px 7px 10px!important}
+body .ents .t.WIN{border-left-color:var(--win)}body .ents .t.LOSS{border-left-color:var(--loss)}
+body .ents .t:last-child{border-bottom:0}
+body .ents .t .top{gap:6px}
+body .ents .t .pair{font-size:14px;font-weight:700}
+body .ents .t .dir{margin-left:6px;padding:1px 6px;font-size:11px}
+body .ents .t .ses{margin-left:6px;font-size:11px}
+body .ents .t .rt{gap:8px}
+body .ents .t .rt b{min-width:46px;text-align:right;font-size:14px;font-variant-numeric:tabular-nums}
+body .ents .t .res{padding:1px 7px;font-size:10.5px}
+body .ents .t .mt{margin-top:1px}
+body .ents .t .mi{font-size:11px}
+body .ents .t .ac button{width:22px;height:22px;font-size:12px;opacity:.7}
+
+/* 4. Chart ala exchange */
+.cw .lp{stroke-width:1;stroke-dasharray:2 3;opacity:.75}
+.cw .lpx{fill:#fff;font-size:10px;font-weight:700}
+.cw .cur{stroke-dasharray:3 3;stroke:var(--mute)}
+.cw .tip{top:-4px;background:var(--card2);font-weight:600}
+body .ents .t{content-visibility:auto;contain-intrinsic-size:auto 66px}
+</style>
+<style id="motion-css">
+:root{--spring:cubic-bezier(.34,1.56,.64,1);--snap:cubic-bezier(.16,1,.3,1)}
+@media (prefers-reduced-motion:no-preference){
+.tabs{-webkit-backdrop-filter:none;backdrop-filter:none}
+#tabpill{transition:transform .2s var(--snap),width .2s var(--snap)}
+.tabs button,.fab,.p,button.lnk,button{transition:transform .18s var(--spring),color .15s,background-color .15s,border-color .15s,box-shadow .2s}
+.tabs button:active,.fab:active,.p:active,button:active{transform:scale(.93)}
+.card,.t{transition:transform .22s var(--spring),box-shadow .25s,border-color .2s}
+.card:active,.t:active{transform:scale(.985)}
+@media(hover:hover){.card:hover,.t:hover{transform:translateY(-2px);box-shadow:0 10px 26px var(--shadow)}}
+
+/* ---- pindah halaman: langsung mulai, tanpa jeda ---- */
+@keyframes mFade{from{opacity:0}to{opacity:1}}
+@keyframes mPage{from{opacity:0;transform:translate3d(calc(var(--dx,0px)*.9),16px,0) scale(.97)}to{opacity:1;transform:none}}
+.tabs button.on{animation:mTabPop .15s var(--snap)}
+@keyframes mTabPop{0%{transform:scale(.94)}100%{transform:none}}
+
+
+/* ===== GRAFIK: jalan saat masuk layar (IntersectionObserver), hanya transform/opacity/dash agar halus ===== */
+/* keadaan awal (sebelum masuk layar) */
+svg.mrv.mc-line:not(.in) polyline,svg.mrv.mc-line:not(.in) polygon{clip-path:inset(-8px 100% -8px -8px)}
+svg.mrv.mc-line:not(.in) .mc-end{transform:scale(0)}
+svg.mrv:not(.in) :is(.lp,.lpt,.lpx){opacity:0}
+svg.mrv.mc-bars:not(.in) rect{transform:scaleY(0)}
+svg.mrv.mc-bars:not(.in) .mc-lbl{opacity:0}
+.vc.mrv:not(.in) .vcol u{transform:scaleY(0)}
+.vc.mrv:not(.in) .vcol b{opacity:0}
+.m.mrv:not(.in) i{transform:scaleX(0)}
+:is(.ring,.pt).mrv:not(.in) svg{opacity:0;transform:rotate(-110deg) scale(.86)}
+:is(.ring,.pt).mrv:not(.in) .seg{stroke-dasharray:0 var(--C,999)}
+.dots.mrv:not(.in) .dt2{transform:scale(0)}
+
+/* garis equity & sparkline: tergambar kiri ke kanan, ujungnya muncul lalu berdenyut terus */
+svg.mrv.mc-line.in polyline,svg.mrv.mc-line.in polygon{animation:mWipe .7s var(--draw) backwards}
+@keyframes mWipe{from{clip-path:inset(-8px 100% -8px -8px)}to{clip-path:inset(-8px -8px -8px -8px)}}
+.mc-end{transform-box:fill-box;transform-origin:center}
+svg.mrv.in .mc-end{animation:mPopIn .35s var(--spring) .5s backwards}
+.mc-ring{fill:none;stroke-width:1.5;opacity:0;transform-box:fill-box;transform-origin:center;animation:mPing 3.4s ease-out .9s infinite}
+svg.mrv.mc-line.in polygon{animation:mWipe .7s var(--draw) backwards,mBreath 6s ease-in-out .8s infinite}
+svg.mrv:not(.in) .mc-ring{animation:none}
+svg.mrv:not(.vis) .mc-ring,svg.mrv:not(.vis) polygon{animation-play-state:paused}
+svg.mrv.in :is(.lp,.lpt,.lpx){animation:mFade .3s ease .3s backwards}
+@keyframes mPopIn{from{transform:scale(0)}to{transform:scale(1)}}
+@keyframes mPing{0%{transform:scale(1);opacity:.6}70%,100%{transform:scale(3.4);opacity:0}}
+@keyframes mBreath{0%,100%{opacity:1}50%{opacity:.86}}
+
+/* bar chart: tumbuh dari dasar dengan sedikit pantulan */
+svg.mrv.mc-bars rect{transform-box:fill-box;transform-origin:50% 100%}
+svg.mrv.mc-bars rect.neg{transform-origin:50% 0}
+svg.mrv.mc-bars{overflow:visible}
+svg.mrv.mc-bars.in rect{animation:mGrowY .5s var(--spring) var(--d,0ms) backwards,mPulse var(--pd,2.4s) ease-in-out calc(.55s + var(--d,0ms)) infinite}
+svg.mrv.mc-bars.in .mc-lbl{animation:mFadeUp .3s var(--snap) var(--d,0ms) backwards,mLblPulse var(--pd,2.4s) ease-in-out .55s infinite}
+.vc.mrv .vcol u{transform-origin:50% 100%}
+.vc.mrv.in .vcol u{animation:mGrowY .5s var(--spring) var(--d,0ms) backwards,mPulse var(--pd,2.4s) ease-in-out calc(.55s + var(--d,0ms)) infinite}
+svg.mrv.mc-bars:not(.vis) :is(rect,.mc-lbl),.vc.mrv:not(.vis) .vcol :is(u,b){animation-play-state:paused}
+.vc.mrv.in .vcol b{animation:mFadeUp .3s var(--snap) calc(var(--d,0ms) + 60ms) backwards,mLblPulse var(--pd,2.4s) ease-in-out calc(.55s + var(--d,0ms)) infinite}
+.vcol:active u{filter:brightness(1.25)}
+@keyframes mPulse{0%,100%{transform:scaleY(1)}40%{transform:scaleY(1.05)}75%{transform:scaleY(.97)}}
+@keyframes mLblPulse{0%,100%{transform:translateY(0)}40%{transform:translateY(calc(var(--h,0px)*var(--sg,-1)*.05))}75%{transform:translateY(calc(var(--h,0px)*var(--sg,-1)*-.03))}}
+@keyframes mGrowY{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+@keyframes mFadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* win rate & donut: lingkaran berputar masuk, busur mengisi, angka menghitung naik bersamaan */
+:is(.ring,.pt).mrv.in svg{animation:mSpin .65s var(--snap) backwards}
+:is(.ring,.pt).mrv.in .seg{animation:mArc .75s var(--draw) backwards}
+@keyframes mSpin{from{opacity:0;transform:rotate(-110deg) scale(.86)}to{opacity:1;transform:none}}
+@keyframes mArc{from{stroke-dasharray:0 var(--C,999)}to{stroke-dasharray:var(--len) var(--C,999)}}
+
+/* progress bar: terisi lalu kilau berjalan (berhenti saat di luar layar) */
+.m.mrv i{transform-origin:0 50%;position:relative;overflow:hidden}
+.m.mrv.in i{animation:mFillX .6s var(--snap) backwards}
+.m.mrv i::after{content:"";position:absolute;left:0;top:0;bottom:0;width:55%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.4) 50%,transparent);transform:translateX(-100%);animation:mShine 3.4s ease-in-out .6s infinite}
+.m.mrv i::before{content:"";position:absolute;right:0;top:0;bottom:0;width:10px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.95));border-radius:0 3px 3px 0;animation:mHead 2.6s ease-in-out .6s infinite;z-index:1}
+.m.mrv:not(.vis) i::after,.m.mrv:not(.vis) i::before{animation-play-state:paused}
+:root[data-theme=light] .m.mrv i::before{display:none}
+:root[data-theme=light] .m.mrv i::after{background:linear-gradient(100deg,transparent,rgba(255,255,255,.3) 50%,transparent)}
+.hd .m.big2.mrv.in i{animation:mFillX .6s var(--snap) backwards,mGlowBar 4.2s ease-in-out .8s infinite}
+@keyframes mHead{0%,100%{opacity:.45}50%{opacity:.95}}
+@keyframes mGlowBar{0%,100%{opacity:1}50%{opacity:.9}}
+@keyframes mFillX{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes mShine{0%{transform:translateX(-100%)}100%{transform:translateX(190%)}}
+
+/* titik form 10 trade terakhir */
+.dots.mrv.in .dt2{animation:mPopIn .3s var(--spring) calc(var(--k,0)*10ms) backwards}
+
+/* ---- pindah halaman: tiap bagian menggeser masuk seperti saat membuka News ---- */
+#app.mfirst .mpg{animation:mPageIn .34s var(--snap) backwards;animation-delay:calc(var(--ci,0)*14ms)}
+@keyframes mPageIn{from{opacity:0;transform:translate3d(var(--dx,24px),0,0)}to{opacity:1;transform:none}}
+
+/* ---- news ---- */
+#nw .s.ev{position:relative;animation:mSlide .32s var(--snap) both;animation-delay:calc(var(--mj,0)*10ms)}
+#nw .s.hl2{animation:mSlideR .32s var(--snap) both;animation-delay:calc(var(--mj,0)*10ms)}
+@keyframes mSlide{from{opacity:0;transform:translateX(-28px)}to{opacity:1;transform:none}}
+@keyframes mSlideR{from{opacity:0;transform:translateX(28px)}to{opacity:1;transform:none}}
+.mlive{animation:mLive 2.4s ease-in-out infinite}
+@keyframes mLive{0%,100%{opacity:.5;transform:scale(.95)}50%{opacity:1;transform:scale(1.08)}}
+
+/* ---- trade baru, toast, dialog, tombol + ---- */
+.t.mnew.WIN{animation:mWin 1.1s ease-out}
+.t.mnew.LOSS{animation:mLoss 1.1s ease-out}
+.t.mnew.BE{animation:mBe 1.1s ease-out}
+@keyframes mWin{0%{transform:scale(.96);box-shadow:0 0 0 0 rgba(var(--acc-rgb),.7);background:rgba(var(--acc-rgb),.2)}40%{transform:scale(1.015)}100%{transform:none;box-shadow:0 0 0 16px rgba(var(--acc-rgb),0)}}
+@keyframes mLoss{0%{box-shadow:0 0 0 0 rgba(var(--loss-rgb),.8);background:rgba(var(--loss-rgb),.22);transform:translateX(0)}15%{transform:translateX(-7px)}30%{transform:translateX(6px)}45%{transform:translateX(-3px)}60%{transform:none}100%{box-shadow:0 0 0 16px rgba(var(--loss-rgb),0)}}
+@keyframes mBe{0%{box-shadow:0 0 0 0 rgba(var(--be-rgb),.7)}100%{box-shadow:0 0 0 14px rgba(var(--be-rgb),0)}}
+#toast{animation:mToast .35s var(--spring)}
+@keyframes mToast{from{opacity:0;transform:translateY(-22px) scale(.96)}to{opacity:1;transform:none}}
+.fab{animation:mGlow 4.2s ease-out infinite}
+.fab.mpop{animation:mPop .45s var(--spring),mGlow 4.2s ease-out .45s infinite}
+@keyframes mPop{from{transform:scale(0) rotate(-90deg)}to{transform:none}}
+@keyframes mGlow{0%{box-shadow:0 0 0 0 rgba(var(--acc-rgb),.28)}70%,100%{box-shadow:0 0 0 12px rgba(var(--acc-rgb),0)}}
+dialog[open]{animation:mDlg .32s var(--spring)}
+dialog[open]::backdrop{animation:mBd .25s ease-out}
+@keyframes mDlg{from{opacity:0;transform:translateY(34px) scale(.94)}to{opacity:1;transform:none}}
+@keyframes mBd{from{opacity:0}to{opacity:1}}
+}
+</style>
+<style id="palettes">
+/* Pilihan palet warna: data-pal di <html>; Navy = bawaan (tanpa data-pal) */
+:root[data-pal=emerald][data-theme=light]{--bg:#eaf2ee;--card:#f7fbf9;--card2:#e3eee9;--card-end:#f7fbf9;--ink:#12251f;--mute:#5d7a70;--line:#cfe0d8;--acc:#0f8a68;--acc2:#0f8a68;--acc-rgb:15,138,104;--on-acc:#ffffff;--win:#0f8a68;--win-rgb:15,138,104;--loss:#c4414f;--loss-rgb:196,65,79;--chart:#0f8a68;--chart2:#0f8a68;--chart-best:#0f8a68;--winbar:#0f8a68;--grad:#0f8a68;--hdbg:linear-gradient(160deg,#e3eee9,#f7fbf9 72%);--hdb:#cfe0d8;--hdglow:rgba(15,138,104,.16);--glow:rgba(15,138,104,.08);--tabsbg:#f7fbf9;--grid:rgba(15,138,104,.04);--shadow:rgba(20,30,50,.14)}
+:root[data-pal=emerald][data-theme=dark]{--bg:#0b1512;--card:#12201b;--card2:#182a24;--card-end:#12201b;--ink:#e6f5ef;--mute:#7f9d92;--line:#223a32;--acc:#22d3a0;--acc2:#22d3a0;--acc-rgb:34,211,160;--on-acc:#04201a;--win:#22d3a0;--win-rgb:34,211,160;--loss:#ff5d73;--loss-rgb:255,93,115;--chart:#22d3a0;--chart2:#22d3a0;--chart-best:#22d3a0;--winbar:#22d3a0;--grad:#22d3a0;--hdbg:linear-gradient(160deg,#182a24,#12201b 72%);--hdb:#223a32;--hdglow:rgba(34,211,160,.16);--glow:rgba(34,211,160,.08);--tabsbg:#12201b;--grid:rgba(34,211,160,.04);--shadow:rgba(0,0,0,.4)}
+:root[data-pal=amber][data-theme=light]{--bg:#f1eee7;--card:#faf8f3;--card2:#ece8de;--card-end:#faf8f3;--ink:#1d2026;--mute:#6b6e76;--line:#dcd7c9;--acc:#b9720a;--acc2:#b9720a;--acc-rgb:185,114,10;--on-acc:#ffffff;--win:#1f8a5b;--win-rgb:31,138,91;--loss:#c4414f;--loss-rgb:196,65,79;--chart:#b9720a;--chart2:#b9720a;--chart-best:#1f8a5b;--winbar:#b9720a;--grad:#b9720a;--hdbg:linear-gradient(160deg,#ece8de,#faf8f3 72%);--hdb:#dcd7c9;--hdglow:rgba(185,114,10,.16);--glow:rgba(185,114,10,.08);--tabsbg:#faf8f3;--grid:rgba(185,114,10,.04);--shadow:rgba(20,30,50,.14)}
+:root[data-pal=amber][data-theme=dark]{--bg:#14161a;--card:#1d2026;--card2:#252932;--card-end:#1d2026;--ink:#f1f1ee;--mute:#9a9ea8;--line:#2e333c;--acc:#f5b73b;--acc2:#f5b73b;--acc-rgb:245,183,59;--on-acc:#1d1300;--win:#5fd39a;--win-rgb:95,211,154;--loss:#ff6b6b;--loss-rgb:255,107,107;--chart:#f5b73b;--chart2:#f5b73b;--chart-best:#5fd39a;--winbar:#f5b73b;--grad:#f5b73b;--hdbg:linear-gradient(160deg,#252932,#1d2026 72%);--hdb:#2e333c;--hdglow:rgba(245,183,59,.16);--glow:rgba(245,183,59,.08);--tabsbg:#1d2026;--grid:rgba(245,183,59,.04);--shadow:rgba(0,0,0,.4)}
+:root[data-pal=violet][data-theme=light]{--bg:#eeeaf8;--card:#f8f6fd;--card2:#e8e3f5;--card-end:#f8f6fd;--ink:#1b1730;--mute:#6f6990;--line:#d8d0ee;--acc:#6a56e8;--acc2:#6a56e8;--acc-rgb:106,86,232;--on-acc:#ffffff;--win:#1f8a5b;--win-rgb:31,138,91;--loss:#c4414f;--loss-rgb:196,65,79;--chart:#6a56e8;--chart2:#6a56e8;--chart-best:#1f8a5b;--winbar:#6a56e8;--grad:#6a56e8;--hdbg:linear-gradient(160deg,#e8e3f5,#f8f6fd 72%);--hdb:#d8d0ee;--hdglow:rgba(106,86,232,.16);--glow:rgba(106,86,232,.08);--tabsbg:#f8f6fd;--grid:rgba(106,86,232,.04);--shadow:rgba(20,30,50,.14)}
+:root[data-pal=violet][data-theme=dark]{--bg:#120f1f;--card:#1b1730;--card2:#241f40;--card-end:#1b1730;--ink:#efecff;--mute:#9a93bd;--line:#302a52;--acc:#8b7bff;--acc2:#8b7bff;--acc-rgb:139,123,255;--on-acc:#140f33;--win:#6fe0b5;--win-rgb:111,224,181;--loss:#ff6b8b;--loss-rgb:255,107,139;--chart:#8b7bff;--chart2:#8b7bff;--chart-best:#6fe0b5;--winbar:#8b7bff;--grad:#8b7bff;--hdbg:linear-gradient(160deg,#241f40,#1b1730 72%);--hdb:#302a52;--hdglow:rgba(139,123,255,.16);--glow:rgba(139,123,255,.08);--tabsbg:#1b1730;--grid:rgba(139,123,255,.04);--shadow:rgba(0,0,0,.4)}
+:root[data-pal=teal][data-theme=light]{--bg:#e6f1f4;--card:#f5fafb;--card2:#deecef;--card-end:#f5fafb;--ink:#0f2229;--mute:#5a7680;--line:#c5dce2;--acc:#0b7a8f;--acc2:#0b7a8f;--acc-rgb:11,122,143;--on-acc:#ffffff;--win:#148a62;--win-rgb:20,138,98;--loss:#c4414f;--loss-rgb:196,65,79;--chart:#0b7a8f;--chart2:#0b7a8f;--chart-best:#148a62;--winbar:#0b7a8f;--grad:#0b7a8f;--hdbg:linear-gradient(160deg,#deecef,#f5fafb 72%);--hdb:#c5dce2;--hdglow:rgba(11,122,143,.16);--glow:rgba(11,122,143,.08);--tabsbg:#f5fafb;--grid:rgba(11,122,143,.04);--shadow:rgba(20,30,50,.14)}
+:root[data-pal=teal][data-theme=dark]{--bg:#0a1a20;--card:#112830;--card2:#17343d;--card-end:#112830;--ink:#e3f4f8;--mute:#7fa3ae;--line:#1f4048;--acc:#3ac4dc;--acc2:#3ac4dc;--acc-rgb:58,196,220;--on-acc:#042229;--win:#4fe0a8;--win-rgb:79,224,168;--loss:#ff6b7d;--loss-rgb:255,107,125;--chart:#3ac4dc;--chart2:#3ac4dc;--chart-best:#4fe0a8;--winbar:#3ac4dc;--grad:#3ac4dc;--hdbg:linear-gradient(160deg,#17343d,#112830 72%);--hdb:#1f4048;--hdglow:rgba(58,196,220,.16);--glow:rgba(58,196,220,.08);--tabsbg:#112830;--grid:rgba(58,196,220,.04);--shadow:rgba(0,0,0,.4)}
+:root[data-pal=mono][data-theme=light]{--bg:#efefef;--card:#fafafa;--card2:#e8e8e8;--card-end:#fafafa;--ink:#111111;--mute:#777777;--line:#d6d6d6;--acc:#111111;--acc2:#111111;--acc-rgb:17,17,17;--on-acc:#ffffff;--win:#1f8a5b;--win-rgb:31,138,91;--loss:#c4414f;--loss-rgb:196,65,79;--chart:#111111;--chart2:#111111;--chart-best:#1f8a5b;--winbar:#111111;--grad:#111111;--hdbg:linear-gradient(160deg,#e8e8e8,#fafafa 72%);--hdb:#d6d6d6;--hdglow:rgba(17,17,17,.16);--glow:rgba(17,17,17,.08);--tabsbg:#fafafa;--grid:rgba(17,17,17,.04);--shadow:rgba(20,30,50,.14)}
+:root[data-pal=mono][data-theme=dark]{--bg:#0a0a0a;--card:#151515;--card2:#1d1d1d;--card-end:#151515;--ink:#eaeaea;--mute:#8a8a8a;--line:#2a2a2a;--acc:#eaeaea;--acc2:#eaeaea;--acc-rgb:234,234,234;--on-acc:#111111;--win:#4ade80;--win-rgb:74,222,128;--loss:#f87171;--loss-rgb:248,113,113;--chart:#eaeaea;--chart2:#eaeaea;--chart-best:#4ade80;--winbar:#eaeaea;--grad:#eaeaea;--hdbg:linear-gradient(160deg,#1d1d1d,#151515 72%);--hdb:#2a2a2a;--hdglow:rgba(234,234,234,.16);--glow:rgba(234,234,234,.08);--tabsbg:#151515;--grid:rgba(234,234,234,.04);--shadow:rgba(0,0,0,.4)}
+:root[data-pal][data-theme] .pill.win{color:var(--win)!important}
+:root[data-pal][data-theme] .dt2.WIN{background:rgba(var(--win-rgb),.8)!important}
+#paldlg{max-width:min(92vw,360px);width:100%;color:var(--ink)}#paldlg h3{margin:0 0 10px;font-size:16px}#paldlg .po{display:flex;align-items:center;gap:10px;width:100%;text-align:left;margin:0 0 8px;padding:10px 12px;border-radius:12px;border:1px solid var(--line);background:var(--card2);color:var(--ink);font-size:14px}#paldlg .po.on{border-color:var(--acc);border-width:2px}#paldlg .sw{display:flex;gap:4px;margin-left:auto}#paldlg .sw i{width:18px;height:18px;border-radius:50%;border:1px solid var(--line);display:block}
+:root[data-pal=rose][data-theme=light]{--bg:#f7ecee;--card:#fdf7f8;--card2:#f2e2e5;--card-end:#fdf7f8;--ink:#2a1519;--mute:#7a5a61;--line:#e6ccd1;--acc:#c2335a;--acc2:#c2335a;--acc-rgb:194,51,90;--on-acc:#ffffff;--win:#1f8a5b;--win-rgb:31,138,91;--loss:#b8323f;--loss-rgb:184,50,63;--chart:#c2335a;--chart2:#c2335a;--chart-best:#1f8a5b;--winbar:#c2335a;--grad:#c2335a;--hdbg:linear-gradient(160deg,#f2e2e5,#fdf7f8 72%);--hdb:#e6ccd1;--hdglow:rgba(194,51,90,.16);--glow:rgba(194,51,90,.08);--tabsbg:#fdf7f8;--grid:rgba(194,51,90,.04);--shadow:rgba(20,30,50,.14)}
+:root[data-pal=rose][data-theme=dark]{--bg:#1a0f12;--card:#24161a;--card2:#2e1c21;--card-end:#24161a;--ink:#fbeaee;--mute:#b58f98;--line:#3d262c;--acc:#ff6b93;--acc2:#ff6b93;--acc-rgb:255,107,147;--on-acc:#2a0a14;--win:#5fd39a;--win-rgb:95,211,154;--loss:#ff6b7d;--loss-rgb:255,107,125;--chart:#ff6b93;--chart2:#ff6b93;--chart-best:#5fd39a;--winbar:#ff6b93;--grad:#ff6b93;--hdbg:linear-gradient(160deg,#2e1c21,#24161a 72%);--hdb:#3d262c;--hdglow:rgba(255,107,147,.16);--glow:rgba(255,107,147,.08);--tabsbg:#24161a;--grid:rgba(255,107,147,.04);--shadow:rgba(0,0,0,.4)}
+:root[data-pal=sunset][data-theme=light]{--bg:#f8eee4;--card:#fffaf4;--card2:#f3e4d4;--card-end:#fffaf4;--ink:#2a1a0e;--mute:#7d6450;--line:#e8d3bd;--acc:#d9541a;--acc2:#d9541a;--acc-rgb:217,84,26;--on-acc:#ffffff;--win:#1f8a5b;--win-rgb:31,138,91;--loss:#c4414f;--loss-rgb:196,65,79;--chart:#d9541a;--chart2:#d9541a;--chart-best:#1f8a5b;--winbar:#d9541a;--grad:#d9541a;--hdbg:linear-gradient(160deg,#f3e4d4,#fffaf4 72%);--hdb:#e8d3bd;--hdglow:rgba(217,84,26,.16);--glow:rgba(217,84,26,.08);--tabsbg:#fffaf4;--grid:rgba(217,84,26,.04);--shadow:rgba(20,30,50,.14)}
+:root[data-pal=sunset][data-theme=dark]{--bg:#17100b;--card:#211710;--card2:#2b1e15;--card-end:#211710;--ink:#fdeee0;--mute:#bd9f86;--line:#3a2a1e;--acc:#ff8a4c;--acc2:#ff8a4c;--acc-rgb:255,138,76;--on-acc:#2a1000;--win:#5fd39a;--win-rgb:95,211,154;--loss:#ff6b6b;--loss-rgb:255,107,107;--chart:#ff8a4c;--chart2:#ff8a4c;--chart-best:#5fd39a;--winbar:#ff8a4c;--grad:#ff8a4c;--hdbg:linear-gradient(160deg,#2b1e15,#211710 72%);--hdb:#3a2a1e;--hdglow:rgba(255,138,76,.16);--glow:rgba(255,138,76,.08);--tabsbg:#211710;--grid:rgba(255,138,76,.04);--shadow:rgba(0,0,0,.4)}
+:root[data-pal=forest][data-theme=light]{--bg:#ebf0e6;--card:#f8fbf4;--card2:#e2e9db;--card-end:#f8fbf4;--ink:#16241a;--mute:#5f7565;--line:#cdd9c5;--acc:#3f7d2b;--acc2:#3f7d2b;--acc-rgb:63,125,43;--on-acc:#ffffff;--win:#3f7d2b;--win-rgb:63,125,43;--loss:#c4414f;--loss-rgb:196,65,79;--chart:#3f7d2b;--chart2:#3f7d2b;--chart-best:#3f7d2b;--winbar:#3f7d2b;--grad:#3f7d2b;--hdbg:linear-gradient(160deg,#e2e9db,#f8fbf4 72%);--hdb:#cdd9c5;--hdglow:rgba(63,125,43,.16);--glow:rgba(63,125,43,.08);--tabsbg:#f8fbf4;--grid:rgba(63,125,43,.04);--shadow:rgba(20,30,50,.14)}
+:root[data-pal=forest][data-theme=dark]{--bg:#0d140e;--card:#141f15;--card2:#1b2a1d;--card-end:#141f15;--ink:#e8f3e4;--mute:#8aa58f;--line:#27402a;--acc:#8ad45a;--acc2:#8ad45a;--acc-rgb:138,212,90;--on-acc:#0e1f06;--win:#8ad45a;--win-rgb:138,212,90;--loss:#ff6b6b;--loss-rgb:255,107,107;--chart:#8ad45a;--chart2:#8ad45a;--chart-best:#8ad45a;--winbar:#8ad45a;--grad:#8ad45a;--hdbg:linear-gradient(160deg,#1b2a1d,#141f15 72%);--hdb:#27402a;--hdglow:rgba(138,212,90,.16);--glow:rgba(138,212,90,.08);--tabsbg:#141f15;--grid:rgba(138,212,90,.04);--shadow:rgba(0,0,0,.4)}
+:root[data-pal=sky][data-theme=light]{--bg:#e8f1fb;--card:#f6faff;--card2:#dfeaf8;--card-end:#f6faff;--ink:#0f1f33;--mute:#586f8c;--line:#c8d9ee;--acc:#1b7ae0;--acc2:#1b7ae0;--acc-rgb:27,122,224;--on-acc:#ffffff;--win:#148a62;--win-rgb:20,138,98;--loss:#c4414f;--loss-rgb:196,65,79;--chart:#1b7ae0;--chart2:#1b7ae0;--chart-best:#148a62;--winbar:#1b7ae0;--grad:#1b7ae0;--hdbg:linear-gradient(160deg,#dfeaf8,#f6faff 72%);--hdb:#c8d9ee;--hdglow:rgba(27,122,224,.16);--glow:rgba(27,122,224,.08);--tabsbg:#f6faff;--grid:rgba(27,122,224,.04);--shadow:rgba(20,30,50,.14)}
+:root[data-pal=sky][data-theme=dark]{--bg:#09131f;--card:#101d2e;--card2:#162840;--card-end:#101d2e;--ink:#e6f1ff;--mute:#86a3c6;--line:#1f3a5c;--acc:#5ab0ff;--acc2:#5ab0ff;--acc-rgb:90,176,255;--on-acc:#031a33;--win:#4fe0a8;--win-rgb:79,224,168;--loss:#ff6b7d;--loss-rgb:255,107,125;--chart:#5ab0ff;--chart2:#5ab0ff;--chart-best:#4fe0a8;--winbar:#5ab0ff;--grad:#5ab0ff;--hdbg:linear-gradient(160deg,#162840,#101d2e 72%);--hdb:#1f3a5c;--hdglow:rgba(90,176,255,.16);--glow:rgba(90,176,255,.08);--tabsbg:#101d2e;--grid:rgba(90,176,255,.04);--shadow:rgba(0,0,0,.4)}
+:root[data-pal=gold][data-theme=light]{--bg:#f4efdf;--card:#fcf9ee;--card2:#ede6d0;--card-end:#fcf9ee;--ink:#241f0e;--mute:#7a7150;--line:#ddd3b2;--acc:#a67c00;--acc2:#a67c00;--acc-rgb:166,124,0;--on-acc:#ffffff;--win:#1f8a5b;--win-rgb:31,138,91;--loss:#c4414f;--loss-rgb:196,65,79;--chart:#a67c00;--chart2:#a67c00;--chart-best:#1f8a5b;--winbar:#a67c00;--grad:#a67c00;--hdbg:linear-gradient(160deg,#ede6d0,#fcf9ee 72%);--hdb:#ddd3b2;--hdglow:rgba(166,124,0,.16);--glow:rgba(166,124,0,.08);--tabsbg:#fcf9ee;--grid:rgba(166,124,0,.04);--shadow:rgba(20,30,50,.14)}
+:root[data-pal=gold][data-theme=dark]{--bg:#12100a;--card:#1c190f;--card2:#262215;--card-end:#1c190f;--ink:#f7f1dc;--mute:#b3a87c;--line:#383220;--acc:#f2c230;--acc2:#f2c230;--acc-rgb:242,194,48;--on-acc:#241b00;--win:#5fd39a;--win-rgb:95,211,154;--loss:#ff6b6b;--loss-rgb:255,107,107;--chart:#f2c230;--chart2:#f2c230;--chart-best:#5fd39a;--winbar:#f2c230;--grad:#f2c230;--hdbg:linear-gradient(160deg,#262215,#1c190f 72%);--hdb:#383220;--hdglow:rgba(242,194,48,.16);--glow:rgba(242,194,48,.08);--tabsbg:#1c190f;--grid:rgba(242,194,48,.04);--shadow:rgba(0,0,0,.4)}
+:root[data-pal=graphite][data-theme=light]{--bg:#e9ebee;--card:#f6f7f9;--card2:#dfe2e7;--card-end:#f6f7f9;--ink:#1a1f29;--mute:#5c6575;--line:#cbd0d9;--acc:#3d5afe;--acc2:#3d5afe;--acc-rgb:61,90,254;--on-acc:#ffffff;--win:#1f8a5b;--win-rgb:31,138,91;--loss:#c4414f;--loss-rgb:196,65,79;--chart:#3d5afe;--chart2:#3d5afe;--chart-best:#1f8a5b;--winbar:#3d5afe;--grad:#3d5afe;--hdbg:linear-gradient(160deg,#dfe2e7,#f6f7f9 72%);--hdb:#cbd0d9;--hdglow:rgba(61,90,254,.16);--glow:rgba(61,90,254,.08);--tabsbg:#f6f7f9;--grid:rgba(61,90,254,.04);--shadow:rgba(20,30,50,.14)}
+:root[data-pal=graphite][data-theme=dark]{--bg:#101216;--card:#181b21;--card2:#20242c;--card-end:#181b21;--ink:#eceef2;--mute:#98a0b0;--line:#2c313c;--acc:#7c8cff;--acc2:#7c8cff;--acc-rgb:124,140,255;--on-acc:#0d1233;--win:#5fd39a;--win-rgb:95,211,154;--loss:#ff6b7d;--loss-rgb:255,107,125;--chart:#7c8cff;--chart2:#7c8cff;--chart-best:#5fd39a;--winbar:#7c8cff;--grad:#7c8cff;--hdbg:linear-gradient(160deg,#20242c,#181b21 72%);--hdb:#2c313c;--hdglow:rgba(124,140,255,.16);--glow:rgba(124,140,255,.08);--tabsbg:#181b21;--grid:rgba(124,140,255,.04);--shadow:rgba(0,0,0,.4)}
+:root[data-wl=classic][data-theme=light]{--win:#1f8a5b;--win-rgb:31,138,91;--loss:#c4414f;--loss-rgb:196,65,79;--chart-best:#1f8a5b}
+:root[data-wl=classic][data-theme=dark]{--win:#4fd6a0;--win-rgb:79,214,160;--loss:#ff6b7d;--loss-rgb:255,107,125;--chart-best:#4fd6a0}
+:root[data-wl=blue][data-theme=light]{--win:#1b6fe0;--win-rgb:27,111,224;--loss:#d9631a;--loss-rgb:217,99,26;--chart-best:#1b6fe0}
+:root[data-wl=blue][data-theme=dark]{--win:#6fa8ff;--win-rgb:111,168,255;--loss:#ff9a4d;--loss-rgb:255,154,77;--chart-best:#6fa8ff}
+:root[data-wl][data-theme] .pill.win{color:var(--win)!important}
+:root[data-wl][data-theme] .dt2.WIN{background:rgba(var(--win-rgb),.8)!important}
+#paldlg{overflow-y:auto;max-height:85vh}#paldlg .sub{font-size:12px;color:var(--mute);margin:12px 0 6px}#paldlg .row{display:flex;gap:6px;flex-wrap:wrap}#paldlg .wo{flex:1;min-width:90px;padding:8px 6px;border-radius:10px;border:1px solid var(--line);background:var(--card2);color:var(--ink);font-size:13px}#paldlg .wo.on{border-color:var(--acc);border-width:2px}#paldlg input[type=color]{width:56px;height:36px;padding:2px;border-radius:8px;border:1px solid var(--line);background:var(--card2)}
+</style>
+<style id="fixes">
+/* Bar batas loss: hijau = aman, kuning = waspada, merah = bahaya. */
+:root[data-theme] body .mn .m.g i{background:var(--win)}
+:root[data-theme] body .mn .m.w i{background:var(--warn)}
+:root[data-theme] body .mn .m.l i{background:var(--loss)}
+/* Peringatan penyimpanan diblokir */
+#storebar{position:fixed;left:12px;right:12px;top:calc(10px + env(safe-area-inset-top,0px));z-index:60;display:flex;gap:10px;align-items:flex-start;padding:12px 14px;border-radius:16px;background:var(--card);border:1px solid var(--loss);color:var(--ink);font-size:13px;line-height:1.4}
+#storebar span{flex:1}#storebar button{flex:none;padding:2px 8px;border-radius:8px}
+</style>
 </head>
 <body>
 <div id="lock"><div class="lb"><h1>SHUAA</h1><p>Masukkan kode akses untuk membuka jurnal.</p>
@@ -540,10 +819,22 @@ html.locked #lock{display:flex;position:fixed;inset:0;z-index:99999;background:v
 <script>(function(){
 var H="6c54a558324a704c40384745813009c090d9344ea310f386a57b90c04dcab963",SALT="shuaa-journal-v1|",f=0,inp=document.getElementById("lk-in"),go=document.getElementById("lk-go"),er=document.getElementById("lk-er");
 function hex(b){return Array.prototype.map.call(new Uint8Array(b),function(x){return("0"+x.toString(16)).slice(-2)}).join("")}
+function sha256hex(s){s=unescape(encodeURIComponent(s));var K=[],H=[],n=2,i,j,l=s.length,w=[];
+ function fr(x){return((x-Math.floor(x))*4294967296)|0}
+ for(;K.length<64;n++){for(j=2;j*j<=n&&n%j;j++);if(j*j>n){if(H.length<8)H.push(fr(Math.pow(n,.5)));K.push(fr(Math.pow(n,1/3)))}}
+ var N=(((l+8)>>6)+1)*16;for(i=0;i<N;i++)w[i]=0;
+ for(i=0;i<l;i++)w[i>>2]|=s.charCodeAt(i)<<(24-(i%4)*8);
+ w[l>>2]|=0x80<<(24-(l%4)*8);w[N-1]=l*8;
+ function R(x,c){return(x>>>c)|(x<<(32-c))}
+ for(var o=0;o<N;o+=16){var W=w.slice(o,o+16),a=H.slice(),t;
+  for(i=16;i<64;i++){var s0=R(W[i-15],7)^R(W[i-15],18)^(W[i-15]>>>3),s1=R(W[i-2],17)^R(W[i-2],19)^(W[i-2]>>>10);W[i]=(W[i-16]+s0+W[i-7]+s1)|0}
+  for(i=0;i<64;i++){var S1=R(a[4],6)^R(a[4],11)^R(a[4],25),ch=(a[4]&a[5])^(~a[4]&a[6]),t1=(a[7]+S1+ch+K[i]+W[i])|0,S0=R(a[0],2)^R(a[0],13)^R(a[0],22),mj=(a[0]&a[1])^(a[0]&a[2])^(a[1]&a[2]),t2=(S0+mj)|0;
+   a=[(t1+t2)|0,a[0],a[1],a[2],(a[3]+t1)|0,a[4],a[5],a[6]]}
+  for(i=0;i<8;i++)H[i]=(H[i]+a[i])|0}
+ return H.map(function(x){return("00000000"+(x>>>0).toString(16)).slice(-8)}).join("")}
 async function check(){
- if(!(window.crypto&&crypto.subtle)){er.textContent="Browser ini tidak mendukung. Buka lewat https.";return}
  var v=inp.value.trim();if(!v)return;go.disabled=true;
- var h=hex(await crypto.subtle.digest("SHA-256",new TextEncoder().encode(SALT+v)));
+ var h;try{h=(window.crypto&&crypto.subtle)?hex(await crypto.subtle.digest("SHA-256",new TextEncoder().encode(SALT+v))):sha256hex(SALT+v)}catch(e){h=sha256hex(SALT+v)}
  if(h===H){try{localStorage.setItem("shuaa_unlock",H)}catch(e){}document.documentElement.classList.remove("locked");inp.value=""}
  else{f++;er.textContent="Kode salah."+(f>=3?" Tunggu sebentar.":"");inp.value="";var w=f>=3?Math.min(30,f*3)*1000:600;setTimeout(function(){go.disabled=false;er.textContent=""},w);return}
  go.disabled=false}
@@ -551,7 +842,7 @@ go.addEventListener("click",check);inp.addEventListener("keydown",function(e){if
 })()</script>
 
 <div class="wrap">
-  <div class="head"><div class="hl"><h1><svg class="lg" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="8" role="img" aria-label="Shuaa"><rect x="4" y="4" width="92" height="92"/><path d="M4 37H61L92 8M61 37V96M4 62H38V96"/></svg></h1></div><div class="jc"><div class="jn empty" id="jn" role="button" tabindex="0">+ Nama jurnal</div></div><div class="hr"><button type="button" class="mnb" id="mnb" aria-label="Menu" aria-haspopup="true" aria-expanded="false">⋯</button></div><div class="mnu" id="mnu" hidden><button type="button" id="vw"></button><button type="button" id="x-style">Ganti strategy</button><button type="button" id="ph-mng">Kelola phase</button><button type="button" id="mn-acc">Atur akun</button><button type="button" id="thm"></button><hr><button type="button" data-a="x-json">Cadangkan data</button><button type="button" data-a="x-imp">Pulihkan cadangan</button><hr><button type="button" data-a="x-pdf">Unduh PDF</button><button type="button" data-a="x-tpl">Unduh templat CSV</button><button type="button" data-a="x-impmt">Impor dari MT4/MT5</button><button type="button" data-a="x-impcsv">Impor dari CSV</button><hr><button type="button" id="mn-faq">FAQ dan panduan</button></div></div>
+  <div class="head"><div class="hl"><h1><svg class="lg" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="8" role="img" aria-label="Shuaa"><rect x="4" y="4" width="92" height="92"/><path d="M4 37H61L92 8M61 37V96M4 62H38V96"/></svg></h1></div><div class="jc"><div class="jn empty" id="jn" role="button" tabindex="0">+ Nama jurnal</div></div><div class="hr"><button type="button" class="mnb" id="mnb" aria-label="Menu" aria-haspopup="true" aria-expanded="false">⋯</button></div><div class="mnu" id="mnu" hidden><button type="button" id="vw"></button><button type="button" id="x-style">Ganti strategy</button><button type="button" id="ph-mng">Kelola phase</button><button type="button" id="mn-acc">Atur akun</button><button type="button" id="thm"></button><button type="button" id="pal"></button><hr><button type="button" data-a="x-json">Cadangkan data</button><button type="button" data-a="x-imp">Pulihkan cadangan</button><hr><button type="button" data-a="x-pdf">Unduh PDF</button><button type="button" data-a="x-tpl">Unduh templat CSV</button><button type="button" data-a="x-impmt">Impor dari MT4/MT5</button><button type="button" data-a="x-impcsv">Impor dari CSV</button><hr><button type="button" id="mn-faq">FAQ dan panduan</button></div></div>
   <div class="phrow"><select id="ph-sel" aria-label="Phase"></select><div class="sub" id="sub">Trading journal dan challenge tracker</div></div>
   <div class="note" id="ph-note" style="margin:-4px 0 12px" hidden>Tampilan Semua phase dipakai untuk melihat pola. Balance dan progres target memakai aturan phase yang aktif, jadi lihat hasil per phase di phase masing-masing.</div>
   <nav class="tabs" id="tabs" role="tablist" aria-label="Bagian jurnal"><button data-tab="ringkasan">Ringkasan</button><button data-tab="analisis">Analisis</button><button data-tab="jurnal">Jurnal</button><button data-tab="news">News</button><button data-tab="plan">Planner</button></nav>
@@ -643,6 +934,9 @@ function cleanAcc(a){const o={};if(!a||typeof a!=='object')return o;['name','jna
   if(Array.isArray(a.facts))o.facts=a.facts.filter(f=>Array.isArray(f)&&/^[\w-]{1,32}$/.test(f[0])&&typeof f[1]==='string').slice(0,8).map(f=>[f[0],f[1].slice(0,40)]);if(o.preset==='CRT'&&o.facts.map(f=>f[0]).join()==='mss,ob,sweep,idm')o.facts.push(['cisd','CISD']);
   if(Array.isArray(a.pois))o.pois=a.pois.filter(x=>typeof x==='string').slice(0,12).map(x=>x.slice(0,40));return o}
 let pickStyle=false;let CH={};let rows=[],edit=null,F={q:'',pair:'',session:'',result:''};
+const FKEYS=['q','pair','session','result','from','to','m','cust','so','cb'];
+try{const sf=JSON.parse(localStorage.getItem('shuaa_filter')||'null');if(sf&&typeof sf==='object')FKEYS.forEach(k=>{if(typeof sf[k]==='string'||typeof sf[k]==='boolean')F[k]=sf[k]})}catch(e){}
+const saveF=()=>{try{const o={};FKEYS.forEach(k=>{if(F[k]!==undefined&&F[k]!=='')o[k]=F[k]});localStorage.setItem('shuaa_filter',JSON.stringify(o))}catch(e){}};
 const pct=(a,b)=>b?Math.round(a/b*100)+'%':'0%';
 const fmt=d=>{try{return new Date(d+'T00:00:00').toLocaleDateString('id-ID',{weekday:'long',day:'numeric',month:'long',year:'numeric'})}catch(e){return d}};
 const isUrl=s=>/^https?:\/\//.test((s||'').trim());
@@ -670,6 +964,7 @@ function toast(t,undo){const o=document.getElementById('toast');if(o)o.remove();
 const GUIDE_CARDS=`<div class="gc"><h3>Tentang Shuaa Journal</h3><p>Jurnal trading pribadi dan <b>challenge tracker</b>. Kamu mencatat setiap trade, lalu aplikasi menghitung balance simulasi, equity curve, kalender profit, win rate, dan analisis setup dari <b>R × risiko</b> yang kamu isi.</p><p>Bukan data akun broker dan bukan saran trading atau keuangan. Fungsinya membantumu disiplin dan melihat pola dari keputusanmu sendiri.</p></div><div class="gc"><h3>Cara menggunakan</h3><ol><li><b>Atur akun</b>: balance awal, risiko per 1R, dan aturan challenge.</li><li><b>Catat trade</b> dengan tombol <b>+</b>: pair, session, setup, arah, dan hasil. Isi <b>R aktual</b> supaya statistik akurat.</li><li><b>Ringkasan</b> menampilkan balance, target, dan progres challenge.</li><li><b>Analisis</b> menunjukkan setup, session, dan pair yang paling berhasil atau paling merugikan.</li><li><b>Jurnal</b> berisi daftar trade, bisa dicari dan difilter, lengkap dengan catatan dan screenshot.</li><li><b>News</b> menampilkan kalender berita dan headline supaya kamu tahu jadwal rilis yang berdampak.</li></ol></div><div class="gc"><h3>Cara pakai Pulihkan cadangan</h3><ol><li>Tekan <b>Pulihkan cadangan</b>, lalu pilih file <b>.json</b> hasil tombol <b>Unduh cadangan</b> (namanya <b>shuaa-journal-backup-…json</b>).</li><li>Jurnal masih kosong: aplikasi langsung bertanya, tekan ya untuk memulihkan semua trade.</li><li>Ganti HP atau browser? Unduh cadangan di perangkat lama, kirim filenya ke perangkat baru, lalu pulihkan di sini.</li></ol><div class="tip2">Data hanya tersimpan di browser ini. Menghapus data browser akan menghapus jurnal, jadi unduh cadangan secara berkala.</div></div>`;
 const FAQ_HTML=`<h3>Mulai memakai</h3><details><summary>Cara memakai jurnal ini</summary><div>${GUIDE_CARDS}</div></details><h3>Fitur dan menu</h3><details><summary>Ganti strategy</summary><div><p>Menu <b>&#8943;</b> &gt; <b>Ganti strategy</b>. Pilih CRT, ICT, SMC, atau Kustom. Pilihan ini menyesuaikan faktor konfluensi, daftar POI, dan model entry di form. Semua trade lama tetap aman, hanya faktor dan model entry yang berganti.</p></div></details><details><summary>Atur akun dan aturan challenge</summary><div><p>Menu <b>&#8943;</b> &gt; <b>Atur akun</b>. Isi balance awal, risiko per 1R (%), target profit, minimal hari trading, maksimal loss harian dan total, jam reset hari trading, dan model drawdown (trailing atau statis).</p><p>Angka-angka ini dipakai untuk balance simulasi, R aktual, progres challenge, dan peringatan batas loss. Jadi isi sesuai aturan firma challenge-mu.</p></div></details><details><summary>Kelola phase</summary><div><p>Menu <b>&#8943;</b> &gt; <b>Kelola phase</b>. Setiap phase (evaluasi atau funded) punya trade dan aturan sendiri. Phase lama tetap tersimpan dan bisa dibuka lagi lewat pilihan phase di bagian atas.</p><p>Phase yang sedang aktif otomatis ditandai Lulus saat kamu lanjut ke phase baru. Kalau gagal, ubah statusnya di daftar phase.</p></div></details><details><summary>Kalkulator lot</summary><div><p>Ada di tab <b>Ringkasan</b>, kartu <b>Kalkulator lot</b>. Isi balance, risiko (%), stop loss dalam pip, dan nilai pip per lot. Hasilnya lot yang dibulatkan ke bawah ke 0,01, plus risiko sebenarnya dalam dolar. Kalau hasilnya di bawah 0,01, perkecil stop loss atau naikkan risiko.</p></div></details><details><summary>Planner (pre-market)</summary><div><p>Tab <b>Planner</b> dipakai sebelum dan sesudah sesi trading. Isinya dua bagian: <b>Sesi hari ini</b> (bias Daily, H4, dan H1, pair fokus, level, skenario, cek news, kondisi diri) dan <b>Aturan trade hari ini</b> (batas trade, risiko, sesi yang dipakai, dan ringkasan trade hari ini).</p><p>Isian tersimpan otomatis dan satu set untuk satu hari trading. Besok formnya kosong lagi. Plan ikut tersimpan di file cadangan.</p></div></details><details><summary>Tampilan dan tema</summary><div><p>Di menu <b>&#8943;</b>, tombol <b>Tampilan</b> beralih antara tampilan Ringkas dan Lengkap. Tombol <b>Tema</b> bergantian antara Ikuti HP, Gelap, dan Terang.</p></div></details><details><summary>Cadangkan dan pulihkan data</summary><div><p><b>Cadangkan data</b> (menu &#8943;, atau <b>Unduh cadangan</b> di bagian Data) mengunduh file .json berisi semua trade, aturan akun, dan phase. Di perangkat yang mendukung, <b>Bagikan cadangan</b> mengirim file itu lewat aplikasi lain.</p><p><b>Pulihkan cadangan</b> membaca file .json tersebut dan menggantikan isi jurnal di perangkat ini. Pakai ini juga untuk pindah HP atau browser.</p><p>Data hanya tersimpan di browser, jadi unduh cadangan secara berkala. Aplikasi akan mengingatkanmu kalau sudah lama.</p></div></details><details><summary>Ekspor CSV</summary><div><p>Di tab Ringkasan, bagian <b>Data</b>, tekan <b>Ekspor CSV</b>. Semua trade dari semua phase diunduh sebagai satu file CSV (ada kolom Phase), yang bisa dibuka di Excel atau Google Sheets.</p></div></details><details><summary>Unduh templat CSV dan impor dari CSV</summary><div><ol><li>Menu <b>&#8943;</b> &gt; <b>Unduh templat CSV</b>.</li><li>Isi di Excel atau Google Sheets. Date: YYYY-MM-DD. Session: Asia, London, atau New York. Arah: Buy atau Sell. Result: WIN, LOSS, atau BE. Faktor konfluensi: YES atau NO.</li><li>Menu <b>&#8943;</b> &gt; <b>Impor dari CSV</b>, lalu pilih file-nya.</li></ol><p>Baris contoh dan baris tanpa Date atau Result dilewati. Trade yang sama persis juga dilewati, dan sisanya masuk ke phase aktif. Pilih strategy dulu supaya kolom faktor sesuai.</p></div></details><details><summary>Unduh PDF</summary><div><p>Menu <b>&#8943;</b> &gt; <b>Unduh PDF</b> membuat laporan jurnal berisi statistik, equity curve, dan tabel trade. Isinya mengikuti phase dan periode yang sedang kamu pilih.</p><p>Aplikasi membuka dialog cetak. Di sana pilih <b>Simpan sebagai PDF</b>.</p></div></details><h3>Impor dari MT4/MT5</h3><details id="faq-mt"><summary>Cara ekspor statement dari MT4</summary><div><ol><li>Di MetaTrader 4 desktop, buka tab <b>Account History</b> di jendela Terminal.</li><li>Klik kanan, pilih rentang waktu (misalnya <b>All History</b>).</li><li>Klik kanan lagi, pilih <b>Save as Report</b>, lalu simpan file .htm.</li></ol><p>Ekspor ini dilakukan dari versi desktop. Versi HP umumnya belum menyediakannya.</p></div></details><details><summary>Cara ekspor statement dari MT5</summary><div><ol><li>Di MetaTrader 5 desktop, buka tab <b>History</b> (Toolbox) dan atur rentang waktu.</li><li>Klik kanan, pilih <b>Report</b>, lalu <b>HTML</b>.</li><li>Simpan file-nya. Laporan harus memuat bagian <b>Positions</b>.</li></ol><p>Nama menu bisa sedikit berbeda antar versi dan broker.</p></div></details><details><summary>Cara mengimpor ke jurnal</summary><div><ol><li>Ketuk menu <b>&#8943;</b> di kanan atas, atau buka bagian <b>Data</b> di tab Ringkasan.</li><li>Pilih <b>Impor dari MT4/MT5</b> dan pilih file statement (.htm, .html, atau .csv).</li><li>Cek ringkasannya: jumlah trade baru dan rentang tanggal.</li><li>Isi selisih jam server broker, lalu tekan <b>Impor</b>.</li></ol><p>Trade masuk ke phase yang sedang aktif.</p></div></details><details><summary>Apa yang terisi otomatis, apa yang perlu dilengkapi</summary><div><p><b>Otomatis:</b> tanggal, jam entry, pair, arah, lot, hasil (WIN/LOSS/BE), R aktual, dan session.</p><p><b>Isi manual:</b> POI, CRT, konfluensi, emosi, pelajaran, dan chart. Buka trade di tab Jurnal untuk melengkapinya. Trade hasil impor diberi catatan di Notes sebagai penanda.</p></div></details><details><summary>Selisih jam server broker, cara mengisinya</summary><div><p>Statement memakai jam server broker, bukan jam HP. Cek di Market Watch (jam server) atau tanya broker. Banyak broker memakai GMT+2 saat musim dingin dan GMT+3 saat musim panas.</p><p>Kalau salah isi, jam entry dan session ikut bergeser. Jam dan tanggal di jurnal ditampilkan dalam jam perangkatmu.</p></div></details><details><summary>Cara R aktual dihitung</summary><div><p>R = (profit + komisi + swap) dibagi (balance awal x risiko per 1R). Angkanya mengikuti <b>Aturan akun</b>, jadi pastikan balance awal dan risiko per 1R sudah benar sebelum impor. Hasil dengan R antara -0,05 dan 0,05 dianggap BE.</p><p>Session ditentukan dari jam UTC: Asia 21:00 sampai 07:00, London 07:00 sampai 12:00, New York 12:00 sampai 21:00. Ini perkiraan, bisa kamu ubah per trade.</p></div></details><details><summary>Trade tidak terbaca atau ada yang dilewati</summary><div><p>Yang diimpor hanya trade yang sudah tertutup. Deposit, withdrawal, order pending, dan order dibatalkan diabaikan.</p><p>Untuk MT5, pakai laporan yang memuat Positions. Laporan yang hanya berisi Deals belum didukung. File CSV harus punya kolom waktu buka dan tutup, type (buy/sell), volume, symbol, dan profit.</p><p>Trade dengan nomor tiket yang sama dilewati, jadi impor ulang file yang sama aman. Kalau masih gagal, coba ekspor dalam format HTML.</p></div></details><details><summary>Nama pair aneh, misalnya EURUSDm</summary><div><p>Akhiran dari broker dirapikan otomatis, jadi EURUSDm atau EURUSD.pro menjadi EURUSD.</p></div></details><h3>Data dan istilah</h3><details><summary>Data jurnal tersimpan di mana</summary><div><p>Di browser perangkat ini saja. Menghapus data browser akan menghapus jurnal. Unduh cadangan secara berkala, dan pakai <b>Pulihkan cadangan</b> untuk pindah perangkat.</p></div></details><details><summary>Arti R, expectancy, dan drawdown</summary><div><p><b>R</b> adalah satuan risiko per trade (1R = risiko yang kamu tetapkan). <b>Expectancy</b> adalah rata-rata R per trade. <b>Drawdown trailing</b> dihitung dari puncak equity, sedangkan <b>statis</b> dari balance awal. Pilih sesuai aturan firma challenge-mu.</p></div></details>`;
 function renderV(fullAll){
+  saveF();
   {const jn=$('#jn'),v=(ACC.jname||'').trim().slice(0,40);if(jn){jn.textContent=v||'+ Nama jurnal';jn.classList.toggle('empty',!v)}document.title=v||'SHUAA Journal'}
   const full=fullAll.filter(r=>r.result!=='SETUP');
   const app=$('#app');
@@ -914,9 +1209,9 @@ document.addEventListener('click',e=>{if(e.target.id==='vw'){desk=!desk;try{loca
 document.addEventListener('click',e=>{const m=document.getElementById('mnu'),b=document.getElementById('mnb');if(!m||!b)return;if(e.target===b){m.hidden=!m.hidden;b.setAttribute('aria-expanded',String(!m.hidden));return}if(!m.hidden){m.hidden=true;b.setAttribute('aria-expanded','false')}});
 document.addEventListener('keydown',e=>{const m=document.getElementById('mnu');if(e.key==='Escape'&&m&&!m.hidden){m.hidden=true;const b=document.getElementById('mnb');if(b)b.setAttribute('aria-expanded','false')}});
 const TABS=['ringkasan','analisis','jurnal','news','plan'];
-const setTab=t=>{document.body.dataset.tab=t;document.querySelectorAll('#tabs button').forEach(b=>{const on=b.dataset.tab===t;b.classList.toggle('on',on);b.setAttribute('role','tab');b.setAttribute('aria-selected',on?'true':'false')});try{history.replaceState(null,'','#'+t)}catch(e){}window.scrollTo(0,0);if(t==='plan'&&typeof pmRender==='function')pmRender()};
+const setTab=t=>{document.body.dataset.tab=t;document.querySelectorAll('#tabs button').forEach(b=>{const on=b.dataset.tab===t;b.classList.toggle('on',on);b.setAttribute('role','tab');b.setAttribute('aria-selected',on?'true':'false')});try{history.replaceState(null,'','#'+t)}catch(e){}try{localStorage.setItem('shuaa_tab',t)}catch(e){}window.scrollTo(0,0);if(t==='plan'&&typeof pmRender==='function')pmRender()};
 document.querySelectorAll('#tabs button').forEach(b=>b.onclick=()=>setTab(b.dataset.tab));
-setTab(TABS.includes(location.hash.slice(1))?location.hash.slice(1):'ringkasan');
+{let t0='ringkasan';try{const h=location.hash.slice(1),sv=localStorage.getItem('shuaa_tab');t0=TABS.includes(h)?h:(TABS.includes(sv)?sv:'ringkasan')}catch(e){}setTab(t0)}
 document.addEventListener('click',e=>{if(['acc-edit','acc-edit2','mn-acc','jn'].includes(e.target.id)){const f=$('#afrm');[...f.elements].forEach(x=>{if(x.name)x.value=x.name==='factsTxt'?ACC.facts.map(f=>f[1]).join('\n'):(ACC[x.name]??'')});$('#adlg').showModal()}});
 $('#acx').onclick=()=>$('#adlg').close();
 $('#asv').onclick=()=>{const f=$('#afrm');if(!f.reportValidity())return;[...f.elements].forEach(x=>{if(x.name)ACC[x.name]=['dm','name','jname','model','rules','factsTxt'].includes(x.name)?x.value:+x.value});ACC.facts=parseFacts(ACC.factsTxt);delete ACC.factsTxt;persistAcc();$('#adlg').close();render()};
@@ -1057,7 +1352,16 @@ document.addEventListener('click',e=>{const t=e.target;if(!t||!t.closest)return;
 /* ===== Tema, salinan otomatis, ubah nama phase ===== */
 var THL={auto:'Ikuti HP',dark:'Gelap',light:'Terang'};
 function thmGet(){try{return localStorage.getItem('shuaa_theme')||'dark'}catch(e){return 'dark'}}
-function thmApply(){const t=thmGet(),l=t==='light'||(t==='auto'&&matchMedia('(prefers-color-scheme: light)').matches);document.documentElement.setAttribute('data-theme',l?'light':'dark');const m=document.querySelector('meta[name=theme-color]');if(m)m.content=l?'#e2e6ee':'#0f1626';const b=document.getElementById('thm');if(b)b.textContent='Tema: '+THL[t]}
+function palGet(){try{return localStorage.getItem('shuaa_pal')||'navy'}catch(e){return 'navy'}}
+function wlGet(){try{return localStorage.getItem('shuaa_wl')||'auto'}catch(e){return 'auto'}}
+function cuGet(){try{return localStorage.getItem('shuaa_cu')||'#e0561f'}catch(e){return '#e0561f'}}
+function stSet(k,v){try{localStorage.setItem(k,v)}catch(e){}}
+var PALS={navy:['Navy (bawaan)','#e2e6ee','#2f55c4','#0f1626','#6f94f2'],emerald:['Emerald','#eaf2ee','#0f8a68','#0b1512','#22d3a0'],amber:['Slate amber','#f1eee7','#b9720a','#14161a','#f5b73b'],violet:['Violet','#eeeaf8','#6a56e8','#120f1f','#8b7bff'],teal:['Ocean teal','#e6f1f4','#0b7a8f','#0a1a20','#3ac4dc'],mono:['Mono','#efefef','#111111','#0a0a0a','#eaeaea'],rose:['Rose','#f7ecee','#c2335a','#1a0f12','#ff6b93'],sunset:['Sunset orange','#f8eee4','#d9541a','#17100b','#ff8a4c'],forest:['Forest','#ebf0e6','#3f7d2b','#0d140e','#8ad45a'],sky:['Sky blue','#e8f1fb','#1b7ae0','#09131f','#5ab0ff'],gold:['Gold','#f4efdf','#a67c00','#12100a','#f2c230'],graphite:['Graphite indigo','#e9ebee','#3d5afe','#101216','#7c8cff']};
+var WLS={auto:'Ikuti palet',classic:'Hijau / merah',blue:'Biru / oranye'};
+function palName(k){return k==='custom'?'Kustom':(PALS[k]||PALS.navy)[0]}
+function thmApply(){const t=thmGet(),l=t==='light'||(t==='auto'&&matchMedia('(prefers-color-scheme: light)').matches),pk=palGet(),wl=wlGet(),r=document.documentElement;r.setAttribute('data-theme',l?'light':'dark');if(pk==='navy')r.removeAttribute('data-pal');else r.setAttribute('data-pal',pk);if(wl==='auto')r.removeAttribute('data-wl');else r.setAttribute('data-wl',wl);window.__cp(pk==='custom'?cuGet():null,l,r,wl);const m=document.querySelector('meta[name=theme-color]');if(m)m.content=getComputedStyle(r).getPropertyValue('--bg').trim()||(l?'#e2e6ee':'#0f1626');const b=document.getElementById('thm');if(b)b.textContent='Tema: '+THL[t];const q=document.getElementById('pal');if(q)q.textContent='Warna: '+palName(pk)}
+function palHtml(){const cur=palGet(),wl=wlGet(),cu=cuGet();let h='<h3>Warna tampilan</h3>';Object.keys(PALS).forEach(k=>{const P=PALS[k];h+='<button type="button" class="po'+(k===cur?' on':'')+'" data-p="'+k+'"><span>'+P[0]+'</span><span class="sw"><i style="background:'+P[1]+'"></i><i style="background:'+P[2]+'"></i><i style="background:'+P[3]+'"></i><i style="background:'+P[4]+'"></i></span></button>'});h+='<button type="button" class="po'+(cur==='custom'?' on':'')+'" data-p="custom"><span>Kustom</span><span class="sw"><i style="background:'+cu+'"></i></span></button>';h+='<div class="sub">Pilih warna aksen sendiri (terang dan gelap dibuat otomatis)</div><div class="row"><input type="color" id="palcu" value="'+cu+'" aria-label="Warna aksen kustom"></div>';h+='<div class="sub">Warna profit dan loss</div><div class="row">'+Object.keys(WLS).map(k=>'<button type="button" class="wo'+(k===wl?' on':'')+'" data-w="'+k+'">'+WLS[k]+'</button>').join('')+'</div>';h+='<button type="button" class="po" data-p="" style="margin-top:12px;justify-content:center">Selesai</button>';return h}
+document.addEventListener('click',e=>{const q=e.target&&e.target.closest?e.target.closest('#pal'):null;if(!q)return;const mn=document.getElementById('mnu');if(mn)mn.hidden=true;let d=document.getElementById('paldlg');if(d)d.remove();d=document.createElement('dialog');d.id='paldlg';d.innerHTML=palHtml();d.addEventListener('click',ev=>{const o=ev.target.closest('.po'),w=ev.target.closest('.wo');if(o){const k=o.dataset.p;if(!k){d.close();d.remove();return}stSet('shuaa_pal',k);thmApply();d.innerHTML=palHtml()}else if(w){stSet('shuaa_wl',w.dataset.w);thmApply();d.innerHTML=palHtml()}else if(ev.target===d){d.close();d.remove()}});d.addEventListener('input',ev=>{if(ev.target.id==='palcu'){stSet('shuaa_cu',ev.target.value);stSet('shuaa_pal','custom');thmApply()}});d.addEventListener('change',ev=>{if(ev.target.id==='palcu')d.innerHTML=palHtml()});document.body.appendChild(d);d.showModal()});
 document.addEventListener('click',e=>{if(e.target&&e.target.id==='thm'){const o=['auto','dark','light'],n=o[(o.indexOf(thmGet())+1)%3];try{localStorage.setItem('shuaa_theme',n)}catch(x){}thmApply();say('Tema: '+THL[n])}});
 try{matchMedia('(prefers-color-scheme: light)').addEventListener('change',()=>{if(thmGet()==='auto')thmApply()})}catch(e){}
 function idbOpen(){return new Promise((ok,no)=>{try{const q=indexedDB.open('shuaa_mirror',1);q.onupgradeneeded=()=>q.result.createObjectStore('s');q.onsuccess=()=>ok(q.result);q.onerror=()=>no(q.error)}catch(e){no(e)}})}
@@ -1074,7 +1378,11 @@ loadPh();
 try{if(navigator.storage&&navigator.storage.persist)navigator.storage.persist()}catch(e){}
 if(!ACC.preset&&rows.length){setPreset('CRT',true);persistAcc()}
 render();thmApply();autoRestore();
-if('serviceWorker' in navigator&&/^https?:/.test(location.protocol))addEventListener('load',()=>navigator.serviceWorker.register('sw.js').then(reg=>{const nv=w=>ask('Ada versi baru Shuaa Journal. Muat ulang sekarang?',()=>{try{w.postMessage({type:'SKIP_WAITING'})}catch(e){}setTimeout(()=>location.reload(),400)},{yes:'Muat ulang'});if(reg.waiting&&navigator.serviceWorker.controller)nv(reg.waiting);reg.addEventListener('updatefound',()=>{const w=reg.installing;if(!w)return;w.addEventListener('statechange',()=>{if(w.state==='installed'&&navigator.serviceWorker.controller)nv(w)})})}).catch(()=>{}));
+(function(){let ok=true;try{localStorage.setItem('__t','1');localStorage.removeItem('__t')}catch(e){ok=false}
+  if(ok)return;const d=document.createElement('div');d.id='storebar';d.setAttribute('role','alert');
+  d.innerHTML='<span><b>Data tidak akan tersimpan.</b> Browser ini memblokir penyimpanan (mode private atau browser dalam aplikasi). Buka lewat Chrome/Safari biasa, lalu unduh cadangan lewat menu.</span><button type="button" aria-label="Tutup">✕</button>';
+  d.querySelector('button').onclick=()=>d.remove();document.body.appendChild(d)})();
+if('serviceWorker' in navigator&&/^https?:/.test(location.protocol))addEventListener('load',()=>navigator.serviceWorker.register('sw.js',{updateViaCache:'none'}).then(reg=>{document.addEventListener('visibilitychange',()=>{if(!document.hidden)reg.update().catch(()=>{})});const nv=w=>ask('Ada versi baru Shuaa Journal. Muat ulang sekarang?',()=>{try{w.postMessage({type:'SKIP_WAITING'})}catch(e){}setTimeout(()=>location.reload(),400)},{yes:'Muat ulang'});if(reg.waiting&&navigator.serviceWorker.controller)nv(reg.waiting);reg.addEventListener('updatefound',()=>{const w=reg.installing;if(!w)return;w.addEventListener('statechange',()=>{if(w.state==='installed'&&navigator.serviceWorker.controller)nv(w)})})}).catch(()=>{}));
 startNews();
 const csvEsc=v=>{let t=String(v??'');if(/^[=+\-@\t\r]/.test(t)&&!/^-?\d+(\.\d+)?$/.test(t))t="'"+t;return '"'+t.replace(/"/g,'""')+'"'};
 function dl(name,text,type){const u=URL.createObjectURL(new Blob([text],{type}));const a=document.createElement('a');a.href=u;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),30000)}
@@ -1303,8 +1611,6 @@ function bkCheck(){
     },{yes:'Unduh cadangan'})
   }catch(e){}
 }
-addEventListener('load',()=>setTimeout(bkCheck,2000));
-document.addEventListener('visibilitychange',()=>{if(!document.hidden)setTimeout(bkCheck,800)});
 </script>
 <script>
 /* ===== PLAN PRE-MARKET ===== */
@@ -1379,126 +1685,6 @@ function pmRender(){try{
 document.addEventListener('visibilitychange',function(){if(document.hidden&&window.__pmFlush)window.__pmFlush()});
 if(document.body.dataset.tab==='plan')pmRender();
 </script>
-<style id="navy-theme">
-/* Palet navy: bar chart, equity curve, progress, tab aktif */
-:root{--chart:#5b84f5;--chart2:#3a62dc;--chart-best:#b4c8ff;--winbar:#5b84f5;--grad:linear-gradient(135deg,#1c3a96,#2c55cf);--ease:cubic-bezier(.22,.8,.2,1);--draw:cubic-bezier(.45,0,.25,1)}
-:root[data-theme=light]{--chart:#1e3a8a;--chart2:#3558c8;--chart-best:#0b1a4d;--winbar:#1e3a8a;--acc:#1f3fa8;--acc2:#1f3fa8;--acc-rgb:31,63,168;--grad:linear-gradient(135deg,#13307c,#2a52c8)}
-.cw svg polyline{stroke-linecap:round}
-.cw rect.best{fill:var(--chart-best)}
-.cw rect.neg{fill:var(--loss)}
-.vcol u{background:linear-gradient(180deg,var(--chart2),var(--chart))}
-.vcol u.neg{background:var(--loss)}
-.tabs{background:var(--card)}
-.tabs button{position:relative;z-index:1}
-.tabs button.on,body.c .tabs button.on{background:transparent!important;box-shadow:none}
-#tabpill{position:absolute;z-index:0;top:5px;bottom:5px;left:0;width:0;border-radius:8px;background:var(--grad);pointer-events:none}
-
-
-/* Palet biru-putih: biru = positif/utama, merah = hanya untuk rugi, abu = netral */
-:root{--win:#7aa2ff;--win-rgb:122,162,255;--warn:#9fb4e6;--warn-rgb:159,180,230;--acc2:#7aa2ff}
-:root[data-theme=light]{--bg:#f4f7fd;--win:#1f3fa8;--win-rgb:31,63,168;--warn:#4a5f94;--warn-rgb:74,95,148;--be:#6b7a99;--be-rgb:107,122,153}
-:root[data-theme=light] .pill.win{color:#1f3fa8!important}
-body .k-win,body .k-acc,body .k-warn{border-top:2px solid var(--acc)}
-.ip.M{background:rgba(var(--acc-rgb),.12);color:var(--acc)}
-
-
-/* Tema gelap gaya exchange: navy lebih terang, satu biru seragam, teks sekunder lebih jelas */
-:root[data-theme=dark]{--bg:#0a1020;--card:#111a2e;--card2:#18233b;--line:#223052;--ink:#eef3ff;--mute:#a3b0cc;
---acc:#6690ff;--acc2:#86abff;--acc-rgb:102,144,255;--chart:#6690ff;--chart2:#4a74e8;--chart-best:#bcd0ff;--winbar:#6690ff;
---win:#86abff;--win-rgb:134,171,255;--grid:rgba(110,140,255,.035);--shadow:rgba(0,0,0,.45);
---hdbg:linear-gradient(160deg,#16306e,#111a2e 72%);--hdb:#25418a;--hdglow:rgba(102,144,255,.14);--glow:rgba(102,144,255,.08);
---tabsbg:#0d1426;--card-end:#0e1729}
-:root[data-theme=dark] body #tabs{background:#0d1426}
-:root[data-theme=dark] .card{box-shadow:none}
-:root[data-theme=dark] .t .mi,:root[data-theme=dark] .ses,:root[data-theme=dark] .ax{color:var(--mute);fill:var(--mute)}
-:root[data-theme=dark] .cw .tip{background:#1c2a47;border-color:#2c3f68}
-:root[data-theme=dark] .ents .day{background:#15213a}
-
-
-/* Warna diredam: merah lebih kalem, elemen kecil tidak menonjol, bar chart tetap */
-:root[data-theme=dark]{--loss:#d9808c;--loss-rgb:217,128,140}
-:root[data-theme=light]{--loss:#b5485a;--loss-rgb:181,72,90}
-/* Tema terang: lembut di mata tapi tetap hidup (teks tegas, aksen biru-cyan jernih) */
-:root[data-theme=light]{--bg:#e2e6ee;--card:#edf0f6;--card2:#dde3ee;--line:#c4cbd9;--ink:#182140;--mute:#505d78;--card-end:#e5e9f1;--tabsbg:rgba(226,230,238,.92);--hdbg:linear-gradient(160deg,#cfdcf8,#e5eaf5 70%);--hdb:#adbfe6;--grid:rgba(47,85,196,.05);--shadow:rgba(30,45,90,.14);--acc:#2f55c4;--acc2:#2f55c4;--acc-rgb:47,85,196;--win:#2f55c4;--win-rgb:47,85,196;--chart:#2f55c4;--chart2:#5a7ddb;--chart-best:#1d3a99;--winbar:#2f55c4;--loss:#c04a62;--loss-rgb:192,74,98;--grad:linear-gradient(135deg,#2f55c4,#2487b0);--glow:rgba(47,85,196,.12);--hdglow:rgba(47,85,196,.16)}
-/* Tema gelap: tidak menyilaukan tapi hidup (teks cerah lembut, aksen biru-cyan bercahaya) */
-:root[data-theme=dark]{--bg:#0f1626;--card:#172033;--card2:#1e2940;--line:#2a3857;--ink:#e6ebf7;--mute:#a2aec8;--acc:#6f94f2;--acc2:#8fb0ff;--acc-rgb:111,148,242;--win:#8fb0ff;--win-rgb:143,176,255;--chart:#6f94f2;--chart2:#4f78e0;--chart-best:#c3d4ff;--winbar:#6f94f2;--loss:#e0798a;--loss-rgb:224,121,138;--grad:linear-gradient(135deg,#3a62d6,#1f8fb8);--hdbg:linear-gradient(160deg,#1d3470,#172033 72%);--hdb:#2e4a8f;--hdglow:rgba(111,148,242,.22);--glow:rgba(111,148,242,.12);--tabsbg:#131b2d;--card-end:#131c2f;--grid:rgba(120,150,230,.04);--shadow:rgba(0,0,0,.4)}
-:root[data-theme=dark] body #tabs{background:#131b2d}
-:root[data-theme=dark] .cw .tip{background:#22304d;border-color:#35497a}
-:root[data-theme=dark] .ents .day{background:#1b2740}
-/* Warna hasil: hijau lembut = profit/win, merah lembut = loss. Biru tetap untuk aksen dan grafik */
-:root[data-theme=dark]{--win:#4cc9a0;--win-rgb:76,201,160}
-:root[data-theme=light]{--win:#1a7f5f;--win-rgb:26,127,95}
-.dt2.WIN{background:rgba(var(--win-rgb),.8)!important}
-.nfo{margin:0 0 8px}.nfo summary{cursor:pointer;list-style:none;color:var(--acc2);font-weight:600;display:inline-flex;align-items:center;gap:6px}
-.nfo summary::-webkit-details-marker{display:none}.nfo summary::after{content:"";width:6px;height:6px;border:solid currentColor;border-width:0 2px 2px 0;transform:rotate(45deg) translateY(-2px);transition:transform .2s var(--snap)}
-.nfo[open] summary::after{transform:rotate(225deg) translateY(-2px)}
-.nfo[open] summary{margin-bottom:6px}
-.spr{display:flex;justify-content:space-between;font-size:11px;color:var(--mute);margin:-2px 0 8px;letter-spacing:.02em}
-/* toast di atas layar, tidak menabrak kartu atau tombol + */
-html body .toast{top:calc(12px + env(safe-area-inset-top,0px))!important;bottom:auto!important;height:auto!important;max-height:none;left:16px;right:16px}
-body .k-win,body .k-acc,body .k-warn{border-top:1px solid var(--line)}
-.dots{gap:7px}
-.dt2{width:13px;height:13px}
-.dt2.WIN{background:rgba(var(--acc-rgb),.8)}
-.dt2.LOSS{background:rgba(var(--loss-rgb),.75)}
-.dt2.BE{background:rgba(var(--be-rgb),.6)}
-.ring svg circle{stroke-width:9}
-.stp{background:rgba(var(--acc-rgb),.16);color:var(--acc);font-weight:700}
-.vcol u.neg,.cw rect.neg{opacity:.85}
-body .vcol u,body .vcol.lo u{opacity:1;border-radius:4px}
-body .vcol u.neg{opacity:.85}
-body .hl{border-left:3px solid rgba(var(--acc-rgb),.45)}
-.pill.loss,.res.LOSS,.dir.Sell,.ip.H{background:rgba(var(--loss-rgb),.10)}
-
-
-@property --a{syntax:"<angle>";inherits:false;initial-value:360deg}
-/* ===== Gaya aplikasi exchange ===== */
-/* 1. Bottom bar */
-body #tabs{position:fixed;left:0;right:0;bottom:0;top:auto;margin:0;border:0;border-top:1px solid var(--line);border-radius:0;padding:6px 4px calc(6px + env(safe-area-inset-bottom,0px));background:var(--card);z-index:30;gap:0;display:flex}
-body #tabs button{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:5px 0 3px;font-size:11px;font-weight:600;border-radius:8px;color:var(--mute)}
-body #tabs button svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-body #tabs button.on{color:var(--acc);background:transparent!important}
-body #tabpill{top:0;bottom:auto;height:2.5px;border-radius:0 0 3px 3px}
-body #pgbar{display:none}
-body #add.fab{bottom:calc(80px + env(safe-area-inset-bottom,0px))}
-body .toast{bottom:calc(82px + env(safe-area-inset-bottom,0px))}
-.wrap{padding-bottom:150px!important;overflow-x:clip}
-@media(min-width:820px){body #tabs{left:50%;right:auto;width:560px;transform:translateX(-50%);border:1px solid var(--line);border-bottom:0;border-radius:14px 14px 0 0}}
-
-/* 2. Header saldo */
-.hd .lbl2{font-size:12px;color:var(--mute);letter-spacing:.02em}
-.hd .big{font-size:40px;font-weight:700;letter-spacing:-.02em}
-.hd .ah b.big+span{display:inline-flex;align-items:center;gap:5px;margin-top:6px;padding:3px 10px;border-radius:6px;font-size:13px;font-weight:700}
-.hd .ah b.big+span.win{background:rgba(var(--win-rgb),.15);color:var(--win)}
-.hd .ah b.big+span.loss{background:rgba(var(--loss-rgb),.15);color:var(--loss)}
-.hd .ah b.big+span.win::before{content:"▲";font-size:9px}
-.hd .ah b.big+span.loss::before{content:"▼";font-size:9px}
-
-/* 3. Daftar trade rapat */
-body .ents{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;padding:0}
-body .ents .day{margin:0!important;padding:7px 12px;background:var(--card2);border-bottom:1px solid var(--line);font-size:12px!important;color:var(--mute);font-family:Figtree,system-ui,sans-serif}
-body .ents .day>span{color:var(--ink);font-weight:600}
-body .ents .t{background:transparent;border:0;border-bottom:1px solid var(--line);border-left:3px solid var(--be);border-radius:0!important;margin:0!important;padding:7px 12px 7px 10px!important}
-body .ents .t.WIN{border-left-color:var(--win)}body .ents .t.LOSS{border-left-color:var(--loss)}
-body .ents .t:last-child{border-bottom:0}
-body .ents .t .top{gap:6px}
-body .ents .t .pair{font-size:14px;font-weight:700}
-body .ents .t .dir{margin-left:6px;padding:1px 6px;font-size:11px}
-body .ents .t .ses{margin-left:6px;font-size:11px}
-body .ents .t .rt{gap:8px}
-body .ents .t .rt b{min-width:46px;text-align:right;font-size:14px;font-variant-numeric:tabular-nums}
-body .ents .t .res{padding:1px 7px;font-size:10.5px}
-body .ents .t .mt{margin-top:1px}
-body .ents .t .mi{font-size:11px}
-body .ents .t .ac button{width:22px;height:22px;font-size:12px;opacity:.7}
-
-/* 4. Chart ala exchange */
-.cw .lp{stroke-width:1;stroke-dasharray:2 3;opacity:.75}
-.cw .lpx{fill:#fff;font-size:10px;font-weight:700}
-.cw .cur{stroke-dasharray:3 3;stroke:var(--mute)}
-.cw .tip{top:-4px;background:var(--card2);font-weight:600}
-body .ents .t{content-visibility:auto;contain-intrinsic-size:auto 66px}
-</style>
 <script id="exchange-js">
 (function(){
 var P={ringkasan:'<path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/>',
@@ -1512,122 +1698,6 @@ document.querySelectorAll("#tabs button").forEach(function(b){
 });
 })();
 </script>
-<style id="motion-css">
-:root{--spring:cubic-bezier(.34,1.56,.64,1);--snap:cubic-bezier(.16,1,.3,1)}
-@media (prefers-reduced-motion:no-preference){
-.tabs{-webkit-backdrop-filter:none;backdrop-filter:none}
-#tabpill{transition:transform .2s var(--snap),width .2s var(--snap)}
-.tabs button,.fab,.p,button.lnk,button{transition:transform .18s var(--spring),color .15s,background-color .15s,border-color .15s,box-shadow .2s}
-.tabs button:active,.fab:active,.p:active,button:active{transform:scale(.93)}
-.card,.t{transition:transform .22s var(--spring),box-shadow .25s,border-color .2s}
-.card:active,.t:active{transform:scale(.985)}
-@media(hover:hover){.card:hover,.t:hover{transform:translateY(-2px);box-shadow:0 10px 26px var(--shadow)}}
-
-/* ---- pindah halaman: langsung mulai, tanpa jeda ---- */
-@keyframes mFade{from{opacity:0}to{opacity:1}}
-@keyframes mPage{from{opacity:0;transform:translate3d(calc(var(--dx,0px)*.9),16px,0) scale(.97)}to{opacity:1;transform:none}}
-.tabs button.on{animation:mTabPop .15s var(--snap)}
-@keyframes mTabPop{0%{transform:scale(.94)}100%{transform:none}}
-
-
-/* ===== GRAFIK: jalan saat masuk layar (IntersectionObserver), hanya transform/opacity/dash agar halus ===== */
-/* keadaan awal (sebelum masuk layar) */
-svg.mrv.mc-line:not(.in) polyline,svg.mrv.mc-line:not(.in) polygon{clip-path:inset(-8px 100% -8px -8px)}
-svg.mrv.mc-line:not(.in) .mc-end{transform:scale(0)}
-svg.mrv:not(.in) :is(.lp,.lpt,.lpx){opacity:0}
-svg.mrv.mc-bars:not(.in) rect{transform:scaleY(0)}
-svg.mrv.mc-bars:not(.in) .mc-lbl{opacity:0}
-.vc.mrv:not(.in) .vcol u{transform:scaleY(0)}
-.vc.mrv:not(.in) .vcol b{opacity:0}
-.m.mrv:not(.in) i{transform:scaleX(0)}
-:is(.ring,.pt).mrv:not(.in) svg{opacity:0;transform:rotate(-110deg) scale(.86)}
-:is(.ring,.pt).mrv:not(.in) .seg{stroke-dasharray:0 var(--C,999)}
-.dots.mrv:not(.in) .dt2{transform:scale(0)}
-
-/* garis equity & sparkline: tergambar kiri ke kanan, ujungnya muncul lalu berdenyut terus */
-svg.mrv.mc-line.in polyline,svg.mrv.mc-line.in polygon{animation:mWipe .7s var(--draw) backwards}
-@keyframes mWipe{from{clip-path:inset(-8px 100% -8px -8px)}to{clip-path:inset(-8px -8px -8px -8px)}}
-.mc-end{transform-box:fill-box;transform-origin:center}
-svg.mrv.in .mc-end{animation:mPopIn .35s var(--spring) .5s backwards}
-.mc-ring{fill:none;stroke-width:1.5;opacity:0;transform-box:fill-box;transform-origin:center;animation:mPing 3.4s ease-out .9s infinite}
-svg.mrv.mc-line.in polygon{animation:mWipe .7s var(--draw) backwards,mBreath 6s ease-in-out .8s infinite}
-svg.mrv:not(.in) .mc-ring{animation:none}
-svg.mrv:not(.vis) .mc-ring,svg.mrv:not(.vis) polygon{animation-play-state:paused}
-svg.mrv.in :is(.lp,.lpt,.lpx){animation:mFade .3s ease .3s backwards}
-@keyframes mPopIn{from{transform:scale(0)}to{transform:scale(1)}}
-@keyframes mPing{0%{transform:scale(1);opacity:.6}70%,100%{transform:scale(3.4);opacity:0}}
-@keyframes mBreath{0%,100%{opacity:1}50%{opacity:.86}}
-
-/* bar chart: tumbuh dari dasar dengan sedikit pantulan */
-svg.mrv.mc-bars rect{transform-box:fill-box;transform-origin:50% 100%}
-svg.mrv.mc-bars rect.neg{transform-origin:50% 0}
-svg.mrv.mc-bars{overflow:visible}
-svg.mrv.mc-bars.in rect{animation:mGrowY .5s var(--spring) var(--d,0ms) backwards,mPulse var(--pd,2.4s) ease-in-out calc(.55s + var(--d,0ms)) infinite}
-svg.mrv.mc-bars.in .mc-lbl{animation:mFadeUp .3s var(--snap) var(--d,0ms) backwards,mLblPulse var(--pd,2.4s) ease-in-out .55s infinite}
-.vc.mrv .vcol u{transform-origin:50% 100%}
-.vc.mrv.in .vcol u{animation:mGrowY .5s var(--spring) var(--d,0ms) backwards,mPulse var(--pd,2.4s) ease-in-out calc(.55s + var(--d,0ms)) infinite}
-svg.mrv.mc-bars:not(.vis) :is(rect,.mc-lbl),.vc.mrv:not(.vis) .vcol :is(u,b){animation-play-state:paused}
-.vc.mrv.in .vcol b{animation:mFadeUp .3s var(--snap) calc(var(--d,0ms) + 60ms) backwards,mLblPulse var(--pd,2.4s) ease-in-out calc(.55s + var(--d,0ms)) infinite}
-.vcol:active u{filter:brightness(1.25)}
-@keyframes mPulse{0%,100%{transform:scaleY(1)}40%{transform:scaleY(1.05)}75%{transform:scaleY(.97)}}
-@keyframes mLblPulse{0%,100%{transform:translateY(0)}40%{transform:translateY(calc(var(--h,0px)*var(--sg,-1)*.05))}75%{transform:translateY(calc(var(--h,0px)*var(--sg,-1)*-.03))}}
-@keyframes mGrowY{from{transform:scaleY(0)}to{transform:scaleY(1)}}
-@keyframes mFadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-
-/* win rate & donut: lingkaran berputar masuk, busur mengisi, angka menghitung naik bersamaan */
-:is(.ring,.pt).mrv.in svg{animation:mSpin .65s var(--snap) backwards}
-:is(.ring,.pt).mrv.in .seg{animation:mArc .75s var(--draw) backwards}
-@keyframes mSpin{from{opacity:0;transform:rotate(-110deg) scale(.86)}to{opacity:1;transform:none}}
-@keyframes mArc{from{stroke-dasharray:0 var(--C,999)}to{stroke-dasharray:var(--len) var(--C,999)}}
-
-/* progress bar: terisi lalu kilau berjalan (berhenti saat di luar layar) */
-.m.mrv i{transform-origin:0 50%;position:relative;overflow:hidden}
-.m.mrv.in i{animation:mFillX .6s var(--snap) backwards}
-.m.mrv i::after{content:"";position:absolute;left:0;top:0;bottom:0;width:55%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.4) 50%,transparent);transform:translateX(-100%);animation:mShine 3.4s ease-in-out .6s infinite}
-.m.mrv i::before{content:"";position:absolute;right:0;top:0;bottom:0;width:10px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.95));border-radius:0 3px 3px 0;animation:mHead 2.6s ease-in-out .6s infinite;z-index:1}
-.m.mrv:not(.vis) i::after,.m.mrv:not(.vis) i::before{animation-play-state:paused}
-:root[data-theme=light] .m.mrv i::before{display:none}
-:root[data-theme=light] .m.mrv i::after{background:linear-gradient(100deg,transparent,rgba(255,255,255,.3) 50%,transparent)}
-.hd .m.big2.mrv.in i{animation:mFillX .6s var(--snap) backwards,mGlowBar 4.2s ease-in-out .8s infinite}
-@keyframes mHead{0%,100%{opacity:.45}50%{opacity:.95}}
-@keyframes mGlowBar{0%,100%{opacity:1}50%{opacity:.9}}
-@keyframes mFillX{from{transform:scaleX(0)}to{transform:scaleX(1)}}
-@keyframes mShine{0%{transform:translateX(-100%)}100%{transform:translateX(190%)}}
-
-/* titik form 10 trade terakhir */
-.dots.mrv.in .dt2{animation:mPopIn .3s var(--spring) calc(var(--k,0)*10ms) backwards}
-
-/* ---- pindah halaman: tiap bagian menggeser masuk seperti saat membuka News ---- */
-#app.mfirst .mpg{animation:mPageIn .34s var(--snap) backwards;animation-delay:calc(var(--ci,0)*14ms)}
-@keyframes mPageIn{from{opacity:0;transform:translate3d(var(--dx,24px),0,0)}to{opacity:1;transform:none}}
-
-/* ---- news ---- */
-#nw .s.ev{position:relative;animation:mSlide .32s var(--snap) both;animation-delay:calc(var(--mj,0)*10ms)}
-#nw .s.hl2{animation:mSlideR .32s var(--snap) both;animation-delay:calc(var(--mj,0)*10ms)}
-@keyframes mSlide{from{opacity:0;transform:translateX(-28px)}to{opacity:1;transform:none}}
-@keyframes mSlideR{from{opacity:0;transform:translateX(28px)}to{opacity:1;transform:none}}
-.mlive{animation:mLive 2.4s ease-in-out infinite}
-@keyframes mLive{0%,100%{opacity:.5;transform:scale(.95)}50%{opacity:1;transform:scale(1.08)}}
-
-/* ---- trade baru, toast, dialog, tombol + ---- */
-.t.mnew.WIN{animation:mWin 1.1s ease-out}
-.t.mnew.LOSS{animation:mLoss 1.1s ease-out}
-.t.mnew.BE{animation:mBe 1.1s ease-out}
-@keyframes mWin{0%{transform:scale(.96);box-shadow:0 0 0 0 rgba(var(--acc-rgb),.7);background:rgba(var(--acc-rgb),.2)}40%{transform:scale(1.015)}100%{transform:none;box-shadow:0 0 0 16px rgba(var(--acc-rgb),0)}}
-@keyframes mLoss{0%{box-shadow:0 0 0 0 rgba(var(--loss-rgb),.8);background:rgba(var(--loss-rgb),.22);transform:translateX(0)}15%{transform:translateX(-7px)}30%{transform:translateX(6px)}45%{transform:translateX(-3px)}60%{transform:none}100%{box-shadow:0 0 0 16px rgba(var(--loss-rgb),0)}}
-@keyframes mBe{0%{box-shadow:0 0 0 0 rgba(var(--be-rgb),.7)}100%{box-shadow:0 0 0 14px rgba(var(--be-rgb),0)}}
-#toast{animation:mToast .35s var(--spring)}
-@keyframes mToast{from{opacity:0;transform:translateY(-22px) scale(.96)}to{opacity:1;transform:none}}
-.fab{animation:mGlow 4.2s ease-out infinite}
-.fab.mpop{animation:mPop .45s var(--spring),mGlow 4.2s ease-out .45s infinite}
-@keyframes mPop{from{transform:scale(0) rotate(-90deg)}to{transform:none}}
-@keyframes mGlow{0%{box-shadow:0 0 0 0 rgba(var(--acc-rgb),.28)}70%,100%{box-shadow:0 0 0 12px rgba(var(--acc-rgb),0)}}
-dialog[open]{animation:mDlg .32s var(--spring)}
-dialog[open]::backdrop{animation:mBd .25s ease-out}
-@keyframes mDlg{from{opacity:0;transform:translateY(34px) scale(.94)}to{opacity:1;transform:none}}
-@keyframes mBd{from{opacity:0}to{opacity:1}}
-}
-</style>
 <script id="motion-js">
 (function(){
 if(matchMedia("(prefers-reduced-motion:reduce)").matches)return;
@@ -1756,111 +1826,7 @@ var fab=document.getElementById("add");
 if(fab)new MutationObserver(function(){if(!fab.hidden)fab.classList.add("mpop")}).observe(fab,{attributes:true,attributeFilter:["hidden"]});
 })();
 </script>
-<style id="glass-theme">
-/* ===== GLASS THEME: gaya Glassy Dashboard (kartu kaca blur, latar hangat, nav pil, grafik putih + oranye) ===== */
-@keyframes glDrift{to{transform:translate3d(-3%,3%,0) scale(1.08)}}
-:root[data-theme=dark]{--bg:#1d1410;--card:rgba(255,255,255,.09);--card2:rgba(255,255,255,.14);--card-end:rgba(255,255,255,.05);--glass:rgba(255,255,255,.10);--glass2:rgba(255,255,255,.15);--edge:rgba(255,255,255,.22);--hi:rgba(255,255,255,.34);--dlg:rgba(40,27,20,.82);--ink:#fff;--mute:rgba(255,255,255,.64);--line:rgba(255,255,255,.16);--acc:#ff8a4c;--acc2:#ffa070;--acc-rgb:255,138,76;--chart:#ff7a45;--chart2:#ff6a3d;--chart-best:#ff5a36;--winbar:#ff7a45;--win:#3fd69a;--win-rgb:63,214,154;--loss:#ff5d6c;--loss-rgb:255,93,108;--warn:#ffc15a;--warn-rgb:255,193,90;--be:rgba(255,255,255,.55);--be-rgb:255,255,255;--grad:linear-gradient(135deg,#ff9a5a,#ff5a36);--grid:transparent;--shadow:rgba(0,0,0,.38);--tabsbg:rgba(28,19,14,.62);--hdbg:linear-gradient(150deg,rgba(255,138,76,.34),rgba(255,255,255,.07) 62%);--hdb:rgba(255,255,255,.26);--hdglow:rgba(255,138,76,.3);--barw:linear-gradient(180deg,#fff,rgba(255,255,255,.5));--solid:#fff;--solid-ink:#1d1410;
-background:radial-gradient(120% 90% at 85% 0%,#5e3c29,#1d1410 72%) fixed}
-:root[data-theme=light]{--bg:#e8d6c4;--card:rgba(255,255,255,.52);--card2:rgba(255,255,255,.72);--card-end:rgba(255,255,255,.40);--glass:rgba(255,255,255,.50);--glass2:rgba(255,255,255,.72);--edge:rgba(255,255,255,.9);--hi:#fff;--dlg:rgba(250,240,230,.9);--ink:#2a1c14;--mute:rgba(42,28,20,.62);--line:rgba(110,70,40,.16);--acc:#e0561f;--acc2:#ee6a30;--acc-rgb:224,86,31;--chart:#f06a30;--chart2:#e0561f;--chart-best:#d9441a;--winbar:#f06a30;--win:#12895c;--win-rgb:18,137,92;--loss:#d63b4b;--loss-rgb:214,59,75;--warn:#b07a12;--warn-rgb:176,122,18;--be:rgba(42,28,20,.5);--be-rgb:42,28,20;--grad:linear-gradient(135deg,#ff9a5a,#e0561f);--grid:transparent;--shadow:rgba(90,50,20,.18);--tabsbg:rgba(255,255,255,.62);--hdbg:linear-gradient(150deg,rgba(255,150,90,.38),rgba(255,255,255,.55) 62%);--hdb:rgba(255,255,255,.9);--hdglow:rgba(255,150,90,.3);--barw:linear-gradient(180deg,#fff,rgba(255,255,255,.72));--solid:#2a1c14;--solid-ink:#fff;
-background:radial-gradient(120% 90% at 85% 0%,#f8ebdd,#dcc0a6 75%) fixed}
-:root[data-theme] body{background:transparent!important;font-family:'Plus Jakarta Sans',Figtree,system-ui,sans-serif}
-:root[data-theme] body::before{content:"";position:fixed;inset:-10%;z-index:-1;pointer-events:none;background:radial-gradient(circle at 86% 8%,rgba(255,138,61,.55) 0,transparent 38%),radial-gradient(circle at 4% 52%,rgba(192,96,58,.42) 0,transparent 38%),radial-gradient(circle at 82% 96%,rgba(150,110,80,.5) 0,transparent 40%);animation:glDrift 26s ease-in-out infinite alternate}
-:root[data-theme=light] body::before{opacity:.8}
-@media(prefers-reduced-motion:reduce){:root[data-theme] body::before{animation:none}}
-:root[data-theme] body :is(h1,h2,.pair,.kp b,.ring b,.ch b,.rk b,.day,.big,.tl b,.tl2 b){font-family:'Plus Jakarta Sans',Figtree,system-ui,sans-serif}
-:root[data-theme] body h2{font-size:17px;font-weight:700;letter-spacing:-.01em}
-:root[data-theme] body #lock,:root[data-theme] html.locked #lock{background:var(--bg)}
 
-/* kaca */
-:root[data-theme] body :is(.card,.hd,.ents,.mnu,.toast,.guide .gc,.hls .hl,.tl,.tl2,.pt,.phi){background:var(--glass)!important;border:1px solid var(--edge)!important;-webkit-backdrop-filter:blur(22px) saturate(150%);backdrop-filter:blur(22px) saturate(150%);box-shadow:0 12px 36px var(--shadow),inset 0 1px 0 var(--hi)}
-:root[data-theme] body :is(.card,.hd){border-radius:26px;position:relative}
-:root[data-theme] body :is(.card,.hd)::before{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(135deg,var(--hi),transparent 38%);opacity:.2;pointer-events:none}
-:root[data-theme] body :is(.tl,.tl2,.hls .hl,.pt,.phi){border-radius:18px;background:var(--glass2)!important;box-shadow:none}
-:root[data-theme] body .hls .hl{border-left:1px solid var(--edge)!important}
-:root[data-theme] body .hd{background:var(--hdbg)!important;border-color:var(--hdb)!important;overflow:hidden}
-:root[data-theme] body .hd::after{content:"";position:absolute;right:-60px;top:-70px;width:220px;height:220px;border-radius:50%;background:var(--hdglow);filter:blur(50px);pointer-events:none}
-:root[data-theme] body .hd .big{font-size:44px;font-weight:800;letter-spacing:-.04em}
-:root[data-theme] body .hd .m{background:var(--glass2)}
-:root[data-theme] body .hd .m.big2 i,:root[data-theme] body .m i{background:var(--grad)}
-:root[data-theme] body .s .m{background:var(--glass2);height:6px;border-radius:99px}
-:root[data-theme] body .s{border-bottom-color:var(--line)}
-:root[data-theme] body .ents{border-radius:26px;overflow:hidden}
-:root[data-theme] body .ents .day{background:var(--glass2);border-bottom:1px solid var(--line)}
-:root[data-theme] body .ents .t{border-bottom-color:var(--line)}
-:root[data-theme] body .ents .t,:root[data-theme] body .t{background:transparent!important;box-shadow:none!important}
-:root[data-theme] body :is(.card,.t):hover{transform:translateY(-3px)}
-
-/* header pil */
-:root[data-theme] body .head{padding:8px 10px 8px 16px;margin-bottom:14px;border-radius:999px;background:var(--glass);border:1px solid var(--edge);-webkit-backdrop-filter:blur(22px);backdrop-filter:blur(22px);box-shadow:0 8px 26px var(--shadow),inset 0 1px 0 var(--hi)}
-:root[data-theme] body .head .hl{background:none!important;border:0!important;padding:0;box-shadow:none}
-:root[data-theme] body .mnb{background:var(--glass2);border-color:var(--edge);color:var(--ink)}
-:root[data-theme] body .phrow select{background:var(--glass);border-color:var(--edge)}
-:root[data-theme] body .mnu{border-radius:20px;background:var(--dlg)!important}
-
-/* input dan tombol */
-:root[data-theme] input,:root[data-theme] select,:root[data-theme] textarea{background:var(--glass2);border:1px solid var(--edge);border-radius:14px;color:var(--ink)}
-:root[data-theme] button,:root[data-theme] a.b{background:var(--glass2);border-color:var(--edge);color:var(--ink);border-radius:999px}
-:root[data-theme] body button.p,:root[data-theme] body .ch2.on{background:var(--solid);color:var(--solid-ink);border-color:transparent;font-weight:700}
-:root[data-theme] body .ch2{background:var(--glass);border-color:var(--edge);color:var(--ink)}
-:root[data-theme] body :is(.lnk,.mnu button){background:none;border:0;color:var(--acc2)}
-:root[data-theme] body .mnu button{color:var(--ink)}
-:root[data-theme] body .mnu button:hover{background:var(--glass2)}
-:root[data-theme] body :is(.live,button.live){background:transparent;border:1px solid var(--acc);color:var(--acc2)}
-:root[data-theme] body a.b{color:var(--acc2);border-color:var(--acc)}
-:root[data-theme] body button.del{color:var(--loss)}
-:root[data-theme] body dialog{background:var(--dlg);border:1px solid var(--edge);border-radius:28px;-webkit-backdrop-filter:blur(30px);backdrop-filter:blur(30px);box-shadow:0 30px 70px var(--shadow)}
-:root[data-theme] body dialog::backdrop{background:rgba(20,12,8,.5);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
-
-/* nav bawah: pil kaca melayang, tab aktif putih */
-:root[data-theme] body #tabs{left:50%;right:auto;width:min(calc(100% - 24px),520px);transform:translateX(-50%);bottom:calc(14px + env(safe-area-inset-bottom,0px));padding:6px;border:1px solid var(--edge);border-radius:999px;background:var(--tabsbg);-webkit-backdrop-filter:blur(26px) saturate(150%);backdrop-filter:blur(26px) saturate(150%);box-shadow:0 18px 44px var(--shadow),inset 0 1px 0 var(--hi)}
-:root[data-theme] body #tabs button{padding:7px 0 5px;border-radius:999px;background:transparent;border:0;color:var(--mute)}
-:root[data-theme] body #tabs button.on{color:var(--solid-ink);background:transparent!important}
-:root[data-theme] body #tabpill{top:5px;bottom:5px;height:auto;border-radius:999px;background:var(--solid);box-shadow:0 4px 14px var(--shadow)}
-:root[data-theme] body #add.fab,:root[data-theme] body.c #add.fab{right:16px;left:auto;width:54px;height:54px;border-radius:50%!important;background:var(--solid)!important;color:var(--solid-ink)!important;font-size:28px;font-weight:500;border:0!important;bottom:calc(84px + env(safe-area-inset-bottom,0px));box-shadow:0 12px 30px var(--shadow)!important}
-:root[data-theme] body .toast{border-radius:999px}
-
-/* grafik: batang putih kaca, sorotan oranye, donat dan garis oranye bercahaya */
-:root[data-theme] body .vc{gap:12px;border-bottom:1px solid var(--line)}
-:root[data-theme] body .vcol u{background:var(--barw);border-radius:14px 14px 8px 8px;max-width:42px;box-shadow:0 8px 18px var(--shadow)}
-:root[data-theme] body .vcol u.neg{background:linear-gradient(180deg,#ff9460,#ff5a36);opacity:1}
-:root[data-theme] body .vc.tt .vcol u{max-width:28px}
-:root[data-theme] body .vcol b{font-weight:700}
-:root[data-theme] body .vc .g50{border-top-color:var(--line)}
-:root[data-theme] body .cw rect:not(.lpt):not(.best):not(.neg){fill:var(--bar-solid,rgba(255,255,255,.85))}
-:root[data-theme=light] body .cw rect:not(.lpt):not(.best):not(.neg){fill:#fff}
-:root[data-theme] body .cw rect.best{fill:var(--chart-best)}
-:root[data-theme] body .cw rect.neg{fill:var(--loss);opacity:1}
-:root[data-theme] body .cw svg polyline{stroke-linecap:round;filter:drop-shadow(0 4px 8px rgba(255,106,61,.4))}
-:root[data-theme] body .ring svg{filter:drop-shadow(0 0 6px rgba(255,106,61,.35))}
-:root[data-theme] body .ring svg circle{stroke-width:8}
-:root[data-theme] body .ring svg circle:first-child{stroke:var(--glass2)}
-:root[data-theme] body .ring b{font-weight:800}
-:root[data-theme] body .gl{stroke:var(--line)}
-:root[data-theme] body .dt2.WIN{background:var(--win)!important}
-:root[data-theme] body .cal b,:root[data-theme] body .hm b{border-radius:12px;background-color:var(--glass2)}
-:root[data-theme] body .cal .wt{border-color:var(--edge)}
-:root[data-theme] body :is(.res,.dir,.ip,.tags span,.pill){border-radius:999px}
-:root[data-theme] body .res.WIN,:root[data-theme] body .dir.Buy{background:rgba(var(--win-rgb),.18)}
-:root[data-theme] body .res.LOSS,:root[data-theme] body .dir.Sell{background:rgba(var(--loss-rgb),.18)}
-:root[data-theme] body .chips div{background:var(--glass2);border-radius:14px}
-:root[data-theme] body .cw .tip{background:var(--dlg);border:1px solid var(--edge);border-radius:12px;-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
-:root[data-theme] body .stp{background:var(--grad);color:#fff}
-:root[data-theme] body :focus-visible{outline-color:var(--acc)}
-</style>
-
-<style id="glass-theme-2">
-/* Mode terang: hijau dan hitam. Mode gelap: putih dan oranye */
-:root[data-theme=dark]{--bg:#141011;--glass:rgba(255,255,255,.09);--acc:#ff8a3d;--acc2:#ffa062;--acc-rgb:255,138,61;--chart:#ff8a3d;--chart2:#ff6a2d;--chart-best:#ff5a1f;--winbar:#ff8a3d;--grad:linear-gradient(135deg,#ffa05a,#ff5a1f);--tabsbg:rgba(22,16,14,.66);--dlg:rgba(30,22,19,.86);
-background:radial-gradient(120% 90% at 85% 0%,#3e2415,#130e0c 72%) fixed}
-:root[data-theme=light]{--bg:#dcebe0;--card:rgba(255,255,255,.55);--card2:rgba(255,255,255,.75);--card-end:rgba(255,255,255,.42);--glass:rgba(255,255,255,.55);--glass2:rgba(255,255,255,.76);--edge:rgba(255,255,255,.92);--hi:#fff;--dlg:rgba(240,248,243,.92);--ink:#0e1411;--mute:rgba(14,20,17,.62);--line:rgba(14,60,36,.16);--acc:#16a35f;--acc2:#0f8a4e;--acc-rgb:22,163,95;--chart:#1fb56d;--chart2:#16a35f;--chart-best:#0c7a45;--winbar:#1fb56d;--win:#0f8a4e;--win-rgb:15,138,78;--loss:#d63b4b;--loss-rgb:214,59,75;--warn:#9a6a00;--warn-rgb:154,106,0;--be:rgba(14,20,17,.5);--be-rgb:14,20,17;--grad:linear-gradient(135deg,#34d98c,#0f8a4e);--shadow:rgba(10,50,30,.18);--tabsbg:rgba(255,255,255,.64);--hdbg:linear-gradient(150deg,rgba(52,217,140,.36),rgba(255,255,255,.55) 62%);--hdb:rgba(255,255,255,.92);--hdglow:rgba(52,217,140,.35);--barw:linear-gradient(180deg,#2c2f2d,#080a09);--solid:#0d0f0e;--solid-ink:#fff;
-background:radial-gradient(120% 90% at 85% 0%,#f0f9f3,#cde3d6 75%) fixed}
-:root[data-theme=light] body::before{opacity:1;background:radial-gradient(circle at 86% 8%,rgba(52,217,140,.5) 0,transparent 38%),radial-gradient(circle at 4% 52%,rgba(20,120,80,.32) 0,transparent 38%),radial-gradient(circle at 82% 96%,rgba(20,24,22,.2) 0,transparent 42%)}
-:root[data-theme=light] body .vcol u.neg{background:linear-gradient(180deg,#ff7885,#d63b4b)}
-:root[data-theme=light] body .cw rect:not(.lpt):not(.best):not(.neg){fill:#141816}
-:root[data-theme=light] body .cw svg polyline{filter:drop-shadow(0 4px 8px rgba(31,181,109,.4))}
-:root[data-theme=light] body .ring svg{filter:drop-shadow(0 0 6px rgba(31,181,109,.35))}
-:root[data-theme=light] body .stp{color:#fff}
-</style>
 
 </body>
 </html>
