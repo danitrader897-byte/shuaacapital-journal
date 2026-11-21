@@ -10,8 +10,8 @@
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="manifest" href="manifest.webmanifest">
-<meta name="theme-color" content="#0f1626">
-<script>(function(){try{var t=localStorage.getItem("shuaa_theme")||"dark";var l=t==="light"||(t==="auto"&&matchMedia("(prefers-color-scheme: light)").matches);document.documentElement.setAttribute("data-theme",l?"light":"dark");var m=document.querySelector("meta[name=theme-color]");if(m)m.content=l?"#e2e6ee":"#0f1626"}catch(e){}})()</script>
+<meta name="theme-color" content="#1d1410">
+<script>(function(){try{var t=localStorage.getItem("shuaa_theme")||"dark";var l=t==="light"||(t==="auto"&&matchMedia("(prefers-color-scheme: light)").matches);document.documentElement.setAttribute("data-theme",l?"light":"dark");var m=document.querySelector("meta[name=theme-color]");if(m)m.content=l?"#dcebe0":"#141011"}catch(e){}})()</script>
 <script>(function(){try{if(localStorage.getItem("shuaa_unlock")!=="6c54a558324a704c40384745813009c090d9344ea310f386a57b90c04dcab963")document.documentElement.classList.add("locked")}catch(e){document.documentElement.classList.add("locked")}})()</script>
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -531,6 +531,7 @@ html.locked #lock{display:flex;position:fixed;inset:0;z-index:99999;background:v
 #lock button:disabled{opacity:.5}
 #lock .er{min-height:18px;margin-top:10px;font-size:13px;color:var(--loss,#ff5d73)}
 </style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
 </head>
 <body>
 <div id="lock"><div class="lb"><h1>SHUAA</h1><p>Masukkan kode akses untuk membuka jurnal.</p>
@@ -1755,5 +1756,111 @@ var fab=document.getElementById("add");
 if(fab)new MutationObserver(function(){if(!fab.hidden)fab.classList.add("mpop")}).observe(fab,{attributes:true,attributeFilter:["hidden"]});
 })();
 </script>
+<style id="glass-theme">
+/* ===== GLASS THEME: gaya Glassy Dashboard (kartu kaca blur, latar hangat, nav pil, grafik putih + oranye) ===== */
+@keyframes glDrift{to{transform:translate3d(-3%,3%,0) scale(1.08)}}
+:root[data-theme=dark]{--bg:#1d1410;--card:rgba(255,255,255,.09);--card2:rgba(255,255,255,.14);--card-end:rgba(255,255,255,.05);--glass:rgba(255,255,255,.10);--glass2:rgba(255,255,255,.15);--edge:rgba(255,255,255,.22);--hi:rgba(255,255,255,.34);--dlg:rgba(40,27,20,.82);--ink:#fff;--mute:rgba(255,255,255,.64);--line:rgba(255,255,255,.16);--acc:#ff8a4c;--acc2:#ffa070;--acc-rgb:255,138,76;--chart:#ff7a45;--chart2:#ff6a3d;--chart-best:#ff5a36;--winbar:#ff7a45;--win:#3fd69a;--win-rgb:63,214,154;--loss:#ff5d6c;--loss-rgb:255,93,108;--warn:#ffc15a;--warn-rgb:255,193,90;--be:rgba(255,255,255,.55);--be-rgb:255,255,255;--grad:linear-gradient(135deg,#ff9a5a,#ff5a36);--grid:transparent;--shadow:rgba(0,0,0,.38);--tabsbg:rgba(28,19,14,.62);--hdbg:linear-gradient(150deg,rgba(255,138,76,.34),rgba(255,255,255,.07) 62%);--hdb:rgba(255,255,255,.26);--hdglow:rgba(255,138,76,.3);--barw:linear-gradient(180deg,#fff,rgba(255,255,255,.5));--solid:#fff;--solid-ink:#1d1410;
+background:radial-gradient(120% 90% at 85% 0%,#5e3c29,#1d1410 72%) fixed}
+:root[data-theme=light]{--bg:#e8d6c4;--card:rgba(255,255,255,.52);--card2:rgba(255,255,255,.72);--card-end:rgba(255,255,255,.40);--glass:rgba(255,255,255,.50);--glass2:rgba(255,255,255,.72);--edge:rgba(255,255,255,.9);--hi:#fff;--dlg:rgba(250,240,230,.9);--ink:#2a1c14;--mute:rgba(42,28,20,.62);--line:rgba(110,70,40,.16);--acc:#e0561f;--acc2:#ee6a30;--acc-rgb:224,86,31;--chart:#f06a30;--chart2:#e0561f;--chart-best:#d9441a;--winbar:#f06a30;--win:#12895c;--win-rgb:18,137,92;--loss:#d63b4b;--loss-rgb:214,59,75;--warn:#b07a12;--warn-rgb:176,122,18;--be:rgba(42,28,20,.5);--be-rgb:42,28,20;--grad:linear-gradient(135deg,#ff9a5a,#e0561f);--grid:transparent;--shadow:rgba(90,50,20,.18);--tabsbg:rgba(255,255,255,.62);--hdbg:linear-gradient(150deg,rgba(255,150,90,.38),rgba(255,255,255,.55) 62%);--hdb:rgba(255,255,255,.9);--hdglow:rgba(255,150,90,.3);--barw:linear-gradient(180deg,#fff,rgba(255,255,255,.72));--solid:#2a1c14;--solid-ink:#fff;
+background:radial-gradient(120% 90% at 85% 0%,#f8ebdd,#dcc0a6 75%) fixed}
+:root[data-theme] body{background:transparent!important;font-family:'Plus Jakarta Sans',Figtree,system-ui,sans-serif}
+:root[data-theme] body::before{content:"";position:fixed;inset:-10%;z-index:-1;pointer-events:none;background:radial-gradient(circle at 86% 8%,rgba(255,138,61,.55) 0,transparent 38%),radial-gradient(circle at 4% 52%,rgba(192,96,58,.42) 0,transparent 38%),radial-gradient(circle at 82% 96%,rgba(150,110,80,.5) 0,transparent 40%);animation:glDrift 26s ease-in-out infinite alternate}
+:root[data-theme=light] body::before{opacity:.8}
+@media(prefers-reduced-motion:reduce){:root[data-theme] body::before{animation:none}}
+:root[data-theme] body :is(h1,h2,.pair,.kp b,.ring b,.ch b,.rk b,.day,.big,.tl b,.tl2 b){font-family:'Plus Jakarta Sans',Figtree,system-ui,sans-serif}
+:root[data-theme] body h2{font-size:17px;font-weight:700;letter-spacing:-.01em}
+:root[data-theme] body #lock,:root[data-theme] html.locked #lock{background:var(--bg)}
+
+/* kaca */
+:root[data-theme] body :is(.card,.hd,.ents,.mnu,.toast,.guide .gc,.hls .hl,.tl,.tl2,.pt,.phi){background:var(--glass)!important;border:1px solid var(--edge)!important;-webkit-backdrop-filter:blur(22px) saturate(150%);backdrop-filter:blur(22px) saturate(150%);box-shadow:0 12px 36px var(--shadow),inset 0 1px 0 var(--hi)}
+:root[data-theme] body :is(.card,.hd){border-radius:26px;position:relative}
+:root[data-theme] body :is(.card,.hd)::before{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(135deg,var(--hi),transparent 38%);opacity:.2;pointer-events:none}
+:root[data-theme] body :is(.tl,.tl2,.hls .hl,.pt,.phi){border-radius:18px;background:var(--glass2)!important;box-shadow:none}
+:root[data-theme] body .hls .hl{border-left:1px solid var(--edge)!important}
+:root[data-theme] body .hd{background:var(--hdbg)!important;border-color:var(--hdb)!important;overflow:hidden}
+:root[data-theme] body .hd::after{content:"";position:absolute;right:-60px;top:-70px;width:220px;height:220px;border-radius:50%;background:var(--hdglow);filter:blur(50px);pointer-events:none}
+:root[data-theme] body .hd .big{font-size:44px;font-weight:800;letter-spacing:-.04em}
+:root[data-theme] body .hd .m{background:var(--glass2)}
+:root[data-theme] body .hd .m.big2 i,:root[data-theme] body .m i{background:var(--grad)}
+:root[data-theme] body .s .m{background:var(--glass2);height:6px;border-radius:99px}
+:root[data-theme] body .s{border-bottom-color:var(--line)}
+:root[data-theme] body .ents{border-radius:26px;overflow:hidden}
+:root[data-theme] body .ents .day{background:var(--glass2);border-bottom:1px solid var(--line)}
+:root[data-theme] body .ents .t{border-bottom-color:var(--line)}
+:root[data-theme] body .ents .t,:root[data-theme] body .t{background:transparent!important;box-shadow:none!important}
+:root[data-theme] body :is(.card,.t):hover{transform:translateY(-3px)}
+
+/* header pil */
+:root[data-theme] body .head{padding:8px 10px 8px 16px;margin-bottom:14px;border-radius:999px;background:var(--glass);border:1px solid var(--edge);-webkit-backdrop-filter:blur(22px);backdrop-filter:blur(22px);box-shadow:0 8px 26px var(--shadow),inset 0 1px 0 var(--hi)}
+:root[data-theme] body .head .hl{background:none!important;border:0!important;padding:0;box-shadow:none}
+:root[data-theme] body .mnb{background:var(--glass2);border-color:var(--edge);color:var(--ink)}
+:root[data-theme] body .phrow select{background:var(--glass);border-color:var(--edge)}
+:root[data-theme] body .mnu{border-radius:20px;background:var(--dlg)!important}
+
+/* input dan tombol */
+:root[data-theme] input,:root[data-theme] select,:root[data-theme] textarea{background:var(--glass2);border:1px solid var(--edge);border-radius:14px;color:var(--ink)}
+:root[data-theme] button,:root[data-theme] a.b{background:var(--glass2);border-color:var(--edge);color:var(--ink);border-radius:999px}
+:root[data-theme] body button.p,:root[data-theme] body .ch2.on{background:var(--solid);color:var(--solid-ink);border-color:transparent;font-weight:700}
+:root[data-theme] body .ch2{background:var(--glass);border-color:var(--edge);color:var(--ink)}
+:root[data-theme] body :is(.lnk,.mnu button){background:none;border:0;color:var(--acc2)}
+:root[data-theme] body .mnu button{color:var(--ink)}
+:root[data-theme] body .mnu button:hover{background:var(--glass2)}
+:root[data-theme] body :is(.live,button.live){background:transparent;border:1px solid var(--acc);color:var(--acc2)}
+:root[data-theme] body a.b{color:var(--acc2);border-color:var(--acc)}
+:root[data-theme] body button.del{color:var(--loss)}
+:root[data-theme] body dialog{background:var(--dlg);border:1px solid var(--edge);border-radius:28px;-webkit-backdrop-filter:blur(30px);backdrop-filter:blur(30px);box-shadow:0 30px 70px var(--shadow)}
+:root[data-theme] body dialog::backdrop{background:rgba(20,12,8,.5);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+
+/* nav bawah: pil kaca melayang, tab aktif putih */
+:root[data-theme] body #tabs{left:50%;right:auto;width:min(calc(100% - 24px),520px);transform:translateX(-50%);bottom:calc(14px + env(safe-area-inset-bottom,0px));padding:6px;border:1px solid var(--edge);border-radius:999px;background:var(--tabsbg);-webkit-backdrop-filter:blur(26px) saturate(150%);backdrop-filter:blur(26px) saturate(150%);box-shadow:0 18px 44px var(--shadow),inset 0 1px 0 var(--hi)}
+:root[data-theme] body #tabs button{padding:7px 0 5px;border-radius:999px;background:transparent;border:0;color:var(--mute)}
+:root[data-theme] body #tabs button.on{color:var(--solid-ink);background:transparent!important}
+:root[data-theme] body #tabpill{top:5px;bottom:5px;height:auto;border-radius:999px;background:var(--solid);box-shadow:0 4px 14px var(--shadow)}
+:root[data-theme] body #add.fab,:root[data-theme] body.c #add.fab{right:16px;left:auto;width:54px;height:54px;border-radius:50%!important;background:var(--solid)!important;color:var(--solid-ink)!important;font-size:28px;font-weight:500;border:0!important;bottom:calc(84px + env(safe-area-inset-bottom,0px));box-shadow:0 12px 30px var(--shadow)!important}
+:root[data-theme] body .toast{border-radius:999px}
+
+/* grafik: batang putih kaca, sorotan oranye, donat dan garis oranye bercahaya */
+:root[data-theme] body .vc{gap:12px;border-bottom:1px solid var(--line)}
+:root[data-theme] body .vcol u{background:var(--barw);border-radius:14px 14px 8px 8px;max-width:42px;box-shadow:0 8px 18px var(--shadow)}
+:root[data-theme] body .vcol u.neg{background:linear-gradient(180deg,#ff9460,#ff5a36);opacity:1}
+:root[data-theme] body .vc.tt .vcol u{max-width:28px}
+:root[data-theme] body .vcol b{font-weight:700}
+:root[data-theme] body .vc .g50{border-top-color:var(--line)}
+:root[data-theme] body .cw rect:not(.lpt):not(.best):not(.neg){fill:var(--bar-solid,rgba(255,255,255,.85))}
+:root[data-theme=light] body .cw rect:not(.lpt):not(.best):not(.neg){fill:#fff}
+:root[data-theme] body .cw rect.best{fill:var(--chart-best)}
+:root[data-theme] body .cw rect.neg{fill:var(--loss);opacity:1}
+:root[data-theme] body .cw svg polyline{stroke-linecap:round;filter:drop-shadow(0 4px 8px rgba(255,106,61,.4))}
+:root[data-theme] body .ring svg{filter:drop-shadow(0 0 6px rgba(255,106,61,.35))}
+:root[data-theme] body .ring svg circle{stroke-width:8}
+:root[data-theme] body .ring svg circle:first-child{stroke:var(--glass2)}
+:root[data-theme] body .ring b{font-weight:800}
+:root[data-theme] body .gl{stroke:var(--line)}
+:root[data-theme] body .dt2.WIN{background:var(--win)!important}
+:root[data-theme] body .cal b,:root[data-theme] body .hm b{border-radius:12px;background-color:var(--glass2)}
+:root[data-theme] body .cal .wt{border-color:var(--edge)}
+:root[data-theme] body :is(.res,.dir,.ip,.tags span,.pill){border-radius:999px}
+:root[data-theme] body .res.WIN,:root[data-theme] body .dir.Buy{background:rgba(var(--win-rgb),.18)}
+:root[data-theme] body .res.LOSS,:root[data-theme] body .dir.Sell{background:rgba(var(--loss-rgb),.18)}
+:root[data-theme] body .chips div{background:var(--glass2);border-radius:14px}
+:root[data-theme] body .cw .tip{background:var(--dlg);border:1px solid var(--edge);border-radius:12px;-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
+:root[data-theme] body .stp{background:var(--grad);color:#fff}
+:root[data-theme] body :focus-visible{outline-color:var(--acc)}
+</style>
+
+<style id="glass-theme-2">
+/* Mode terang: hijau dan hitam. Mode gelap: putih dan oranye */
+:root[data-theme=dark]{--bg:#141011;--glass:rgba(255,255,255,.09);--acc:#ff8a3d;--acc2:#ffa062;--acc-rgb:255,138,61;--chart:#ff8a3d;--chart2:#ff6a2d;--chart-best:#ff5a1f;--winbar:#ff8a3d;--grad:linear-gradient(135deg,#ffa05a,#ff5a1f);--tabsbg:rgba(22,16,14,.66);--dlg:rgba(30,22,19,.86);
+background:radial-gradient(120% 90% at 85% 0%,#3e2415,#130e0c 72%) fixed}
+:root[data-theme=light]{--bg:#dcebe0;--card:rgba(255,255,255,.55);--card2:rgba(255,255,255,.75);--card-end:rgba(255,255,255,.42);--glass:rgba(255,255,255,.55);--glass2:rgba(255,255,255,.76);--edge:rgba(255,255,255,.92);--hi:#fff;--dlg:rgba(240,248,243,.92);--ink:#0e1411;--mute:rgba(14,20,17,.62);--line:rgba(14,60,36,.16);--acc:#16a35f;--acc2:#0f8a4e;--acc-rgb:22,163,95;--chart:#1fb56d;--chart2:#16a35f;--chart-best:#0c7a45;--winbar:#1fb56d;--win:#0f8a4e;--win-rgb:15,138,78;--loss:#d63b4b;--loss-rgb:214,59,75;--warn:#9a6a00;--warn-rgb:154,106,0;--be:rgba(14,20,17,.5);--be-rgb:14,20,17;--grad:linear-gradient(135deg,#34d98c,#0f8a4e);--shadow:rgba(10,50,30,.18);--tabsbg:rgba(255,255,255,.64);--hdbg:linear-gradient(150deg,rgba(52,217,140,.36),rgba(255,255,255,.55) 62%);--hdb:rgba(255,255,255,.92);--hdglow:rgba(52,217,140,.35);--barw:linear-gradient(180deg,#2c2f2d,#080a09);--solid:#0d0f0e;--solid-ink:#fff;
+background:radial-gradient(120% 90% at 85% 0%,#f0f9f3,#cde3d6 75%) fixed}
+:root[data-theme=light] body::before{opacity:1;background:radial-gradient(circle at 86% 8%,rgba(52,217,140,.5) 0,transparent 38%),radial-gradient(circle at 4% 52%,rgba(20,120,80,.32) 0,transparent 38%),radial-gradient(circle at 82% 96%,rgba(20,24,22,.2) 0,transparent 42%)}
+:root[data-theme=light] body .vcol u.neg{background:linear-gradient(180deg,#ff7885,#d63b4b)}
+:root[data-theme=light] body .cw rect:not(.lpt):not(.best):not(.neg){fill:#141816}
+:root[data-theme=light] body .cw svg polyline{filter:drop-shadow(0 4px 8px rgba(31,181,109,.4))}
+:root[data-theme=light] body .ring svg{filter:drop-shadow(0 0 6px rgba(31,181,109,.35))}
+:root[data-theme=light] body .stp{color:#fff}
+</style>
+
 </body>
 </html>
