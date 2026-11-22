@@ -32,10 +32,12 @@ dialog{background:var(--card);color:var(--ink);border:1px solid var(--line);bord
 .fg{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}.fg .full{grid-column:1/-1}
 @media print{:root,:root[data-theme]{--bg:#fff;--card:#fff;--line:#ccc;--ink:#000;--mu:#555;--w:#0a7a4d;--l:#b5302a}nav,.fab,button,select,input,.chips{display:none!important}body{padding:0}details.t{break-inside:avoid}}
 header .jn{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}@media(max-width:400px){header .lb{display:none}}@media(max-width:360px){.fg{grid-template-columns:1fr}}.cal-h{display:flex;align-items:center;justify-content:space-between;gap:8px}
-</style></head><body><main id="app"></main><nav id="nav" aria-label="Menu utama"></nav>
+.chips button{white-space:nowrap;flex:0 0 auto}
+</style></head><body><main id="app"><p style="padding:24px">Memuat jurnal... Kalau layar ini tidak berubah, buka file ini lewat browser (Chrome/Safari) dari alamat web jurnalmu, bukan lewat pratinjau file.</p><noscript><p style="padding:24px">JavaScript dimatikan. Aktifkan JavaScript untuk memakai jurnal ini.</p></noscript></main><nav id="nav" aria-label="Menu utama"></nav>
 <button class="fab" id="add">+ Trade</button>
 <script>
 (()=>{'use strict';
+addEventListener('error',e=>{const m=document.getElementById('app');if(m)m.textContent='Terjadi kesalahan: '+e.message+' (baris '+e.lineno+'). Kirim pesan ini ke pembuatnya.'});
 /* ===== util ===== */
 const NS='http://www.w3.org/2000/svg';
 const h=(t,a={},...c)=>{const e=document.createElement(t);for(const k in a){if(k==='class')e.className=a[k];else if(k.startsWith('on'))e.addEventListener(k.slice(2),a[k]);else e.setAttribute(k,a[k])}c.flat().filter(x=>x!==false&&x!=null).forEach(x=>e.append(x.nodeType?x:String(x)));return e};
@@ -44,7 +46,8 @@ const rd=(k,f)=>{try{return JSON.parse(localStorage.getItem(k))??f}catch{return 
 /* ===== data (format lama dipertahankan) ===== */
 const PH=rd('shuaa_phases',{list:[]});if(!Array.isArray(PH.list))PH.list=[];const PHL=PH.list;
 let phv=rd('shuaa_v2_phase',PH.view||PH.active||'');if(!PHL.some(p=>p.id===phv))phv='';
-let ACC,ALL,rows,asc,unit;
+let ACC,ALL,rows,asc,unit,PR;const RG={k:'all',a:'',b:''};
+const inRg=d=>{if(RG.k==='all')return true;const n=new Date(),p=x=>x.getFullYear()+'-'+String(x.getMonth()+1).padStart(2,'0');if(RG.k==='m0')return d.startsWith(p(n));if(RG.k==='m1')return d.startsWith(p(new Date(n.getFullYear(),n.getMonth()-1,1)));return(!RG.a||d>=RG.a)&&(!RG.b||d<=RG.b)};
 const FULL=()=>{const j=rd('shuaa_journal_v1',{}).rows;return Array.isArray(j)?j:[]};
 const num=v=>{const n=parseFloat(v);return isFinite(n)?n:null};
 const R=r=>{const a=num(r.ar);if(a!==null)return a;if(r.result==='LOSS')return -1;if(r.result==='WIN'){const m=String(r.rr||'').match(/[:\/]\s*([\d.]+)/);return m?+m[1]:1}return 0};
@@ -54,7 +57,7 @@ const st=l=>{const n=l.length,w=l.filter(r=>r.result==='WIN').length,g=l.reduce(
 const inPh=(r,id)=>(r.ph||(PHL[0]&&PHL[0].id))===id;
 function load(){const p=PHL.find(x=>x.id===phv);ACC={bal:10000,risk:1,tgt:10,...rd('shuaa_acct',{}),...(p&&p.acc||{})};
  ALL=FULL().filter(r=>r&&r.date&&r.result!=='SETUP');const f=phv?ALL.filter(r=>inPh(r,phv)):ALL;
- rows=[...f].sort((a,b)=>a.date<b.date?1:-1);asc=[...rows].reverse();unit=ACC.bal*ACC.risk/100}
+ PR=f;rows=f.filter(r=>inRg(r.date)).sort((a,b)=>a.date<b.date?1:-1);asc=[...rows].reverse();unit=ACC.bal*ACC.risk/100}
 load();
 const PMK='shuaa_premarket',pmGet=()=>{const o=rd(PMK,{});return o&&typeof o==='object'?o:{}};
 const blank=()=>({b:'',tf:{d:'',h4:'',h1:''},pr:'',lv:'',n:'',nw:false,td:false,fk:false,em:'',l:'',rk:'',ss:[],ck:[],ev:'',evn:'',sk:'',ls:'',ms:[]});
@@ -124,15 +127,29 @@ const backup=()=>{const inp=h('input',{type:'file',accept:'.json,application/jso
   h('button',{onclick:()=>inp.click()},'Import JSON'),inp,h('button',{onclick:()=>cin.click()},'Import CSV'),cin,h('button',{onclick:()=>{document.querySelectorAll('details').forEach(d=>d.open=true);print()}},'Ekspor PDF')))};
 /* ===== halaman ===== */
 const V={
- ringkasan(){const s=st(rows),pnl=s.sum*unit,tg=ACC.bal*ACC.tgt/100,pg=Math.max(0,Math.min(100,pnl/tg*100));
-  return[card(h('span',{class:'mu'},'Balance'),h('div',{class:'big'},'$'+Math.round(ACC.bal+pnl).toLocaleString('en-US')),
-   h('div',{class:'bar'},h('i',{style:'width:'+pg+'%'})),h('div',{class:'mu',style:'margin-top:8px;display:flex;justify-content:space-between'},h('span',{},Math.round(pg)+'% menuju target'),h('span',{},'P/L '+usd(pnl)))),
-   h('div',{class:'g3'},stat('Win rate',s.wr+'%','w'),stat('Profit factor',s.pf.toFixed(1)),stat('Rata-rata R',rr(s.n?s.sum/s.n:0),s.sum>=0?'w':'l')),h('div',{class:'g3'},stat('Total trade',s.n),stat('Max drawdown','-$'+Math.round(ddv()*unit).toLocaleString('en-US'),'l'),stat('Streak',streak())),
-   card(h('span',{class:'mu'},'Kurva equity'),equity()),calendar(),h('h2',{},'TRADE TERAKHIR'),...rows.slice(0,3).map(trade)]},
+ ringkasan(){const s=st(rows),tot=PR.reduce((a,r)=>a+R(r),0),pl=tot*unit,tg=ACC.bal*ACC.tgt/100,pg=Math.max(0,Math.min(100,pl/tg*100)),pa=[...PR].sort((a,b)=>a.date<b.date?-1:1),byD={};
+  PR.forEach(r=>byD[r.date]=(byD[r.date]||0)+R(r));const worst=Math.max(0,-Math.min(0,...Object.values(byD)))*ACC.risk;
+  let c=0,pk=0,m=0;pa.forEach(r=>{c+=R(r);pk=Math.max(pk,c);m=Math.max(m,pk-c)});
+  const dd=m*ACC.risk,days=Object.keys(byD).length,md=ACC.md||0,dl=ACC.dl||3,ml=ACC.ml||6,td=byD[dayKey()]||0,tdr=PR.filter(r=>r.date===dayKey()),left=Math.max(0,dl-Math.max(0,-td)*ACC.risk);
+  const col=x=>x<50?'var(--w)':x<80?'var(--ac)':'var(--l)';
+  const mt=(l,v,x,k)=>h('div',{},h('div',{class:'mu'},l),h('b',{style:'font-size:14px'},v),h('div',{class:'bar',style:'margin-top:6px'},h('i',{style:'width:'+Math.min(100,x)+'%;background:'+k})));
+  const rc=[['all','Semua'],['m0','Bulan ini'],['m1','Bulan lalu'],['c','Custom']].map(([k,t])=>h('button',{'aria-pressed':String(RG.k===k),onclick:()=>{RG.k=k;load();go()}},t));
+  const dt=k=>{const i=h('input',{type:'date','aria-label':k==='a'?'Dari tanggal':'Sampai tanggal',onchange:e=>{RG[k]=e.target.value;load();go()}});i.value=RG[k];return i};
+  const mny=x=>'$'+Math.round(x).toLocaleString('en-US');
+  return[h('div',{class:'chips',role:'group','aria-label':'Rentang waktu'},rc),RG.k==='c'&&h('div',{class:'g3',style:'grid-template-columns:1fr 1fr'},dt('a'),dt('b')),
+   card(h('div',{style:'display:flex;justify-content:space-between;align-items:center'},h('span',{class:'mu'},'Balance'),h('span',{class:'mu',style:'border:1px solid var(--line);border-radius:999px;padding:2px 10px'},pg>=100&&days>=md?'Target tercapai':'Berjalan')),
+    h('div',{class:'big',style:'margin-bottom:6px'},mny(ACC.bal+pl)),h('div',{class:pl>=0?'w':'l',style:'font-weight:700;margin-bottom:8px'},(pl>=0?'▲ ':'▼ ')+usd(pl)+' ('+(pl/ACC.bal*100).toFixed(1)+'%)'),equity(),
+    h('div',{class:'mu',style:'display:flex;justify-content:space-between;margin:10px 0 6px'},h('span',{},'Menuju target '+ACC.tgt+'% ('+mny(tg)+')'),h('b',{},Math.round(pg)+'%')),h('div',{class:'bar'},h('i',{style:'width:'+pg+'%'}))),
+   h('div',{class:'g3'},stat('Win rate',s.wr+'%','w'),stat('Profit factor',s.pf.toFixed(1)),stat('Rata-rata R',rr(s.n?s.sum/s.n:0),s.sum>=0?'w':'l')),
+   h('div',{class:'g3'},stat('Total trade',s.n),stat('Max drawdown','-'+mny(ddv()*unit),'l'),stat('Streak',streak())),
+   h('h2',{},'ATURAN CHALLENGE'),card(h('div',{class:'g3',style:'gap:14px'},mt('Loss harian terbesar','-'+worst.toFixed(1)+'% / '+dl+'%',worst/dl*100,col(worst/dl*100)),mt('Loss total','-'+dd.toFixed(1)+'% / '+ml+'%',dd/ml*100,col(dd/ml*100)),mt('Hari trading',days+' / '+md,md?days/md*100:100,'var(--ac)')),h('button',{style:'margin-top:14px',onclick:openAcc},'Atur akun')),
+   h('h2',{},'HARI INI'),card(h('div',{style:'display:flex;justify-content:space-between;align-items:baseline;gap:8px'},h('b',{class:td>=0?'w':'l',style:'font-size:24px'},usd(td*unit)),h('span',{class:'mu'},tdr.length?tdr.length+' trade · '+tdr.filter(r=>R(r)>0).length+'W · '+tdr.filter(r=>R(r)<0).length+'L':'Belum ada trade hari ini')),
+    h('div',{style:'display:flex;justify-content:space-between;margin:12px 0 6px'},h('span',{},'Sisa batas loss harian'),h('b',{class:'w'},left.toFixed(1)+'% / '+dl+'%')),h('div',{class:'bar'},h('i',{style:'width:'+left/dl*100+'%;background:var(--w)'}))),
+   calendar(),h('h2',{},'TRADE TERAKHIR'),...rows.slice(0,3).map(trade)]},
  analisis(){const grp=(t,k)=>{const m={};rows.forEach(r=>(m[r[k]||'-']??=[]).push(r));
    return[h('h2',{},t),card(Object.entries(m).sort((a,b)=>b[1].length-a[1].length).slice(0,8).map(([n,l])=>{const s=st(l);
     return h('div',{class:'row'},h('b',{},n),h('div',{class:'bar'},h('i',{style:'width:'+s.wr+'%'})),h('span',{class:s.sum>=0?'w':'l'},rr(s.sum)))}))]};
-  return[donut(),ddCard(),...grp('PER SESSION','session'),...grp('PER PAIR','pair'),...grp('PER ARAH','dir'),...phasesCard()]},
+  return[donut(),ddCard(),...grp('PER SESSION','session'),...(rows.some(r=>r.crt)?grp('WIN RATE PER CRT TF','crt'):[]),...grp('PER PAIR','pair'),...grp('PER ARAH','dir'),...phasesCard()]},
  jurnal(){let q='',f='';const box=h('div',{style:'display:flex;flex-direction:column;gap:10px'});
   const draw=()=>{const l=rows.filter(r=>(!f||r.result===f)&&(!q||JSON.stringify(r).toLowerCase().includes(q))).slice(0,150),g={};l.forEach(r=>(g[r.date]??=[]).push(r));
    if(!l.length)return box.replaceChildren(card(h('span',{class:'mu'},'Belum ada trade yang cocok.')));
@@ -164,7 +181,7 @@ function go(){const k=V[location.hash.slice(1)]?location.hash.slice(1):'ringkasa
  document.getElementById('nav').replaceChildren(...TABS.map(([id,t,p])=>h('a',{href:'#'+id,...(id===k?{'aria-current':'page'}:{})},ic(p),t)));
  const logo=document.createElementNS(NS,'svg');[['class','lg'],['viewBox','0 0 100 100'],['fill','none'],['stroke','currentColor'],['stroke-width','8'],['role','img'],['aria-label','Shuaa']].forEach(([k,v])=>logo.setAttribute(k,v));
  const lr=document.createElementNS(NS,'rect');[['x',4],['y',4],['width',92],['height',92]].forEach(([k,v])=>lr.setAttribute(k,v));const lp=document.createElementNS(NS,'path');lp.setAttribute('d','M4 37H61L92 8M61 37V96M4 62H38V96');logo.append(lr,lp);
- app.replaceChildren(h('header',{},h('h1',{},logo),h('span',{class:'jn'},ACC.jname||ACC.name||''),PHL.length>1&&h('select',{'aria-label':'Pilih phase',onchange:e=>{phv=e.target.value;try{localStorage.setItem('shuaa_v2_phase',JSON.stringify(phv))}catch{}load();go()}},h('option',{value:''},'Semua phase'),...PHL.map(p=>h('option',{value:p.id,...(p.id===phv?{selected:''}:{})},p.name))),h('button',{'aria-label':'Pengaturan',onclick:()=>{location.hash='#pengaturan'}},ic('M4 7h9M17 7h3M4 17h3M11 17h9M13 5v4M7 15v4',20),h('span',{class:'lb'},'Atur')),h('button',{'aria-label':'Ganti tema terang/gelap',onclick:()=>{setTheme(root.dataset.theme==='dark'?'light':'dark')}},ic('M12 3a9 9 0 109 9 7 7 0 01-9-9z'))),...V[k]());window.scrollTo(0,0)}
+ app.replaceChildren(h('header',{},h('h1',{},logo),h('span',{class:'jn'},ACC.jname||ACC.name||''),PHL.length>1&&h('select',{'aria-label':'Pilih phase',onchange:e=>{phv=e.target.value;try{localStorage.setItem('shuaa_v2_phase',JSON.stringify(phv))}catch{}load();go()}},h('option',{value:''},'Semua phase'),...PHL.map(p=>h('option',{value:p.id,...(p.id===phv?{selected:''}:{})},p.name))),h('button',{'aria-label':'Pengaturan',onclick:()=>{location.hash='#pengaturan'}},ic('M4 7h9M17 7h3M4 17h3M11 17h9M13 5v4M7 15v4',20),h('span',{class:'lb'},'Atur')),h('button',{'aria-label':'Ganti tema terang/gelap',onclick:()=>{setTheme(root.dataset.theme==='dark'?'light':'dark')}},ic('M12 3a9 9 0 109 9 7 7 0 01-9-9z'))),...V[k]().filter(Boolean));window.scrollTo(0,0)}
 addEventListener('hashchange',go);go();document.getElementById('add').onclick=()=>openTrade();
 })();
 </script></body></html>
